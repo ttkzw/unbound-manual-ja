@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resolver for Home Networks &mdash; Unbound 1.19.0 ドキュメント</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/dark.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/light.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="Local DNS (Stub) Resolver for a Single Machine" href="local-stub.html" />
+    <link rel="prev" title="Configuration" href="../getting-started/configuration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/unbound-duotone-white.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.19.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Use Cases</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Resolver for Home Networks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-unbound">Setting up Unbound</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-the-resolver-locally">Testing the resolver locally</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-for-a-single-machine">Setting up for a single machine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-for-the-rest-of-the-network">Setting up for the rest of the network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-the-resolver-from-a-remote-machine">Testing the resolver from a remote machine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#where-it-all-comes-together">Where it all comes together</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="local-stub.html">Local DNS (Stub) Resolver for a Single Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/proxy.html">Downstream Proxy Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/serve-stale.html">Serving Stale Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/performance.html">Performance Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/monitoring.html">Monitoring and Reporting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/privacy/aggressive-nsec.html">Aggressive NSEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/privacy/dns-over-https.html">DNS-over-HTTPS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Filtering</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/filtering/tags-views.html">Tags and Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/filtering/rpz.html">Response Policy Zones</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developer/libunbound-tutorial/index.html">Unbound Library Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/python-modules.html">Unbound for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/doxygen-docs.html">Source Code Docs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual Pages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound.html">unbound(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound-checkconf.html">unbound-checkconf(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound.conf.html">unbound.conf(5)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound-host.html">unbound-host(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/libunbound.html">libunbound(3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound-control.html">unbound-control(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound-anchor.html">unbound-anchor(8)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/rfc-compliance.html">RFC Compliance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/history/index.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/todo.html">Docs To-Do List</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Unbound</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Resolver for Home Networks</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/use-cases/home-resolver.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="resolver-for-home-networks">
+<h1>Resolver for Home Networks<a class="headerlink" href="#resolver-for-home-networks" title="この見出しへのパーマリンク">¶</a></h1>
+<p>To start off, let's ask the all-important question &quot;Why would you want Unbound
+as a resolver for your home network?&quot;</p>
+<p>Firstly, Unbound supports DNSSEC which, through an authentication chain,
+verifies that the DNS query responses you receive are unaltered, as opposed to
+query responses which are not DNSSEC-signed and could be changed by anyone who
+has access to the query. Secondly, by using your own resolver you stop sharing
+your DNS traffic with third parties and increase your DNS privacy. While you
+still send out (parts of) your queries unencrypted, you could configure Unbound
+to take it a step further, which we'll talk about in an upcoming guide. Lastly,
+when you run your own resolver your DNS cache will be local to your network.
+Even though the first time you resolve a domain name may be slightly slower than
+using your ISP’s resolver, all subsequent queries for the name will likely be
+much faster.</p>
+<p>In this tutorial we'll look at setting up Unbound as a DNS resolver; First for
+your own machine, and then for your entire network.</p>
+<section id="setting-up-unbound">
+<h2>Setting up Unbound<a class="headerlink" href="#setting-up-unbound" title="この見出しへのパーマリンク">¶</a></h2>
+<p>Unbound is a powerful validating, recursive, caching DNS resolver. It’s used by
+some of the biggest tech companies in the world as well as small-office /
+home-office users, who use it together with ad blockers and firewalls, or
+self-hosted resolvers. Setting it up for your home network can be quite simple
+as we’ll showcase below.</p>
+<p>Setting up a caching DNS server for your entire home network requires a
+recursive DNS resolver, and a dedicated machine on which the resolver runs; this
+(small) system is always on and accessible to the entire network. It can be as
+small as a Raspberry Pi or any other available Linux/Unix machine that is always
+online and has Internet connectivity via your router.</p>
+<p>Because of the variety of machines that Unbound can run on we cannot create a
+comprehensive tutorial for all possible options. For this tutorial we will use
+<strong>Ubuntu 22.04 LTS</strong> as a stepping stone you can adapt and apply to
+other systems.</p>
+<p>While you could download the code from GitHub and build it yourself, getting a
+copy can be as simple as running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>unbound<span class="w"> </span>-y
+</pre></div>
+</div>
+<p>This gives you a complete and running version of Unbound which behaves as a
+caching recursive DNS resolver out of the box for the system on which you
+install it. You can check which version of Unbound you have installed with
+<code class="docutils literal notranslate"><span class="pre">unbound</span> <span class="pre">-V</span></code>. The version installed will vary depending on the operating
+system. If the version is installed is quite old (at the time of writing it
+isn't) or you'd simply like to run the latest and greatest version you can
+download the latest release tarball from our <a class="reference external" href="https://nlnetlabs.nl/projects/unbound/about/">website</a> and build it yourself.</p>
+<p>Do note that by default Unbound will be queriable only from the local host,
+i.e. the system on which you installed Unbound.
+We will change that later.</p>
+</section>
+<section id="testing-the-resolver-locally">
+<h2>Testing the resolver locally<a class="headerlink" href="#testing-the-resolver-locally" title="この見出しへのパーマリンク">¶</a></h2>
+<p>To verify that the server works correctly, it’s a good idea to test it before
+committing the entire network to it. Luckily we can test this on the machine
+that you installed Unbound on (locally) and from any other machine (remotely)
+that will be using the resolver after we expose Unbound to the network.</p>
+<p>The command for testing locally on the Unbound machine is:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dig<span class="w"> </span>example.com<span class="w"> </span>@127.0.0.1
+</pre></div>
+</div>
+<p>Here we tell the <strong class="command">dig</strong> tool to look up the IP address for example.com,
+and to ask for this information from the resolver running at the IP address
+<code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code>, which is where our Unbound machine is running by default. We can
+verify that Unbound has indeed answered our query instead of the default
+resolver that is present on Ubuntu by default. In the output of every
+<strong class="command">dig</strong> command there is an <code class="docutils literal notranslate"><span class="pre">ANSWER</span> <span class="pre">SECTION</span></code> which gives the response
+to the query. In the footer section of the output, the server which has answered
+the query under the <code class="docutils literal notranslate"><span class="pre">SERVER</span></code> entry. The entry will look like:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>;; SERVER: 127.0.0.1#53(127.0.0.1)
+</pre></div>
+</div>
+<p>In the next section we will be disabling the default Ubuntu resolver. To verify
+that we do it correctly it is useful to know the address of the default resolver
+as a baseline. For this baseline we also use a <strong class="command">dig</strong> query, but this
+time without specifying an IP address (which causes dig to use the machine's
+default DNS resolver).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dig<span class="w"> </span>example.com
+</pre></div>
+</div>
+<p>While the response should be the same, the <code class="docutils literal notranslate"><span class="pre">SERVER</span></code> entry in the response
+should look like:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>;; SERVER: 127.0.0.53#53(127.0.0.53)
+</pre></div>
+</div>
+<p>Note that the final IPv4 digit is 53 and not 1, as with our Unbound instance.</p>
+</section>
+<section id="setting-up-for-a-single-machine">
+<h2>Setting up for a single machine<a class="headerlink" href="#setting-up-for-a-single-machine" title="この見出しへのパーマリンク">¶</a></h2>
+<p>Now that we have tested our Unbound resolver, we can tell our machine to use it
+by default. The resolver your machine uses by default is defined in
+<code class="file docutils literal notranslate"><span class="pre">/etc/systemd/resolved.conf</span></code> in the <code class="docutils literal notranslate"><span class="pre">DNS</span></code> entry (It uses <code class="docutils literal notranslate"><span class="pre">127.0.0.53</span></code>
+). While just changing this file will work as long as the machine doesn't
+reboot, we need to make sure that this change is persistent. To do that, we need
+to change the <code class="docutils literal notranslate"><span class="pre">DNS</span></code> entry to be equal to <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code> so the machine uses
+Unbound as default. To make the change persistent, we also need to set the
+<code class="docutils literal notranslate"><span class="pre">DNSStubListener</span></code> to <code class="docutils literal notranslate"><span class="pre">no</span></code> so that is not changed by our router (such as with
+a &quot;recommended resolver&quot; mentioned below). We also want to enable the <code class="docutils literal notranslate"><span class="pre">DNSSEC</span></code>
+option so that we can verify the integrity the responses we get to our DNS
+queries. With your favourite text editor (e.g. <strong class="command">nano</strong>) we can modify
+the file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano<span class="w"> </span>/etc/systemd/resolved.conf
+</pre></div>
+</div>
+<p>Here, under the <code class="docutils literal notranslate"><span class="pre">[Resolve]</span></code> section we add (or rather, enable by removing the
+&quot;#&quot;) the options:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[Resolve]
+DNS=127.0.0.1
+#FallbackDNS=
+#Domains=
+DNSSEC=yes
+#DNSOverTLS=no
+#MulticastDNS=no
+#LLMNR=no
+#Cache=no-negative
+DNSStubListener=no
+#DNSStubListenerExtra=
+</pre></div>
+</div>
+<p>To actually have the system start using Unbound, we then need to create a symlink to overwrite <code class="file docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code> to the one we modified.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-fs<span class="w"> </span>/run/systemd/resolve/resolv.conf<span class="w"> </span>/etc/resolv.conf
+</pre></div>
+</div>
+<p>With this file modified, we can restart using this configuration with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>systemctl<span class="w"> </span>restart<span class="w"> </span>systemd-resolved
+</pre></div>
+</div>
+<p>If successful, the operating system should use our Unbound instance as default.
+A quick test a <strong class="command">dig</strong> without specifying the address of the Unbound
+server should give the same result as specifying it did above (with
+<code class="docutils literal notranslate"><span class="pre">&#64;127.0.0.1</span></code>).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dig<span class="w"> </span>example.com
+</pre></div>
+</div>
+<p>Note that the &quot;SERVER&quot; section in the output from <strong class="command">dig</strong> should also
+contain the local IP address of our server.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>;; SERVER: 127.0.0.1#53(127.0.0.1)
+</pre></div>
+</div>
+</section>
+<section id="setting-up-for-the-rest-of-the-network">
+<h2>Setting up for the rest of the network<a class="headerlink" href="#setting-up-for-the-rest-of-the-network" title="この見出しへのパーマリンク">¶</a></h2>
+<p>While we currently have a working instance of Unbound, we need it to be
+reachable from within our entire network. With that comes the headache of
+dealing with (local) IP addresses. It’s likely that your home router distributed
+local IP addresses to your devices. If this is the case (i.e. you didn't change
+it by hand), they should be <span class="target" id="index-0"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc1918.html"><strong>RFC 1918</strong></a> ranges:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>10.0.0.0 - 10.255.255.255 (10/8)
+172.16.0.0 - 172.31.255.255 (172.16/12)
+192.168.0.0 - 192.168.255.255 (192.168/16)
+</pre></div>
+</div>
+<p>To find the IP address of the machine that is running Unbound, we use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hostname<span class="w"> </span>--all-ip-addresses
+</pre></div>
+</div>
+<p>If you just have one IP address as output from the <strong class="command">hostname</strong> command
+that will be the correct one. If you have multiple IP addresses, the easiest way
+to determine which IP address to use, is to find out which connection goes to
+your home router. Keep in mind that using the wrong IP address here can be a
+source of connectivity errors further on. For the purpose of this tutorial we
+assume that our home router has the IP address <code class="docutils literal notranslate"><span class="pre">192.168.0.1</span></code>, as this is
+typical for home routers, and our resolver machine (the machine that is running
+our Unbound instance) has IP address <code class="docutils literal notranslate"><span class="pre">192.168.0.2</span></code>, which we will get into in
+the next section.</p>
+<p>As a prerequisite for the next step, we need to configure our Unbound instance
+to be reachable from devices other than only the machine on which the Unbound is
+running.
+Unbound is a highly capable resolver, and as such has many options which can be
+set; the full example configuration file is almost 1200 lines long, but we'll
+need but a fraction of these settings.
+(If you are interested, all configuration options are documented in the
+extensive manual page of <a class="reference internal" href="../manpages/unbound.conf.html"><span class="doc">unbound.conf(5)</span></a>).</p>
+<p>The default configuration file is found at:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/etc/unbound/unbound.conf
+</pre></div>
+</div>
+<p>If you open this for the first time it looks very empty. It is still usable as a
+resolver for one machine, as this is how the Unbound defaults are configured.
+It's not, however, enough for our purposes, so we will add the minimal
+configuration options needed.</p>
+<p>The options that we add to the current configuration file to make it a &quot;minimal
+usable configuration&quot; are as follows.
+Note that the IPv6 options are commented out, but we recommend to uncomment
+them if your router and network supports it.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>server:
+    # location of the trust anchor file that enables DNSSEC
+    auto-trust-anchor-file: &quot;/var/lib/unbound/root.key&quot;
+    # send minimal amount of information to upstream servers to enhance privacy
+    qname-minimisation: yes
+    # the interface that is used to connect to the network (this will listen to all interfaces)
+    interface: 0.0.0.0
+    # interface: ::0
+    # addresses from the IP range that are allowed to connect to the resolver
+    access-control: 192.168.0.0/16 allow
+    # access-control: 2001:DB8/64 allow
+
+remote-control:
+    # allows controling unbound using &quot;unbound-control&quot;
+    control-enable: yes
+</pre></div>
+</div>
+<p>The interface is currently configured to listen to any address on the machine,
+and the access-control only allows queries from the <code class="docutils literal notranslate"><span class="pre">192.168.0.0/16</span></code> <a class="reference external" href="https://www.ripe.net/about-us/press-centre/understanding-ip-addressing">IP
+subnet</a>
+range. Note that the IP address we chose above (<code class="docutils literal notranslate"><span class="pre">192.168.0.1</span></code> and
+<code class="docutils literal notranslate"><span class="pre">192.168.0.2</span></code>) fall within the <code class="docutils literal notranslate"><span class="pre">192.168.0.0/16</span></code> range.</p>
+<p>To prepare our configuration we are going to modify the existing configuration in
+<code class="file docutils literal notranslate"><span class="pre">/etc/unbound/unbound.conf</span></code>. If you open the file for the first time, you
+see that there is already an “include” in there. The &quot;include&quot; enables us to do
+<a class="reference external" href="https://www.sidn.nl/en/modern-internet-standards/dnssec">DNSSEC</a>, which allows
+Unbound to verify the source of the answers that it receives, as well as QNAME
+minimisation. For convenience these configuration options have already been
+added in the minimal configuration.
+The configuration also includes the <a class="reference internal" href="../manpages/unbound.conf.html#unbound-conf-remote"><span class="std std-ref">remote-control:</span></a>
+section in the configuration to enable controlling Unbound using the
+<a class="reference internal" href="../manpages/unbound-control.html"><span class="doc">unbound-control(8)</span></a> command, which is useful if you want to
+modify the configuration on the fly later on.</p>
+<p>Using the text editor again, we can then add the minimal configuration shown
+above, making any changes to the access control where needed.
+When we've modified the configuration we check it for mistakes with the
+<a class="reference internal" href="../manpages/unbound-checkconf.html"><span class="doc">unbound-checkconf(8)</span></a> command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>unbound-checkconf<span class="w"> </span>unbound.conf
+</pre></div>
+</div>
+<p>If this command reports no errors, we need to stop the currently running Unbound
+instance and restart it with our new configuration. You can stop Unbound with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>pkill<span class="w"> </span>-f<span class="w"> </span>unbound
+</pre></div>
+</div>
+<p>And you can restart Unbound with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>unbound-control<span class="w"> </span>start
+</pre></div>
+</div>
+<p>From this point on, we can <a class="reference internal" href="../manpages/unbound-control.html#unbound-control-commands-stop"><span class="std std-ref">stop</span></a>,
+<a class="reference internal" href="../manpages/unbound-control.html#unbound-control-commands-start"><span class="std std-ref">start</span></a>, and
+<a class="reference internal" href="../manpages/unbound-control.html#unbound-control-commands-reload"><span class="std std-ref">reload</span></a> Unbound with
+<strong class="command">unbound-control</strong> if you want to make changes to the configuration.</p>
+</section>
+<section id="testing-the-resolver-from-a-remote-machine">
+<h2>Testing the resolver from a remote machine<a class="headerlink" href="#testing-the-resolver-from-a-remote-machine" title="この見出しへのパーマリンク">¶</a></h2>
+<p>So now we have a DNS resolver which should be reachable from within the network.
+To be able to verify that our resolver is working correctly, we want to test it
+from another machine in the network. As mentioned above, this tutorial uses the
+address <code class="docutils literal notranslate"><span class="pre">192.168.0.2</span></code> (not <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code> as we saw earlier) as an example for
+the machine running Unbound. Armed with the IP address we can send a query to
+our DNS resolver from another machine which is within our home network. To do
+this we use the same dig command, only we change the IP address where the query
+is asked.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dig<span class="w"> </span>example.com<span class="w"> </span>@192.168.0.2
+</pre></div>
+</div>
+<p>This should give the same result as above. The <code class="docutils literal notranslate"><span class="pre">SERVER</span></code> entry in the footer
+reflects from which server the response was received.</p>
+</section>
+<section id="where-it-all-comes-together">
+<h2>Where it all comes together<a class="headerlink" href="#where-it-all-comes-together" title="この見出しへのパーマリンク">¶</a></h2>
+<p>We should now have a functioning DNS resolver that is accessible to all machines
+in our network (<strong>make sure you do before you continue</strong>).</p>
+<p>The next step then is a little tricky as there are many options and variations
+possible. We have a choice of which machines in our network will be using our
+configured DNS resolver. This can range from a single machine to all the
+machines that are connected. Since this tutorial cannot (and does not try to) be
+comprehensive for the range of choices, we will look at some of the basic
+examples which you can implement and expand on.</p>
+<p>Most machines when they first connect to a network get a “recommended resolver”
+from your router using <abbr title="Dynamic Host Configuration Protocol">DHCP</abbr>. To
+change this, we need to log into the router. Earlier in this tutorial we assume
+the home router was using <code class="docutils literal notranslate"><span class="pre">192.168.0.1</span></code>, though in reality this can differ.
+If this does differ, the unbound configuration needs to be changed as well.</p>
+<p>To find the IP address of our home router, which is likely be under the
+<code class="docutils literal notranslate"><span class="pre">default</span> <span class="pre">gateway</span></code> entry from:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ip<span class="w"> </span>route
+</pre></div>
+</div>
+<p>When you've found the IP address of your home router, you can copy the address
+to a web browser, which should give you access to the router configuration
+portal. If you can't find the portal using this method, consult the manual or
+the manufacturer's website. When you have access, you should change the DHCP
+configuration to advertise the IP address of the machine running Unbound as the
+default gateway. In the case of our example, that would be <code class="docutils literal notranslate"><span class="pre">192.168.0.2</span></code>.</p>
+<p>Another possibility is a machine that does not use a resolver that is
+“recommended” by your router. This machine can be running its own resolver or be
+connected to a different one altogether. If you want these machines to use the
+Unbound resolver you set up, you need to change the configuration of the
+machine.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../getting-started/configuration.html" class="btn btn-neutral float-left" title="Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="local-stub.html" class="btn btn-neutral float-right" title="Local DNS (Stub) Resolver for a Single Machine" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1999-2024, NLnet Labs.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

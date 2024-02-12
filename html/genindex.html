@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>索引 &mdash; Unbound 1.19.0 ドキュメント</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/dark.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/light.css" type="text/css" />
+      <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script src="_static/tabs.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="#" />
+    <link rel="search" title="検索" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/unbound-duotone-white.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.19.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started/configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Use Cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="use-cases/home-resolver.html">Resolver for Home Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="use-cases/local-stub.html">Local DNS (Stub) Resolver for a Single Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="topics/core/proxy.html">Downstream Proxy Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topics/core/serve-stale.html">Serving Stale Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topics/core/performance.html">Performance Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topics/core/monitoring.html">Monitoring and Reporting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="topics/privacy/aggressive-nsec.html">Aggressive NSEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topics/privacy/dns-over-https.html">DNS-over-HTTPS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Filtering</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="topics/filtering/tags-views.html">Tags and Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topics/filtering/rpz.html">Response Policy Zones</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developer/libunbound-tutorial/index.html">Unbound Library Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer/python-modules.html">Unbound for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer/doxygen-docs.html">Source Code Docs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual Pages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="manpages/unbound.html">unbound(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manpages/unbound-checkconf.html">unbound-checkconf(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manpages/unbound.conf.html">unbound.conf(5)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manpages/unbound-host.html">unbound-host(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manpages/libunbound.html">libunbound(3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manpages/unbound-control.html">unbound-control(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manpages/unbound-anchor.html">unbound-anchor(8)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference/rfc-compliance.html">RFC Compliance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/history/index.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/todo.html">Docs To-Do List</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Unbound</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">索引</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<h1 id="index">索引</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#記号"><strong>記号</strong></a>
+ | <a href="#A"><strong>A</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#H"><strong>H</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ 
+</div>
+<h2 id="記号">記号</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    -4
+
+      <ul>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-4">unbound-anchor コマンドラインオプション</a>
+</li>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-4">unbound-host コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -6
+
+      <ul>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-6">unbound-anchor コマンドラインオプション</a>
+</li>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-6">unbound-host コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -a
+
+      <ul>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-a">unbound-anchor コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -b
+
+      <ul>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-b">unbound-anchor コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -C
+
+      <ul>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-C">unbound-anchor コマンドラインオプション</a>
+</li>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-C">unbound-host コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -c
+
+      <ul>
+        <li><a href="manpages/unbound.html#cmdoption-unbound-c">unbound コマンドラインオプション</a>
+</li>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-c">unbound-anchor コマンドラインオプション</a>
+</li>
+        <li><a href="manpages/unbound-control.html#cmdoption-unbound-control-c">unbound-control コマンドラインオプション</a>
+</li>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-c">unbound-host コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -D
+
+      <ul>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-D">unbound-host コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -d
+
+      <ul>
+        <li><a href="manpages/unbound.html#cmdoption-unbound-d">unbound コマンドラインオプション</a>
+</li>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-d">unbound-host コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -F
+
+      <ul>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-F">unbound-anchor コマンドラインオプション</a>
+</li>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-F">unbound-host コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -f
+
+      <ul>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-f">unbound-anchor コマンドラインオプション</a>
+</li>
+        <li><a href="manpages/unbound-checkconf.html#cmdoption-unbound-checkconf-f">unbound-checkconf コマンドラインオプション</a>
+</li>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-f">unbound-host コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -h
+
+      <ul>
+        <li><a href="manpages/unbound.html#cmdoption-unbound-h">unbound コマンドラインオプション</a>
+</li>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-h">unbound-anchor コマンドラインオプション</a>
+</li>
+        <li><a href="manpages/unbound-checkconf.html#cmdoption-unbound-checkconf-h">unbound-checkconf コマンドラインオプション</a>
+</li>
+        <li><a href="manpages/unbound-control.html#cmdoption-unbound-control-h">unbound-control コマンドラインオプション</a>
+</li>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-h">unbound-host コマンドラインオプション</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    -l
+
+      <ul>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-l">unbound-anchor コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -n
+
+      <ul>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-n">unbound-anchor コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -o
+
+      <ul>
+        <li><a href="manpages/unbound-checkconf.html#cmdoption-unbound-checkconf-o">unbound-checkconf コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -P
+
+      <ul>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-P">unbound-anchor コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -p
+
+      <ul>
+        <li><a href="manpages/unbound.html#cmdoption-unbound-p">unbound コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -q
+
+      <ul>
+        <li><a href="manpages/unbound-control.html#cmdoption-unbound-control-q">unbound-control コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -R
+
+      <ul>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-R">unbound-anchor コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -r
+
+      <ul>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-r">unbound-anchor コマンドラインオプション</a>
+</li>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-r">unbound-host コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -S
+
+      <ul>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-S">unbound-anchor コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -s
+
+      <ul>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-0">unbound-anchor コマンドラインオプション</a>
+</li>
+        <li><a href="manpages/unbound-control.html#cmdoption-unbound-control-s">unbound-control コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -t
+
+      <ul>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-t">unbound-host コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -u
+
+      <ul>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-u">unbound-anchor コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -V
+
+      <ul>
+        <li><a href="manpages/unbound.html#cmdoption-unbound-V">unbound コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -v
+
+      <ul>
+        <li><a href="manpages/unbound.html#cmdoption-unbound-v">unbound コマンドラインオプション</a>
+</li>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-v">unbound-anchor コマンドラインオプション</a>
+</li>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-v">unbound-host コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -x
+
+      <ul>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-x">unbound-anchor コマンドラインオプション</a>
+</li>
+      </ul></li>
+      <li>
+    -y
+
+      <ul>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-y">unbound-host コマンドラインオプション</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="topics/privacy/aggressive-nsec.html#index-0">Aggressive NSEC</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    cfgfile
+
+      <ul>
+        <li><a href="manpages/unbound-checkconf.html#cmdoption-unbound-checkconf-arg-cfgfile">unbound-checkconf コマンドラインオプション</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="topics/privacy/aggressive-nsec.html#index-0">DNSSEC-Validated cache</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    hostname
+
+      <ul>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-arg-hostname">unbound-host コマンドラインオプション</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="topics/privacy/aggressive-nsec.html#index-3">NSEC records</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="topics/filtering/rpz.html#index-0">Response Policy Zones</a>
+</li>
+      <li>
+    RFC
+
+      <ul>
+        <li><a href="manpages/unbound.conf.html#index-0">RFC 1034</a>, <a href="reference/rfc-compliance.html#index-0">[1]</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-1">RFC 1035</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-2">RFC 1101</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-3">RFC 1123</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-4">RFC 1183</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-5">RFC 1337</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-6">RFC 1521</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-7">RFC 1706</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-8">RFC 1712</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-9">RFC 1876</a>
+</li>
+        <li><a href="manpages/unbound.conf.html#index-16">RFC 1918</a>, <a href="manpages/unbound.conf.html#index-2">[1]</a>, <a href="manpages/unbound.conf.html#index-23">[2]</a>, <a href="use-cases/home-resolver.html#index-0">[3]</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-10">RFC 1982</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-11">RFC 1995</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-12">RFC 1996</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-13">RFC 2163</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-14">RFC 2181</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-15">RFC 2182</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-16">RFC 2230</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-17">RFC 2253</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-18">RFC 2308</a>
+</li>
+        <li><a href="topics/privacy/aggressive-nsec.html#index-2">RFC 2308#section-1</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-19">RFC 2535</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-20">RFC 2536</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-21">RFC 2537</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-22">RFC 2538</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-23">RFC 2539</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-24">RFC 2606</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-25">RFC 2671</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-26">RFC 2672</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-27">RFC 2673</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-28">RFC 2782</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-29">RFC 2874</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-30">RFC 2915</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-31">RFC 2930</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-32">RFC 3110</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-33">RFC 3123</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-34">RFC 3225</a>
+</li>
+        <li><a href="manpages/unbound.conf.html#index-17">RFC 3330</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-35">RFC 3526</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-36">RFC 3597</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-37">RFC 3779</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-38">RFC 4007</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-39">RFC 4025</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-40">RFC 4033</a>
+</li>
+        <li><a href="reference/history/patch-announce102.html#index-0">RFC 4034</a>, <a href="reference/rfc-compliance.html#index-41">[1]</a>
+</li>
+        <li><a href="topics/privacy/aggressive-nsec.html#index-4">RFC 4034#section-6.1</a>
+</li>
+        <li><a href="reference/history/patch-announce102.html#index-1">RFC 4035</a>, <a href="reference/rfc-compliance.html#index-42">[1]</a>
+</li>
+        <li><a href="manpages/unbound.conf.html#index-19">RFC 4193</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-43">RFC 4255</a>
+</li>
+        <li><a href="manpages/unbound.conf.html#index-18">RFC 4291</a>, <a href="manpages/unbound.conf.html#index-20">[1]</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-44">RFC 4343</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-45">RFC 4398</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-46">RFC 4431</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-47">RFC 4509</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-48">RFC 4592</a>, <a href="topics/privacy/aggressive-nsec.html#index-5">[1]</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-49">RFC 4597</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-50">RFC 4697</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-51">RFC 4701</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-52">RFC 5001</a>
+</li>
+        <li><a href="manpages/unbound-anchor.html#index-1">RFC 5011</a>, <a href="manpages/unbound-anchor.html#index-3">[1]</a>, <a href="manpages/unbound-anchor.html#index-4">[2]</a>, <a href="manpages/unbound.conf.html#index-10">[3]</a>, <a href="manpages/unbound.conf.html#index-11">[4]</a>, <a href="manpages/unbound.conf.html#index-3">[5]</a>, <a href="manpages/unbound.conf.html#index-9">[6]</a>, <a href="reference/rfc-compliance.html#index-53">[7]</a>, <a href="reference/todo.html#index-0">[8]</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-54">RFC 5114</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-55">RFC 5155</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-56">RFC 5205</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-57">RFC 5358</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-58">RFC 5452</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-59">RFC 5702</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-60">RFC 5933</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-61">RFC 6147</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-62">RFC 6234</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-63">RFC 6303</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-64">RFC 6598</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-65">RFC 6604</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-66">RFC 6605</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-67">RFC 6672</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-68">RFC 6698</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-69">RFC 6725</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-70">RFC 6742</a>
+</li>
+        <li><a href="manpages/unbound.conf.html#index-14">RFC 6761</a>, <a href="manpages/unbound.conf.html#index-15">[1]</a>, <a href="reference/rfc-compliance.html#index-71">[2]</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-72">RFC 6840</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-73">RFC 6844</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-74">RFC 6891</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-75">RFC 6975</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-76">RFC 7043</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-77">RFC 7344</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-78">RFC 7413</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-79">RFC 7477</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-80">RFC 7553</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-81">RFC 7646</a>
+</li>
+        <li><a href="manpages/unbound.conf.html#index-13">RFC 7686</a>, <a href="reference/rfc-compliance.html#index-82">[1]</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-83">RFC 7706</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-84">RFC 7830</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-85">RFC 7858</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-86">RFC 7871</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-87">RFC 7929</a>
+</li>
+        <li><a href="manpages/unbound-anchor.html#index-0">RFC 7958</a>, <a href="manpages/unbound-anchor.html#index-2">[1]</a>, <a href="reference/rfc-compliance.html#index-88">[2]</a>
+</li>
+        <li><a href="manpages/unbound.conf.html#index-1">RFC 8020</a>, <a href="reference/rfc-compliance.html#index-89">[1]</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-90">RFC 8080</a>
+</li>
+        <li><a href="manpages/unbound.conf.html#index-4">RFC 8145</a>, <a href="reference/rfc-compliance.html#index-91">[1]</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-92">RFC 8162</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-93">RFC 8198</a>, <a href="topics/privacy/aggressive-nsec.html#index-1">[1]</a>, <a href="topics/privacy/aggressive-nsec.html#index-6">[2]</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-94">RFC 8310</a>
+</li>
+        <li><a href="manpages/unbound.conf.html#index-12">RFC 8375</a>, <a href="reference/rfc-compliance.html#index-95">[1]</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-96">RFC 8467</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-97">RFC 8482</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-98">RFC 8484</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-99">RFC 8509</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-100">RFC 8624</a>
+</li>
+        <li><a href="manpages/unbound.conf.html#index-5">RFC 8767</a>, <a href="manpages/unbound.conf.html#index-6">[1]</a>, <a href="manpages/unbound.conf.html#index-7">[2]</a>, <a href="manpages/unbound.conf.html#index-8">[3]</a>, <a href="reference/rfc-compliance.html#index-101">[4]</a>, <a href="topics/core/serve-stale.html#index-0">[5]</a>, <a href="topics/core/serve-stale.html#index-1">[6]</a>, <a href="topics/core/serve-stale.html#index-3">[7]</a>
+</li>
+        <li><a href="topics/core/serve-stale.html#index-2">RFC 8767#section-4</a>
+</li>
+        <li><a href="topics/core/serve-stale.html#index-4">RFC 8767#section-5-11</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-102">RFC 8806</a>
+</li>
+        <li><a href="manpages/unbound.conf.html#index-21">RFC 8914</a>, <a href="manpages/unbound.conf.html#index-22">[1]</a>, <a href="reference/rfc-compliance.html#index-103">[2]</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-104">RFC 8976</a>
+</li>
+        <li><a href="reference/rfc-compliance.html#index-105">RFC 9156</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="topics/filtering/rpz.html#index-0">RPZ</a>
+</li>
+      <li><a href="topics/filtering/rpz.html#index-2">RPZ actions</a>
+</li>
+      <li><a href="topics/filtering/rpz.html#index-1">RPZ policies</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="topics/filtering/tags-views.html#index-0">Tags</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="manpages/libunbound.html#term-ub_cancel"><strong>ub_cancel</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_ctx_add_ta"><strong>ub_ctx_add_ta</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_ctx_add_ta_autr"><strong>ub_ctx_add_ta_autr</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_ctx_add_ta_file"><strong>ub_ctx_add_ta_file</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_ctx_async"><strong>ub_ctx_async</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_ctx_config"><strong>ub_ctx_config</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_ctx_create"><strong>ub_ctx_create</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_ctx_data_add"><strong>ub_ctx_data_add</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_ctx_data_remove"><strong>ub_ctx_data_remove</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_ctx_debuglevel"><strong>ub_ctx_debuglevel</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_ctx_debugout"><strong>ub_ctx_debugout</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_ctx_delete"><strong>ub_ctx_delete</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_ctx_get_option"><strong>ub_ctx_get_option</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_ctx_hosts"><strong>ub_ctx_hosts</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_ctx_print_local_zones"><strong>ub_ctx_print_local_zones</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_ctx_resolvconf"><strong>ub_ctx_resolvconf</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_ctx_set_fwd"><strong>ub_ctx_set_fwd</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_ctx_set_option"><strong>ub_ctx_set_option</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_ctx_set_stub"><strong>ub_ctx_set_stub</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_ctx_set_tls"><strong>ub_ctx_set_tls</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_ctx_trustedkeys"><strong>ub_ctx_trustedkeys</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_ctx_zone_add"><strong>ub_ctx_zone_add</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_ctx_zone_remove"><strong>ub_ctx_zone_remove</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_fd"><strong>ub_fd</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_poll"><strong>ub_poll</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_process"><strong>ub_process</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_resolve"><strong>ub_resolve</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_resolve_async"><strong>ub_resolve_async</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_resolve_free"><strong>ub_resolve_free</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_strerror"><strong>ub_strerror</strong></a>
+</li>
+      <li><a href="manpages/libunbound.html#term-ub_wait"><strong>ub_wait</strong></a>
+</li>
+      <li>
+    unbound コマンドラインオプション
+
+      <ul>
+        <li><a href="manpages/unbound.html#cmdoption-unbound-c">-c</a>
+</li>
+        <li><a href="manpages/unbound.html#cmdoption-unbound-d">-d</a>
+</li>
+        <li><a href="manpages/unbound.html#cmdoption-unbound-h">-h</a>
+</li>
+        <li><a href="manpages/unbound.html#cmdoption-unbound-p">-p</a>
+</li>
+        <li><a href="manpages/unbound.html#cmdoption-unbound-v">-v</a>
+</li>
+        <li><a href="manpages/unbound.html#cmdoption-unbound-V">-V</a>
+</li>
+      </ul></li>
+      <li>
+    unbound-anchor コマンドラインオプション
+
+      <ul>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-4">-4</a>
+</li>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-6">-6</a>
+</li>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-a">-a</a>
+</li>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-b">-b</a>
+</li>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-c">-c</a>
+</li>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-C">-C</a>
+</li>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-f">-f</a>
+</li>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-F">-F</a>
+</li>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-h">-h</a>
+</li>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-l">-l</a>
+</li>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-n">-n</a>
+</li>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-P">-P</a>
+</li>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-r">-r</a>
+</li>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-R">-R</a>
+</li>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-S">-S</a>
+</li>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-0">-s</a>
+</li>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-u">-u</a>
+</li>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-v">-v</a>
+</li>
+        <li><a href="manpages/unbound-anchor.html#cmdoption-unbound-anchor-x">-x</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    unbound-checkconf コマンドラインオプション
+
+      <ul>
+        <li><a href="manpages/unbound-checkconf.html#cmdoption-unbound-checkconf-f">-f</a>
+</li>
+        <li><a href="manpages/unbound-checkconf.html#cmdoption-unbound-checkconf-h">-h</a>
+</li>
+        <li><a href="manpages/unbound-checkconf.html#cmdoption-unbound-checkconf-o">-o</a>
+</li>
+        <li><a href="manpages/unbound-checkconf.html#cmdoption-unbound-checkconf-arg-cfgfile">cfgfile</a>
+</li>
+      </ul></li>
+      <li>
+    unbound-control コマンドラインオプション
+
+      <ul>
+        <li><a href="manpages/unbound-control.html#cmdoption-unbound-control-c">-c</a>
+</li>
+        <li><a href="manpages/unbound-control.html#cmdoption-unbound-control-h">-h</a>
+</li>
+        <li><a href="manpages/unbound-control.html#cmdoption-unbound-control-q">-q</a>
+</li>
+        <li><a href="manpages/unbound-control.html#cmdoption-unbound-control-s">-s</a>
+</li>
+      </ul></li>
+      <li>
+    unbound-host コマンドラインオプション
+
+      <ul>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-4">-4</a>
+</li>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-6">-6</a>
+</li>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-c">-c</a>
+</li>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-C">-C</a>
+</li>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-d">-d</a>
+</li>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-D">-D</a>
+</li>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-f">-f</a>
+</li>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-F">-F</a>
+</li>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-h">-h</a>
+</li>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-r">-r</a>
+</li>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-t">-t</a>
+</li>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-v">-v</a>
+</li>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-y">-y</a>
+</li>
+        <li><a href="manpages/unbound-host.html#cmdoption-unbound-host-arg-hostname">hostname</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="topics/filtering/tags-views.html#index-0">Views</a>
+</li>
+  </ul></td>
+</tr></table>
+
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1999-2024, NLnet Labs.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

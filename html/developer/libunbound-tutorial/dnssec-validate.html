@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DNSSEC Validate &mdash; Unbound 1.19.0 ドキュメント</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/dark.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/light.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/translations.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" />
+    <link rel="next" title="Unbound for Python" href="../python-modules.html" />
+    <link rel="prev" title="Lookup from Threads" href="lookup-threads.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/unbound-duotone-white.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.19.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Use Cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../use-cases/home-resolver.html">Resolver for Home Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../use-cases/local-stub.html">Local DNS (Stub) Resolver for a Single Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/proxy.html">Downstream Proxy Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/serve-stale.html">Serving Stale Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/performance.html">Performance Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/monitoring.html">Monitoring and Reporting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/privacy/aggressive-nsec.html">Aggressive NSEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/privacy/dns-over-https.html">DNS-over-HTTPS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Filtering</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/filtering/tags-views.html">Tags and Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/filtering/rpz.html">Response Policy Zones</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Unbound Library Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="resolve-a-name.html">Resolve a Name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup-context.html">Setup the Context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examine-results.html">Examine the Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="async-lookup.html">Asynchronous Lookup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lookup-threads.html">Lookup from Threads</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">DNSSEC Validate</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python-modules.html">Unbound for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doxygen-docs.html">Source Code Docs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual Pages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound.html">unbound(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-checkconf.html">unbound-checkconf(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound.conf.html">unbound.conf(5)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-host.html">unbound-host(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/libunbound.html">libunbound(3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-control.html">unbound-control(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-anchor.html">unbound-anchor(8)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/rfc-compliance.html">RFC Compliance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/history/index.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/todo.html">Docs To-Do List</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Unbound</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Unbound Library Tutorial</a></li>
+      <li class="breadcrumb-item active">DNSSEC Validate</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/developer/libunbound-tutorial/dnssec-validate.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dnssec-validate">
+<h1>DNSSEC Validate<a class="headerlink" href="#dnssec-validate" title="この見出しへのパーマリンク">¶</a></h1>
+<p>This example program performs DNSSEC validation of a lookup. It is a
+modification of the example program from the <a class="reference internal" href="setup-context.html"><span class="doc">Setup the Context</span></a> section.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;errno.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;arpa/inet.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unbound.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">;</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_result</span><span class="o">*</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">retval</span><span class="p">;</span>
+
+<span class="w">        </span><span class="cm">/* create context */</span>
+<span class="w">        </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ub_ctx_create</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">ctx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;error: could not create unbound context</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="cm">/* read /etc/resolv.conf for DNS proxy settings (from DHCP) */</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="n">retval</span><span class="o">=</span><span class="n">ub_ctx_resolvconf</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/etc/resolv.conf&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;error reading resolv.conf: %s. errno says: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">ub_strerror</span><span class="p">(</span><span class="n">retval</span><span class="p">),</span><span class="w"> </span><span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="cm">/* read /etc/hosts for locally supplied host addresses */</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="n">retval</span><span class="o">=</span><span class="n">ub_ctx_hosts</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/etc/hosts&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;error reading hosts: %s. errno says: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">ub_strerror</span><span class="p">(</span><span class="n">retval</span><span class="p">),</span><span class="w"> </span><span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="cm">/* read public keys for DNSSEC verification */</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="n">retval</span><span class="o">=</span><span class="n">ub_ctx_add_ta_file</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;keys&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;error adding keys: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ub_strerror</span><span class="p">(</span><span class="n">retval</span><span class="p">));</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="cm">/* query for webserver */</span>
+<span class="w">        </span><span class="n">retval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ub_resolve</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;www.nlnetlabs.nl&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="mi">1</span><span class="w"> </span><span class="cm">/* TYPE A (IPv4 address) */</span><span class="p">,</span>
+<span class="w">                </span><span class="mi">1</span><span class="w"> </span><span class="cm">/* CLASS IN (internet) */</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">result</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">retval</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;resolve error: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ub_strerror</span><span class="p">(</span><span class="n">retval</span><span class="p">));</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="cm">/* show first result */</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">result</span><span class="o">-&gt;</span><span class="n">havedata</span><span class="p">)</span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;The address is %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">inet_ntoa</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">in_addr</span><span class="o">*</span><span class="p">)</span><span class="n">result</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]));</span>
+<span class="w">        </span><span class="cm">/* show security status */</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">result</span><span class="o">-&gt;</span><span class="n">secure</span><span class="p">)</span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Result is secure</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">result</span><span class="o">-&gt;</span><span class="n">bogus</span><span class="p">)</span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Result is bogus: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="o">-&gt;</span><span class="n">why_bogus</span><span class="p">);</span>
+<span class="w">        </span><span class="k">else</span><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Result is insecure</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">ub_resolve_free</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+<span class="w">        </span><span class="n">ub_ctx_delete</span><span class="p">(</span><span class="n">ctx</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Invocation of this program yields the following:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>First testrun
+    $ touch keys
+    $ example_6
+    The address is 213.154.224.1
+    Result is insecure
+</pre></div>
+</div>
+<p>The first testrun uses an empty keyfile, and since there is no security
+configured for nlnetlabs.nl, the result is insecure. For a secure result, DNSSEC
+security must be configured on both the server and the client, and in this
+example run, the nlnetlabs.nl server has security configured, but the key file
+is empty on the client.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Second testrun
+    $ dig nlnetlabs.nl DNSKEY &gt; keys
+    $ example_6
+    The address is 213.154.224.1
+    Result is secure
+</pre></div>
+</div>
+<p>The second testrun obtains the current DNSKEY information for <code class="docutils literal notranslate"><span class="pre">nlnetlabs.nl</span></code>
+using <code class="docutils literal notranslate"><span class="pre">dig</span></code> (from the <code class="docutils literal notranslate"><span class="pre">named</span></code> utilities).</p>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>This is not a secure method to obtain keys, check keys carefully
+before you trust them and enter them into your application (for
+example RIPE distributes key files with added PGP signatures).</p>
+</div>
+<p>But it is very easy, and useful for this tutorial. The lookup result is secure,
+because it is signed with the correct keys.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Third testrun
+    $ echo &#39;nlnetlabs.nl. 3528 IN DNSKEY ( 256 3 5
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAA== )&#39; &gt; keys
+    $ example_6
+    The address is 213.154.224.1
+    Result is bogus: validation failure &lt;www.nlnetlabs.nl. A IN&gt;:
+    signatures from unknown keys from 213.154.224.254 for trust anchor
+    nlnetlabs.nl. while building chain of trust
+</pre></div>
+</div>
+<p>The third example puts a key into the keyfile that is not going to match any
+signatures. The <code class="docutils literal notranslate"><span class="pre">echo</span></code> command is wrapped onto multiple lines on this page for
+presentation, put the text onto one line. Because the key and the signatures on
+the data do not match, verification fails and the result is bogus.</p>
+<p>The program starts like in the <a class="reference internal" href="setup-context.html"><span class="doc">Setup the Context</span></a> section of the tutorial,
+creates the unbound context and reads in <code class="docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code> and
+<code class="docutils literal notranslate"><span class="pre">/etc/hosts</span></code>. Then it adds the contents of the keys file from the current
+directory as trusted keys. It continues to resolve www.nlnetlabs.nl and prints
+the result. It also prints the security status of the result.</p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">ub_ctx_add_ta_file</span></code> adds trusted keys. The keys file contains text
+in the zone file format (output from <code class="docutils literal notranslate"><span class="pre">dig</span></code> or <code class="docutils literal notranslate"><span class="pre">drill</span></code> tools, or a copy and paste
+from the DNS zone file). It can contain DNSKEY and DS entries, for any number of
+domain names. If any of the keys matches the signatures on lookup results, the
+<code class="docutils literal notranslate"><span class="pre">result-&gt;secure</span></code> is set true.</p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">ub_ctx_add_ta</span></code> (not shown in example) can be used to add a trusted
+key from a string. A single DNSKEY or DS key entry, on a single line, is
+expected. Multiple keys can be given with multiple calls to <code class="docutils literal notranslate"><span class="pre">ub_ctx_add_ta</span></code>. For
+example:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="n">retval</span><span class="o">=</span><span class="n">ub_ctx_add_ta</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;jelte.nlnetlabs.nl. DS 31560 &quot;</span>
+<span class="w">    </span><span class="s">&quot;5 1 1CFED84787E6E19CCF9372C1187325972FE546CD&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="p">{</span><span class="w"> </span><span class="cm">/* print error */</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>It is also possible to read in named (BIND-style) key config files. These files
+contain <code class="docutils literal notranslate"><span class="pre">trusted-key{}</span></code> clauses. The function <code class="docutils literal notranslate"><span class="pre">ub_ctx_trustedkeys</span></code> (not
+shown in example) adds the keys from a bind-style config file.
+<code class="docutils literal notranslate"><span class="pre">ub_ctx_set_option(ctx,</span> <span class="pre">&quot;auto-trust-anchor-file:&quot;,</span> <span class="pre">&quot;keys&quot;)</span></code> (not shown in
+example) can be used to use auto-updated keys (with RFC5011), the file is read
+from and written to when the keys change. The probes have to be frequent enough
+to not lose track, about every 15 days.</p>
+<p>It is worth noting that with DNSSEC it is possible to verify nonexistence of
+data. So, if the example above is modified to query for <code class="docutils literal notranslate"><span class="pre">foobar.nlnetlabs.nl</span></code>
+and with correct keys in the keys file, the output is no data, but the result is
+secure.</p>
+<p>DNSSEC has complicated verification procedures. The result is distilled into two
+booleans, secure and bogus. Either the result is secure, the result is bogus, or
+the result is neither of the two, called insecure. Insecure happens when no
+DNSSEC security is configured for the domain name (or you simply forgot to add
+the trusted key). Secure means that one of the trusted keys verifies the
+signatures on the data. Bogus (security failed) can have many reasons, DNSSEC
+protects against alteration of the data in transit, signatures can expire, the
+trusted keys can be rolled over to fresh trusted keys, and many others. The
+functions <code class="docutils literal notranslate"><span class="pre">ub_ctx_debugout</span></code> (sets a stream to log to) and
+<code class="docutils literal notranslate"><span class="pre">ub_ctx_debuglevel</span></code> (try level 2) can give more information about a security
+failure. The <code class="docutils literal notranslate"><span class="pre">why_bogus</span></code> string as printed in the example above attempts to
+give a detailed reason for the failure. An e-commerce application can simply
+look at <code class="docutils literal notranslate"><span class="pre">result-&gt;secure</span></code> for its shopping server, and only continue if the
+result is secure.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="lookup-threads.html" class="btn btn-neutral float-left" title="Lookup from Threads" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../python-modules.html" class="btn btn-neutral float-right" title="Unbound for Python" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1999-2024, NLnet Labs.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

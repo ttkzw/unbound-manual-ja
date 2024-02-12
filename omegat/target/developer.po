@@ -1,0 +1,668 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 1999-2024, NLnet Labs
+# This file is distributed under the same license as the Unbound package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr "Project-Id-Version: Unbound 1.19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-12 13:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.14.0\n"
+
+#: ../../source/developer/doxygen-docs.rst:2
+msgid "Source Code Docs"
+msgstr ""
+
+#: ../../source/developer/doxygen-docs.rst:4
+msgid ""
+"The automatically generated documentation of the Unbound source code is "
+"available in on `the NLnet Labs website "
+"<https://www.nlnetlabs.nl/documentation/unbound/doxygen/>`_."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/async-lookup.rst:2
+msgid "Asynchronous Lookup"
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/async-lookup.rst:4
+msgid ""
+"This example performs the name lookup in the background. The original "
+"program keeps running, while the name is resolved. It is a modification "
+"of the example program from the :doc:`resolve-a-name` section."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/async-lookup.rst:72
+#: ../../source/developer/libunbound-tutorial/dnssec-validate.rst:71
+#: ../../source/developer/libunbound-tutorial/examine-results.rst:107
+#: ../../source/developer/libunbound-tutorial/lookup-threads.rst:108
+#: ../../source/developer/libunbound-tutorial/resolve-a-name.rst:54
+#: ../../source/developer/libunbound-tutorial/setup-context.rst:60
+msgid "Invocation of this program yields the following:"
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/async-lookup.rst:83
+msgid "If resolution takes longer or shorter, the output can vary."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/async-lookup.rst:85
+msgid ""
+"The context is created. Then an asynchronous resolve is performed. This "
+"performs the name resolution work in the background, allowing your "
+"application to continue to perform tasks (like showing a GUI to the "
+"user)."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/async-lookup.rst:89
+msgid ""
+"The function to start a background, asynchronous, resolve is "
+"``ub_resolve_async``. It takes the usual context, name, type and class as"
+" arguments. Additionally it takes a user argument, callback function and "
+"an id as arguments. In the example, the user argument is a reference to "
+"the variable done. It can be any pointer you like, or NULL if you don't "
+"care. The callback function is a pointer to a function, like "
+"``mycallback`` in the example, that is invoked when the lookup is done."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/async-lookup.rst:97
+msgid ""
+"The optional id argument is omitted in the example by passing NULL. If "
+"you pass an int*, an identifier is returned to you, that allows "
+"subsequent cancellation of the outstanding resolve request. The function "
+"``ub_cancel`` can be used while the asynchronous lookup has not completed"
+" yet to cancel it (not shown in the example)."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/async-lookup.rst:103
+msgid ""
+"After requesting the lookup the main function continues with a while "
+"loop, that prints time increments. Every time increment ``ub_process`` is"
+" called. This function processes pending lookup results and an "
+"application has to call ``ub_process`` somewhere to be able to receive "
+"results from asynchronous queries. The function ``ub_process`` does not "
+"block. The callback function is called from within ``ub_process``."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/async-lookup.rst:110
+msgid ""
+"The callback is called after some time, in the example it is called "
+"``mycallback``. This function receives as its first argument the same "
+"value you passed as user argument to ``ub_resolve_async``. It also "
+"receives the error code and a result structure. If the error code is not "
+"0 (an error happened), the result is NULL. The result structure contains "
+"the lookup information."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/async-lookup.rst:116
+msgid ""
+"The example callback uses its first argument to set done to true, to "
+"signal the main function that lookup has completed. It then checks if an "
+"error happened, and prints it if so. If there was no error it prints the "
+"first data element of the result. (It doesn't check the result very "
+"closely, this is only an example)."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/async-lookup.rst:121
+msgid ""
+"When the main function sees that after a call to ``ub_process`` the "
+"variable done is true, it exits the waiting loop, and deletes the "
+"context. The delete of the context also stops the background resolution "
+"process and removes the cached data from memory."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/async-lookup.rst:126
+msgid ""
+"You do not have to call ``ub_process`` all the time. The function "
+"``ub_poll`` (not shown in example) returns true when new data is "
+"available (without calling any callbacks). The function ``ub_fd`` (not "
+"shown in example) returns a file descriptor that becomes readable when "
+"new data is available (for use with ``select()`` or similar system "
+"calls)."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/async-lookup.rst:132
+msgid ""
+"The function ``ub_wait`` (not shown in example) can be used to wait for "
+"the asynchronous lookups to complete. For example, when the main program "
+"continues to set up a user GUI after starting the lookup, then if it runs"
+" out of work before the result arrives, it can use ``ub_wait`` to block "
+"until data arrives."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/dnssec-validate.rst:2
+msgid "DNSSEC Validate"
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/dnssec-validate.rst:4
+msgid ""
+"This example program performs DNSSEC validation of a lookup. It is a "
+"modification of the example program from the :doc:`setup-context` "
+"section."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/dnssec-validate.rst:81
+msgid ""
+"The first testrun uses an empty keyfile, and since there is no security "
+"configured for nlnetlabs.nl, the result is insecure. For a secure result,"
+" DNSSEC security must be configured on both the server and the client, "
+"and in this example run, the nlnetlabs.nl server has security configured,"
+" but the key file is empty on the client."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/dnssec-validate.rst:95
+msgid ""
+"The second testrun obtains the current DNSKEY information for "
+"``nlnetlabs.nl`` using ``dig`` (from the ``named`` utilities)."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/dnssec-validate.rst:98
+msgid ""
+"This is not a secure method to obtain keys, check keys carefully before "
+"you trust them and enter them into your application (for example RIPE "
+"distributes key files with added PGP signatures)."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/dnssec-validate.rst:102
+msgid ""
+"But it is very easy, and useful for this tutorial. The lookup result is "
+"secure, because it is signed with the correct keys."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/dnssec-validate.rst:119
+msgid ""
+"The third example puts a key into the keyfile that is not going to match "
+"any signatures. The ``echo`` command is wrapped onto multiple lines on "
+"this page for presentation, put the text onto one line. Because the key "
+"and the signatures on the data do not match, verification fails and the "
+"result is bogus."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/dnssec-validate.rst:124
+msgid ""
+"The program starts like in the :doc:`setup-context` section of the "
+"tutorial, creates the unbound context and reads in ``/etc/resolv.conf`` "
+"and ``/etc/hosts``. Then it adds the contents of the keys file from the "
+"current directory as trusted keys. It continues to resolve "
+"www.nlnetlabs.nl and prints the result. It also prints the security "
+"status of the result."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/dnssec-validate.rst:130
+msgid ""
+"The function ``ub_ctx_add_ta_file`` adds trusted keys. The keys file "
+"contains text in the zone file format (output from ``dig`` or ``drill`` "
+"tools, or a copy and paste from the DNS zone file). It can contain DNSKEY"
+" and DS entries, for any number of domain names. If any of the keys "
+"matches the signatures on lookup results, the ``result->secure`` is set "
+"true."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/dnssec-validate.rst:136
+msgid ""
+"The function ``ub_ctx_add_ta`` (not shown in example) can be used to add "
+"a trusted key from a string. A single DNSKEY or DS key entry, on a single"
+" line, is expected. Multiple keys can be given with multiple calls to "
+"``ub_ctx_add_ta``. For example:"
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/dnssec-validate.rst:147
+msgid ""
+"It is also possible to read in named (BIND-style) key config files. These"
+" files contain ``trusted-key{}`` clauses. The function "
+"``ub_ctx_trustedkeys`` (not shown in example) adds the keys from a bind-"
+"style config file. ``ub_ctx_set_option(ctx, \"auto-trust-anchor-file:\", "
+"\"keys\")`` (not shown in example) can be used to use auto-updated keys "
+"(with RFC5011), the file is read from and written to when the keys "
+"change. The probes have to be frequent enough to not lose track, about "
+"every 15 days."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/dnssec-validate.rst:155
+msgid ""
+"It is worth noting that with DNSSEC it is possible to verify nonexistence"
+" of data. So, if the example above is modified to query for "
+"``foobar.nlnetlabs.nl`` and with correct keys in the keys file, the "
+"output is no data, but the result is secure."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/dnssec-validate.rst:160
+msgid ""
+"DNSSEC has complicated verification procedures. The result is distilled "
+"into two booleans, secure and bogus. Either the result is secure, the "
+"result is bogus, or the result is neither of the two, called insecure. "
+"Insecure happens when no DNSSEC security is configured for the domain "
+"name (or you simply forgot to add the trusted key). Secure means that one"
+" of the trusted keys verifies the signatures on the data. Bogus (security"
+" failed) can have many reasons, DNSSEC protects against alteration of the"
+" data in transit, signatures can expire, the trusted keys can be rolled "
+"over to fresh trusted keys, and many others. The functions "
+"``ub_ctx_debugout`` (sets a stream to log to) and ``ub_ctx_debuglevel`` "
+"(try level 2) can give more information about a security failure. The "
+"``why_bogus`` string as printed in the example above attempts to give a "
+"detailed reason for the failure. An e-commerce application can simply "
+"look at ``result->secure`` for its shopping server, and only continue if "
+"the result is secure."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/examine-results.rst:2
+msgid "Examine the Results"
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/examine-results.rst:4
+msgid ""
+"In the third example, the results returned are examined in detail. In "
+"addition, the program is modified to accept an argument, the name to look"
+" up. It is a modification of the example program from the :doc:`setup-"
+"context` section."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/examine-results.rst:128
+msgid ""
+"This example add the option to specify the name too lookup from the "
+"commandline, and this name is found in ``argv[1]``. The name is looked up"
+" and ``examine_result`` is called to printout a detailed account of the "
+"results."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/examine-results.rst:132
+msgid ""
+"The ``qname``, ``qtype`` and ``qclass`` fields show the question that was"
+" asked to ``ub_resolve``."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/examine-results.rst:135
+msgid ""
+"The canonical name may be set if you query for an alias, in that case the"
+" alternate name for the host is set here."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/examine-results.rst:138
+msgid ""
+"The boolean value ``hasdata`` is true when at least one data element is "
+"available."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/examine-results.rst:141
+msgid ""
+"The boolean value ``nxdomain`` is true, when no data is available because"
+" the name queried for does not exist."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/examine-results.rst:144
+msgid ""
+"The boolean value ``secure`` is true when public key signatures on the "
+"answer are are valid. It is also possible for responses without data to "
+"be secure."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/examine-results.rst:147
+msgid ""
+"The boolean value ``bogus`` is true when security checks failed. The "
+"authenticity of the content, and the absence or presence of it, failed "
+"security checks. This happens when, for example, you use the wrong public"
+" keys for validation, or if the data was altered in transit."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/examine-results.rst:152
+msgid ""
+"If both ``secure`` and ``bogus`` are false this indicates there was no "
+"security information for that domain name."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/examine-results.rst:155
+msgid ""
+"The ``rcode`` value indicates the exact DNS error code. If there is no "
+"data, it may explain why (the servers encountered errors). If there is no"
+" data and the name does not exist (so ``nxdomain`` is true), the "
+"``rcode`` value is 3 (NXDOMAIN). If there is no data, and the name does "
+"exist (it does not have this type of data) the ``rcode`` is 0 (NOERROR). "
+"Other error codes indicate some sort of failure, mostly a failure at the "
+"DNS server."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/examine-results.rst:162
+msgid "The example prints all the data elements and their length."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/examine-results.rst:164
+msgid ""
+"Here are some other results that you can get. The first is an alias, with"
+" several addresses, and the second is a nonexistent name:"
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/index.rst:10
+msgid "Contents"
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/index.rst:2
+msgid "Unbound Library Tutorial"
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/index.rst:4
+msgid ""
+"This is the tutorial for the :doc:`unbound "
+"library</manpages/libunbound>`. Unbound can run as a server, as a daemon "
+"in the background, answering DNS queries from the network. Alternatively,"
+" it can link to an application as a library ``-lunbound``, and answer DNS"
+" queries for the application. This tutorial explains how to use the "
+"library API."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/lookup-threads.rst:2
+msgid "Lookup from Threads"
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/lookup-threads.rst:4
+msgid ""
+"This example shows how to use libunbound from a threaded program. It is a"
+" modification of the example program from the :doc:`setup-context` "
+"section. It creates two threads and resolves from both threads."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/lookup-threads.rst:8
+msgid ""
+"This example uses ``pthreads``, and assumes that libunbound was compiled "
+"with threading enabled (which is the default, if ``pthreads`` can be "
+"found). To compile the example pass the compiler the option "
+"``-lpthread``."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/lookup-threads.rst:116
+msgid "Sometimes, the result from thread 2 is printed first."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/lookup-threads.rst:118
+msgid ""
+"The example starts at the ``main`` program function. The unbound context "
+"is created and ``resolv.conf`` and ``/etc/hosts`` are read in. Then, two "
+"threads are started using ``pthread_create``. The main program continues "
+"with waiting for those two threads to finish."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/lookup-threads.rst:123
+msgid ""
+"The first thread, ``thread_one``, starts by obtaining a pointer to the "
+"unbound context from the thread argument. Then, www.nlnetlabs.nl is "
+"resolved, using the regular ``ub_resolve``. The result is printed, and "
+"freed and the thread exits with ``return NULL``."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/lookup-threads.rst:128
+msgid ""
+"The second thread, ``thread_two``, does the same as the first thread, but"
+" looks up www.google.nl instead."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/lookup-threads.rst:131
+msgid ""
+"Using threads is easy when the context is created with ``ub_ctx_create``."
+" In this example, when both threads start resolving, they act as a "
+"2-threaded resolver, and share results, validation outcomes and data. "
+"When one of the threads finishes its lookup, the other thread continues "
+"as a 1-threaded resolver. When the resolver is created with "
+"``ub_ctx_create_event`` or ``ub_ctx_create_ub_event``, with an event "
+"base, then it can only be accessed from one thread, usually the one that "
+"is running that event loop."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/lookup-threads.rst:139
+msgid ""
+"This example uses blocking resolution for both threads. You can use "
+"asynchronous resolution in threaded programs too. The function "
+"``ub_resolve_async`` is used to perform a background lookup. The calling "
+"thread continues executing while the background lookup is in progress."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/lookup-threads.rst:144
+msgid ""
+"The application can decide if it wants the background lookup to be "
+"performed from a (forked) process or from a (newly created) thread, by "
+"setting ``ub_ctx_async``. The default is to fork. The asynchronous "
+"resolution process or thread is deleted when ``ub_ctx_delete`` is called."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/lookup-threads.rst:149
+msgid ""
+"Callbacks from asynchronous lookups are performed when ``ub_process`` is "
+"called, just like in a single-threaded program. The thread from which the"
+" callbacks are called is the thread from which ``ub_process`` has been "
+"called. It is the responsibility of the application to signal other "
+"threads that lookup results are available."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/lookup-threads.rst:155
+msgid ""
+"It is possible to have a thread wait for the file descriptor from "
+"``ub_ctx_fd`` (a pipe) to become readable, and process any pending lookup"
+" results with ``ub_process``."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/resolve-a-name.rst:2
+msgid "Resolve a Name"
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/resolve-a-name.rst:4
+msgid ""
+"First, obtain `ldns <https://www.nlnetlabs.nl/projects/ldns/about/>`_ and"
+" :doc:`Unbound </getting-started/installation>`, compile and install "
+"them. To compile a program with its library use this command, assuming "
+"unbound was installed in ``/usr/local``:"
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/resolve-a-name.rst:13
+msgid ""
+"First a basic example that shows how to create a context and resolve a "
+"host address."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/resolve-a-name.rst:61
+msgid ""
+"The code starts by including system header files and unbound.h. Then, the"
+" main routine creates the context using the ``ub_ctx_create()`` function."
+" If this returns NULL, the program prints an error and exits."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/resolve-a-name.rst:65
+msgid ""
+"Then, the domain name ``www.nlnetlabs.nl`` is resolved using the function"
+" ``ub_resolve()``. The ``ub_resolve`` invocation takes as arguments the "
+"context that was just created, the domain name string and the type and "
+"class to lookup. Results are returned in the ``ub_result`` structure, "
+"unless an error occurs. If an error occurs, retval contains an error code"
+" and ``ub_strerror`` converts the error code into a readable string, that"
+" is printed and the program exits."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/resolve-a-name.rst:72
+msgid ""
+"If the resolve succeeds, then the results are printed. In this example, "
+"the results are not examined in detail, but only if there is data, the "
+"first element of data is printed. The ``result->havedata`` boolean "
+"indicates whether the resolver found data, and ``result->data[0]`` is a "
+"pointer to the first element of data. The standard C library routine "
+"``inet_ntoa`` is used to print out the IPv4 address."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/resolve-a-name.rst:79
+msgid ""
+"Note that this example program neglects to examine ``result->len[0]`` for"
+" simplicity. For security, such untrusted data from the internet should "
+"be checked. That value should have been 4 (bytes), the length of IPv4 "
+"addresses."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/resolve-a-name.rst:83
+msgid ""
+"At the end of the main routine, the results are freed with "
+"``ub_resolve_free(result)`` and the context is deleted with "
+"``ub_ctx_delete``. If you perform multiple lookups, it is good to keep "
+"the context around, it performs caching and that will speed up your "
+"responses."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/setup-context.rst:2
+msgid "Setup the Context"
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/setup-context.rst:4
+msgid ""
+"In the second example we set additional useful options on the context, to"
+" enhance performance and utility. It is a modification of the example "
+"program from the :doc:`resolve-a-name` section."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/setup-context.rst:67
+msgid ""
+"As said, the code is a modification of the :doc:`first "
+"example<resolve-a-name>`. The context is set up, a single name is looked "
+"up, and the results and context are freed. The difference is that local "
+"settings are applied."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/setup-context.rst:72
+msgid ""
+"The local DNS server settings (acquired from DHCP perhaps) are read from "
+"``/etc/resolv.conf`` with ``ub_ctx_resolvconf``. Without reading this, "
+"Unbound will use built-in root hints, this is a lot slower than using the"
+" DNS servers from ``resolv.conf``. It makes a large difference, for me "
+"``time example1`` takes about 0.25 seconds, and ``time example2`` takes "
+"about 0.05 seconds."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/setup-context.rst:78
+msgid ""
+"The difference is caused because the DNS proxy in ``resolv.conf`` has a "
+"cache of often used data, and thus can resolve queries much faster. If "
+"you perform many queries (and keep the unbound context around between "
+"calls to resolve) the time difference will grow smaller over time, since "
+"a cache of data is kept inside the context as well."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/setup-context.rst:84
+msgid ""
+"When you use ``ub_ctx_resolvconf`` libunbound becomes a stub resolver, "
+"not going to the internet itself, but relying on the servers listed. "
+"Without the call, by default, libunbound contacts the servers on the "
+"internet itself. A reason to not use the servers from resolv.conf is "
+"because you do not trust them, or because they lack support for DNSSEC, "
+"and you want to use DNSSEC validation."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/setup-context.rst:90
+msgid ""
+"Some people have complained about DNSSEC validation changing between "
+"secure and bogus, randomly. Often these are because they read a "
+"``resolv.conf`` that contains nameservers where some support DNSSEC and "
+"some do not. If unbound detects that signatures are stripped from the "
+"answer, it returns bogus."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/setup-context.rst:96
+msgid ""
+"The function ``ub_ctx_set_fwd(ctx, \"192.168.0.1\")`` (not shown in the "
+"example program) can be used to set an explicit IPv4 or IPv6 address for "
+"the DNS server to use. You can use this function to set DNS caching proxy"
+" server addresses that are not listed in ``/etc/resolv.conf``."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/setup-context.rst:101
+msgid ""
+"If you wish to provide your own root-hints file, to override the built-in"
+" values, you can use the power-user interface ``ub_ctx_set_option(ctx, "
+"\"root-hints:\", \"my-hints.root\")``, and the file ``my-hints.root`` is "
+"read in before the first name resolution."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/setup-context.rst:106
+msgid ""
+"The function ``ub_ctx_hosts`` is used to read ``/etc/hosts``. This allows"
+" unbound to (very quickly) return addresses for hosts that are configured"
+" in ``/etc/hosts``. If you do not trust the ``/etc/hosts`` file, you can "
+"avoid loading it. The addresses listed in the hosts file lack DNSSEC "
+"signatures, which may affect their validation status later on. The hosts "
+"file is a very useful configuration file to load, as it allows users to "
+"list addresses that are often used, or addresses for hosts on their local"
+" network."
+msgstr ""
+
+#: ../../source/developer/libunbound-tutorial/setup-context.rst:114
+msgid ""
+"If you do not want your program to fail if ``/etc/resolv.conf`` or "
+"``/etc/hosts`` do not exist at all, you can check if ``errno == ENOENT`` "
+"when the reading functions fail, and act accordingly."
+msgstr ""
+
+#: ../../source/developer/python-modules.rst:2
+msgid "Unbound for Python"
+msgstr ""
+
+#: ../../source/developer/python-modules.rst:5
+msgid "Pyunbound"
+msgstr ""
+
+#: ../../source/developer/python-modules.rst:7
+msgid ""
+"Unbound supports bindings for Python which we call 'pyunbound'. This "
+"functionality can be enabled in the :command:`configure` step of the "
+"installation using the following option:"
+msgstr ""
+
+#: ../../source/developer/python-modules.rst:15
+msgid ""
+"Documentation for pyunbound will then also be included when building "
+"Unbound's documentation with:"
+msgstr ""
+
+#: ../../source/developer/python-modules.rst:22
+msgid ""
+"This command will generate the relevant pyunbound documentation in "
+"``doc/html/pyunbound``, which can be browsed in a web browser by opening "
+"the ``index.html`` file in that directory."
+msgstr ""
+
+#: ../../source/developer/python-modules.rst:26
+msgid ""
+"The pyunbound documentation can also be solely generated without the need"
+" to configure/compile Unbound by invoking :command:`sphinx-build` "
+"directly with:"
+msgstr ""
+
+#: ../../source/developer/python-modules.rst:34
+msgid "Pythonmod"
+msgstr ""
+
+#: ../../source/developer/python-modules.rst:36
+msgid ""
+"Unbound contains a module that executes python code called 'pythonmod'. "
+"The supplied Python code has to follow module operation semantics. This "
+"module is enabled in the :command:`configure` step of the installation "
+"using the following option:"
+msgstr ""
+
+#: ../../source/developer/python-modules.rst:45
+msgid ""
+"Documentation for pythonmod will then also be included when building "
+"Unbound's documentation with:"
+msgstr ""
+
+#: ../../source/developer/python-modules.rst:52
+msgid ""
+"This command will generate the relevant pythonmod documentation in "
+"``doc/html/pythonmod``, which can be browsed in a web browser by opening "
+"the ``index.html`` file in that directory."
+msgstr ""
+
+#: ../../source/developer/python-modules.rst:56
+msgid ""
+"The pythonmod documentation can also be solely generated without the need"
+" to configure/compile Unbound by invoking :command:`sphinx-build` "
+"directly with:"
+msgstr ""
+

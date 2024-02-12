@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configuration &mdash; Unbound 1.19.0 ドキュメント</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/dark.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/light.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="Resolver for Home Networks" href="../use-cases/home-resolver.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/unbound-duotone-white.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.19.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#testing-the-setup">Testing the setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-remote-control">Set up Remote Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-trust-anchor-enable-dnssec">Set up Trust Anchor (Enable DNSSEC)</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Use Cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../use-cases/home-resolver.html">Resolver for Home Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use-cases/local-stub.html">Local DNS (Stub) Resolver for a Single Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/proxy.html">Downstream Proxy Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/serve-stale.html">Serving Stale Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/performance.html">Performance Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/monitoring.html">Monitoring and Reporting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/privacy/aggressive-nsec.html">Aggressive NSEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/privacy/dns-over-https.html">DNS-over-HTTPS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Filtering</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/filtering/tags-views.html">Tags and Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/filtering/rpz.html">Response Policy Zones</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developer/libunbound-tutorial/index.html">Unbound Library Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/python-modules.html">Unbound for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/doxygen-docs.html">Source Code Docs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual Pages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound.html">unbound(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound-checkconf.html">unbound-checkconf(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound.conf.html">unbound.conf(5)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound-host.html">unbound-host(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/libunbound.html">libunbound(3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound-control.html">unbound-control(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound-anchor.html">unbound-anchor(8)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/rfc-compliance.html">RFC Compliance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/history/index.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/todo.html">Docs To-Do List</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Unbound</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Configuration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/getting-started/configuration.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="この見出しへのパーマリンク">¶</a></h1>
+<p>Unbound has a vast array of configuration options for advanced use cases, which
+can seem a little overwhelming at first. Luckily, all of the defaults are
+sensible and secure, so in a lot of environments you can run Unbound without
+changing any options.
+Below we will go through a basic, recommended configuration, but feel free to
+add and experiment with options as you need them.</p>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>The instructions in this page assume that Unbound is already installed.</p>
+</div>
+<p>The basic configuration which you can use out of the box is shown below.
+To use it, you need to create a file with this configuration as its content (or
+copy the configuration to the default configuration file which can be found
+during the installation process).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>server:
+<span class="w">    </span><span class="c1"># can be uncommented if you do not need user privilige protection</span>
+<span class="w">    </span><span class="c1"># username: &quot;&quot;</span>
+
+<span class="w">    </span><span class="c1"># can be uncommented if you do not need file access protection</span>
+<span class="w">    </span><span class="c1"># chroot: &quot;&quot;</span>
+
+<span class="w">    </span><span class="c1"># location of the trust anchor file that enables DNSSEC. note that</span>
+<span class="w">    </span><span class="c1"># the location of this file can be elsewhere</span>
+<span class="w">    </span>auto-trust-anchor-file:<span class="w"> </span><span class="s2">&quot;/usr/local/etc/unbound/root.key&quot;</span>
+<span class="w">    </span><span class="c1"># auto-trust-anchor-file: &quot;/var/lib/unbound/root.key&quot;</span>
+
+<span class="w">    </span><span class="c1"># send minimal amount of information to upstream servers to enhance privacy</span>
+<span class="w">    </span>qname-minimisation:<span class="w"> </span>yes
+
+<span class="w">    </span><span class="c1"># specify the interface to answer queries from by ip-address.</span>
+<span class="w">    </span>interface:<span class="w"> </span><span class="m">0</span>.0.0.0
+<span class="w">    </span><span class="c1"># interface: ::0</span>
+
+<span class="w">    </span><span class="c1"># addresses from the IP range that are allowed to connect to the resolver</span>
+<span class="w">    </span>access-control:<span class="w"> </span><span class="m">192</span>.168.0.0/16<span class="w"> </span>allow
+<span class="w">    </span><span class="c1"># access-control: 2001:DB8/64 allow</span>
+</pre></div>
+</div>
+<p>By default the Unbound configuration uses
+<a class="reference external" href="https://wiki.archlinux.org/title/chroot">chroot</a> to provide an extra layer
+of defence against remote exploits.
+If Unbound is not starting because it cannot access files due to permission
+errors caused by <strong class="command">chroot</strong>, a solution can be to enter file paths as
+full pathnames starting at the root of the file system (<code class="docutils literal notranslate"><span class="pre">/</span></code>).
+Otherwise, if <strong class="command">chroot</strong> is not required you can disable it in the
+configuration file:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>server:
+    # disable chroot
+    chroot: &quot;&quot;
+</pre></div>
+</div>
+<p>By default Unbound assumes that a user named &quot;unbound&quot; exists.
+You can add this user with an account management tool available on your system;
+on Linux this is usually <strong class="command">useradd</strong>).
+You can also disable this feature by adding <code class="docutils literal notranslate"><span class="pre">username:</span> <span class="pre">&quot;&quot;</span></code> in the
+configuration file:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>server:
+    # disable user privilige protection
+    username: &quot;&quot;
+</pre></div>
+</div>
+<p>If it is enabled, after the setup, any other user privileges are dropped and
+the configured username is assumed.
+If this user needs access to files (such as the 'trust
+anchor' mentioned below), these can be created by executing with <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">-u</span>
+<span class="pre">unbound</span></code> in front of it.</p>
+<div class="admonition important">
+<p class="admonition-title">重要</p>
+<p>Unbound comes with the <a class="reference internal" href="../manpages/unbound-checkconf.html"><span class="doc">unbound-checkconf(8)</span></a> tool.
+This tool allows you to check the config file for errors before starting
+Unbound. It is very convenient because if any errors are found it tells you
+where they are, which is particularly useful when Unbound is already
+running to avoid failure to restart due to a configuration error.</p>
+</div>
+<section id="testing-the-setup">
+<h2>Testing the setup<a class="headerlink" href="#testing-the-setup" title="この見出しへのパーマリンク">¶</a></h2>
+<p>After running the <strong class="command">unbound-checkconf</strong> command to see if your config
+file is correct, you can test your setup by running Unbound in &quot;debug&quot; mode.
+This allows you to see what is happening during startup and catch any errors.
+The <a class="reference internal" href="../manpages/unbound.html"><span class="doc">unbound(8)</span></a> manpage shows that the <a class="reference internal" href="../manpages/unbound.html#cmdoption-unbound-d"><code class="xref std std-option docutils literal notranslate"><span class="pre">-d</span></code></a>
+flag will start Unbound in this mode.
+The manpage also shows that we can use the <a class="reference internal" href="../manpages/unbound.html#cmdoption-unbound-c"><code class="xref std std-option docutils literal notranslate"><span class="pre">-c</span></code></a> flag to
+specify the path to the configuration file, so we can use the one we created.
+We also recommend increasing the verbosity of the logging to 1 or 2, to see
+what's actually happening (<a class="reference internal" href="../manpages/unbound.html#cmdoption-unbound-v"><code class="xref std std-option docutils literal notranslate"><span class="pre">-v</span></code></a> or <code class="docutils literal notranslate"><span class="pre">-vv</span></code>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>unbound<span class="w"> </span>-d<span class="w"> </span>-vv<span class="w"> </span>-c<span class="w"> </span>unbound.conf
+</pre></div>
+</div>
+<p>After Unbound starts normally (and you've sent it some queries) you can remove
+the <a class="reference internal" href="../manpages/unbound.html#cmdoption-unbound-v"><code class="xref std std-option docutils literal notranslate"><span class="pre">-v</span></code></a> and <a class="reference internal" href="../manpages/unbound.html#cmdoption-unbound-d"><code class="xref std std-option docutils literal notranslate"><span class="pre">-d</span></code></a> and run the command
+again.
+Then Unbound will fork to the background and run until you either kill it or
+reboot the machine.</p>
+<p>You may run into an error where Unbound tells you it cannot bind to
+<code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code> as it's already in use. This is because the system resolver
+<code class="docutils literal notranslate"><span class="pre">systemd-resolved</span></code> is already running on that port. You can go around this by
+changing the IP address in the config to <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code>. This looks like:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>server:
+<span class="w">    </span><span class="c1"># specify the interface to answer queries from by ip-address.</span>
+<span class="w">    </span>interface:<span class="w"> </span><span class="m">127</span>.0.0.1
+</pre></div>
+</div>
+<p>If you want to change this behaviour, on <a class="reference internal" href="../use-cases/local-stub.html"><span class="doc">this page</span></a>
+we show how to change the system resolver to be Unbound.</p>
+</section>
+<section id="set-up-remote-control">
+<h2>Set up Remote Control<a class="headerlink" href="#set-up-remote-control" title="この見出しへのパーマリンク">¶</a></h2>
+<p>A useful functionality to enable is the <a class="reference internal" href="../manpages/unbound-control.html"><span class="doc">unbound-control(8)</span></a>
+command. This makes starting, stopping, and reloading Unbound
+easier.
+To enable this functionality we need to add
+<a class="reference internal" href="../manpages/unbound.conf.html#unbound-conf-remote"><span class="std std-ref">remote-control:</span></a> to the configuration file:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>remote-control:
+    # enable remote-control
+    control-enable: yes
+
+    # location of the files created by unbound-control-setup
+    # server-key-file: &quot;/usr/local/etc/unbound/unbound_server.key&quot;
+    # server-cert-file: &quot;/usr/local/etc/unbound/unbound_server.pem&quot;
+    # control-key-file: &quot;/usr/local/etc/unbound/unbound_control.key&quot;
+    # control-cert-file: &quot;/usr/local/etc/unbound/unbound_control.pem&quot;
+</pre></div>
+</div>
+<p>To use the <strong class="command">unbound-control</strong> command, we need to invoke the
+<strong class="command">unbound-control-setup</strong> command. This creates a number of files in the
+default install directory. The default install directory is
+<code class="docutils literal notranslate"><span class="pre">/usr/local/etc/unbound/</span></code> on most systems, but some distributions may put it
+in <code class="docutils literal notranslate"><span class="pre">/etc/unbound/</span></code> or <code class="docutils literal notranslate"><span class="pre">/var/lib/unbound</span></code>.</p>
+<p><strong class="command">unbound-control-setup</strong> creates the cryptographic keys necessary for the control option:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>unbound-control-setup
+</pre></div>
+</div>
+<p>If you use a username like <code class="docutils literal notranslate"><span class="pre">unbound</span></code> in the configuration to run the daemon
+(which is the default setting), you can use <strong class="command">sudo</strong> to create the files
+in that user's name, so that the user running Unbound is allowed to read the
+keys.
+This is also a solution if the <code class="docutils literal notranslate"><span class="pre">/usr/local/etc/unbound/</span></code> directory (or any
+other default directory) is write-protected, which is the case for some
+distributions.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>-u<span class="w"> </span>unbound<span class="w"> </span>unbound-control-setup
+</pre></div>
+</div>
+<p>You can now control Unbound using the <strong class="command">unbound-control</strong> command. Note
+that if your configuration file is not in the default location or not named
+<code class="docutils literal notranslate"><span class="pre">unbound.conf</span></code>, the name (and possibly path) need to be provided when using
+the command using the <a class="reference internal" href="../manpages/unbound-control.html#cmdoption-unbound-control-c"><code class="xref std std-option docutils literal notranslate"><span class="pre">-c</span></code></a> flag.</p>
+</section>
+<section id="set-up-trust-anchor-enable-dnssec">
+<h2>Set up Trust Anchor (Enable DNSSEC)<a class="headerlink" href="#set-up-trust-anchor-enable-dnssec" title="この見出しへのパーマリンク">¶</a></h2>
+<p>To enable <a class="reference external" href="https://www.sidn.nl/en/modern-internet-standards/dnssec">DNSSEC</a>,
+which we strongly recommend, we need to set up a trust anchor as it allows the
+verification of the integrity of the responses to the queries you send.</p>
+<p>To help, we can use the <a class="reference internal" href="../manpages/unbound-anchor.html"><span class="doc">unbound-anchor(8)</span></a> command.</p>
+<p><strong class="command">unbound-anchor</strong> performs the setup by configuring a trust anchor. This
+trust anchor will only serve as the initial anchor from built-in values. To keep
+this anchor up to date, Unbound must be able to read and write to this file. The
+default location that <strong class="command">unbound-anchor</strong> creates this in is determined by
+your installation method.
+Usually the default directory is <code class="docutils literal notranslate"><span class="pre">/usr/local/etc/unbound/</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>During the dynamic linking, this command could output an error about
+loading shared libraries. This is remedied by running <code class="docutils literal notranslate"><span class="pre">ldconfig</span></code> to reset
+the dynamic library cache.</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>unbound-anchor
+</pre></div>
+</div>
+<p>Note that using a package manager to install Unbound, on some distributions,
+creates the root key during installation. On Ubuntu 22.04 LTS for example,
+this location is <code class="docutils literal notranslate"><span class="pre">/var/lib/unbound/root.key</span></code>. On macOS Big Sur this location
+is <code class="docutils literal notranslate"><span class="pre">/opt/homebrew/etc/unbound/root.key</span></code> If you create the root key yourself
+(by using the <strong class="command">unbound-anchor</strong> command), then the path to the anchor
+file in the configuration file should be changed to the correct location. To
+find out the default location you can use the <strong class="command">unbound-anchor</strong> command
+again with the <code class="docutils literal notranslate"><span class="pre">-vvv</span></code> option enabled. To enable DNSSEC, we add
+<code class="docutils literal notranslate"><span class="pre">auto-trust-anchor-file</span></code> under the <code class="docutils literal notranslate"><span class="pre">server</span></code> clause in the configuration
+file.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>server:
+    # enable DNSSEC
+    auto-trust-anchor-file: &quot;/var/lib/unbound/root.key&quot;
+</pre></div>
+</div>
+<p>Note that on some systems the <code class="docutils literal notranslate"><span class="pre">/usr/local/etc/unbound/</span></code> directory might be
+write-protected.</p>
+<p>If the <strong class="command">unbound-anchor</strong> command fails due to the insufficient
+permissions, run the command as the correct user, here we use the user
+<code class="docutils literal notranslate"><span class="pre">unbound</span></code> as this is the default user.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>-u<span class="w"> </span>unbound<span class="w"> </span>unbound-anchor
+</pre></div>
+</div>
+<p>This step is also important when using the <code class="docutils literal notranslate"><span class="pre">chroot</span></code> jail.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../use-cases/home-resolver.html" class="btn btn-neutral float-right" title="Resolver for Home Networks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1999-2024, NLnet Labs.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

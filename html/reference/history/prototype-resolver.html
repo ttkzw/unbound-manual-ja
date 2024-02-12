@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unbound Resolver Prototype &mdash; Unbound 1.19.0 ドキュメント</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/dark.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/light.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/translations.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" />
+    <link rel="next" title="DNS Cache Poisoning Vulnerability (2008)" href="dns-cache-poisoning-vulnerability.html" />
+    <link rel="prev" title="Requirements for Recursive Caching Resolver" href="requirements.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/unbound-duotone-white.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.19.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Use Cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../use-cases/home-resolver.html">Resolver for Home Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../use-cases/local-stub.html">Local DNS (Stub) Resolver for a Single Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/proxy.html">Downstream Proxy Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/serve-stale.html">Serving Stale Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/performance.html">Performance Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/monitoring.html">Monitoring and Reporting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/privacy/aggressive-nsec.html">Aggressive NSEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/privacy/dns-over-https.html">DNS-over-HTTPS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Filtering</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/filtering/tags-views.html">Tags and Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/filtering/rpz.html">Response Policy Zones</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/libunbound-tutorial/index.html">Unbound Library Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/python-modules.html">Unbound for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/doxygen-docs.html">Source Code Docs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual Pages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound.html">unbound(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-checkconf.html">unbound-checkconf(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound.conf.html">unbound.conf(5)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-host.html">unbound-host(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/libunbound.html">libunbound(3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-control.html">unbound-control(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-anchor.html">unbound-anchor(8)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../rfc-compliance.html">RFC Compliance</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">History</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="requirements.html">Requirements for Recursive Caching Resolver</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Unbound Resolver Prototype</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#download-the-original-java-prototype">Download the Original Java Prototype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prototype">Prototype?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#design">Design</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dns-cache-poisoning-vulnerability.html">DNS Cache Poisoning Vulnerability (2008)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="patch-announce102.html">Unbound 1.0.2 Patch Announcement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="book-news.html">Unbound Operation Explained in Book</a></li>
+<li class="toctree-l2"><a class="reference internal" href="info-timeout-server-selection.html">Unbound Timeout and Server Selection Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="info-algo.html">DNSSEC Algorithms with Unbound</a></li>
+<li class="toctree-l2"><a class="reference internal" href="info-algo.html#trust-anchors">Trust Anchors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="root-11sep-11oct.html">Trust anchor retrieval less then 30 days before the KSK rollover</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../todo.html">Docs To-Do List</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Unbound</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">History</a></li>
+      <li class="breadcrumb-item active">Unbound Resolver Prototype</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/reference/history/prototype-resolver.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="unbound-resolver-prototype">
+<h1>Unbound Resolver Prototype<a class="headerlink" href="#unbound-resolver-prototype" title="この見出しへのパーマリンク">¶</a></h1>
+<p><em>The following is information regarding the Java based prototype for Unbound.
+The Java prototype was superseded by a C version, available</em> <a class="reference external" href="https://www.nlnetlabs.nl/projects/unbound/about/">here</a>. <em>Older prototype versions
+can be downloaded</em> <a class="reference external" href="https://www.nlnetlabs.nl/downloads/unbound/proto-java">here</a>.</p>
+<p>Unbound is a project to develop independent open-source DNS software and
+documentation. It is jointly funded by <a class="reference external" href="https://www.verisign.com">VeriSign, Inc.</a>, and the <a class="reference external" href="http://www.isi.edu">University of Southern
+California/Information Sciences Institute</a>.</p>
+<p>This is our prototype full-service, iterative-mode, validating DNS resolver.  It
+is written entirely in Java and is licensed under the <a class="reference external" href="http://svn.verisignlabs.com/unbound/proto/trunk/licenses/unbound-LICENSE.txt">BSD open-source license</a>.</p>
+<p>Even though it is a prototype, it is fairly full-featured:</p>
+<ul class="simple">
+<li><p>Supports DNSSEC validation</p></li>
+<li><p>Supports zone forwarding</p></li>
+<li><p>Supports &quot;stub&quot; zones</p></li>
+<li><p>Is resistant to cache poisoning</p></li>
+<li><p>Plus, other even harder to explain features!</p></li>
+</ul>
+<section id="download-the-original-java-prototype">
+<h2>Download the Original Java Prototype<a class="headerlink" href="#download-the-original-java-prototype" title="この見出しへのパーマリンク">¶</a></h2>
+<p>Fetch the latest package and released version here:</p>
+<dl class="simple">
+<dt>Binary:</dt><dd><p><a class="reference download external" download="" href="https://www.nlnetlabs.nl/downloads/unbound/proto-java/unbound-prototype-0.10.1.tar.gz"><code class="xref download docutils literal notranslate"><span class="pre">unbound-prototype-0.10.1.tar.gz</span></code></a> | <a class="reference download external" download="" href="https://www.nlnetlabs.nl/downloads/unbound/proto-java/unbound-prototype-0.10.1.tar.gz.asc"><code class="xref download docutils literal notranslate"><span class="pre">(sig)</span></code></a></p>
+</dd>
+<dt>Source:</dt><dd><p><a class="reference download external" download="" href="https://www.nlnetlabs.nl/downloads/unbound/proto-java/unbound-prototype-0.10.1-src.tar.gz"><code class="xref download docutils literal notranslate"><span class="pre">unbound-prototype-0.10.1-src.tar.gz</span></code></a> | <a class="reference download external" download="" href="https://www.nlnetlabs.nl/downloads/unbound/proto-java/unbound-prototype-0.10.1-src.tar.gz.asc"><code class="xref download docutils literal notranslate"><span class="pre">(sig)</span></code></a></p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>As of unbound-prototype-0.10, support for <a class="reference external" href="http://www.nsec3.org">NSEC3</a> validation is part of the trunk. Even more
+cutting edge versions (including branches) of the Java Prototype may
+be fetched via the <a class="reference external" href="http://svn.verisignlabs.com/unbound/proto">subversion repository</a>.</p>
+</div>
+<p>The above is the link to the whole prototype area, which you probably don't want
+to check out directly.  Instead, either check out the trunk or a single branch:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>svn<span class="w"> </span>co<span class="w"> </span>http://svn.verisignlabs.com/unbound/proto/trunk<span class="w"> </span>unbound-prototype
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Don't have subversion?  Don't even know what we are talking about?
+Head on over to the <a class="reference external" href="http://subversion.tigris.org">subversion home</a>.</p>
+</div>
+</section>
+<section id="prototype">
+<h2>Prototype?<a class="headerlink" href="#prototype" title="この見出しへのパーマリンク">¶</a></h2>
+<p>Java, while a fine, fine language, isn't what we envision as the final
+implementation language of the non-prototype resolver.  That would be C.  For
+the prototype, however, Java was chosen because of the excellent <a class="reference external" href="http://www.dnsjava.org">DNSjava</a> library and the familiarity with the same on the part
+of one of the main developers.</p>
+<p>The intent is to use a prototype to explore and validate a particular design for
+an iterative-resolver and separable DNSSEC validator.</p>
+</section>
+<section id="design">
+<h2>Design<a class="headerlink" href="#design" title="この見出しへのパーマリンク">¶</a></h2>
+<p>The unbound-resolver was designed to be modular.  The idea was to create a
+&quot;chain&quot; of modules that could be brought together to form either a full-service
+resolver, or (for instance) a DNSSEC validating stub resolver.  It also is
+designed to be able to use different implementations of a few key components,
+like the cache.</p>
+<p>Here is a diagram that shows the basic components.</p>
+<figure class="align-default">
+<img alt="Unbound resolver architecture diagram" src="../../_images/unbound-prototype-arch.png" />
+</figure>
+<p>In the image, &quot;API&quot; is referring to an internal API which is not standardized
+<em>per-se</em>, but is internally consistent.</p>
+<p>This version of the prototype has been written as an event-driven, asynchronous
+server.  Each packet that is received is turned into an event (along with a few
+internally generated events, like timeouts and generated queries).</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="requirements.html" class="btn btn-neutral float-left" title="Requirements for Recursive Caching Resolver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dns-cache-poisoning-vulnerability.html" class="btn btn-neutral float-right" title="DNS Cache Poisoning Vulnerability (2008)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1999-2024, NLnet Labs.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

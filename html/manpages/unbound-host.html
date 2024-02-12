@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>unbound-host(1) &mdash; Unbound 1.19.0 ドキュメント</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/dark.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/light.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="libunbound(3)" href="libunbound.html" />
+    <link rel="prev" title="unbound.conf(5)" href="unbound.conf.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/unbound-duotone-white.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.19.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Use Cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../use-cases/home-resolver.html">Resolver for Home Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use-cases/local-stub.html">Local DNS (Stub) Resolver for a Single Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/proxy.html">Downstream Proxy Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/serve-stale.html">Serving Stale Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/performance.html">Performance Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/monitoring.html">Monitoring and Reporting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/privacy/aggressive-nsec.html">Aggressive NSEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/privacy/dns-over-https.html">DNS-over-HTTPS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Filtering</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/filtering/tags-views.html">Tags and Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/filtering/rpz.html">Response Policy Zones</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developer/libunbound-tutorial/index.html">Unbound Library Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/python-modules.html">Unbound for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/doxygen-docs.html">Source Code Docs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual Pages</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="unbound.html">unbound(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unbound-checkconf.html">unbound-checkconf(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unbound.conf.html">unbound.conf(5)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">unbound-host(1)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#synopsis">概要</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">説明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exit-code">Exit Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#see-also">See Also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="libunbound.html">libunbound(3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unbound-control.html">unbound-control(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unbound-anchor.html">unbound-anchor(8)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/rfc-compliance.html">RFC Compliance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/history/index.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/todo.html">Docs To-Do List</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Unbound</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">unbound-host(1)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/manpages/unbound-host.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="unbound-host-1">
+<h1>unbound-host(1)<a class="headerlink" href="#unbound-host-1" title="この見出しへのパーマリンク">¶</a></h1>
+<section id="synopsis">
+<h2>概要<a class="headerlink" href="#synopsis" title="この見出しへのパーマリンク">¶</a></h2>
+<p><strong>unbound-host</strong> [<code class="docutils literal notranslate"><span class="pre">-C</span> <span class="pre">configfile</span></code>] [<code class="docutils literal notranslate"><span class="pre">-vdhr46D</span></code>] [<code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">class</span></code>]
+[<code class="docutils literal notranslate"><span class="pre">-t</span> <span class="pre">type</span></code>] [<code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">key</span></code>] [<code class="docutils literal notranslate"><span class="pre">-f</span> <span class="pre">keyfile</span></code>] [<code class="docutils literal notranslate"><span class="pre">-F</span> <span class="pre">namedkeyfile</span></code>] hostname</p>
+</section>
+<section id="description">
+<h2>説明<a class="headerlink" href="#description" title="この見出しへのパーマリンク">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">unbound-host</span></code> uses the Unbound validating resolver to query for the hostname
+and display results.
+With the <a class="reference internal" href="#cmdoption-unbound-host-v"><code class="xref std std-option docutils literal notranslate"><span class="pre">-v</span></code></a> option it displays validation status: secure, insecure,
+bogus (security failure).</p>
+<p>By default it reads no configuration file whatsoever.
+It attempts to reach the internet root servers.
+With <a class="reference internal" href="#cmdoption-unbound-host-C"><code class="xref std std-option docutils literal notranslate"><span class="pre">-C</span></code></a> an unbound config file and with <a class="reference internal" href="#cmdoption-unbound-host-r"><code class="xref std std-option docutils literal notranslate"><span class="pre">-r</span></code></a> <code class="docutils literal notranslate"><span class="pre">resolv.conf</span></code>
+can be read.</p>
+<p>The available options are:</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-host-arg-hostname">
+<span class="sig-name descname"><span class="pre">hostname</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-unbound-host-arg-hostname" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>This name is resolved (looked up in the DNS).
+If a IPv4 or IPv6 address is given, a reverse lookup is performed.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-host-h">
+<span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-unbound-host-h" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Show the version and commandline option help.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-host-v">
+<span class="sig-name descname"><span class="pre">-v</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-unbound-host-v" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Enable verbose output and it shows validation results, on every line.
+Secure means that the NXDOMAIN (no such domain name), nodata (no such
+data) or positive data response validated correctly with one of the
+keys.
+Insecure means that that domain name has no security set up for it.
+Bogus (security failure) means that the response failed one or more
+checks, it is likely wrong, outdated, tampered with, or broken.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-host-d">
+<span class="sig-name descname"><span class="pre">-d</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-unbound-host-d" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Enable debug output to stderr.
+One <a class="reference internal" href="#cmdoption-unbound-host-d"><code class="xref std std-option docutils literal notranslate"><span class="pre">-d</span></code></a> shows what the resolver and validator are doing and may
+tell you what is going on.
+More times, <a class="reference internal" href="#cmdoption-unbound-host-d"><code class="xref std std-option docutils literal notranslate"><span class="pre">-d</span></code></a> <a class="reference internal" href="#cmdoption-unbound-host-d"><code class="xref std std-option docutils literal notranslate"><span class="pre">-d</span></code></a>, gives a lot of output, with every
+packet sent and received.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-host-c">
+<span class="sig-name descname"><span class="pre">-c</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;class&gt;</span></span><a class="headerlink" href="#cmdoption-unbound-host-c" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Specify the class to lookup for, the default is IN the internet
+class.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-host-t">
+<span class="sig-name descname"><span class="pre">-t</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;type&gt;</span></span><a class="headerlink" href="#cmdoption-unbound-host-t" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Specify the type of data to lookup.
+The default looks for IPv4, IPv6 and mail handler data, or domain name
+pointers for reverse queries.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-host-y">
+<span class="sig-name descname"><span class="pre">-y</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;key&gt;</span></span><a class="headerlink" href="#cmdoption-unbound-host-y" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Specify a public key to use as trust anchor.
+This is the base for a chain of trust that is built up from the trust
+anchor to the response, in order to validate the response message.
+Can be given as a DS or DNSKEY record.
+For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-y &quot;example.com DS 31560 5 1 1CFED84787E6E19CCF9372C1187325972FE546CD&quot;
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-host-D">
+<span class="sig-name descname"><span class="pre">-D</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-unbound-host-D" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Enables DNSSEC validation.
+Reads the root anchor from the default configured root anchor at the
+default location, <code class="file docutils literal notranslate"><span class="pre">/usr/local/etc/unbound/root.key</span></code>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-host-f">
+<span class="sig-name descname"><span class="pre">-f</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;keyfile&gt;</span></span><a class="headerlink" href="#cmdoption-unbound-host-f" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Reads keys from a file.
+Every line has a DS or DNSKEY record, in the format as for <a class="reference internal" href="#cmdoption-unbound-host-y"><code class="xref std std-option docutils literal notranslate"><span class="pre">-y</span></code></a>.
+The zone file format, the same as <code class="docutils literal notranslate"><span class="pre">dig</span></code> and <code class="docutils literal notranslate"><span class="pre">drill</span></code> produce.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-host-F">
+<span class="sig-name descname"><span class="pre">-F</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;namedkeyfile&gt;</span></span><a class="headerlink" href="#cmdoption-unbound-host-F" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Reads keys from a BIND-style <code class="file docutils literal notranslate"><span class="pre">named.conf</span></code> file.
+Only the <code class="docutils literal notranslate"><span class="pre">trusted-key</span> <span class="pre">{};</span></code> entries are read.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-host-C">
+<span class="sig-name descname"><span class="pre">-C</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;configfile&gt;</span></span><a class="headerlink" href="#cmdoption-unbound-host-C" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Uses the specified unbound.conf to prime <a class="reference internal" href="libunbound.html"><span class="doc">libunbound(3)</span></a>.
+Pass it as first argument if you want to override some options from the
+config file with further arguments on the commandline.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-host-r">
+<span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-unbound-host-r" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Read <code class="file docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code>, and use the forward DNS servers from
+there (those could have been set by DHCP).
+More info in <em>resolv.conf(5)</em>.
+Breaks validation if those servers do not support DNSSEC.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-host-4">
+<span class="sig-name descname"><span class="pre">-4</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-unbound-host-4" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Use solely the IPv4 network for sending packets.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-host-6">
+<span class="sig-name descname"><span class="pre">-6</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-unbound-host-6" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Use solely the IPv6 network for sending packets.</p>
+</dd></dl>
+
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="この見出しへのパーマリンク">¶</a></h2>
+<p>Some examples of use.
+The keys shown below are fakes, thus a security failure is encountered.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ unbound-host www.example.com
+
+$ unbound-host -v -y &quot;example.com DS 31560 5 1 1CFED84787E6E19CCF9372C1187325972FE546CD&quot; www.example.com
+
+$ unbound-host -v -y &quot;example.com DS 31560 5 1 1CFED84787E6E19CCF9372C1187325972FE546CD&quot; 192.0.2.153
+</pre></div>
+</div>
+</section>
+<section id="exit-code">
+<h2>Exit Code<a class="headerlink" href="#exit-code" title="この見出しへのパーマリンク">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">unbound-host</span></code> program exits with status code 1 on error, 0 on no error.
+The data may not be available on exit code 0, exit code 1 means the lookup
+encountered a fatal error.</p>
+</section>
+<section id="see-also">
+<h2>See Also<a class="headerlink" href="#see-also" title="この見出しへのパーマリンク">¶</a></h2>
+<p><a class="reference internal" href="unbound.conf.html"><span class="doc">unbound.conf(5)</span></a>,
+<a class="reference internal" href="unbound.html"><span class="doc">unbound(8)</span></a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="unbound.conf.html" class="btn btn-neutral float-left" title="unbound.conf(5)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="libunbound.html" class="btn btn-neutral float-right" title="libunbound(3)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1999-2024, NLnet Labs.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

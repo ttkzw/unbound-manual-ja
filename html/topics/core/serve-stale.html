@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serving Stale Data &mdash; Unbound 1.19.0 ドキュメント</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/dark.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/light.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/translations.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" />
+    <link rel="next" title="Performance Tuning" href="performance.html" />
+    <link rel="prev" title="Downstream Proxy Support" href="proxy.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/unbound-duotone-white.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.19.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Use Cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../use-cases/home-resolver.html">Resolver for Home Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../use-cases/local-stub.html">Local DNS (Stub) Resolver for a Single Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="proxy.html">Downstream Proxy Support</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Serving Stale Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#serve-expired">serve-expired</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rfc-8767">RFC 8767</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring.html">Monitoring and Reporting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../privacy/aggressive-nsec.html">Aggressive NSEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../privacy/dns-over-https.html">DNS-over-HTTPS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Filtering</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../filtering/tags-views.html">Tags and Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../filtering/rpz.html">Response Policy Zones</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/libunbound-tutorial/index.html">Unbound Library Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/python-modules.html">Unbound for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/doxygen-docs.html">Source Code Docs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual Pages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound.html">unbound(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-checkconf.html">unbound-checkconf(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound.conf.html">unbound.conf(5)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-host.html">unbound-host(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/libunbound.html">libunbound(3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-control.html">unbound-control(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-anchor.html">unbound-anchor(8)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/rfc-compliance.html">RFC Compliance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/history/index.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/todo.html">Docs To-Do List</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Unbound</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Serving Stale Data</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/topics/core/serve-stale.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="versionadded">
+<p><span class="versionmodified added">バージョン 1.6.0 で追加.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">バージョン 1.11.0 で変更: </span><span class="target" id="index-0"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc8767.html"><strong>RFC 8767</strong></a> behavior is introduced</p>
+</div>
+<section id="serving-stale-data">
+<h1>Serving Stale Data<a class="headerlink" href="#serving-stale-data" title="この見出しへのパーマリンク">¶</a></h1>
+<p>Unbound supports serving stale data from its cache, as described in <span class="target" id="index-1"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc8767.html"><strong>RFC 8767</strong></a>.
+Serving stale data would normally break the contract between an authoritative
+name server and a caching resolver on the amount of time a record is permitted
+to be cached. However, the TTL definition of <span class="target" id="index-2"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc8767.html#section-4"><strong>RFC 8767#section-4</strong></a> states that:</p>
+<blockquote>
+<div><p>&quot;If the data is unable to be authoritatively refreshed when the TTL
+expires, the record MAY be used as though it is unexpired.&quot;</p>
+</div></blockquote>
+<p>Serving expired records is not a novel idea and it was already present in
+various forms (e.g., increased cache-hit ratio, fallback when upstream is not
+reachable) in various resolvers.
+Unbound’s own form is called <a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-serve-expired"><span class="std std-ref">serve-expired:</span></a>
+and its main purpose was to increase the cache-hit ratio.</p>
+<p>As the RFC landed in the standards track, Unbound gained support for it but
+still kept the original serve-expired logic. Certain aspects of the RFC, such as
+timers, were already present in Unbound and their functionality is shared by
+both modes of operation.</p>
+<p>The following sections try to clarify the differences between serve-expired and
+<span class="target" id="index-3"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc8767.html"><strong>RFC 8767</strong></a> (serve-stale) and give some insight into when one may be preferable
+over the other. I will refrain from using the RFC term serve-stale in order to
+avoid any confusion between the terms and the configuration options later on.</p>
+<section id="serve-expired">
+<h2>serve-expired<a class="headerlink" href="#serve-expired" title="この見出しへのパーマリンク">¶</a></h2>
+<p>Since version 1.6.0, Unbound has the ability to answer with expired records.
+Before trying to resolve, Unbound will also consider expired cached records as
+possible answers. If such a record is found it is immediately returned to the
+client (cache response speed!). But contrary to normal cache replies, Unbound
+continues resolving and hopefully updating the cached record.</p>
+<p>The immediate downside is obvious: the expired answers rely heavily on the
+cache state.
+Unbound already has the tools to try and tip the scales in its favor with the
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-prefetch"><span class="std std-ref">prefetch:</span></a> and
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-serve-expired-ttl"><span class="std std-ref">serve-expired-ttl:</span></a> options.</p>
+<p>With prefetch, Unbound tries to update a cached record (after first replying to
+the client) when the current TTL is within 10% of the original TTL value. The
+logic is similar to serve-expired: if a cached record is found and the record is
+within 10% of the TTL, it is returned to the client but Unbound continues
+resolving in order to update the record. Although prefetching comes with a small
+penalty of ~10% in traffic and load from the extra upstream queries, the cache
+is kept up-to-date, at least for popular queries.</p>
+<p>Rare queries have the inescapable fate of having their records expired past any
+meaningful time.
+The option <a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-serve-expired-ttl"><span class="std std-ref">serve-expired-ttl:</span></a> limits the
+amount of time an expired record is supposed to be served.
+<span class="target" id="index-4"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc8767.html#section-5-11"><strong>RFC 8767#section-5-11</strong></a> suggests a value between one and three days.</p>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>A note on the expired reply’s TTL value: prior to the RFC, Unbound was
+using TTL 0 in order to signal that the expired record is only meant to be
+used for this DNS transaction and not to be cached by the client. The RFC
+now RECOMMENDS a value of 30 to be returned to the client.</p>
+</div>
+<p>A simple configuration for the primal serve-expired behavior could then be:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>server:
+    prefetch: yes
+    serve-expired: yes
+    serve-expired-ttl: 86400  # one day, in seconds
+</pre></div>
+</div>
+<p>This will allow Unbound to:</p>
+<ul class="simple">
+<li><p>prioritize (expired) cached replies,</p></li>
+<li><p>keep the cache fairly up-to-date, and</p></li>
+<li><p>in the likelihood that an expired record needs to be served (e.g., rare
+query, issue with upstream resolving), make sure that the record is not older
+than the specified limit.</p></li>
+</ul>
+</section>
+<section id="rfc-8767">
+<h2>RFC 8767<a class="headerlink" href="#rfc-8767" title="この見出しへのパーマリンク">¶</a></h2>
+<p>Starting with version 1.11.0, Unbound supports serving expired records
+following the RFC guidelines.
+The RFC behavior is mainly focused on returning expired answers as fallback for
+normal resolution.
+The option to control that is
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-serve-expired-client-timeout"><span class="std std-ref">serve-expired-client-timeout:</span></a>
+and setting it to a value greater than 0 enables the RFC behavior.</p>
+<p>With the value set, Unbound has a limit on how much time it can spend resolving
+a client query. When that limit is passed, Unbound pauses resolution and checks
+if there are any expired records in the cache that can answer the initial query.
+If that is the case, Unbound answers with the expired record before resuming
+resolution. The result of the resolution will be used to update the cache if
+possible.</p>
+<p>Similar to the client timeout, Unbound will also try and use expired answers
+instead of returning SERVFAIL to the client where possible.</p>
+<p>A simple configuration for the RFC behavior could then be:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>server:
+    serve-expired: yes
+    serve-expired-ttl: 86400            # one day, in seconds
+    serve-expired-client-timeout: 1800  # 1.8 seconds, in milliseconds
+</pre></div>
+</div>
+<p>This will allow Unbound to use expired answers only as fallback from normal
+resolving:</p>
+<ul class="simple">
+<li><p>when 1.8 seconds have passed since the client made the query,</p></li>
+<li><p>instead of returning SERVFAIL, or</p></li>
+<li><p>in the likelihood that an expired record needs to be served (e.g., issue with
+upstream resolving), make sure that the record is not older than the
+specified limit.</p></li>
+</ul>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="この見出しへのパーマリンク">¶</a></h2>
+<p>Unbound offers two distinct modes for serving expired records. The safest
+approach is to use the RFC behavior where expired records are used as a fallback
+to availability, network or configuration errors. This will serve expired
+records as a last resort instead of returning SERVFAIL or the client giving up.</p>
+<p>If more client-side performance is required, the default original serve-expired
+behavior can keep the cache-hit ratio higher. Using it together with the
+prefetch option is highly recommended in order to try and keep an updated cache.</p>
+<p>In all cases make sure to consult the <a class="reference internal" href="../../manpages/unbound.conf.html"><span class="doc">unbound.conf(5)</span></a> manpage of
+your installed Unbound for defaults and suggested values. And always remember
+that serving expired records should be approached with caution; you may be
+directing your clients to places long gone.</p>
+<div class="admonition seealso">
+<p class="admonition-title">参考</p>
+<p><a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-serve-expired"><span class="std std-ref">serve-expired</span></a>,
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-serve-expired-ttl"><span class="std std-ref">serve-expired-ttl</span></a>,
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-serve-expired-ttl-reset"><span class="std std-ref">serve-expired-ttl-reset</span></a>,
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-serve-expired-reply-ttl"><span class="std std-ref">serve-expired-reply-ttl</span></a> and
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-serve-expired-client-timeout"><span class="std std-ref">serve-expired-client-timeout</span></a>
+in the <a class="reference internal" href="../../manpages/unbound.conf.html"><span class="doc">unbound.conf(5)</span></a> manpage.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="proxy.html" class="btn btn-neutral float-left" title="Downstream Proxy Support" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="performance.html" class="btn btn-neutral float-right" title="Performance Tuning" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1999-2024, NLnet Labs.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

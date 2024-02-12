@@ -1,0 +1,494 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 1999-2024, NLnet Labs
+# This file is distributed under the same license as the Unbound package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr "Project-Id-Version: Unbound 1.19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-12 13:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.14.0\n"
+
+#: ../../source/getting-started/configuration.rst:2
+msgid "Configuration"
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:4
+msgid ""
+"Unbound has a vast array of configuration options for advanced use cases,"
+" which can seem a little overwhelming at first. Luckily, all of the "
+"defaults are sensible and secure, so in a lot of environments you can run"
+" Unbound without changing any options. Below we will go through a basic, "
+"recommended configuration, but feel free to add and experiment with "
+"options as you need them."
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:15
+msgid "The instructions in this page assume that Unbound is already installed."
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:17
+msgid ""
+"The basic configuration which you can use out of the box is shown below. "
+"To use it, you need to create a file with this configuration as its "
+"content (or copy the configuration to the default configuration file "
+"which can be found during the installation process)."
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:47
+msgid ""
+"By default the Unbound configuration uses `chroot "
+"<https://wiki.archlinux.org/title/chroot>`_ to provide an extra layer of "
+"defence against remote exploits. If Unbound is not starting because it "
+"cannot access files due to permission errors caused by :command:`chroot`,"
+" a solution can be to enter file paths as full pathnames starting at the "
+"root of the file system (``/``). Otherwise, if :command:`chroot` is not "
+"required you can disable it in the configuration file:"
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:62
+msgid ""
+"By default Unbound assumes that a user named \"unbound\" exists. You can "
+"add this user with an account management tool available on your system; "
+"on Linux this is usually :command:`useradd`). You can also disable this "
+"feature by adding ``username: \"\"`` in the configuration file:"
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:74
+msgid ""
+"If it is enabled, after the setup, any other user privileges are dropped "
+"and the configured username is assumed. If this user needs access to "
+"files (such as the 'trust anchor' mentioned below), these can be created "
+"by executing with ``sudo -u unbound`` in front of it."
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:83
+msgid ""
+"Unbound comes with the :doc:`/manpages/unbound-checkconf` tool. This tool"
+" allows you to check the config file for errors before starting Unbound. "
+"It is very convenient because if any errors are found it tells you where "
+"they are, which is particularly useful when Unbound is already running to"
+" avoid failure to restart due to a configuration error."
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:90
+msgid "Testing the setup"
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:92
+msgid ""
+"After running the :command:`unbound-checkconf` command to see if your "
+"config file is correct, you can test your setup by running Unbound in "
+"\"debug\" mode. This allows you to see what is happening during startup "
+"and catch any errors. The :doc:`/manpages/unbound` manpage shows that the"
+" :option:`-d<unbound -d>` flag will start Unbound in this mode. The "
+"manpage also shows that we can use the :option:`-c<unbound -c>` flag to "
+"specify the path to the configuration file, so we can use the one we "
+"created. We also recommend increasing the verbosity of the logging to 1 "
+"or 2, to see what's actually happening (:option:`-v<unbound -v>` or "
+"``-vv``):"
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:106
+msgid ""
+"After Unbound starts normally (and you've sent it some queries) you can "
+"remove the :option:`-v<unbound -v>` and :option:`-d<unbound -d>` and run "
+"the command again. Then Unbound will fork to the background and run until"
+" you either kill it or reboot the machine."
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:112
+msgid ""
+"You may run into an error where Unbound tells you it cannot bind to "
+"``0.0.0.0`` as it's already in use. This is because the system resolver "
+"``systemd-resolved`` is already running on that port. You can go around "
+"this by changing the IP address in the config to ``127.0.0.1``. This "
+"looks like:"
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:123
+msgid ""
+"If you want to change this behaviour, on :doc:`this page</use-cases"
+"/local-stub>` we show how to change the system resolver to be Unbound."
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:127
+msgid "Set up Remote Control"
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:129
+msgid ""
+"A useful functionality to enable is the :doc:`/manpages/unbound-control` "
+"command. This makes starting, stopping, and reloading Unbound easier. To "
+"enable this functionality we need to add :ref:`remote-"
+"control:<unbound.conf.remote>` to the configuration file:"
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:147
+msgid ""
+"To use the :command:`unbound-control` command, we need to invoke the "
+":command:`unbound-control-setup` command. This creates a number of files "
+"in the default install directory. The default install directory is "
+"``/usr/local/etc/unbound/`` on most systems, but some distributions may "
+"put it in ``/etc/unbound/`` or ``/var/lib/unbound``."
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:153
+msgid ""
+":command:`unbound-control-setup` creates the cryptographic keys necessary"
+" for the control option:"
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:159
+msgid ""
+"If you use a username like ``unbound`` in the configuration to run the "
+"daemon (which is the default setting), you can use :command:`sudo` to "
+"create the files in that user's name, so that the user running Unbound is"
+" allowed to read the keys. This is also a solution if the "
+"``/usr/local/etc/unbound/`` directory (or any other default directory) is"
+" write-protected, which is the case for some distributions."
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:171
+msgid ""
+"You can now control Unbound using the :command:`unbound-control` command."
+" Note that if your configuration file is not in the default location or "
+"not named ``unbound.conf``, the name (and possibly path) need to be "
+"provided when using the command using the :option:`-c<unbound-control "
+"-c>` flag."
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:178
+msgid "Set up Trust Anchor (Enable DNSSEC)"
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:180
+msgid ""
+"To enable `DNSSEC <https://www.sidn.nl/en/modern-internet-"
+"standards/dnssec>`_, which we strongly recommend, we need to set up a "
+"trust anchor as it allows the verification of the integrity of the "
+"responses to the queries you send."
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:184
+msgid "To help, we can use the :doc:`/manpages/unbound-anchor` command."
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:186
+msgid ""
+":command:`unbound-anchor` performs the setup by configuring a trust "
+"anchor. This trust anchor will only serve as the initial anchor from "
+"built-in values. To keep this anchor up to date, Unbound must be able to "
+"read and write to this file. The default location that :command:`unbound-"
+"anchor` creates this in is determined by your installation method. "
+"Usually the default directory is ``/usr/local/etc/unbound/``."
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:195
+msgid ""
+"During the dynamic linking, this command could output an error about "
+"loading shared libraries. This is remedied by running ``ldconfig`` to "
+"reset the dynamic library cache."
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:203
+msgid ""
+"Note that using a package manager to install Unbound, on some "
+"distributions, creates the root key during installation. On Ubuntu 22.04 "
+"LTS for example, this location is ``/var/lib/unbound/root.key``. On macOS"
+" Big Sur this location is ``/opt/homebrew/etc/unbound/root.key`` If you "
+"create the root key yourself (by using the :command:`unbound-anchor` "
+"command), then the path to the anchor file in the configuration file "
+"should be changed to the correct location. To find out the default "
+"location you can use the :command:`unbound-anchor` command again with the"
+" ``-vvv`` option enabled. To enable DNSSEC, we add ``auto-trust-anchor-"
+"file`` under the ``server`` clause in the configuration file."
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:220
+msgid ""
+"Note that on some systems the ``/usr/local/etc/unbound/`` directory might"
+" be write-protected."
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:223
+msgid ""
+"If the :command:`unbound-anchor` command fails due to the insufficient "
+"permissions, run the command as the correct user, here we use the user "
+"``unbound`` as this is the default user."
+msgstr ""
+
+#: ../../source/getting-started/configuration.rst:231
+msgid "This step is also important when using the ``chroot`` jail."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:2
+msgid "Installation"
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:4
+msgid ""
+"To install your own copy of Unbound you have two options: Use the version"
+" provided by your package manager, or download the source and building it"
+" yourself."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:8
+msgid ""
+"Installing via the package manager is the easiest option, and on most "
+"systems even trivial. The downside is the distributed version can be "
+"outdated for some distributions or not have all the compile-time options "
+"included that you want. Building and compiling Unbound yourself ensures "
+"that you have the latest version and all the compile-time options you "
+"desire."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:14
+msgid "If you're a first-time user we recommend installing via a package manager."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:17
+msgid "Installing with a Package Manager"
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:19
+msgid ""
+"Most package managers maintain a version of Unbound, although this "
+"version can be outdated if this package has not been updated recently. If"
+" you like to upgrade to the latest version, we recommend :ref:`compiling "
+"Unbound yourself<getting-started/installation:Building from "
+"source/Compiling>`."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:25
+#: ../../source/getting-started/installation.rst:66
+msgid "Ubuntu 22.04 LTS"
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:27
+msgid "Installing Unbound with the built-in package manager should be as easy as:"
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:34
+#: ../../source/getting-started/installation.rst:54
+msgid ""
+"This gives you a compiled and running version of Unbound ready to "
+":doc:`be configured<configuration>`."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:38
+#: ../../source/getting-started/installation.rst:142
+msgid "macOS Big Sur"
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:40
+msgid ""
+"In this tutorial we make use of the Brew package installer for MacOS. "
+"Install ``brew`` and, if you've never used ``brew`` before, give `their "
+"website <https://brew.sh/>`_ a read."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:48
+msgid "Then use brew to install Unbound."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:58
+msgid "Building from source/Compiling"
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:60
+msgid ""
+"To compile Unbound on any system you need to have the ``openssl`` and "
+"``expat`` libraries, and their header files. To include the header files "
+"we need to get the development version, usually called ``libssl-dev`` and"
+" ``libexpat1-dev`` respectively."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:68
+msgid ""
+"First of all, we need our copy of the Unbound code, so we download the "
+"tarball of the latest version and untar it."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:77
+msgid "We'll need some tools, such as a compiler and the :command:`make` program."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:80
+msgid ""
+"During installations with the package manager, a screen will come up "
+"asking which services need to be restarted. Using the defaults for this "
+"is fine."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:88
+msgid ""
+"The library components Unbound needs are: ``libssl`` ``libexpat``, of "
+"which we need the \"dev\" version. Unbound also uses ``libldns``, but "
+"this is included in the tarball we've already downloaded."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:97
+msgid ""
+"We'll also need the tools to build the actual program. For this, Unbound "
+"uses :command:`make` and internally it uses ``flex`` and ``yacc``, which "
+"we need to download as well."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:106
+msgid ""
+"With all the requirements met, we can now start the compilation process "
+"in the Unbound directory. The first step here is configuring. With "
+"``./configure -h`` you can look at the extensive list of configuration "
+"options for Unbound. A nice feature is that ``configure`` will tell you "
+"what it's missing during configuration. A common error is for the paths "
+"to the two libraries we just installed, which can be manually specified "
+"with ``--with-ssl=`` and ``--with-libexpat=``."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:118
+#: ../../source/getting-started/installation.rst:225
+msgid ""
+"When :command:`configure` gives no errors, we can continue to actually "
+"compiling Unbound. For this Unbound uses :command:`make`. Be warned that "
+"compiling might take a while."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:126
+#: ../../source/getting-started/installation.rst:233
+msgid ""
+"When we have a successful compilation, we can install Unbound to make "
+"available for the machine."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:133
+msgid ""
+"We now have fully compiled and installed version of Unbound, and "
+":ref:`continue to testing it<getting-started/installation:Testing>`."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:136
+msgid ""
+"Please note that the default configuration file is located at "
+":file:`/usr/local/etc/unbound/unbound.conf` and created during the "
+":command:`make` step. This file contains all possible configuration "
+"options for Unbound."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:144
+msgid ""
+"In this tutorial we make use of the :command:`brew` package installer for"
+" MacOS. Install :command:`brew` and give `their website "
+"<https://brew.sh/>`_ a read if you've never used brew before."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:153
+msgid "Then we use :command:`brew` to install :command:`wget`."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:160
+msgid ""
+"We can the use :command:`wget` to download the latest version of Unbound "
+"from repository and unpack it."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:168
+msgid ""
+"To compile Unbound on MacOS (or anything really), we need to install the "
+"Mac specific development tools called \"Xcode\". This is available on the"
+" app store and requires ~12 GB space on the hard disk. Alternatively, if "
+"you don't want multiple Gigabytes of largely unused space on your hard "
+"disk a slimmed down version also exists called the \"Command Line "
+"Tools\". This includes all the tools to compile on a Mac can also be "
+"installed via the terminal."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:179
+msgid ""
+"This command will open a window where the selection can be made of what "
+"to install. If you just want the Command Line Tools select this option."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:182
+msgid ""
+"To verify that Xcode is installed correctly we check that we have the "
+":command:`gcc` compiler by asking for the version."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:193
+msgid ""
+"Next we install the required libraries using :command:`brew`. Note that "
+"when installing these :command:`brew` will tell you the path to where it "
+"has installed the library. The default is the ``/opt/homebrew/Cellar/`` "
+"directory, which can become important in the :command:`configure` step."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:203
+msgid ""
+"With all the requirements met, we can now start the compilation process "
+"in the Unbound directory. The first step here is configuring. With "
+"``./configure -h`` you can look at the extensive list of configuration "
+"options for Unbound. A nice feature is that :command:`configure` will "
+"tell you what it's missing during configuration. A common error is for "
+"the paths to the two libraries we just installed, which can be manually "
+"specified with ``--with-ssl=`` and ``--with-libexpat=``."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:215
+msgid ""
+"Or alternatively, when :command:`configure` cannot find ``libssl`` and "
+"``libexpat`` and :command:`brew` installed them at the default directory "
+"(make sure you fill in the correct version, at the time of writing the "
+"latest version of openssl is ``1.1.1k`` and of libexapt is ``2.3.0``)."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:240
+msgid ""
+"We now have fully compiled and installed version of Unbound, and can "
+":ref:`continue to testing it<getting-started/installation:Testing>`."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:244
+msgid "Testing"
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:246
+msgid ""
+"A simple test to determine if the installation was successful is to "
+"invoke the :command:`unbound` command with the :option:`-V<unbound -V>` "
+"option, which is the \"version\" option. This shows the version and build"
+" options used, as well as proving that the install was successful. You "
+"may have to use ``sudo`` to run this, depending on the installation."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:257
+msgid ""
+"If all the previous steps were successful we can continue to configuring "
+"our Unbound instance."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:260
+msgid ""
+"Another handy trick you can use during testing is to run Unbound in the "
+"foreground using the :option:`-d<unbound -d>` option and increase the "
+"verbosity level using the :option:`-v<unbound -v>` option multiple times."
+" This allows you to see steps Unbound takes and also where it fails. "
+"Another useful, more detailed trick in combination with the foreground is"
+" to make Unbound log on the foreground. To do this, the following line "
+"needs to be added to the configuration file."
+msgstr ""
+
+#: ../../source/getting-started/installation.rst:273
+msgid ""
+"Now that Unbound is installed we can :doc:`continue to configuring "
+"it<configuration>`."
+msgstr ""
+

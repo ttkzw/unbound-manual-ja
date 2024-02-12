@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>unbound-anchor(8) &mdash; Unbound 1.19.0 ドキュメント</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/dark.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/light.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="RFC Compliance" href="../reference/rfc-compliance.html" />
+    <link rel="prev" title="unbound-control(8)" href="unbound-control.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/unbound-duotone-white.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.19.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Use Cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../use-cases/home-resolver.html">Resolver for Home Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use-cases/local-stub.html">Local DNS (Stub) Resolver for a Single Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/proxy.html">Downstream Proxy Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/serve-stale.html">Serving Stale Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/performance.html">Performance Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/monitoring.html">Monitoring and Reporting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/privacy/aggressive-nsec.html">Aggressive NSEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/privacy/dns-over-https.html">DNS-over-HTTPS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Filtering</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/filtering/tags-views.html">Tags and Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/filtering/rpz.html">Response Policy Zones</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developer/libunbound-tutorial/index.html">Unbound Library Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/python-modules.html">Unbound for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/doxygen-docs.html">Source Code Docs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual Pages</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="unbound.html">unbound(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unbound-checkconf.html">unbound-checkconf(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unbound.conf.html">unbound.conf(5)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unbound-host.html">unbound-host(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libunbound.html">libunbound(3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unbound-control.html">unbound-control(8)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">unbound-anchor(8)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#synopsis">概要</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">説明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exit-code">Exit Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#trust">Trust</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#files">Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#see-also">See Also</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/rfc-compliance.html">RFC Compliance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/history/index.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/todo.html">Docs To-Do List</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Unbound</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">unbound-anchor(8)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/manpages/unbound-anchor.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="unbound-anchor-8">
+<h1>unbound-anchor(8)<a class="headerlink" href="#unbound-anchor-8" title="この見出しへのパーマリンク">¶</a></h1>
+<section id="synopsis">
+<h2>概要<a class="headerlink" href="#synopsis" title="この見出しへのパーマリンク">¶</a></h2>
+<p><strong>unbound-anchor</strong> [<code class="docutils literal notranslate"><span class="pre">opts</span></code>]</p>
+</section>
+<section id="description">
+<h2>説明<a class="headerlink" href="#description" title="この見出しへのパーマリンク">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">unbound-anchor</span></code> performs setup or update of the root trust anchor for DNSSEC
+validation.
+The program fetches the trust anchor with the method from <span class="target" id="index-0"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc7958.html"><strong>RFC 7958</strong></a> when
+regular <span class="target" id="index-1"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc5011.html"><strong>RFC 5011</strong></a> update fails to bring it up to date.
+It can be run (as root) from the commandline, or run as part of startup
+scripts.
+Before you start the <a class="reference internal" href="unbound.html"><span class="doc">unbound(8)</span></a> DNS server.</p>
+<p>Suggested usage:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># in the init scripts.
+# provide or update the root anchor (if necessary)
+unbound-anchor -a &quot;/usr/local/etc/unbound/root.key&quot;
+# Please note usage of this root anchor is at your own risk
+# and under the terms of our LICENSE (see source).
+#
+# start validating resolver
+# the unbound.conf contains:
+# auto-trust-anchor-file: &quot;/usr/local/etc/unbound/root.key&quot;
+unbound -c unbound.conf
+</pre></div>
+</div>
+<p>This tool provides builtin default contents for the root anchor and root update
+certificate files.</p>
+<p>It tests if the root anchor file works, and if not, and an update is possible,
+attempts to update the root anchor using the root update certificate.
+It performs a https fetch of
+<a class="reference external" href="http://data.iana.org/root-anchors/root-anchors.xml">root-anchors.xml</a>
+and checks the results (<span class="target" id="index-2"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc7958.html"><strong>RFC 7958</strong></a>); if all checks are successful, it updates
+the root anchor file.
+Otherwise the root anchor file is unchanged.
+It performs <span class="target" id="index-3"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc5011.html"><strong>RFC 5011</strong></a> tracking if the DNSSEC information available via the
+DNS makes that possible.</p>
+<p>It does not perform an update if the certificate is expired, if the network is
+down or other errors occur.</p>
+<p>The available options are:</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-anchor-a">
+<span class="sig-name descname"><span class="pre">-a</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;file&gt;</span></span><a class="headerlink" href="#cmdoption-unbound-anchor-a" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>The root anchor key file, that is read in and written out.
+Default is <code class="file docutils literal notranslate"><span class="pre">/usr/local/etc/unbound/root.key</span></code>.
+If the file does not exist, or is empty, a builtin root key is written
+to it.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-anchor-c">
+<span class="sig-name descname"><span class="pre">-c</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;file&gt;</span></span><a class="headerlink" href="#cmdoption-unbound-anchor-c" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>The root update certificate file, that is read in.
+Default is <code class="file docutils literal notranslate"><span class="pre">/usr/local/etc/unbound/icannbundle.pem</span></code>.
+If the file does not exist, or is empty, a builtin certificate is used.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-anchor-l">
+<span class="sig-name descname"><span class="pre">-l</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-unbound-anchor-l" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>List the builtin root key and builtin root update certificate on stdout.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-anchor-u">
+<span class="sig-name descname"><span class="pre">-u</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;name&gt;</span></span><a class="headerlink" href="#cmdoption-unbound-anchor-u" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>The server name, it connects to <code class="docutils literal notranslate"><span class="pre">https://name</span></code>.
+Specify without <code class="docutils literal notranslate"><span class="pre">https://</span></code> prefix.
+The default is <code class="docutils literal notranslate"><span class="pre">&quot;data.iana.org&quot;</span></code>.
+It connects to the port specified with <a class="reference internal" href="#cmdoption-unbound-anchor-P"><code class="xref std std-option docutils literal notranslate"><span class="pre">-P</span></code></a>.
+You can pass an IPv4 address or IPv6 address (no brackets) if you want.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-anchor-S">
+<span id="cmdoption-unbound-anchor-s"></span><span class="sig-name descname"><span class="pre">-S</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-unbound-anchor-S" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Do not use SNI for the HTTPS connection.
+Default is to use SNI.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-anchor-b">
+<span class="sig-name descname"><span class="pre">-b</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;address&gt;</span></span><a class="headerlink" href="#cmdoption-unbound-anchor-b" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>The source address to bind to for domain resolution and contacting the
+server on https.
+May be either an IPv4 address or IPv6 address (no brackets).</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-anchor-x">
+<span class="sig-name descname"><span class="pre">-x</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;path&gt;</span></span><a class="headerlink" href="#cmdoption-unbound-anchor-x" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>The pathname to the root-anchors.xml file on the server.
+(forms URL with <a class="reference internal" href="#cmdoption-unbound-anchor-u"><code class="xref std std-option docutils literal notranslate"><span class="pre">-u</span></code></a>).
+The default is <code class="file docutils literal notranslate"><span class="pre">/root-anchors/root-anchors.xml</span></code>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-anchor-0">
+<span class="sig-name descname"><span class="pre">-s</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;path&gt;</span></span><a class="headerlink" href="#cmdoption-unbound-anchor-0" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>The pathname to the root-anchors.p7s file on the server.
+(forms URL with <a class="reference internal" href="#cmdoption-unbound-anchor-u"><code class="xref std std-option docutils literal notranslate"><span class="pre">-u</span></code></a>).
+The default is <code class="file docutils literal notranslate"><span class="pre">/root-anchors/root-anchors.p7s</span></code>.
+This file has to be a PKCS7 signature over the xml file, using the pem
+file (<a class="reference internal" href="#cmdoption-unbound-anchor-c"><code class="xref std std-option docutils literal notranslate"><span class="pre">-c</span></code></a>) as trust anchor.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-anchor-n">
+<span class="sig-name descname"><span class="pre">-n</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;name&gt;</span></span><a class="headerlink" href="#cmdoption-unbound-anchor-n" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>The emailAddress for the Subject of the signer's certificate from the
+p7s signature file.
+Only signatures from this name are allowed.
+The default is <code class="docutils literal notranslate"><span class="pre">dnssec&#64;iana.org</span></code>.
+If you pass <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> then the emailAddress is not checked.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-anchor-4">
+<span class="sig-name descname"><span class="pre">-4</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-unbound-anchor-4" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Use IPv4 for domain resolution and contacting the server on
+https.
+Default is to use IPv4 and IPv6 where appropriate.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-anchor-6">
+<span class="sig-name descname"><span class="pre">-6</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-unbound-anchor-6" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Use IPv6 for domain resolution and contacting the server on https.
+Default is to use IPv4 and IPv6 where appropriate.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-anchor-f">
+<span class="sig-name descname"><span class="pre">-f</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;resolv.conf&gt;</span></span><a class="headerlink" href="#cmdoption-unbound-anchor-f" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Use the given resolv.conf file.
+Not enabled by default, but you could try to pass
+<code class="file docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code> on some systems.
+It contains the IP addresses of the recursive nameservers to use.
+However, since this tool could be used to bootstrap that very recursive
+nameserver, it would not be useful (since that server is not up yet,
+since we are bootstrapping it).
+It could be useful in a situation where you know an upstream cache is
+deployed (and running) and in captive portal situations.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-anchor-r">
+<span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;root.hints&gt;</span></span><a class="headerlink" href="#cmdoption-unbound-anchor-r" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Use the given root.hints file (same syntax as the BIND and Unbound root
+hints file) to bootstrap domain resolution.
+By default a list of builtin root hints is used.
+unbound-anchor goes to the network itself for these roots, to resolve
+the server (<a class="reference internal" href="#cmdoption-unbound-anchor-u"><code class="xref std std-option docutils literal notranslate"><span class="pre">-u</span></code></a> option) and to check the root DNSKEY records.
+It does so, because the tool when used for bootstrapping the recursive
+resolver, cannot use that recursive resolver itself because it is
+bootstrapping that server.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-anchor-R">
+<span class="sig-name descname"><span class="pre">-R</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-unbound-anchor-R" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Allow fallback from <a class="reference internal" href="#cmdoption-unbound-anchor-f"><code class="xref std std-option docutils literal notranslate"><span class="pre">-f</span></code></a> <code class="docutils literal notranslate"><span class="pre">&lt;resolv.conf&gt;</span></code> file to direct root
+servers query.
+It allows you to prefer local resolvers, but fallback automatically to
+direct root query if they do not respond or do not support DNSSEC.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-anchor-v">
+<span class="sig-name descname"><span class="pre">-v</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-unbound-anchor-v" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>More verbose.
+Once prints informational messages, multiple times may enable large
+debug amounts (such as full certificates or byte-dumps of downloaded
+files).
+By default it prints almost nothing.
+It also prints nothing on errors by default; in that case the original
+root anchor file is simply left undisturbed, so that a recursive server
+can start right after it.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-anchor-C">
+<span class="sig-name descname"><span class="pre">-C</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;unbound.conf&gt;</span></span><a class="headerlink" href="#cmdoption-unbound-anchor-C" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Debug option to read <code class="file docutils literal notranslate"><span class="pre">&lt;unbound.conf&gt;</span></code> into the resolver process
+used.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-anchor-P">
+<span id="cmdoption-unbound-anchor-p"></span><span class="sig-name descname"><span class="pre">-P</span></span><span class="sig-prename descclassname"> <span class="pre">port</span></span><a class="headerlink" href="#cmdoption-unbound-anchor-P" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Set the port number to use for the https connection.
+The default is 443.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-anchor-F">
+<span class="sig-name descname"><span class="pre">-F</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-unbound-anchor-F" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Debug option to force update of the root anchor through downloading the
+xml file and verifying it with the certificate.
+By default it first tries to update by contacting the DNS, which uses
+much less bandwidth, is much faster (200 msec not 2 sec), and is nicer
+to the deployed infrastructure.
+With this option, it still attempts to do so (and may verbosely tell
+you), but then ignores the result and goes on to use the xml fallback
+method.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-anchor-h">
+<span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-unbound-anchor-h" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Show the version and commandline option help.</p>
+</dd></dl>
+
+</section>
+<section id="exit-code">
+<h2>Exit Code<a class="headerlink" href="#exit-code" title="この見出しへのパーマリンク">¶</a></h2>
+<p>This tool exits with value 1 if the root anchor was updated using the
+certificate or if the builtin root-anchor was used.
+It exits with code 0 if no update was necessary, if the update was possible
+with <span class="target" id="index-4"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc5011.html"><strong>RFC 5011</strong></a> tracking, or if an error occurred.</p>
+<p>You can check the exit value in this manner:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>unbound-anchor -a &quot;root.key&quot; || logger &quot;Please check root.key&quot;
+</pre></div>
+</div>
+<p>Or something more suitable for your operational environment.</p>
+</section>
+<section id="trust">
+<h2>Trust<a class="headerlink" href="#trust" title="この見出しへのパーマリンク">¶</a></h2>
+<p>The root keys and update certificate included in this tool are provided for
+convenience and under the terms of our license (see the LICENSE file in the
+source distribution or <a class="reference external" href="https://github.com/NLnetLabs/unbound/blob/master/LICENSE">https://github.com/NLnetLabs/unbound/blob/master/LICENSE</a>
+and might be stale or not suitable to your purpose.</p>
+<p>By running <a class="reference internal" href="#cmdoption-unbound-anchor-l"><code class="xref std std-option docutils literal notranslate"><span class="pre">unbound-anchor</span> <span class="pre">-l</span></code></a> the keys and certificate that are
+configured in the code are printed for your convenience.</p>
+<p>The built-in configuration can be overridden by providing a root-cert file and
+a rootkey file.</p>
+</section>
+<section id="files">
+<h2>Files<a class="headerlink" href="#files" title="この見出しへのパーマリンク">¶</a></h2>
+<dl class="simple">
+<dt>/usr/local/etc/unbound/root.key</dt><dd><p>The root anchor file, updated with 5011 tracking, and  read  and written
+to.
+The file is created if it does not exist.</p>
+</dd>
+<dt>/usr/local/etc/unbound/icannbundle.pem</dt><dd><p>The trusted self-signed certificate that is used to verify the
+downloaded DNSSEC root trust  anchor.
+You can update it by fetching  it from
+<a class="reference external" href="https://data.iana.org/root-anchors/icannbundle.pem">https://data.iana.org/root-anchors/icannbundle.pem</a> (and validate it).
+If the file does  not  exist  or  is empty, a builtin version is used.</p>
+</dd>
+<dt><a class="reference external" href="https://data.iana.org/root-anchors/root-anchors.xml">https://data.iana.org/root-anchors/root-anchors.xml</a></dt><dd><p>Source for the root key information.</p>
+</dd>
+<dt><a class="reference external" href="https://data.iana.org/root-anchors/root-anchors.p7s">https://data.iana.org/root-anchors/root-anchors.p7s</a></dt><dd><p>Signature on the root key information.</p>
+</dd>
+</dl>
+</section>
+<section id="see-also">
+<h2>See Also<a class="headerlink" href="#see-also" title="この見出しへのパーマリンク">¶</a></h2>
+<p><a class="reference internal" href="unbound.conf.html"><span class="doc">unbound.conf(5)</span></a>,
+<a class="reference internal" href="unbound.html"><span class="doc">unbound(8)</span></a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="unbound-control.html" class="btn btn-neutral float-left" title="unbound-control(8)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../reference/rfc-compliance.html" class="btn btn-neutral float-right" title="RFC Compliance" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1999-2024, NLnet Labs.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

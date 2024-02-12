@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unbound Timeout and Server Selection Information &mdash; Unbound 1.19.0 ドキュメント</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/dark.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/light.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/translations.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" />
+    <link rel="next" title="DNSSEC Algorithms with Unbound" href="info-algo.html" />
+    <link rel="prev" title="Unbound Operation Explained in Book" href="book-news.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/unbound-duotone-white.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.19.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Use Cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../use-cases/home-resolver.html">Resolver for Home Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../use-cases/local-stub.html">Local DNS (Stub) Resolver for a Single Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/proxy.html">Downstream Proxy Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/serve-stale.html">Serving Stale Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/performance.html">Performance Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/monitoring.html">Monitoring and Reporting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/privacy/aggressive-nsec.html">Aggressive NSEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/privacy/dns-over-https.html">DNS-over-HTTPS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Filtering</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/filtering/tags-views.html">Tags and Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/filtering/rpz.html">Response Policy Zones</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/libunbound-tutorial/index.html">Unbound Library Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/python-modules.html">Unbound for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/doxygen-docs.html">Source Code Docs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual Pages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound.html">unbound(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-checkconf.html">unbound-checkconf(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound.conf.html">unbound.conf(5)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-host.html">unbound-host(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/libunbound.html">libunbound(3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-control.html">unbound-control(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-anchor.html">unbound-anchor(8)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../rfc-compliance.html">RFC Compliance</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">History</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="requirements.html">Requirements for Recursive Caching Resolver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prototype-resolver.html">Unbound Resolver Prototype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dns-cache-poisoning-vulnerability.html">DNS Cache Poisoning Vulnerability (2008)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="patch-announce102.html">Unbound 1.0.2 Patch Announcement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="book-news.html">Unbound Operation Explained in Book</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Unbound Timeout and Server Selection Information</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#normal-operations">Normal Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#probing">Probing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#blocking">Blocking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#control">Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="info-algo.html">DNSSEC Algorithms with Unbound</a></li>
+<li class="toctree-l2"><a class="reference internal" href="info-algo.html#trust-anchors">Trust Anchors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="root-11sep-11oct.html">Trust anchor retrieval less then 30 days before the KSK rollover</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../todo.html">Docs To-Do List</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Unbound</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">History</a></li>
+      <li class="breadcrumb-item active">Unbound Timeout and Server Selection Information</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/reference/history/info-timeout-server-selection.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="unbound-timeout-and-server-selection-information">
+<h1>Unbound Timeout and Server Selection Information<a class="headerlink" href="#unbound-timeout-and-server-selection-information" title="この見出しへのパーマリンク">¶</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="この見出しへのパーマリンク">¶</a></h2>
+<p>Unbound sends requests upstream to the authority servers on the internet
+and these requests can timeout.  These timeouts have to be handled.
+Either the request has to be sent to another server, or resent.  And the
+responsiveness of the destination server has to be kept track of.</p>
+<p>The handling of timeouts is complicated by conflicting requirements.
+If a server is down and not responding, continuation of sending packets
+is a waste of resources.  These resources are typically the time spent
+waiting, the socket and port number, and request list entry that are
+used during that time.  But if the server was down briefly, and has
+come up, then it is important to detect this quickly.  Especially in
+cases where the timeout involves a high traffic destination (say,
+the local organisation's own domain), then it is especially pressing,
+and the domain must not be blocked for hours.</p>
+<p>Unbound has several different regimes that can be distinguished.
+These are described separately for explanatory purposes, in the code
+the mechanisms all operate together.</p>
+</section>
+<section id="normal-operations">
+<h2>Normal Operations<a class="headerlink" href="#normal-operations" title="この見出しへのパーマリンク">¶</a></h2>
+<p>In the normal case, requests and replies are flowing like they should.
+Unbound has to set a timeout because UDP is an unreliable transport
+mechanism and a packet may get lost once in a while.  To do this, it
+keeps a roundtrip time estimate and performs exponential backoff.</p>
+<p>The timeout is measured in milliseconds and is kept per IP-address (so,
+not by host name but by host address).  This is stored in the infra-cache.
+The infra-cache can be configured in the max-number of elements it
+stores, and the TTL (time to live) of the elements inside the cache.
+By default elements exist for 15 minutes in the infra-cache.</p>
+<p>The fastest server (randomly picked within a so-called RTT band of 400
+msec) is selected when a query has to be sent out.  The roundtrip-timeout
+(<code class="docutils literal notranslate"><span class="pre">rtt</span></code>) is used for selection purposes.  This is the value of
+the timer that would be set if the packet is sent out.  When this timer
+expires, the packet is considered timed-out.  If nothing is known about an
+IP-address a timeout of 376 msec is assumed.  This assumed timeout should
+be successful for most traffic.  The 376 is chosen to fall within the 400
+msec rtt band and it is also a reasonable value (many pings fall in it)
+while still allowing several resends within about a single second.</p>
+<p>When packets return successfully from the remote server, the ping-time is
+used to update the estimate of the roundtrip timers.  A smoothed average
+roundtrip time is kept, that can keep track of a slow change towards
+a new average.  Also a smoothed variation measure is kept, that keeps
+track of the jumps in the times observed.  And when a timeout happens the
+exponential backoff is kept track of.  Exponential backoff means that
+the roundtrip timeout is doubled for every next packet.  These values
+are stored in the infra-cache and return to their defaults when the TTL
+expires on the element for that IP address.</p>
+<p>If a timeout occurs, the packet is considered lost and the cache is
+updated by doubling the timeout to apply for the next packet.  Server
+selection is performed again, and will likely pick another server to
+send to.  If the server was very fast, then it may be picked again since
+the doubled value is still very small.  But if the server gets slower,
+it will no longer be preferred and traffic is sent to another server
+for that domain.</p>
+<p>If a server is selected again, the same query can be sent again to the
+same server, but now with a larger timeout.  Unbound no longer listens
+or wants to receive a reply to the timed-out queries at that point.
+This is because listening to multiple outstanding versions of the same
+query sent to a server creates a (small) birthday paradox.  And this is
+avoided for cache-poison resistance reasons.</p>
+<p>If many requests are sent to a destination server at the same time,
+then a short interruption could cause many of them to timeout at about
+the same moment.  This would, with exponential backoff, result in an
+almost infinite backoff to be applied.  Therefore some race-condition
+protection is applied.  The timeout in the infra-cache is increased to
+double the original value that the query was sent out with.  Thus if
+the doubling has already been applied by another failed packet, it is
+not applied again. The doubling is only done if the timeout stored is
+between the original value and its double.  So that if another query
+has already succeeded and lowered the value in the cache then this is
+left as-is, since traffic is flowing again.</p>
+<p>In normal operations, many threads can have many packets outstanding to
+an IP address, all at the same time.  The infra-cache data is shared between
+threads.</p>
+</section>
+<section id="probing">
+<h2>Probing<a class="headerlink" href="#probing" title="この見出しへのパーマリンク">¶</a></h2>
+<p>When a domain starts to become unresponsive, it is probed.  In this regime
+only one request is allowed to probe to a particular IP.  This conserves
+resources, as other requests are turned away, and do to not use up
+port-numbers, sockets and requestlist elements.  Also it lowers the
+traffic towards the destination (that is apparently having trouble),
+which may help it get back up.</p>
+<p>An IP address is in the probing regime if it fits the following criteria.</p>
+<ul class="simple">
+<li><p>The timeout (with exponential backoff applied) exceeds 12 seconds</p></li>
+<li><p>Two (or more) consecutive exponential backoffs have just been done on it</p></li>
+</ul>
+<p>These conditions can not be configured.  They mean that the query has
+just had two timeouts, and it is already very slow (12 seconds timeout).
+If it normally has a timeout that is high, say 10 seconds, then the
+timeout has to reach 40 seconds before this restricted regime applies.
+If it is normally very fast, then normal operations continue for about 24
+seconds (because of exponential backoff, the total time for the timeouts
+in sequence).  For queries that normally take about 100 msec or so, about
+6 timeouts have to happen before it hits a 12 second timeout.</p>
+<p>In this regime, when a probe request is sent to the destination IP
+address, the <code class="docutils literal notranslate"><span class="pre">exclusion</span> <span class="pre">time</span></code> until another probe can be
+allowed is stored.  This is the current time plus the timeout for this
+packet plus one (see below about the plus one).  Other queries are not
+sent to this IP address until that time.</p>
+<p>The exclusion time is stored in the infra-cache.  This means that it is
+shared by the threads.  So normally, one request can probe at a time.
+In some cases, the code can allow a small window of opportunity and
+multiple probes, one per thread, happen at the same time.  This only
+happens when traffic it very large towards that domain and is otherwise
+harmless.</p>
+<p>When the probe is done and is it successful - so an answer came back -
+then the roundtrip estimates are updated with this new observation.
+And the IP address is put back into normal operations.  Many queries
+are allowed to the destination server.</p>
+<p>When the probe is done but it was a timeout, the exponential backoff
+is increased.  And the probe query tries to select a new server for that
+domain to send to.  But because of the plus-one on the exclusion timer,
+is now excludes itself from sending to that server again.  It may probe
+another IP-address for the same DNS domain at that time, but not the
+same one right away.</p>
+<p>This self-exclusion generates some useful effects.</p>
+<ul class="simple">
+<li><p>If there is very little traffic towards an affected domain, then
+a single request will slowly probe the different servers (if there
+are multiple servers, otherwise, with one server only, it will give
+up quickly).</p></li>
+<li><p>If there is a moderate amount of traffic towards an affected domain,
+then several requests will probe, each picks up a different IP address and
+probes one time. But because they all arrive randomly the exclusions mean
+every request performs usually one probe only as the other servers are
+(being) probed by other requests when it finishes probing an IP address.
+And there is a little wait before a new query comes in to probe a new
+server, in that time an already probing query is allowed to probe this
+IP address again.  When another request comes in, probing the servers
+continues.  Thus there are some queries probing one (or some more)
+different IP addresses, but not all IP addresses are probed at the
+same time.</p></li>
+<li><p>If there is high traffic towards an affected domain, then requests
+are always available as soon as the exclusion ends.  Thus all the servers
+for that domain are probed at the same time, each server receives one
+query at a time.  The requestlist contains an element for every server
+to probe.</p></li>
+</ul>
+<p>If more requests arrive at the server than can be used for probing,
+these are turned away.</p>
+<p>When a request is turned away because the servers are probed and this
+request did not attain probe status, then it gets the DNS error code
+SERVFAIL.  These requests do enter the requestlist, but do not use a
+socket or a port number, as they get an error reply when it finds out
+that no servers are available to send packets to.</p>
+<p>Another effect is that once a query is excluded from all currently known
+servers for a domain, the fallback mechanism to handle misconfigured
+domains is activated.  This searches for additional servers that may
+respond for this domain name.</p>
+<p>In the probe regime, IP addresses that are becoming unresponsive are
+probed by single requests and other requests are turned away.  At some
+point the exponential backoff becomes too large and it seems useless to
+send further traffic to that server.</p>
+</section>
+<section id="blocking">
+<h2>Blocking<a class="headerlink" href="#blocking" title="この見出しへのパーマリンク">¶</a></h2>
+<p>In the blocking regime, the timeout reached 120 seconds and further
+requests towards the server seem useless.  All requests are turned
+away and receive SERVFAIL (unless another working server exists for
+that domain).</p>
+<p>Requests do enter the requestlist, briefly, but when it turns out all
+servers are unresponsive, it is turned away with the error SERVFAIL.</p>
+<p>This condition is cached in the infra-cache element for that IP address.
+The elements in the infra-cache live for infra-ttl seconds (15 minutes
+by default).  When this TTL (time to live) expires, then the domain is
+probed again.</p>
+<p>Performing the full probe sequence would take about 240 seconds (sequence
+of exponential backoffs until it is 120 seconds).  With a 15 minute time
+to live, this is a bit excessive, especially if normal operations resumes
+and many resources are expended on this likely-unresponsive server.
+Therefore only a single probe packet is sent if the infra-ttl has expired.
+If that probe fails, then the server is blocked for another infra-ttl.</p>
+<p>The result is that a server is probed with one packet every 15 minutes.
+If it succeeds, all traffic is allowed again (normal operations),
+and if it fails, the next probe is sent after blocking the server for
+15 minutes.  So if a server comes back up, this is observed within
+infra-ttl seconds.  If a server does not respond, it is probed every
+15 minutes, but only if there are queries to send to it.</p>
+<p>The way the code works means that if an <code class="docutils literal notranslate"><span class="pre">expired</span></code> infra-cache
+element exists, and it says the address was blocked, then a single
+probe is performed.  Such expired entries can exist until the cache runs
+out of memory and flushes elements out to make space for new elements,
+the infra-cache uses the LRU cache-algorithm for that.  Servers for a
+domain for which very little queries are received, do not get probes
+sent to them, and when finally a query arrives for it, a single probe
+is done so as to not squander resources.</p>
+</section>
+<section id="control">
+<h2>Control<a class="headerlink" href="#control" title="この見出しへのパーマリンク">¶</a></h2>
+<p>The timeout behaviour can be controlled and configured.</p>
+<p>The configuration consists of the size of the infra-cache (please allow
+sufficient elements to store information about IP addresses).  And the
+infra-ttl time can be configured.  By setting the infra-ttl lower,
+unbound will probe servers that are not responsive more aggressively.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">unbound-control</span></code> tool can be used to interact with the
+running server.  It can provide information and flush cache entries.
+The <code class="docutils literal notranslate"><span class="pre">flush_infra</span></code> command can be used to flush all of the cache
+or particular elements.  The <code class="docutils literal notranslate"><span class="pre">lookup</span></code> command shows status for
+the servers associated with a particular domain.  The <code class="docutils literal notranslate"><span class="pre">dump_infra</span></code>
+command dumps the entire contents of the infra-cache, a snapshot of the
+ping-times of the servers on the internet that unbound has contacted.</p>
+<p>The output of a <code class="docutils literal notranslate"><span class="pre">lookup</span></code> command can look like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>unbound-control<span class="w"> </span>lookup<span class="w"> </span>nlnetlabs.nl
+The<span class="w"> </span>following<span class="w"> </span>name<span class="w"> </span>servers<span class="w"> </span>are<span class="w"> </span>used<span class="w"> </span><span class="k">for</span><span class="w"> </span>lookup<span class="w"> </span>of<span class="w"> </span>nlnetlabs.nl.
+<span class="p">;</span>rrset<span class="w"> </span><span class="m">9911</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="m">3</span>
+nlnetlabs.nl.<span class="w">       </span><span class="m">9911</span><span class="w">    </span>IN<span class="w">      </span>NS<span class="w">      </span>omval.tednet.nl.
+nlnetlabs.nl.<span class="w">       </span><span class="m">9911</span><span class="w">    </span>IN<span class="w">      </span>NS<span class="w">      </span>open.nlnetlabs.nl.
+nlnetlabs.nl.<span class="w">       </span><span class="m">9911</span><span class="w">    </span>IN<span class="w">      </span>NS<span class="w">      </span>ns3.domain-registry.nl.
+nlnetlabs.nl.<span class="w">       </span><span class="m">9911</span><span class="w">    </span>IN<span class="w">      </span>RRSIG<span class="w">   </span>NS<span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">10200</span><span class="w"> </span><span class="m">20101129015003</span>
+<span class="w">    </span><span class="m">20101101015003</span><span class="w"> </span><span class="m">42393</span><span class="w"> </span>nlnetlabs.nl.<span class="w"> </span>H28rD+MVEYWYm5aceRHg
+<span class="w">    </span>rf4gkLplnPhJjeYG5tKc<span class="w"> </span>quzyAUtQv2/IfQWDbKWz<span class="w"> </span>wdGGwhwFIF91Fio9ogAm
+<span class="w">    </span>2UrukBtE5Z7LAp1D0ZUZ<span class="w"> </span>uqnbWCsXXYcpayHDO3t<span class="w"> </span>T3oCd73JPChm5nPlw+NU
+<span class="w">    </span>VmqGWpSP8/4MoDsgPYdR<span class="w"> </span><span class="nv">88MK2NdqZ0F8</span><span class="o">=</span><span class="w"> </span><span class="p">;</span><span class="o">{</span><span class="nv">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">42393</span><span class="o">}</span>
+<span class="p">;</span>rrset<span class="w"> </span><span class="m">177</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">0</span>
+ns3.domain-registry.nl.<span class="w">     </span><span class="m">177</span><span class="w">     </span>IN<span class="w">      </span>A<span class="w">       </span><span class="m">193</span>.176.144.6
+<span class="p">;</span>rrset<span class="w"> </span><span class="m">177</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">0</span>
+ns3.domain-registry.nl.<span class="w">     </span><span class="m">177</span><span class="w">     </span>IN<span class="w">      </span>AAAA<span class="w">    </span>2a00:d78:0:102:193:176:144:6
+<span class="p">;</span>rrset<span class="w"> </span><span class="m">5399</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">3</span>
+open.nlnetlabs.nl.<span class="w">  </span><span class="m">5399</span><span class="w">    </span>IN<span class="w">      </span>A<span class="w">       </span><span class="m">213</span>.154.224.1
+open.nlnetlabs.nl.<span class="w">  </span><span class="m">5399</span><span class="w">    </span>IN<span class="w">      </span>RRSIG<span class="w">   </span>A<span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">10200</span><span class="w"> </span><span class="m">20101129015007</span>
+<span class="w">    </span><span class="m">20101101015007</span><span class="w"> </span><span class="m">42393</span><span class="w"> </span>nlnetlabs.nl.<span class="w"> </span>noDw4tW3WSEphAj8eXtg
+<span class="w">    </span>aiqt4qNBD3KFvFjv+rss<span class="w"> </span>iW/QYkKjxDl7j2xPGLWY<span class="w"> </span>pTk1XdWa21k0xYTpgshA
+<span class="w">    </span>3vh9JB69FCfwHnuxIC/o<span class="w"> </span>Ksy6g43TIOmOYuENaOIs<span class="w"> </span>OZ8MwvrHuGpLxjUo5QPq
+<span class="w">    </span>rQO/yuVz5pgFFsSScJwZ<span class="w"> </span><span class="nv">ZiYQSjwfTBU</span><span class="o">=</span><span class="w"> </span><span class="p">;</span><span class="o">{</span><span class="nv">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">42393</span><span class="o">}</span>
+<span class="p">;</span>rrset<span class="w"> </span><span class="m">5399</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">3</span>
+open.nlnetlabs.nl.<span class="w">  </span><span class="m">5399</span><span class="w">    </span>IN<span class="w">      </span>AAAA<span class="w">    </span><span class="m">2001</span>:7b8:206:1::53
+open.nlnetlabs.nl.<span class="w">  </span><span class="m">5399</span><span class="w">    </span>IN<span class="w">      </span>AAAA<span class="w">    </span><span class="m">2001</span>:7b8:206:1::1
+open.nlnetlabs.nl.<span class="w">  </span><span class="m">5399</span><span class="w">    </span>IN<span class="w">      </span>RRSIG<span class="w">   </span>AAAA<span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">10200</span><span class="w"> </span><span class="m">20101129015007</span>
+<span class="w">    </span><span class="m">20101101015007</span><span class="w"> </span><span class="m">42393</span><span class="w"> </span>nlnetlabs.nl.<span class="w"> </span>ZXSeWEgkY4xhEwlDdTsj
+<span class="w">    </span>FM12r31L/MMQYaDFeGki<span class="w"> </span>YTUeWJRFzGa4w3+A+FHp<span class="w"> </span>mibdVKuscGTuPWtsP2zE
+<span class="w">    </span>29u6ClcW0NDM+KfbEV+D<span class="w"> </span>zUYH88f7P1qs1sZSKGJL<span class="w"> </span>owxzREKDVF1t5iThVLIZ
+<span class="w">    </span>l49aD/mL97eNJ60Ybwov<span class="w"> </span><span class="nv">nsoFVuEt5Ao</span><span class="o">=</span><span class="w"> </span><span class="p">;</span><span class="o">{</span><span class="nv">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">42393</span><span class="o">}</span>
+<span class="p">;</span>rrset<span class="w"> </span><span class="m">18042</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">3</span>
+omval.tednet.nl.<span class="w">    </span><span class="m">18042</span><span class="w">   </span>IN<span class="w">      </span>A<span class="w">       </span><span class="m">213</span>.154.224.17
+<span class="p">;</span>rrset<span class="w"> </span><span class="m">18042</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">3</span>
+omval.tednet.nl.<span class="w">    </span><span class="m">18042</span><span class="w">   </span>IN<span class="w">      </span>AAAA<span class="w">    </span><span class="m">2001</span>:7b8:206:1::17
+omval.tednet.nl.<span class="w">    </span><span class="m">18042</span><span class="w">   </span>IN<span class="w">      </span>AAAA<span class="w">    </span><span class="m">2001</span>:7b8:206:1:200:39ff:fe59:b187
+Delegation<span class="w"> </span>with<span class="w"> </span><span class="m">3</span><span class="w"> </span>names,<span class="w"> </span>of<span class="w"> </span>which<span class="w"> </span><span class="m">0</span><span class="w"> </span>can<span class="w"> </span>be<span class="w"> </span>examined<span class="w"> </span>to<span class="w"> </span>query<span class="w"> </span>further<span class="w"> </span>addresses.
+It<span class="w"> </span>provides<span class="w"> </span><span class="m">8</span><span class="w"> </span>IP<span class="w"> </span>addresses.
+<span class="m">2001</span>:7b8:206:1:200:39ff:fe59:b187<span class="w">   </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span>infra<span class="w"> </span>cache.
+<span class="m">2001</span>:7b8:206:1::17<span class="w">  </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span>infra<span class="w"> </span>cache.
+<span class="m">213</span>.154.224.17<span class="w">      </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span>infra<span class="w"> </span>cache.
+<span class="m">2001</span>:7b8:206:1::1<span class="w">   </span>rto<span class="w"> </span><span class="m">284</span><span class="w"> </span>msec,<span class="w"> </span>ttl<span class="w"> </span><span class="m">860</span>,<span class="w"> </span>ping<span class="w"> </span><span class="m">0</span><span class="w"> </span>var<span class="w"> </span><span class="m">71</span><span class="w"> </span>rtt<span class="w"> </span><span class="m">284</span>,<span class="w"> </span>EDNS<span class="w"> </span><span class="m">0</span><span class="w"> </span>probed.
+<span class="m">2001</span>:7b8:206:1::53<span class="w">  </span>rto<span class="w"> </span><span class="m">164</span><span class="w"> </span>msec,<span class="w"> </span>ttl<span class="w"> </span><span class="m">420</span>,<span class="w"> </span>ping<span class="w"> </span><span class="m">0</span><span class="w"> </span>var<span class="w"> </span><span class="m">41</span><span class="w"> </span>rtt<span class="w"> </span><span class="m">164</span>,<span class="w"> </span>EDNS<span class="w"> </span><span class="m">0</span><span class="w"> </span>probed.
+<span class="m">213</span>.154.224.1<span class="w">       </span>rto<span class="w"> </span><span class="m">72</span><span class="w"> </span>msec,<span class="w"> </span>ttl<span class="w"> </span><span class="m">130</span>,<span class="w"> </span>ping<span class="w"> </span><span class="m">0</span><span class="w"> </span>var<span class="w"> </span><span class="m">18</span><span class="w"> </span>rtt<span class="w"> </span><span class="m">72</span>,<span class="w"> </span>EDNS<span class="w"> </span><span class="m">0</span><span class="w"> </span>probed.
+2a00:d78:0:102:193:176:144:6<span class="w">        </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span>infra<span class="w"> </span>cache.
+<span class="m">193</span>.176.144.6<span class="w">       </span>rto<span class="w"> </span><span class="m">230</span><span class="w"> </span>msec,<span class="w"> </span>ttl<span class="w"> </span><span class="m">105</span>,<span class="w"> </span>ping<span class="w"> </span><span class="m">2</span><span class="w"> </span>var<span class="w"> </span><span class="m">57</span><span class="w"> </span>rtt<span class="w"> </span><span class="m">230</span>,<span class="w"> </span>EDNS<span class="w"> </span><span class="m">0</span><span class="w"> </span>probed.
+</pre></div>
+</div>
+<p>Some servers are listed as not in the infra-cache.  For the ones in the
+infra-cache, the rto (roundtrip timeout with exponential backoff applied)
+is printed, and the ttl of the infra-cache element.  Also the ping-time
+(the smoothed roundtrip time) is printed (in msec) and the variability
+(in msec), the roundtrip timeout without exponential backoff (rtt)
+is also printed (in msec).  The infra-cache also contains EDNS status
+and lameness information which is also shown.  In the above example,
+the ping time is very low as most servers are on the same subnet.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="m">192</span>.0.2.1<span class="w"> </span>ttl<span class="w"> </span><span class="m">316</span><span class="w"> </span>ping<span class="w"> </span><span class="m">0</span><span class="w"> </span>var<span class="w"> </span><span class="m">94</span><span class="w"> </span>rtt<span class="w"> </span><span class="m">376</span><span class="w"> </span>rto<span class="w"> </span><span class="m">120000</span><span class="w"> </span>ednsknown<span class="w"> </span><span class="m">0</span><span class="w"> </span>edns<span class="w"> </span><span class="m">0</span><span class="w"> </span>delay<span class="w"> </span><span class="m">0</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">dump_infra</span></code> command produces similar output.  Here is
+an example (only a single line from the very long output) that shows a
+blocked entry.  The 120 second rto means it is blocked.  The rtt of 376
+(still at the assumed default), leads us to assume it never replied.
+192.0.2/24 is a netblock for documentation purposes and not deployed on
+the internet, hence no replies.</p>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="この見出しへのパーマリンク">¶</a></h2>
+<p>Unbound implements timeout management with exponential backoff and keeps
+track of average and variance of the ping times.  If a server starts to
+become unresponsive, a probing scheme is applied in which a few queries
+are selected to probe the IP address.  If that fails, the server is
+blocked for 15 minutes (infra-ttl) and re-probed with one query after
+that.</p>
+<p>Queries that failed to attain probe status, or if the server is blocked
+due to timeouts, get a reply with the SERVFAIL error.  Also, if the
+available IP addresses for a domain have been probed for 5 times by a
+query it is also replied with SERVFAIL.  New queries must come in to
+continue the probing.</p>
+<p>The status of an IP address can be looked up and flushed.  The infra-cache
+is not flushed on a reload, so the list of blocked sites and ping times
+is not wiped.  If you wish to remove it the <code class="docutils literal notranslate"><span class="pre">flush_infra</span></code>
+control command can be used.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="book-news.html" class="btn btn-neutral float-left" title="Unbound Operation Explained in Book" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="info-algo.html" class="btn btn-neutral float-right" title="DNSSEC Algorithms with Unbound" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1999-2024, NLnet Labs.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

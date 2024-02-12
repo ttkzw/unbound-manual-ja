@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Local DNS (Stub) Resolver for a Single Machine &mdash; Unbound 1.19.0 ドキュメント</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/dark.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/light.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="Downstream Proxy Support" href="../topics/core/proxy.html" />
+    <link rel="prev" title="Resolver for Home Networks" href="home-resolver.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/unbound-duotone-white.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.19.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Use Cases</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="home-resolver.html">Resolver for Home Networks</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Local DNS (Stub) Resolver for a Single Machine</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-the-local-stub-resolver">Configuring the Local Stub resolver</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ubuntu-22-04-lts">Ubuntu 22.04 LTS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#package-manager">Package manager</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compilation">Compilation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#macos-big-sur">macOS Big Sur</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#homebrew">Homebrew</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Compilation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/proxy.html">Downstream Proxy Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/serve-stale.html">Serving Stale Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/performance.html">Performance Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/monitoring.html">Monitoring and Reporting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/privacy/aggressive-nsec.html">Aggressive NSEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/privacy/dns-over-https.html">DNS-over-HTTPS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Filtering</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/filtering/tags-views.html">Tags and Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/filtering/rpz.html">Response Policy Zones</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developer/libunbound-tutorial/index.html">Unbound Library Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/python-modules.html">Unbound for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/doxygen-docs.html">Source Code Docs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual Pages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound.html">unbound(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound-checkconf.html">unbound-checkconf(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound.conf.html">unbound.conf(5)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound-host.html">unbound-host(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/libunbound.html">libunbound(3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound-control.html">unbound-control(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound-anchor.html">unbound-anchor(8)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/rfc-compliance.html">RFC Compliance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/history/index.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/todo.html">Docs To-Do List</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Unbound</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Local DNS (Stub) Resolver for a Single Machine</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/use-cases/local-stub.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="local-dns-stub-resolver-for-a-single-machine">
+<h1>Local DNS (Stub) Resolver for a Single Machine<a class="headerlink" href="#local-dns-stub-resolver-for-a-single-machine" title="この見出しへのパーマリンク">¶</a></h1>
+<p>Unbound is a powerful validating, recursive, caching DNS resolver. It’s used by
+some of the biggest tech companies in the world as well as home users, who use
+it together with ad blockers and firewalls, or self-run resolvers. Setting it up
+as a caching resolver for your own machine can be quite simple as we’ll showcase
+below.</p>
+<p>We strongly recommend setting up
+<a class="reference external" href="https://www.sidn.nl/en/modern-internet-standards/dnssec">DNSSEC</a>
+during the Unbound configuration step, as it allows the verification of the
+integrity of the responses to the queries you send.</p>
+<p>If you need to install Unbound first visit the
+<a class="reference internal" href="../getting-started/installation.html"><span class="doc">Installation</span></a> page.</p>
+<section id="configuring-the-local-stub-resolver">
+<h2>Configuring the Local Stub resolver<a class="headerlink" href="#configuring-the-local-stub-resolver" title="この見出しへのパーマリンク">¶</a></h2>
+<p>For configuring Unbound we need to make sure we have Unbound installed. An easy
+test is by asking the version number.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>unbound<span class="w"> </span>-V
+</pre></div>
+</div>
+<p>Once we have a working version of Unbound installed we need to configure it to
+be a recursive caching resolver (information about recursive resolvers can be
+found <a class="reference external" href="https://www.cloudflare.com/en-gb/learning/dns/dns-server-types/">here</a>,
+but is not necessary for our purposes here). Luckily for us Unbound already
+behaves as such by default, so for basic purposes we can use the configuration
+from the <a class="reference internal" href="../getting-started/configuration.html"><span class="doc">Configuration</span></a> page. We always recommend
+<span class="xref std std-doc">enabling DNSSEC</span>.</p>
+<p>Once we have a configuration we are happy with, we need to tell our machine to use
+Unbound by default instead of what it is currently using. This works differently
+on different operating systems. Below we will go through this for a selection of OSes.</p>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>Make sure your Unbound can run with the configuration we create. Steps for
+this can be found <a class="reference internal" href="../getting-started/configuration.html"><span class="doc">on the configuration page</span></a>.</p>
+</div>
+<section id="ubuntu-22-04-lts">
+<h3>Ubuntu 22.04 LTS<a class="headerlink" href="#ubuntu-22-04-lts" title="この見出しへのパーマリンク">¶</a></h3>
+<p>The resolver your machine uses by default is defined in
+<code class="file docutils literal notranslate"><span class="pre">/etc/systemd/resolved.conf</span></code> in the <code class="docutils literal notranslate"><span class="pre">DNS</span></code> entry and uses the IP address <code class="docutils literal notranslate"><span class="pre">127.0.0.53</span></code>.</p>
+<p>We can test this by using <strong class="command">dig</strong> to &quot;example.com&quot; and looking at the
+output.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dig<span class="w"> </span>example.com
+</pre></div>
+</div>
+<p>Near the bottom of the output we can see <code class="docutils literal notranslate"><span class="pre">127.0.0.53</span></code> IP address.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>;; SERVER: 127.0.0.53#53(127.0.0.53)
+</pre></div>
+</div>
+<p>To change this, we are going to change the <code class="file docutils literal notranslate"><span class="pre">resolved.conf</span></code>.
+While just changing this file will work as long as the machine doesn't
+reboot, we need to make sure that this change is <em>persistent</em>. To do that, we
+need to change the <code class="docutils literal notranslate"><span class="pre">DNS</span></code> entry to be equal to <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code> (or whatever IP address Unbound is bound to in your configuration) so the machine uses Unbound
+as default. So the interface would look like this in the Unbound config:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>server:
+<span class="w">    </span><span class="c1"># specify the interface to answer queries from by ip-address.</span>
+<span class="w">    </span>interface:<span class="w"> </span><span class="m">127</span>.0.0.1
+</pre></div>
+</div>
+<p>To test that Unbound is running, we can tell <strong class="command">dig</strong> to use a specific
+server with the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dig<span class="w"> </span>example.com<span class="w"> </span>@127.0.0.1
+</pre></div>
+</div>
+<p>If Unbound is running, the output should contain the address that we specified
+in the config:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>;; SERVER: 127.0.0.1#53(127.0.0.1)
+</pre></div>
+</div>
+<p>If we changed <code class="file docutils literal notranslate"><span class="pre">resolved.conf</span></code> now, the default resolver would be persistent
+until the router wants to update it. To make sure it doesn't do that we also need to set the <code class="docutils literal notranslate"><span class="pre">DNSStubListener</span></code> to <code class="docutils literal notranslate"><span class="pre">no</span></code> so that is not changed by our
+router (such as with a &quot;recommended resolver&quot; mentioned below). We also want to
+enable the <code class="docutils literal notranslate"><span class="pre">DNSSEC</span></code> option so that we can verify the integrity the responses
+we get to our DNS queries. With your favourite text editor (e.g. <strong class="command">nano</strong>
+) we can modify the file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano<span class="w"> </span>/etc/systemd/resolved.conf
+</pre></div>
+</div>
+<p>Here, under there <code class="docutils literal notranslate"><span class="pre">[Resolve]</span></code> header we add/substitute our changes to the
+options:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[Resolve]
+DNS=127.0.0.1
+#FallbackDNS=
+#Domains=
+DNSSEC=yes
+#DNSOverTLS=no
+#MulticastDNS=no
+#LLMNR=no
+#Cache=no-negative
+DNSStubListener=no
+#DNSStubListenerExtra=
+</pre></div>
+</div>
+<p>To actually have the system start using our changed config, we then need to create a symlink to overwrite <code class="file docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code> to the one we modified.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-fs<span class="w"> </span>/run/systemd/resolve/resolv.conf<span class="w"> </span>/etc/resolv.conf
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>Make sure your Unbound is running at at the IP address from the modified
+resolv.conf before the next step, otherwise you might break your internet
+connection.</p>
+</div>
+<p>With the resolv.conf file modified, we can restart systemd using the new resolver
+configuration with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>systemctl<span class="w"> </span>restart<span class="w"> </span>systemd-resolved
+</pre></div>
+</div>
+<p>If successful, the operating system should use our Unbound instance as default.
+A quick test a <strong class="command">dig</strong> without specifying the address of the Unbound
+server should give the same result as specifying it did above (with
+<code class="docutils literal notranslate"><span class="pre">&#64;127.0.0.1</span></code>).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dig<span class="w"> </span>example.com
+</pre></div>
+</div>
+<p>Here we tell the <strong class="command">dig</strong> tool to look up the IP address for
+<code class="docutils literal notranslate"><span class="pre">example.com</span></code>. We did not specify where <strong class="command">dig</strong> should ask this, so it
+goes to the default resolver of the machine.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>dig example.com
+</pre></div>
+</div>
+<p>It should look the same as with
+the <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code> IP specified as we did earlier.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>;; SERVER: 127.0.0.1#53(127.0.0.1)
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>Unbound is not persistent at this point, and will not start up when your
+system does (and possibly &quot;breaking&quot; your internet). This is fixed by
+restarting your Unbound upon reboot.</p>
+</div>
+<section id="package-manager">
+<h4>Package manager<a class="headerlink" href="#package-manager" title="この見出しへのパーマリンク">¶</a></h4>
+<p>To make Unbound persistent between restarts, we need to add it to the systemd
+service manager, for which we'll need a service file. If you installed Unbound
+via the package manager, this service file is already created for you and the
+only thing that is missing, is it executing our own configuration file.</p>
+<p>To make sure we execute Unbound with our own configuration, we copy our config
+file to the default location of the config file:
+<code class="file docutils literal notranslate"><span class="pre">/etc/unbound/unbound.conf</span></code>. Make sure Unbound starts using the copied
+configuration (this can be done with the <a class="reference internal" href="../manpages/unbound.html#cmdoption-unbound-c"><code class="xref std std-option docutils literal notranslate"><span class="pre">-c</span></code></a> flag to
+specify the config location).</p>
+<p>Before you proceed to the next step, make sure to stop the Unbound that may
+still be running. Now we can start our Unbound with systemd, which will restart
+automatically when the system is rebooted.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>systemctl start unbound
+</pre></div>
+</div>
+<p>To check that everything is correct, you can see the status (which should be
+&quot;active&quot;):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>systemctl status unbound
+</pre></div>
+</div>
+<p>We can now <strong class="command">dig</strong> a final time, to verify that this works.</p>
+</section>
+<section id="compilation">
+<h4>Compilation<a class="headerlink" href="#compilation" title="この見出しへのパーマリンク">¶</a></h4>
+<p>The steps for making Unbound persistent are almost exactly the same as if you
+installed it via the package manager, except that the service file that is
+needed by systemd does not exist yet. So instead of changing it, we create it
+and call it <code class="docutils literal notranslate"><span class="pre">unbound.service</span></code>, and copy the minimally modified service file
+supplied by the package manager. It should be located at:
+<code class="docutils literal notranslate"><span class="pre">/lib/systemd/system/unbound.service</span></code>.</p>
+<p>So using your favorite text editor open the file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano<span class="w"> </span>/lib/systemd/system/unbound.service
+</pre></div>
+</div>
+<p>and copy the file contents below:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[Unit]
+Description=Unbound DNS server
+Documentation=man:unbound(8)
+After=network.target
+Before=nss-lookup.target
+Wants=nss-lookup.target
+
+[Service]
+Type=simple
+Restart=on-failure
+EnvironmentFile=-/usr/local/etc/unbound
+ExecStart=/usr/local/sbin/unbound -d -p $DAEMON_OPTS
+ExecReload=+/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+</pre></div>
+</div>
+<p>Note that in this file <code class="docutils literal notranslate"><span class="pre">systemctl</span></code> uses the default config location. This
+location is different depending on the installation method used. In this case the
+default config file is located at <code class="file docutils literal notranslate"><span class="pre">/usr/local/etc/unbound</span></code>. We need to copy
+the config that we are going to use here.</p>
+<p>Once you have your config copied in the right location, we need to make sure the
+system can find it.</p>
+<p>Because we change the service file on disk (we created it), systemctl needs to
+be reloaded:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>systemctl daemon-reload
+</pre></div>
+</div>
+<p>We then need to enable Unbound as a systemctl service:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>systemctl enable unbound
+</pre></div>
+</div>
+<p>If all steps went correctly, we can start Unbound now using systemctl. Note that
+any previous Unbound instances with the same config (specifically the same
+ip-address) needs to be stopped.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>systemctl start unbound
+</pre></div>
+</div>
+<p>We can then look at the status, which should be &quot;active&quot;.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>systemctl status unbound
+</pre></div>
+</div>
+<p>If you succeeded Unbound should now be the default resolver on your machine and
+it will start when your machine boots.</p>
+</section>
+</section>
+<section id="macos-big-sur">
+<h3>macOS Big Sur<a class="headerlink" href="#macos-big-sur" title="この見出しへのパーマリンク">¶</a></h3>
+<p>To find out which resolver your machine uses, we have two options: Look at the
+DNS tab under the Network tab in the System Preferences app, or we can use the
+<strong class="command">scutil</strong> command in the terminal. The <strong class="command">scutil</strong> command can be
+used to manage and give information about the system configuration parameters.
+When used for DNS, it will show you all the configured resolvers though we are
+only interested in the first.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scutil<span class="w"> </span>--dns
+</pre></div>
+</div>
+<p>The output will show all the resolvers configured, but we are interested in the
+first entry. Before configuring Unbound to be our resolver, the first entry is
+(likely) the resolver recommended by your router.</p>
+<p>The simplest method of changing the resolver of your Mac is by using the System
+Preferences Window (the option of doing this step via the command line terminal
+also exists if you want to script this step). The steps go as follows:</p>
+<ol class="arabic simple">
+<li><p>Open the Network tab in System Preferences.</p></li>
+<li><p>Click on the Advanced button.</p></li>
+<li><p>Go to the DNS Tab.</p></li>
+<li><p>Click &quot;+&quot; icon</p></li>
+<li><p>Add IP address of Unbound instance (here we use <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code>)</p></li>
+</ol>
+<p>Once the IP address is added we can test our Unbound instance (assuming it's running)  with <strong class="command">dig</strong>. Note that the Unbound instance cannot be reached before it has been added in the DNS tab in System Preferences.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dig<span class="w"> </span>example.com<span class="w"> </span>@127.0.0.1
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<p>If you restart your Mac at this stage in the process, you will not have
+access to the internet anymore. This is because Unbound does not
+automatically restart if your machine restarts. To make remedy this, we
+need to add Unbound to the startup routine on your Mac.</p>
+</div>
+<p>Depending on your installation method, either via <code class="docutils literal notranslate"><span class="pre">Homebrew</span></code> or compiling
+Unbound yourself, the method of making Unbound persistent differs slightly.
+For both methods we use <strong class="command">launchctl</strong> to start Unbound on the startup of
+your machine.</p>
+<section id="homebrew">
+<h4>Homebrew<a class="headerlink" href="#homebrew" title="この見出しへのパーマリンク">¶</a></h4>
+<p>If you installed Unbound using Homebrew, the XML file required by
+<strong class="command">launchctl</strong> is already supplied during installation. The file can be
+found at <code class="docutils literal notranslate"><span class="pre">/Library/LaunchDaemons/homebrew.mxcl.unbound.plist</span></code>. To load this
+file we invoke the following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>launchctl<span class="w"> </span>load<span class="w"> </span>/Library/LaunchDaemons/homebrew.mxcl.unbound.plist
+</pre></div>
+</div>
+<p>Now every time you restart your machine, Unbound should restart too.</p>
+</section>
+<section id="id1">
+<h4>Compilation<a class="headerlink" href="#id1" title="この見出しへのパーマリンク">¶</a></h4>
+<p>If you installed Unbound by compiling it yourself, we need to create an XML file
+for <strong class="command">launchctl</strong>. Conveniently we've created one for you:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="cp">&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;</span>
+<span class="nt">&lt;plist</span><span class="w"> </span><span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dict&gt;</span>
+<span class="w">    </span><span class="nt">&lt;key&gt;</span>Label<span class="nt">&lt;/key&gt;</span>
+<span class="w">    </span><span class="nt">&lt;string&gt;</span>nl.nlnetlabs.unbound<span class="nt">&lt;/string&gt;</span>
+<span class="w">    </span><span class="nt">&lt;key&gt;</span>KeepAlive<span class="nt">&lt;/key&gt;</span>
+<span class="w">    </span><span class="nt">&lt;true/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;key&gt;</span>RunAtLoad<span class="nt">&lt;/key&gt;</span>
+<span class="w">    </span><span class="nt">&lt;true/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;key&gt;</span>ProgramArguments<span class="nt">&lt;/key&gt;</span>
+<span class="w">    </span><span class="nt">&lt;array&gt;</span>
+<span class="w">        </span><span class="nt">&lt;string&gt;</span>/usr/local/sbin/unbound<span class="nt">&lt;/string&gt;</span>
+<span class="w">        </span><span class="nt">&lt;string&gt;</span>-c<span class="nt">&lt;/string&gt;</span>
+<span class="w">        </span><span class="nt">&lt;string&gt;</span>/usr/local/etc/unbound/unbound.conf<span class="nt">&lt;/string&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/array&gt;</span>
+<span class="w">    </span><span class="nt">&lt;key&gt;</span>UserName<span class="nt">&lt;/key&gt;</span>
+<span class="w">    </span><span class="nt">&lt;string&gt;</span>root<span class="nt">&lt;/string&gt;</span>
+<span class="w">    </span><span class="nt">&lt;key&gt;</span>StandardErrorPath<span class="nt">&lt;/key&gt;</span>
+<span class="w">    </span><span class="nt">&lt;string&gt;</span>/dev/null<span class="nt">&lt;/string&gt;</span>
+<span class="w">    </span><span class="nt">&lt;key&gt;</span>StandardOutPath<span class="nt">&lt;/key&gt;</span>
+<span class="w">    </span><span class="nt">&lt;string&gt;</span>/dev/null<span class="nt">&lt;/string&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/dict&gt;</span>
+<span class="nt">&lt;/plist&gt;</span>
+</pre></div>
+</div>
+<p>The main components that interest us, are the items in the <code class="docutils literal notranslate"><span class="pre">&lt;array&gt;</span></code> which
+execute the command. Firstly, we invoke Unbound from the location that it has
+been installed (for example using <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install</span></code>).
+Secondly, we add the <a class="reference internal" href="../manpages/unbound.html#cmdoption-unbound-c"><code class="xref std std-option docutils literal notranslate"><span class="pre">-c</span></code></a> option to supply a configuration
+file.
+Lastly, we add the location of the default configuration file.
+The location in the XML can be changed to another location if this is
+convenient.</p>
+<p>Using the text editor of choice, we then create the file
+<code class="docutils literal notranslate"><span class="pre">/Library/LaunchDaemons/nl.nlnetlabs.unbound.plist</span></code> and insert the above
+supplied XML code. To be able to use the file, we need to change the permissions
+of the file using <strong class="command">chmod</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">644</span><span class="w"> </span>/Library/LaunchDaemons/nl.nlnetlabs.unbound.plist
+</pre></div>
+</div>
+<p>We can then load the file with the following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>launchctl<span class="w"> </span>load<span class="w"> </span>/Library/LaunchDaemons/nl.nlnetlabs.unbound.plist
+</pre></div>
+</div>
+<p>Now every time you restart your machine, Unbound should restart too.</p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="home-resolver.html" class="btn btn-neutral float-left" title="Resolver for Home Networks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../topics/core/proxy.html" class="btn btn-neutral float-right" title="Downstream Proxy Support" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1999-2024, NLnet Labs.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

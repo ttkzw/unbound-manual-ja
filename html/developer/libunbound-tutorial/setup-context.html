@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Setup the Context &mdash; Unbound 1.19.0 ドキュメント</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/dark.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/light.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/translations.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" />
+    <link rel="next" title="Examine the Results" href="examine-results.html" />
+    <link rel="prev" title="Resolve a Name" href="resolve-a-name.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/unbound-duotone-white.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.19.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Use Cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../use-cases/home-resolver.html">Resolver for Home Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../use-cases/local-stub.html">Local DNS (Stub) Resolver for a Single Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/proxy.html">Downstream Proxy Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/serve-stale.html">Serving Stale Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/performance.html">Performance Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/monitoring.html">Monitoring and Reporting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/privacy/aggressive-nsec.html">Aggressive NSEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/privacy/dns-over-https.html">DNS-over-HTTPS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Filtering</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/filtering/tags-views.html">Tags and Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/filtering/rpz.html">Response Policy Zones</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Unbound Library Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="resolve-a-name.html">Resolve a Name</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Setup the Context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examine-results.html">Examine the Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="async-lookup.html">Asynchronous Lookup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lookup-threads.html">Lookup from Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dnssec-validate.html">DNSSEC Validate</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python-modules.html">Unbound for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doxygen-docs.html">Source Code Docs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual Pages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound.html">unbound(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-checkconf.html">unbound-checkconf(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound.conf.html">unbound.conf(5)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-host.html">unbound-host(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/libunbound.html">libunbound(3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-control.html">unbound-control(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-anchor.html">unbound-anchor(8)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/rfc-compliance.html">RFC Compliance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/history/index.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/todo.html">Docs To-Do List</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Unbound</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Unbound Library Tutorial</a></li>
+      <li class="breadcrumb-item active">Setup the Context</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/developer/libunbound-tutorial/setup-context.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="setup-the-context">
+<h1>Setup the Context<a class="headerlink" href="#setup-the-context" title="この見出しへのパーマリンク">¶</a></h1>
+<p>In the second example we set additional useful options on the context, to
+enhance performance and utility. It is a modification of the example program
+from the <a class="reference internal" href="resolve-a-name.html"><span class="doc">Resolve a Name</span></a> section.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;errno.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;arpa/inet.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unbound.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">;</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_result</span><span class="o">*</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">retval</span><span class="p">;</span>
+
+<span class="w">        </span><span class="cm">/* create context */</span>
+<span class="w">        </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ub_ctx_create</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">ctx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;error: could not create unbound context</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="cm">/* read /etc/resolv.conf for DNS proxy settings (from DHCP) */</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="n">retval</span><span class="o">=</span><span class="n">ub_ctx_resolvconf</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/etc/resolv.conf&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;error reading resolv.conf: %s. errno says: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">ub_strerror</span><span class="p">(</span><span class="n">retval</span><span class="p">),</span><span class="w"> </span><span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="cm">/* read /etc/hosts for locally supplied host addresses */</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="n">retval</span><span class="o">=</span><span class="n">ub_ctx_hosts</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/etc/hosts&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;error reading hosts: %s. errno says: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">ub_strerror</span><span class="p">(</span><span class="n">retval</span><span class="p">),</span><span class="w"> </span><span class="n">strerror</span><span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="cm">/* query for webserver */</span>
+<span class="w">        </span><span class="n">retval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ub_resolve</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;www.nlnetlabs.nl&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="mi">1</span><span class="w"> </span><span class="cm">/* TYPE A (IPv4 address) */</span><span class="p">,</span>
+<span class="w">                </span><span class="mi">1</span><span class="w"> </span><span class="cm">/* CLASS IN (internet) */</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">result</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">retval</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;resolve error: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ub_strerror</span><span class="p">(</span><span class="n">retval</span><span class="p">));</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="cm">/* show first result */</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">result</span><span class="o">-&gt;</span><span class="n">havedata</span><span class="p">)</span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;The address is %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">inet_ntoa</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">in_addr</span><span class="o">*</span><span class="p">)</span><span class="n">result</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]));</span>
+
+<span class="w">        </span><span class="n">ub_resolve_free</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+<span class="w">        </span><span class="n">ub_ctx_delete</span><span class="p">(</span><span class="n">ctx</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Invocation of this program yields the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>example_2
+The<span class="w"> </span>address<span class="w"> </span>is<span class="w"> </span><span class="m">213</span>.154.224.1
+</pre></div>
+</div>
+<p>As said, the code is a modification of the <a class="reference internal" href="resolve-a-name.html"><span class="doc">first
+example</span></a>. The context is set up, a single name is
+looked up, and the results and context are freed. The difference is that local
+settings are applied.</p>
+<p>The local DNS server settings (acquired from DHCP perhaps) are read from
+<code class="docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code> with <code class="docutils literal notranslate"><span class="pre">ub_ctx_resolvconf</span></code>. Without reading this, Unbound
+will use built-in root hints, this is a lot slower than using the DNS servers
+from <code class="docutils literal notranslate"><span class="pre">resolv.conf</span></code>. It makes a large difference, for me <code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">example1</span></code>
+takes about 0.25 seconds, and <code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">example2</span></code> takes about 0.05 seconds.</p>
+<p>The difference is caused because the DNS proxy in <code class="docutils literal notranslate"><span class="pre">resolv.conf</span></code> has a cache of
+often used data, and thus can resolve queries much faster. If you perform many
+queries (and keep the unbound context around between calls to resolve) the time
+difference will grow smaller over time, since a cache of data is kept inside the
+context as well.</p>
+<p>When you use <code class="docutils literal notranslate"><span class="pre">ub_ctx_resolvconf</span></code> libunbound becomes a stub resolver, not going
+to the internet itself, but relying on the servers listed. Without the call, by
+default, libunbound contacts the servers on the internet itself. A reason to not
+use the servers from resolv.conf is because you do not trust them, or because
+they lack support for DNSSEC, and you want to use DNSSEC validation.</p>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>Some people have complained about DNSSEC validation changing between
+secure and bogus, randomly. Often these are because they read a
+<code class="docutils literal notranslate"><span class="pre">resolv.conf</span></code> that contains nameservers where some support DNSSEC
+and some do not. If unbound detects that signatures are stripped from
+the answer, it returns bogus.</p>
+</div>
+<p>The function <code class="docutils literal notranslate"><span class="pre">ub_ctx_set_fwd(ctx,</span> <span class="pre">&quot;192.168.0.1&quot;)</span></code> (not shown in the example
+program) can be used to set an explicit IPv4 or IPv6 address for the DNS server
+to use. You can use this function to set DNS caching proxy server addresses that
+are not listed in <code class="docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code>.</p>
+<p>If you wish to provide your own root-hints file, to override the built-in
+values, you can use the power-user interface <code class="docutils literal notranslate"><span class="pre">ub_ctx_set_option(ctx,</span>
+<span class="pre">&quot;root-hints:&quot;,</span> <span class="pre">&quot;my-hints.root&quot;)</span></code>, and the file <code class="docutils literal notranslate"><span class="pre">my-hints.root</span></code> is read in
+before the first name resolution.</p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">ub_ctx_hosts</span></code> is used to read <code class="docutils literal notranslate"><span class="pre">/etc/hosts</span></code>. This allows
+unbound to (very quickly) return addresses for hosts that are configured in
+<code class="docutils literal notranslate"><span class="pre">/etc/hosts</span></code>. If you do not trust the <code class="docutils literal notranslate"><span class="pre">/etc/hosts</span></code> file, you can avoid
+loading it. The addresses listed in the hosts file lack DNSSEC signatures, which
+may affect their validation status later on. The hosts file is a very useful
+configuration file to load, as it allows users to list addresses that are often
+used, or addresses for hosts on their local network.</p>
+<p>If you do not want your program to fail if <code class="docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code> or
+<code class="docutils literal notranslate"><span class="pre">/etc/hosts</span></code> do not exist at all, you can check if <code class="docutils literal notranslate"><span class="pre">errno</span> <span class="pre">==</span> <span class="pre">ENOENT</span></code> when
+the reading functions fail, and act accordingly.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="resolve-a-name.html" class="btn btn-neutral float-left" title="Resolve a Name" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="examine-results.html" class="btn btn-neutral float-right" title="Examine the Results" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1999-2024, NLnet Labs.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

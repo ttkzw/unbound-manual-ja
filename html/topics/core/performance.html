@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Performance Tuning &mdash; Unbound 1.19.0 ドキュメント</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/dark.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/light.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/translations.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" />
+    <link rel="next" title="Monitoring and Reporting" href="monitoring.html" />
+    <link rel="prev" title="Serving Stale Data" href="serve-stale.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/unbound-duotone-white.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.19.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Use Cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../use-cases/home-resolver.html">Resolver for Home Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../use-cases/local-stub.html">Local DNS (Stub) Resolver for a Single Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="proxy.html">Downstream Proxy Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serve-stale.html">Serving Stale Data</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Performance Tuning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-libevent">Using Libevent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#forked-operation">Forked Operation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="monitoring.html">Monitoring and Reporting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../privacy/aggressive-nsec.html">Aggressive NSEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../privacy/dns-over-https.html">DNS-over-HTTPS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Filtering</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../filtering/tags-views.html">Tags and Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../filtering/rpz.html">Response Policy Zones</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/libunbound-tutorial/index.html">Unbound Library Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/python-modules.html">Unbound for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/doxygen-docs.html">Source Code Docs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual Pages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound.html">unbound(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-checkconf.html">unbound-checkconf(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound.conf.html">unbound.conf(5)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-host.html">unbound-host(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/libunbound.html">libunbound(3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-control.html">unbound-control(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-anchor.html">unbound-anchor(8)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/rfc-compliance.html">RFC Compliance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/history/index.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/todo.html">Docs To-Do List</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Unbound</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Performance Tuning</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/topics/core/performance.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="performance-tuning">
+<h1>Performance Tuning<a class="headerlink" href="#performance-tuning" title="この見出しへのパーマリンク">¶</a></h1>
+<p>Most users will probably not have a need to tune and optimise their Unbound
+installation, but it could be useful for large resolver installations. This page
+contains recommendations based on user feedback. If you have different
+experiences or have recommendations, please share them on the <a class="reference external" href="https://lists.nlnetlabs.nl/mailman/listinfo/unbound-users">Unbound users
+mailing list</a>.</p>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="この見出しへのパーマリンク">¶</a></h2>
+<p>Set <a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-num-threads"><span class="std std-ref">num-threads:</span></a> equal to the number of CPU
+cores on the system.
+For example, for 4 CPUs with 2 cores each, use 8.</p>
+<p>On Linux, set <a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-so-reuseport"><span class="std std-ref">so-reuseport: yes</span></a>, that will
+significantly improve UDP performance (on kernels that support it, otherwise it
+is inactive, the <a class="reference internal" href="../../manpages/unbound-control.html"><span class="doc">unbound-control(8)</span></a> status command shows if it is
+active).</p>
+<p>Set <code class="docutils literal notranslate"><span class="pre">*-slabs</span></code> to a power of 2 close to the <code class="docutils literal notranslate"><span class="pre">num-threads</span></code> value.
+Do this for
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-msg-cache-slabs"><span class="std std-ref">msg-cache-slabs:</span></a>,
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-rrset-cache-slabs"><span class="std std-ref">rrset-cache-slabs:</span></a>,
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-infra-cache-slabs"><span class="std std-ref">infra-cache-slabs:</span></a> and
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-key-cache-slabs"><span class="std std-ref">key-cache-slabs:</span></a>.
+This reduces lock contention.</p>
+<p>Increase the memory size of the cache.
+Use roughly twice as much rrset cache memory as you use msg cache memory.
+For example, <a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-rrset-cache-size"><span class="std std-ref">rrset-cache-size: 100m</span></a> and
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-msg-cache-size"><span class="std std-ref">msg-cache-size: 50m</span></a>.
+Due to malloc overhead, the total memory usage is likely to rise to double (or
+2.5x) the total cache memory that is entered into the configuration.</p>
+<p>Set the <a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-outgoing-range"><span class="std std-ref">outgoing-range:</span></a> to as large a value
+as possible, see the sections below on how to overcome the limit of 1024 in
+total.
+This services more clients at a time.
+With 1 core, try 950.
+With 2 cores, try 450.
+With 4 cores try 200.
+The <a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-num-queries-per-thread"><span class="std std-ref">num-queries-per-thread:</span></a> is best
+set at half the number of the <code class="docutils literal notranslate"><span class="pre">outgoing-range</span></code>, but you would like a whole
+lot to be able to soak up a spike in queries.
+Because of the limit on <code class="docutils literal notranslate"><span class="pre">outgoing-range</span></code> thus also limits
+<code class="docutils literal notranslate"><span class="pre">num-queries-per-thread</span></code>, it is better to compile with <code class="docutils literal notranslate"><span class="pre">libevent</span></code> (see the
+section below), so that there is no more 1024 limit on <code class="docutils literal notranslate"><span class="pre">outgoing-range</span></code>.</p>
+<p>Set <a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-so-rcvbuf"><span class="std std-ref">so-rcvbuf:</span></a> to a larger value (4m or 8m) for a
+busy server.
+This sets the kernel buffer larger so that no messages are lost in spikes in
+the traffic.
+Adds extra 9s to the reply-reliability percentage.
+The OS caps it at a maximum, on Linux, Unbound needs root permission to bypass
+the limit, or the admin can use <code class="docutils literal notranslate"><span class="pre">sysctl</span> <span class="pre">net.core.rmem_max</span></code>.
+On BSD change <code class="docutils literal notranslate"><span class="pre">kern.ipc.maxsockbuf</span> <span class="pre">in</span> <span class="pre">/etc/sysctl.conf</span></code>.</p>
+<p>On OpenBSD change header and recompile kernel.
+On Solaris <code class="docutils literal notranslate"><span class="pre">ndd</span> <span class="pre">-set</span> <span class="pre">/dev/udp</span> <span class="pre">udp_max_buf</span> <span class="pre">8388608</span></code>.</p>
+<p>Also set <a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-so-sndbuf"><span class="std std-ref">so-sndbuf:</span></a> to a larger value (4m or 8m)
+for a busy server.
+Same as <code class="docutils literal notranslate"><span class="pre">so-rcvbuf</span></code>, but now for spikes in replies, and it is
+<code class="docutils literal notranslate"><span class="pre">net.core.wmem_max</span></code>.
+Might need a smaller value, as spikes are less common in replies, you can see
+rcv and snd buffer overruns with <code class="docutils literal notranslate"><span class="pre">netstat</span> <span class="pre">-su</span></code>, <code class="docutils literal notranslate"><span class="pre">RcvbufErrors</span></code> and
+<code class="docutils literal notranslate"><span class="pre">SndbufErrors</span></code>, and similar reports on BSD.</p>
+<p>For the TCP listen backlog on Linux, it is possible to tweak the kernel
+parameters to allow larger values. Unbound attempts to increase this to enable
+it to handle spikes in incoming TCP or TLS connections. The number that unbound
+attempts is defined in <code class="docutils literal notranslate"><span class="pre">TCP_BACKLOG</span></code> in <code class="docutils literal notranslate"><span class="pre">services/listen_dnsport.c</span></code>, it does
+not need to be changed if the current value, about 256, is sufficient for you.
+However, the Linux kernel limits this value silently to a maximum configured
+into the kernel settings. The kernel can be tweaked to enable a higher number
+with <code class="docutils literal notranslate"><span class="pre">net.core.somaxconn</span> <span class="pre">=</span> <span class="pre">256</span></code> and <code class="docutils literal notranslate"><span class="pre">net.ipv4.tcp_max_syn_backlog</span> <span class="pre">=</span> <span class="pre">256</span></code>.</p>
+<p>Here is a short summary of optimisation config:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># some optimisation options.
+server:
+    # use all CPUs
+    num-threads: &lt;number of cores&gt;
+
+    # power of 2 close to num-threads
+    msg-cache-slabs: &lt;same&gt;
+    rrset-cache-slabs: &lt;same&gt;
+    infra-cache-slabs: &lt;same&gt;
+    key-cache-slabs: &lt;same&gt;
+
+    # more cache memory, rrset=msg*2
+    rrset-cache-size: 100m
+    msg-cache-size: 50m
+
+    # more outgoing connections
+    # depends on number of cores: 1024/cores - 50
+    outgoing-range: 950
+
+    # Larger socket buffer.  OS may need config.
+    so-rcvbuf: 4m
+    so-sndbuf: 4m
+
+    # Faster UDP with multithreading (only on Linux).
+    so-reuseport: yes
+</pre></div>
+</div>
+<p>The default setup works fine, but when a large number of users have to be
+served, the limits of the system are reached. Most pressing is the number of
+file descriptors, the default has a limit of 1024. To use more than 1024 file
+descriptors, use libevent or the forked operation method. These are described in
+sections below.</p>
+</section>
+<section id="using-libevent">
+<h2>Using Libevent<a class="headerlink" href="#using-libevent" title="この見出しへのパーマリンク">¶</a></h2>
+<p>Libevent is a BSD licensed cross platform wrapper around platform specific event
+notification system calls. Unbound can use it to efficiently use more than 1024
+file descriptors. Install <code class="docutils literal notranslate"><span class="pre">libevent</span></code> (and <code class="docutils literal notranslate"><span class="pre">libevent-devel</span></code>, if it exists)
+with your favorite package manager. Before compiling unbound run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./configure<span class="w"> </span>--with-libevent
+</pre></div>
+</div>
+<p>Now you can give any number you like for
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-outgoing-range"><span class="std std-ref">outgoing-range:</span></a>.
+Also increase the
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-num-queries-per-thread"><span class="std std-ref">num-queries-per-thread:</span></a> value.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># with libevent
+outgoing-range: 8192
+num-queries-per-thread: 4096
+</pre></div>
+</div>
+<p>Users report that libevent-1.4.8-stable works well. Users have confirmed it
+works well on Linux and FreeBSD with 4096 or 8192 as values.
+Double the <a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-num-queries-per-thread"><span class="std std-ref">num-queries-per-thread:</span></a>
+and use that as <a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-outgoing-range"><span class="std std-ref">outgoing-range:</span></a>.</p>
+<p>Stable(old) distributions can package older versions (such as libevent-1.1), for
+which there are crash reports, thus you may need to upgrade your libevent. In
+unbound 1.2.0 a race condition in the libevent calls was fixed.</p>
+<p>Unbound can compile from the libevent or libev build directory to make this
+easy; e.g.,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>configure<span class="w"> </span>--with-libevent<span class="o">=</span>/home/user/libevent-1.4.8-stable
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>configure<span class="w"> </span>--with-libevent<span class="o">=</span>/home/user/libev-3.52
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>If you experience crashes anyway, then you can try the following.  Update
+libevent. If the problem persists, libevent can be made to use different
+system-call back-ends by setting environment variables.  Unbound reports the
+back-end in use when verbosity is at level 4. By setting <code class="docutils literal notranslate"><span class="pre">EVENT_NOKQUEUE</span></code>,
+<code class="docutils literal notranslate"><span class="pre">EVENT_NODEVPOLL</span></code>, <code class="docutils literal notranslate"><span class="pre">EVENT_NOPOLL</span></code>, <code class="docutils literal notranslate"><span class="pre">EVENT_NOSELECT</span></code>, <code class="docutils literal notranslate"><span class="pre">EVENT_NOEPOLL</span></code>
+or <code class="docutils literal notranslate"><span class="pre">EVENT_NOEVPORT</span></code> to yes in the shell before you start unbound, some
+back-ends can be excluded from use. The <em>poll(2)</em> backend is reliable, but
+slow.</p>
+</div>
+</section>
+<section id="forked-operation">
+<h2>Forked Operation<a class="headerlink" href="#forked-operation" title="この見出しへのパーマリンク">¶</a></h2>
+<p>Unbound has a unique mode where it can operate without threading. This can be
+useful if libevent fails on the platform, for extra performance, or for creating
+walls between the cores so that one cannot poison another.</p>
+<p>To compile for forked operation, before compilation use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./configure<span class="w"> </span>--without-pthreads<span class="w"> </span>--without-solaris-threads
+</pre></div>
+</div>
+<p>This disables threads and enable forked operation.
+Because no locking has to be done, the code speeds up (about 10 to 20%).</p>
+<p>In the configuration file, <a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-num-threads"><span class="std std-ref">num-threads:</span></a> still
+specifies the number of cores you want to use (even though it uses processes
+and not threads).
+And note that the <a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-outgoing-range"><span class="std std-ref">outgoing-range:</span></a> and cache
+memory values are all per thread.
+This means that much more memory is used, as every core uses its own cache.
+Because every core has its own cache, if one gets cache poisoned, the others
+are not affected.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># with forked operation
+server:
+    # use all CPUs
+    num-threads: &lt;number of cores&gt;
+
+    msg-cache-slabs: 1
+    rrset-cache-slabs: 1
+    infra-cache-slabs: 1
+    key-cache-slabs: 1
+
+    # more cache memory, rrset=msg*2
+    # total usage is 150m*cores
+    rrset-cache-size: 100m
+    msg-cache-size: 50m
+
+    # does not depend on number of cores
+    outgoing-range: 950
+    num-queries-per-thread: 512
+
+    # Larger socket buffer.  OS may need config.
+    so-rcvbuf: 4m
+</pre></div>
+</div>
+<p>Because every process is using at most 1024 file descriptors now, the effective
+maximum is the number of cores * 1024. The configuration above uses 950 per process,
+for 4 processes gives a respectable 3800 sockets. The number of queries per
+thread is half the number of sockets, to guarantee that every query can get a
+socket, and some to spare for queries-for-nameservers.</p>
+<p>Using forked operation together with libevent is also possible. It may be useful
+to force the OS to service the file descriptors for different processes, instead
+of threads. This may have (radically) different performance if the underlying
+network stack uses (slow) lookup structures per-process.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="serve-stale.html" class="btn btn-neutral float-left" title="Serving Stale Data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="monitoring.html" class="btn btn-neutral float-right" title="Monitoring and Reporting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1999-2024, NLnet Labs.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

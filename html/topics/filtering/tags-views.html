@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tags and Views &mdash; Unbound 1.19.0 ドキュメント</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/dark.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/light.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/translations.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" />
+    <link rel="next" title="Response Policy Zones" href="rpz.html" />
+    <link rel="prev" title="DNS-over-HTTPS" href="../privacy/dns-over-https.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/unbound-duotone-white.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.19.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Use Cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../use-cases/home-resolver.html">Resolver for Home Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../use-cases/local-stub.html">Local DNS (Stub) Resolver for a Single Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../core/proxy.html">Downstream Proxy Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/serve-stale.html">Serving Stale Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/performance.html">Performance Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/monitoring.html">Monitoring and Reporting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../privacy/aggressive-nsec.html">Aggressive NSEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../privacy/dns-over-https.html">DNS-over-HTTPS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Filtering</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tags and Views</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tags">Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#views">Views</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rpz.html">Response Policy Zones</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/libunbound-tutorial/index.html">Unbound Library Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/python-modules.html">Unbound for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/doxygen-docs.html">Source Code Docs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual Pages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound.html">unbound(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-checkconf.html">unbound-checkconf(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound.conf.html">unbound.conf(5)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-host.html">unbound-host(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/libunbound.html">libunbound(3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-control.html">unbound-control(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-anchor.html">unbound-anchor(8)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/rfc-compliance.html">RFC Compliance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/history/index.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/todo.html">Docs To-Do List</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Unbound</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Tags and Views</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/topics/filtering/tags-views.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tags-and-views">
+<span id="index-0"></span><h1>Tags and Views<a class="headerlink" href="#tags-and-views" title="この見出しへのパーマリンク">¶</a></h1>
+<p>The tags and views functionality make it possible to send specific DNS answers
+based on the IP address of the client.</p>
+<section id="tags">
+<h2>Tags<a class="headerlink" href="#tags" title="この見出しへのパーマリンク">¶</a></h2>
+<p>The tags functionality makes it possible to divide incoming client queries in
+categories (tags), and use <a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-local-zone"><span class="std std-ref">local-zone:</span></a> and
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-local-data"><span class="std std-ref">local-data:</span></a> information for these specific tags.</p>
+<p>Before these tags can be used, you need to define them in the Unbound
+configuration using
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-define-tag"><span class="std std-ref">define-tag:</span></a>.
+In this example, a tag for domains containing malware is set, along with one
+for domains of gambling sites:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>define-tag: &quot;malware gambling&quot;
+</pre></div>
+</div>
+<p>Now that Unbound is aware of the existing tags, it is possible to start using
+them.</p>
+<p>The <a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-access-control-tag"><span class="std std-ref">access-control-tag:</span></a> element is used
+to specify the tag to use for client source address.
+Alternatively, the <a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-interface-tag"><span class="std std-ref">interface-tag:</span></a> element is
+used to specify the tag to use for clients on a specific listening interface.
+You can add multiple tags to these elements:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># Per client IP ...
+access-control-tag: 10.0.1.0/24 &quot;malware&quot;
+access-control-tag: 10.0.2.0/24 &quot;malware&quot;
+access-control-tag: 10.0.3.0/24 &quot;gambling&quot;
+access-control-tag: 10.0.4.0/24 &quot;malware gambling&quot;
+
+# ... and/or per listening interface
+interface-tag: eth0 &quot;malware&quot;
+interface-tag: 10.0.0.1 &quot;malware gambling&quot;
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>Any <code class="docutils literal notranslate"><span class="pre">access-control*:</span></code> setting overrides all <code class="docutils literal notranslate"><span class="pre">interface-*:</span></code> settings
+for targeted clients.</p>
+</div>
+<p>Unbound will create a <code class="docutils literal notranslate"><span class="pre">*-tag</span></code> element with the “allow” type if the IP
+address block / listening interface in the <code class="docutils literal notranslate"><span class="pre">*-tag</span></code> element does not match an
+existing access control rule.</p>
+<p>When a query comes in that is marked with a tag, Unbound starts searching its
+local-zone tree for the best match.
+The best match is the most specific local-zone with a matching tag, or without
+any tag.
+That means that local-zones without any tag will be used for all queries and
+tagged local-zones only for queries with matching tags.</p>
+<p>Adding tags to local-zones can be done using the
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-local-zone-tag"><span class="std std-ref">local-zone-tag:</span></a> element:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>local-zone: malwarehere.example refuse
+local-zone: somegamblingsite.example static
+local-zone: matchestwotags.example transparent
+local-zone: notags.example inform
+
+local-zone-tag: malwarehere.example malware
+local-zone-tag: somegamblingsite.example malware
+local-zone-tag: matchestwotags.example &quot;malware gambling&quot;
+</pre></div>
+</div>
+<p>A local-zone can have multiple tags, as illustrated in the example above.
+The tagged local-zones will be used if one or more tags match the query.
+So, the matchestwotags.example local-zone will be used for all queries with at
+least the malware or gambling tag.
+The used local-zone type will be the type specified in the matching local-zone.
+It is possible to depend the local-zone type on the client and tag combination.
+Setting tag specific local-zone types can be done using
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-access-control-tag-action"><span class="std std-ref">access-control-tag-action:</span></a> and/or
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-interface-tag-action"><span class="std std-ref">interface-tag-action:</span></a>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># Per client IP ...
+access-control-tag-action: 10.0.1.0/24 &quot;malware&quot; refuse
+access-control-tag-action: 10.0.2.0/24 &quot;malware&quot; deny
+
+# ... and/or per listening interface
+interface-tag-action: eth0 &quot;malware&quot; refuse
+interface-tag-action: 10.0.0.1 &quot;malware&quot; deny
+</pre></div>
+</div>
+<p>In addition to configuring a local-zone type for specific clients/tag match, it
+is also possible to set the used local-data RRs.
+This can be done using the
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-access-control-tag-data"><span class="std std-ref">access-control-tag-data:</span></a> and/or
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-interface-tag-data"><span class="std std-ref">interface-tag-data:</span></a> elements:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># Per client IP ...
+access-control-tag-data: 10.0.4.0/24 &quot;gambling&quot; &quot;A 127.0.0.1&quot;
+
+# ... and/or per listening interface
+interface-tag-data: 10.0.0.1 &quot;gambling&quot; &quot;A 127.0.0.1&quot;
+</pre></div>
+</div>
+<p>Sometimes you might want to override a local-zone type for a specific IP prefix
+or interface, regardless the type configured for tagged and untagged local
+zones, and regardless the type configured using
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-access-control-tag-action"><span class="std std-ref">access-control-tag-action:</span></a> and/or
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-interface-tag-action"><span class="std std-ref">interface-tag-action:</span></a>.
+This override can be done using
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-local-zone-override"><span class="std std-ref">local-zone-override:</span></a>.</p>
+</section>
+<section id="views">
+<h2>Views<a class="headerlink" href="#views" title="この見出しへのパーマリンク">¶</a></h2>
+<p>Tags make is possible to divide a large number of local-zones in categories,
+and assign these categories to a large number of IP address blocks.
+As tags on the clients and local-zones are stored in bitmaps, it is advised to
+keep the number of tags low.
+Specifically for client prefixes (i.e., <code class="docutils literal notranslate"><span class="pre">access-control-tag*:</span></code>), if a lot of
+clients have their own local-zones, without sharing these to other IP prefixes,
+it can result in a large amount tags.
+In this situation it is more convenient to give the clients' IP prefix its own
+tree containing local-zones.
+Another benefit of having a separate local zone tree is that it makes it
+possible to apply a local-zone action to a part of the domain space, without
+having other local-zone elements of subdomains overriding this.
+Configuring a client specific local-zone tree can be done using views.</p>
+<p>A view is a named list of configuration options.
+The supported view configuration options are
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-view-local-zone"><span class="std std-ref">local-zone:</span></a> and
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-view-local-data"><span class="std std-ref">local-data:</span></a>.</p>
+<p>A view is configured using a <strong>view:</strong> clause.
+There may be multiple view clauses, each with a unique name. For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>view:
+    name: &quot;firstview&quot;
+    local-zone: example.com inform
+    local-data: &#39;example.com TXT &quot;this is an example&quot;&#39;
+    local-zone: refused.example.nl refuse
+</pre></div>
+</div>
+<p>Mapping a view to a client can be done using the
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-access-control-view"><span class="std std-ref">access-control-view:</span></a> element:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>access-control-view: 10.0.5.0/24 firstview
+</pre></div>
+</div>
+<p>Alternatively, mapping a view to clients in a specific interface can be done
+using the <a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-interface-view"><span class="std std-ref">interface-view:</span></a> element:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>interface-view: eth0 firstview
+</pre></div>
+</div>
+<p>By default, view configuration options override the global configuration
+outside the view.
+When a client matches a view it will only use the view's local-zone tree.
+This behaviour can be changed by setting
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-view-view-first"><span class="std std-ref">view-first:</span></a> to yes.
+If view-first is enabled, Unbound will try to use the view's local-zone tree,
+and if there is no match it will search the global tree.</p>
+<div class="admonition seealso">
+<p class="admonition-title">参考</p>
+<p><a class="reference internal" href="../../manpages/unbound.conf.html#view-options"><span class="std std-ref">View Options</span></a> in the
+<a class="reference internal" href="../../manpages/unbound.conf.html"><span class="doc">unbound.conf(5)</span></a> manpage.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../privacy/dns-over-https.html" class="btn btn-neutral float-left" title="DNS-over-HTTPS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rpz.html" class="btn btn-neutral float-right" title="Response Policy Zones" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1999-2024, NLnet Labs.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

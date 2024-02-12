@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monitoring and Reporting &mdash; Unbound 1.19.0 ドキュメント</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/dark.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/light.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/translations.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" />
+    <link rel="next" title="Aggressive NSEC" href="../privacy/aggressive-nsec.html" />
+    <link rel="prev" title="Performance Tuning" href="performance.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/unbound-duotone-white.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.19.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Use Cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../use-cases/home-resolver.html">Resolver for Home Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../use-cases/local-stub.html">Local DNS (Stub) Resolver for a Single Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="proxy.html">Downstream Proxy Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="serve-stale.html">Serving Stale Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance Tuning</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Monitoring and Reporting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#statistics-with-munin">Statistics with Munin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#statistics-with-cacti">Statistics with Cacti</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../privacy/aggressive-nsec.html">Aggressive NSEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../privacy/dns-over-https.html">DNS-over-HTTPS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Filtering</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../filtering/tags-views.html">Tags and Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../filtering/rpz.html">Response Policy Zones</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/libunbound-tutorial/index.html">Unbound Library Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/python-modules.html">Unbound for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/doxygen-docs.html">Source Code Docs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual Pages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound.html">unbound(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-checkconf.html">unbound-checkconf(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound.conf.html">unbound.conf(5)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-host.html">unbound-host(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/libunbound.html">libunbound(3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-control.html">unbound-control(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-anchor.html">unbound-anchor(8)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/rfc-compliance.html">RFC Compliance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/history/index.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/todo.html">Docs To-Do List</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Unbound</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Monitoring and Reporting</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/topics/core/monitoring.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="monitoring-and-reporting">
+<h1>Monitoring and Reporting<a class="headerlink" href="#monitoring-and-reporting" title="この見出しへのパーマリンク">¶</a></h1>
+<p>There are several ways to configure statistics in Unbound. In this section we'll
+cover Munin and Cacti, but there are many other third-party options available as
+well, using for example <a class="reference external" href="https://github.com/jeftedelima/Unbound-DNS">Zabbix</a>
+or <a class="reference external" href="https://github.com/letsencrypt/unbound_exporter">Prometheus</a>.</p>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="この見出しへのパーマリンク">¶</a></h2>
+<p>Unbound has an option to enable extended statistics collection. If
+enabled, more statistics are collected, for example what types of queries are
+sent to the resolver. Otherwise, only the total number of queries is collected.</p>
+<p>Statistics can be printed to the log file using
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-statistics-interval"><span class="std std-ref">statistics-interval:</span></a>, but
+here we'll focus on using <a class="reference internal" href="../../manpages/unbound-control.html"><span class="doc">unbound-control(8)</span></a> to obtain
+statistics on demand. If you set a <code class="docutils literal notranslate"><span class="pre">statistics-interval</span></code>, every interval it is
+printed to the logfile.</p>
+<p>To use <code class="docutils literal notranslate"><span class="pre">unbound-control</span></code>, first set it up using the
+<a class="reference internal" href="../../manpages/unbound-control.html#set-up"><span class="std std-ref">unbound-control-setup</span></a> script.
+See howto setup unbound.
+Then you can use the <a class="reference internal" href="../../manpages/unbound-control.html#unbound-control-commands-stats"><span class="std std-ref">unbound-control
+stats</span></a> command to print out the statistics on
+demand.</p>
+<p>Various graphing tools expect the counters to go up over time. Some may expect
+counters to be reset to 0 since the previous statistics printout. The
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-statistics-cumulative"><span class="std std-ref">statistics-cumulative:</span></a> option
+controls the behaviour of Unbound.
+By default it is set to <code class="docutils literal notranslate"><span class="pre">no</span></code>, which resets values to zero after stat
+printout.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># enable extended statistics.
+server:
+   statistics-interval: 0
+   extended-statistics: yes
+   # set to yes if graphing tool needs it
+   statistics-cumulative: no
+</pre></div>
+</div>
+</section>
+<section id="statistics-with-munin">
+<h2>Statistics with Munin<a class="headerlink" href="#statistics-with-munin" title="この見出しへのパーマリンク">¶</a></h2>
+<p>In the <code class="docutils literal notranslate"><span class="pre">contrib</span></code> directory in the source of Unbound is the <code class="docutils literal notranslate"><span class="pre">unbound_munin_</span></code>
+plugin script. It can be used with <a class="reference external" href="https://munin-monitoring.org">Munin</a> to
+monitor the health of an Unbound server.</p>
+<p>Install <code class="docutils literal notranslate"><span class="pre">munin</span></code> and <code class="docutils literal notranslate"><span class="pre">munin-node</span></code> with the appropriate package install tool.
+The plugin script for Unbound can be copied somewhere on the system (such as in
+the unbound directory). Then create symbolic links from <code class="docutils literal notranslate"><span class="pre">/etc/munin/plugins</span></code>
+to that file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ln<span class="w"> </span>-s<span class="w"> </span>/etc/unbound/unbound_munin_<span class="w"> </span>/etc/munin/plugins/unbound_munin_hits
+</pre></div>
+</div>
+<p>In the <code class="docutils literal notranslate"><span class="pre">/etc/munin/plugin-conf.d/plugins.conf</span></code> file you can setup the Munin
+plugin for Unbound. Below are the default values. Set the correct values for
+your system. The <code class="docutils literal notranslate"><span class="pre">statefile</span></code> is a temporary file.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[unbound*]
+user root
+env.statefile /usr/local/var/munin/plugin-state/unbound-state
+env.unbound_conf /usr/local/etc/unbound/unbound.conf
+env.unbound_control /usr/local/sbin/unbound-control
+env.spoof_warn 1000
+env.spoof_crit 100000
+</pre></div>
+</div>
+<p>Restart the munin-node daemon. Munin will automatically pick up the new graph
+and plot it with <code class="docutils literal notranslate"><span class="pre">rrdtool</span></code>.</p>
+<p>Additional graphs are possible, below is a list of them, and examples. Create
+(additional) symbolic links to <code class="docutils literal notranslate"><span class="pre">unbound_munin_</span></code> with the names (in bold) of
+those graphs to enable their display. Several require that
+<a class="reference internal" href="../../manpages/unbound.conf.html#unbound-conf-extended-statistics"><span class="std std-ref">extended-statistics:</span></a> is enabled in
+the configuration.
+Pictures included are samples, your statistics may look different :-) .</p>
+<figure class="align-default" id="id1">
+<img alt="../../_images/unbound_munin_hits-day.png" src="../../_images/unbound_munin_hits-day.png" />
+<figcaption>
+<p><span class="caption-text">unbound_munin_hits - base volume, cache hits, unwanted traffic</span><a class="headerlink" href="#id1" title="この画像へのパーマリンク">¶</a></p>
+</figcaption>
+</figure>
+<p>A sharp increase in unwanted traffic indicates a possible spoof run in progress.</p>
+<figure class="align-default" id="id2">
+<img alt="../../_images/unbound_munin_queue-week.png" src="../../_images/unbound_munin_queue-week.png" />
+<figcaption>
+<p><span class="caption-text">unbound_munin_queue - to monitor the internal requestlist</span><a class="headerlink" href="#id2" title="この画像へのパーマリンク">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id3">
+<img alt="../../_images/unbound_munin_memory-day.png" src="../../_images/unbound_munin_memory-day.png" />
+<figcaption>
+<p><span class="caption-text">unbound_munin_memory - memory usage</span><a class="headerlink" href="#id3" title="この画像へのパーマリンク">¶</a></p>
+</figcaption>
+</figure>
+<p>You can see that the server was restarted during the day.</p>
+<figure class="align-default" id="id4">
+<img alt="../../_images/unbound_munin_by_type-day.png" src="../../_images/unbound_munin_by_type-day.png" />
+<figcaption>
+<p><span class="caption-text">unbound_munin_by_type - incoming queries by type</span><a class="headerlink" href="#id4" title="この画像へのパーマリンク">¶</a></p>
+</figcaption>
+</figure>
+<p>The types received are shown.</p>
+<figure class="align-default" id="id5">
+<img alt="../../_images/unbound_munin_by_class-week.png" src="../../_images/unbound_munin_by_class-week.png" />
+<figcaption>
+<p><span class="caption-text">unbound_munin_by_class - incoming queries by class</span><a class="headerlink" href="#id5" title="この画像へのパーマリンク">¶</a></p>
+</figcaption>
+</figure>
+<p>Usually only IN (internet) class.</p>
+<figure class="align-default" id="id6">
+<img alt="../../_images/unbound_munin_by_opcode-week.png" src="../../_images/unbound_munin_by_opcode-week.png" />
+<figcaption>
+<p><span class="caption-text">unbound_munin_by_opcode - incoming queries by opcode</span><a class="headerlink" href="#id6" title="この画像へのパーマリンク">¶</a></p>
+</figcaption>
+</figure>
+<p>Usually only QUERY (normal query).</p>
+<figure class="align-default" id="id7">
+<img alt="../../_images/unbound_munin_by_rcode-week.png" src="../../_images/unbound_munin_by_rcode-week.png" />
+<figcaption>
+<p><span class="caption-text">unbound_munin_by_rcode - answers by rcode, validation status</span><a class="headerlink" href="#id7" title="この画像へのパーマリンク">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id8">
+<img alt="../../_images/unbound_munin_by_flags-week.png" src="../../_images/unbound_munin_by_flags-week.png" />
+<figcaption>
+<p><span class="caption-text">unbound_munin_by_flags - incoming queries by flags</span><a class="headerlink" href="#id8" title="この画像へのパーマリンク">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id9">
+<img alt="../../_images/unbound_munin_histogram-day.png" src="../../_images/unbound_munin_histogram-day.png" />
+<figcaption>
+<p><span class="caption-text">unbound_munin_histogram - histogram of query resolving times</span><a class="headerlink" href="#id9" title="この画像へのパーマリンク">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="statistics-with-cacti">
+<h2>Statistics with Cacti<a class="headerlink" href="#statistics-with-cacti" title="この見出しへのパーマリンク">¶</a></h2>
+<p>The setup is described in the README in the tarball in the Unbound source
+<code class="docutils literal notranslate"><span class="pre">contrib</span></code> directory: <a class="reference download external" download="" href="https://github.com/NLnetLabs/unbound/blob/master/contrib/unbound_cacti.tar.gz?raw=true"><code class="xref download docutils literal notranslate"><span class="pre">contrib/unbound_cacti.tar.gz</span></code></a>
+(contributed by Dmitriy Demidov).</p>
+<p>Example output from unbound cacti statistics:</p>
+<figure class="align-default">
+<img alt="../../_images/cacti-1.png" src="../../_images/cacti-1.png" />
+</figure>
+<figure class="align-default">
+<img alt="../../_images/cacti-2.png" src="../../_images/cacti-2.png" />
+</figure>
+<figure class="align-default">
+<img alt="../../_images/cacti-3.png" src="../../_images/cacti-3.png" />
+</figure>
+<figure class="align-default">
+<img alt="../../_images/cacti-4.png" src="../../_images/cacti-4.png" />
+</figure>
+<figure class="align-default">
+<img alt="../../_images/cacti-5.png" src="../../_images/cacti-5.png" />
+</figure>
+<figure class="align-default">
+<img alt="../../_images/cacti-6.png" src="../../_images/cacti-6.png" />
+</figure>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="performance.html" class="btn btn-neutral float-left" title="Performance Tuning" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../privacy/aggressive-nsec.html" class="btn btn-neutral float-right" title="Aggressive NSEC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1999-2024, NLnet Labs.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

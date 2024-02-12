@@ -1,0 +1,3054 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 1999-2024, NLnet Labs
+# This file is distributed under the same license as the Unbound package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Unbound 1.19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-12 13:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.14.0\n"
+
+#: ../../source/reference/history/book-news.rst:2
+msgid "Unbound Operation Explained in Book"
+msgstr ""
+
+#: ../../source/reference/history/book-news.rst:4
+msgid "*Authored December 2008.*"
+msgstr ""
+
+#: ../../source/reference/history/book-news.rst:6
+msgid ""
+"We received a complimentary book by `Jan-Piet Mens "
+"<https://jpmens.net/>`_ today, titled `Alternative DNS Servers "
+"<https://jpmens.net/2010/10/29/alternative-dns-servers-the-book-as-"
+"pdf/>`_. It covers a whole host of DNS servers, including NSD and "
+"Unbound."
+msgstr ""
+
+#: ../../source/reference/history/book-news.rst:11
+msgid ""
+"The book describes how to set up DNS servers and how to operate them. I "
+"found the section on Unbound to be fine (also NSD is fine).  I cannot "
+"comment on the other products."
+msgstr ""
+
+#: ../../source/reference/history/book-news.rst:15
+msgid ""
+"One section stood out as it has a performance comparison of the servers. "
+"The book has more details, below is one line of results.  Here 10 "
+"queryperf machines query a DNS cache, and the average queryperf "
+"performance is noted. So the cache is doing 10x the number noted.  The "
+"figures show similar results to what we find for performance comparisons "
+"in the NLnet Labs testlab. The results below have been found "
+"independently, and compare a greater number of products."
+msgstr ""
+
+#: ../../source/reference/history/book-news.rst:23
+msgid "Server"
+msgstr ""
+
+#: ../../source/reference/history/book-news.rst:23
+msgid "Queries/sec (10 clients)"
+msgstr ""
+
+#: ../../source/reference/history/book-news.rst:25
+msgid "MaraDNS"
+msgstr ""
+
+#: ../../source/reference/history/book-news.rst:25
+msgid "3 068"
+msgstr ""
+
+#: ../../source/reference/history/book-news.rst:26
+msgid "BIND"
+msgstr ""
+
+#: ../../source/reference/history/book-news.rst:26
+msgid "3 003"
+msgstr ""
+
+#: ../../source/reference/history/book-news.rst:27
+msgid "dnscache"
+msgstr ""
+
+#: ../../source/reference/history/book-news.rst:27
+msgid "2 928"
+msgstr ""
+
+#: ../../source/reference/history/book-news.rst:28
+msgid "PowerDNS Recursor"
+msgstr ""
+
+#: ../../source/reference/history/book-news.rst:28
+msgid "2 074"
+msgstr ""
+
+#: ../../source/reference/history/book-news.rst:29
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:62
+msgid "Unbound"
+msgstr ""
+
+#: ../../source/reference/history/book-news.rst:29
+msgid "8 276"
+msgstr ""
+
+#: ../../source/reference/history/book-news.rst:32
+msgid ""
+"The book reviews unbound version 1.0, and the config and operation is the"
+" same as 1.1 which was recently released. `Unbound 1.1 "
+"</projects/unbound/download/#unbound-1-1-0>`_ has DLV support and "
+"improved statistics, which may be of interest."
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:2
+msgid "DNS Cache Poisoning Vulnerability (2008)"
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:4
+msgid "*Authored April, 2008*"
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:5
+msgid "*Updated and released Jul 9, 2008*"
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:8
+msgid "Executive Summary"
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:10
+msgid ""
+"Dan Kaminsky of `IOActive <http://www.ioactive.com/>`_ has reported a DNS"
+" cache poisoning vulnerability to developers of DNS caching software. The"
+" details of this vulnerability will be explained by Kaminsky at the "
+"upcoming `Black Hat conference <http://blackhat.com/>`_ in August."
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:15
+msgid ""
+"A cache poisoning attack allows unauthorized third parties to inject data"
+" into a DNS cache, the injected data may cause rerouting of traffic."
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:18
+msgid ""
+"There is no definite solution to the form of cache poisoning described to"
+" us by Kaminsky. Only DNSSEC will provide the measures to detect "
+"malicious data and prevent cache poisoning."
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:22
+msgid ""
+"However in absence of DNSSEC being sufficiently deployed to benefit, "
+"methods exist to increase resilience against cache poisoning attacks, and"
+" Unbound has these implemented by design."
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:26
+msgid ""
+"Unbound was designed to use the maximum amount of randomness for query "
+"ports and does not need to be `upgraded to improve resilience "
+"<http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-1447>`_."
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:29
+msgid ""
+"Unbound has also been designed with a component, called the scrubber, "
+"that sanitizes query results and does not add data to the cache it does "
+"not trust as being authoritative."
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:34
+msgid "Background"
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:36
+msgid ""
+"Absent a reference to Dan Kaminsky's work we refer to other papers where "
+"the general principle of port and query ID randomization to mitigate "
+"cache poisoning attempts are described."
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:40
+msgid ""
+"Recently an article appeared in `the Register "
+"<http://www.theregister.co.uk/2008/04/15/dns_cache_poisoning/>`_ where a "
+"statement that Amit Klein made during the RSA Security conference was "
+"quoted as:"
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:44
+msgid ""
+"*I'm not too comfortable with the quality of the solution from the "
+"security and predictability standpoint*"
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:47
+msgid ""
+"In 2007 and 2008 Klein has `published "
+"<http://www.trusteer.com/research/>`_ a number of articles on port and "
+"query ID predictability on the website of his company. Work started "
+"within the IETF by `Hubert and van Mook <http://tools.ietf.org/html"
+"/draft-ietf-dnsext-forgery-resilience>`_ in 2006 already indicated that "
+"making optimal use of the full port range improves cache forgery "
+"resilience, and recommends the use of good sources of randomness for the "
+"choice of query IDs and ports."
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:55
+msgid ""
+"A new strategy to improve the resilience against forgery is the `work by "
+"Vixie and Dagon <http://tools.ietf.org/id/internet-drafts/draft-vixie-"
+"dnsext-dns0x20\">`_, that uses the property that authoritative servers "
+"copy the query name, while preserving case, to introduce more entropy "
+"matching queries against answers."
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:64
+msgid ""
+"Unbound is being designed to be a modern, secure and up-to-date name "
+"server, that in addition to DNSSEC (the only complete solution to DNS "
+"forgery) implements all known mechanisms to increase the resilience to "
+"forgery of cache entries."
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:69
+msgid ""
+"Unbound version 1.0 has implemented query id and port randomization in "
+"the following way."
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:72
+msgid ""
+"For each outgoing query both the query-ID and port number are set by "
+"`routines <http://unbound.net/documentation/doxygen/random_8c.html>`_ "
+"based on the ARC4 algorithm as implemented in OpenBSD. Arc4random is a "
+"pseudo random generator based on ARC4 that addresses the problems, as "
+"Klein mentions in one of his papers:"
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:78
+msgid ""
+"*Fortunately, OpenBSD also uses [[...]] the ARC4 algorithm. As such, "
+"spoofing responses for the resolver necessitates knowing the UDP source "
+"port, predicting the ARC4 algorithm's next output, or exploiting an "
+"implementation bug, none of which is currently known to apply.*"
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:83
+msgid ""
+"To allow for the maximum number of ports to pick from randomly, Unbound "
+"uses an advanced strategy. Ports are chosen chosen randomly from the pool"
+" of non-allocated ports. Ports can be excluded from this pools by means "
+"of a configuration parameter."
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:88
+msgid ""
+"There is a small penalty for recursive name servers that will have to do "
+"a lot of recursion. This is because there is only a limited set of slots "
+"in the socket cache and one may need to wait before one is available.  "
+"For this penalty there is a compensation by the use of a socket cache "
+"which helps the kernel run its select algorithm over open file "
+"descriptors."
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:94
+msgid ""
+"The mechanisms utilizing case preservation as described by Vixie and "
+"Dagon is under development and can be turned on while configuring Unbound"
+" 1.0. It should be noted though that the likely hood on false positives, "
+"which causes Unbound to ignore an answer thinking it is under attack, is "
+"fairly high. There are strategies to deal with these false positives that"
+" delay the response time somewhat and are currently under investigation. "
+"We plan an implementation of those in once we are satisfied with the "
+"behavior."
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:102
+msgid ""
+"We believe that the scrubber safeguards against the currently publicly "
+"known cache poisoning tactics."
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:105
+msgid "Links"
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:107
+msgid ""
+"`http://www.theregister.co.uk/2008/04/15/dns_cache_poisoning/ "
+"<http://www.theregister.co.uk/2008/04/15/dns_cache_poisoning/>`_"
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:108
+msgid ""
+"`http://www.trusteer.com/research/ <http://www.trusteer.com/research/>`_ "
+"contains various articles focused on predictability of port and query IDs"
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:110
+msgid ""
+"`http://tools.ietf.org/html/draft-ietf-dnsext-forgery-resilience "
+"<http://tools.ietf.org/html/draft-ietf-dnsext-forgery-resilience>`_"
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:111
+msgid ""
+"`http://tools.ietf.org/id/draft-vixie-dnsext-dns0x20 "
+"<http://tools.ietf.org/id/draft-vixie-dnsext-dns0x20>`_ work in progress"
+msgstr ""
+
+#: ../../source/reference/history/dns-cache-poisoning-vulnerability.rst:113
+msgid ""
+"`http://unbound.net/documentation/doxygen/random_8c.html "
+"<http://unbound.net/documentation/doxygen/random_8c.html>`_"
+msgstr ""
+
+#: ../../source/reference/history/index.rst:17
+msgid "Contents"
+msgstr ""
+
+#: ../../source/reference/history/index.rst:2
+msgid "History"
+msgstr ""
+
+#: ../../source/reference/history/index.rst:4
+msgid ""
+"Unbound started out as a project to develop independent open-source DNS "
+"software and documentation. It was jointly funded by `VeriSign, Inc. "
+"<https://www.verisign.com>`_, and the `University of Southern "
+"California/Information Sciences Institute <http://www.isi.edu>`_. The C "
+"implementation was based on a prototype written in Java. It was released "
+"in May 2008 with this :download:`press "
+"release<files/Unbound_Press_Release.pdf>`."
+msgstr ""
+
+#: ../../source/reference/history/index.rst:11
+msgid ""
+"This section contains several historic documents. There are also "
+"presentations about the initial Unbound design delivered at "
+":download:`IETF 67 <files/ietf67-design-02.pdf>` and :download:`RIPE 56 "
+"<files/ripe56_unbound_02.pdf>`. The :download:`Windows Vista install "
+"guide <files/unbound-windows-manual-02.pdf>` is also available as a PDF."
+msgstr ""
+
+#: ../../source/reference/history/info-algo.rst:2
+msgid "DNSSEC Algorithms with Unbound"
+msgstr ""
+
+#: ../../source/reference/history/info-algo.rst:5
+msgid ""
+"Unbound validates DNSSEC signatures and in the case that there are "
+"multiple signature algorithms in use, it checks that a valid chain of "
+"trust exists for each algorithm separately.  Thus the algorithms that are"
+" in use must all be subverted before validation can be misdirected."
+msgstr ""
+
+#: ../../source/reference/history/info-algo.rst:11
+msgid "Algorithms in the Chain of Trust"
+msgstr ""
+
+#: ../../source/reference/history/info-algo.rst:13
+msgid ""
+"The algorithms that are checked are signalled via the DS RRset.  This "
+"means that zones do not receive these checks until they publish multiple "
+"algorithms into their DS set.  Thus the set of algorithms present in the "
+"DS RRset must have DNSKEYs and signatures on every data element."
+msgstr ""
+
+#: ../../source/reference/history/info-algo.rst:18
+msgid ""
+"The RFCs already mandate that for algorithms signalled to be in use for a"
+" domain you must have DNSKEYs and signatures on every data element, "
+"because a validator is allowed to continue the chain of trust if it "
+"supports one algorithm but not the others.  These validators that support"
+" one of the algorithms must find that the algorithm signalled to be "
+"present has keys and signatures, and if these are missing, will conclude "
+"that signatures have been 'stripped' away.  The extra checks that unbound"
+" performs thus must succeed if the domain is properly signed and all "
+"signatures are present."
+msgstr ""
+
+#: ../../source/reference/history/info-algo.rst:28
+msgid ""
+"There is some leeway when signing a domain, and this leeway is useful "
+"when changes are phased in.  The DNSKEY may contain more algorithms, "
+"perhaps as part of a rollover.  The data may be signed with other "
+"algorithms as well. It is possible to have DS records for which no key "
+"exists, as long as another DS record for that algorithm has a key.  It is"
+" possible to have DNSKEY records that do not sign any or only part of the"
+" data (as long as signatures are available via other DNSKEYs)."
+msgstr ""
+
+#: ../../source/reference/history/info-algo.rst:36
+msgid ""
+"Change in algorithms is possible by introducing keys in the DNSKEY set, "
+"and signing with them, and once complete, introducing the DS record. The "
+"reverse, first with the takeown of the old algorithm DS records, for "
+"removal of a signing algorithm.  Older versions of unbound did not allow "
+"introduction of a new algorithm key in the DNSKEY set if the signatures "
+"on the data were not already present, but newer (since 1.4.8) versions "
+"allow this (and rely on the algorithms signalled in the DS RRset)."
+msgstr ""
+
+#: ../../source/reference/history/info-algo.rst:45
+msgid "Protection"
+msgstr ""
+
+#: ../../source/reference/history/info-algo.rst:47
+msgid ""
+"The check for multiple algorithms protects against not-known-today "
+"algorithmic weaknesses in one algorithm by using the other algorithm. "
+"This assumes the (mathematical) properties of the algorithms are "
+"dissimilar and that any deficiencies are not discovered simultaneously."
+msgstr ""
+
+#: ../../source/reference/history/info-algo.rst:53
+msgid ""
+"So, for example, RSASHA1 and RSASHA1_NSEC3 is a poor choice in this "
+"regard, as the algorithms are identical (the algorithm identifier is used"
+" to signal NSEC3 support here, which was useful during the introduction "
+"of NSEC3).  Also the use of multiple keys only protects like the largest "
+"one."
+msgstr ""
+
+#: ../../source/reference/history/info-algo.rst:60
+msgid "Trust Anchors"
+msgstr ""
+
+#: ../../source/reference/history/info-algo.rst:62
+msgid ""
+"Trust anchors can provide multiple algorithms, if a trust anchor contains"
+" multiple algorithms, a valid chain of trust is checked for them. "
+"Similar, if a RFC5011 automated key state contains VALID (or MISSING) "
+"keys with multiple algorithms, these algorithms are checked. For RFC5011,"
+" key revocation is checked and performed before the other checks in the "
+"RFC5011 state table when processing a DNSKEY probe, to make algorithm "
+"rollover possible (specifically the removal of the last key for the old "
+"algorithm)."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:2
+msgid "Unbound Timeout and Server Selection Information"
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:5
+msgid "Introduction"
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:7
+msgid ""
+"Unbound sends requests upstream to the authority servers on the internet "
+"and these requests can timeout.  These timeouts have to be handled. "
+"Either the request has to be sent to another server, or resent.  And the "
+"responsiveness of the destination server has to be kept track of."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:12
+msgid ""
+"The handling of timeouts is complicated by conflicting requirements. If a"
+" server is down and not responding, continuation of sending packets is a "
+"waste of resources.  These resources are typically the time spent "
+"waiting, the socket and port number, and request list entry that are used"
+" during that time.  But if the server was down briefly, and has come up, "
+"then it is important to detect this quickly.  Especially in cases where "
+"the timeout involves a high traffic destination (say, the local "
+"organisation's own domain), then it is especially pressing, and the "
+"domain must not be blocked for hours."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:22
+msgid ""
+"Unbound has several different regimes that can be distinguished. These "
+"are described separately for explanatory purposes, in the code the "
+"mechanisms all operate together."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:27
+msgid "Normal Operations"
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:29
+msgid ""
+"In the normal case, requests and replies are flowing like they should. "
+"Unbound has to set a timeout because UDP is an unreliable transport "
+"mechanism and a packet may get lost once in a while.  To do this, it "
+"keeps a roundtrip time estimate and performs exponential backoff."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:34
+msgid ""
+"The timeout is measured in milliseconds and is kept per IP-address (so, "
+"not by host name but by host address).  This is stored in the infra-"
+"cache. The infra-cache can be configured in the max-number of elements it"
+" stores, and the TTL (time to live) of the elements inside the cache. By "
+"default elements exist for 15 minutes in the infra-cache."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:40
+msgid ""
+"The fastest server (randomly picked within a so-called RTT band of 400 "
+"msec) is selected when a query has to be sent out.  The roundtrip-timeout"
+" (``rtt``) is used for selection purposes.  This is the value of the "
+"timer that would be set if the packet is sent out.  When this timer "
+"expires, the packet is considered timed-out.  If nothing is known about "
+"an IP-address a timeout of 376 msec is assumed.  This assumed timeout "
+"should be successful for most traffic.  The 376 is chosen to fall within "
+"the 400 msec rtt band and it is also a reasonable value (many pings fall "
+"in it) while still allowing several resends within about a single second."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:50
+msgid ""
+"When packets return successfully from the remote server, the ping-time is"
+" used to update the estimate of the roundtrip timers.  A smoothed average"
+" roundtrip time is kept, that can keep track of a slow change towards a "
+"new average.  Also a smoothed variation measure is kept, that keeps track"
+" of the jumps in the times observed.  And when a timeout happens the "
+"exponential backoff is kept track of.  Exponential backoff means that the"
+" roundtrip timeout is doubled for every next packet.  These values are "
+"stored in the infra-cache and return to their defaults when the TTL "
+"expires on the element for that IP address."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:60
+msgid ""
+"If a timeout occurs, the packet is considered lost and the cache is "
+"updated by doubling the timeout to apply for the next packet.  Server "
+"selection is performed again, and will likely pick another server to send"
+" to.  If the server was very fast, then it may be picked again since the "
+"doubled value is still very small.  But if the server gets slower, it "
+"will no longer be preferred and traffic is sent to another server for "
+"that domain."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:68
+msgid ""
+"If a server is selected again, the same query can be sent again to the "
+"same server, but now with a larger timeout.  Unbound no longer listens or"
+" wants to receive a reply to the timed-out queries at that point. This is"
+" because listening to multiple outstanding versions of the same query "
+"sent to a server creates a (small) birthday paradox.  And this is avoided"
+" for cache-poison resistance reasons."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:75
+msgid ""
+"If many requests are sent to a destination server at the same time, then "
+"a short interruption could cause many of them to timeout at about the "
+"same moment.  This would, with exponential backoff, result in an almost "
+"infinite backoff to be applied.  Therefore some race-condition protection"
+" is applied.  The timeout in the infra-cache is increased to double the "
+"original value that the query was sent out with.  Thus if the doubling "
+"has already been applied by another failed packet, it is not applied "
+"again. The doubling is only done if the timeout stored is between the "
+"original value and its double.  So that if another query has already "
+"succeeded and lowered the value in the cache then this is left as-is, "
+"since traffic is flowing again."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:87
+msgid ""
+"In normal operations, many threads can have many packets outstanding to "
+"an IP address, all at the same time.  The infra-cache data is shared "
+"between threads."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:92
+msgid "Probing"
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:94
+msgid ""
+"When a domain starts to become unresponsive, it is probed.  In this "
+"regime only one request is allowed to probe to a particular IP.  This "
+"conserves resources, as other requests are turned away, and do to not use"
+" up port-numbers, sockets and requestlist elements.  Also it lowers the "
+"traffic towards the destination (that is apparently having trouble), "
+"which may help it get back up."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:101
+msgid "An IP address is in the probing regime if it fits the following criteria."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:103
+msgid "The timeout (with exponential backoff applied) exceeds 12 seconds"
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:104
+msgid "Two (or more) consecutive exponential backoffs have just been done on it"
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:106
+msgid ""
+"These conditions can not be configured.  They mean that the query has "
+"just had two timeouts, and it is already very slow (12 seconds timeout). "
+"If it normally has a timeout that is high, say 10 seconds, then the "
+"timeout has to reach 40 seconds before this restricted regime applies. If"
+" it is normally very fast, then normal operations continue for about 24 "
+"seconds (because of exponential backoff, the total time for the timeouts "
+"in sequence).  For queries that normally take about 100 msec or so, about"
+" 6 timeouts have to happen before it hits a 12 second timeout."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:115
+msgid ""
+"In this regime, when a probe request is sent to the destination IP "
+"address, the ``exclusion time`` until another probe can be allowed is "
+"stored.  This is the current time plus the timeout for this packet plus "
+"one (see below about the plus one).  Other queries are not sent to this "
+"IP address until that time."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:121
+msgid ""
+"The exclusion time is stored in the infra-cache.  This means that it is "
+"shared by the threads.  So normally, one request can probe at a time. In "
+"some cases, the code can allow a small window of opportunity and multiple"
+" probes, one per thread, happen at the same time.  This only happens when"
+" traffic it very large towards that domain and is otherwise harmless."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:128
+msgid ""
+"When the probe is done and is it successful - so an answer came back - "
+"then the roundtrip estimates are updated with this new observation. And "
+"the IP address is put back into normal operations.  Many queries are "
+"allowed to the destination server."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:133
+msgid ""
+"When the probe is done but it was a timeout, the exponential backoff is "
+"increased.  And the probe query tries to select a new server for that "
+"domain to send to.  But because of the plus-one on the exclusion timer, "
+"is now excludes itself from sending to that server again.  It may probe "
+"another IP-address for the same DNS domain at that time, but not the same"
+" one right away."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:140
+msgid "This self-exclusion generates some useful effects."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:142
+msgid ""
+"If there is very little traffic towards an affected domain, then a single"
+" request will slowly probe the different servers (if there are multiple "
+"servers, otherwise, with one server only, it will give up quickly)."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:146
+msgid ""
+"If there is a moderate amount of traffic towards an affected domain, then"
+" several requests will probe, each picks up a different IP address and "
+"probes one time. But because they all arrive randomly the exclusions mean"
+" every request performs usually one probe only as the other servers are "
+"(being) probed by other requests when it finishes probing an IP address. "
+"And there is a little wait before a new query comes in to probe a new "
+"server, in that time an already probing query is allowed to probe this IP"
+" address again.  When another request comes in, probing the servers "
+"continues.  Thus there are some queries probing one (or some more) "
+"different IP addresses, but not all IP addresses are probed at the same "
+"time."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:157
+msgid ""
+"If there is high traffic towards an affected domain, then requests are "
+"always available as soon as the exclusion ends.  Thus all the servers for"
+" that domain are probed at the same time, each server receives one query "
+"at a time.  The requestlist contains an element for every server to "
+"probe."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:163
+msgid ""
+"If more requests arrive at the server than can be used for probing, these"
+" are turned away."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:166
+msgid ""
+"When a request is turned away because the servers are probed and this "
+"request did not attain probe status, then it gets the DNS error code "
+"SERVFAIL.  These requests do enter the requestlist, but do not use a "
+"socket or a port number, as they get an error reply when it finds out "
+"that no servers are available to send packets to."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:172
+msgid ""
+"Another effect is that once a query is excluded from all currently known "
+"servers for a domain, the fallback mechanism to handle misconfigured "
+"domains is activated.  This searches for additional servers that may "
+"respond for this domain name."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:177
+msgid ""
+"In the probe regime, IP addresses that are becoming unresponsive are "
+"probed by single requests and other requests are turned away.  At some "
+"point the exponential backoff becomes too large and it seems useless to "
+"send further traffic to that server."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:183
+msgid "Blocking"
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:185
+msgid ""
+"In the blocking regime, the timeout reached 120 seconds and further "
+"requests towards the server seem useless.  All requests are turned away "
+"and receive SERVFAIL (unless another working server exists for that "
+"domain)."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:190
+msgid ""
+"Requests do enter the requestlist, briefly, but when it turns out all "
+"servers are unresponsive, it is turned away with the error SERVFAIL."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:193
+msgid ""
+"This condition is cached in the infra-cache element for that IP address. "
+"The elements in the infra-cache live for infra-ttl seconds (15 minutes by"
+" default).  When this TTL (time to live) expires, then the domain is "
+"probed again."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:198
+msgid ""
+"Performing the full probe sequence would take about 240 seconds (sequence"
+" of exponential backoffs until it is 120 seconds).  With a 15 minute time"
+" to live, this is a bit excessive, especially if normal operations "
+"resumes and many resources are expended on this likely-unresponsive "
+"server. Therefore only a single probe packet is sent if the infra-ttl has"
+" expired. If that probe fails, then the server is blocked for another "
+"infra-ttl."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:205
+msgid ""
+"The result is that a server is probed with one packet every 15 minutes. "
+"If it succeeds, all traffic is allowed again (normal operations), and if "
+"it fails, the next probe is sent after blocking the server for 15 "
+"minutes.  So if a server comes back up, this is observed within infra-ttl"
+" seconds.  If a server does not respond, it is probed every 15 minutes, "
+"but only if there are queries to send to it."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:212
+msgid ""
+"The way the code works means that if an ``expired`` infra-cache element "
+"exists, and it says the address was blocked, then a single probe is "
+"performed.  Such expired entries can exist until the cache runs out of "
+"memory and flushes elements out to make space for new elements, the "
+"infra-cache uses the LRU cache-algorithm for that.  Servers for a domain "
+"for which very little queries are received, do not get probes sent to "
+"them, and when finally a query arrives for it, a single probe is done so "
+"as to not squander resources."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:222
+msgid "Control"
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:224
+msgid "The timeout behaviour can be controlled and configured."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:226
+msgid ""
+"The configuration consists of the size of the infra-cache (please allow "
+"sufficient elements to store information about IP addresses).  And the "
+"infra-ttl time can be configured.  By setting the infra-ttl lower, "
+"unbound will probe servers that are not responsive more aggressively."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:231
+msgid ""
+"The ``unbound-control`` tool can be used to interact with the running "
+"server.  It can provide information and flush cache entries. The "
+"``flush_infra`` command can be used to flush all of the cache or "
+"particular elements.  The ``lookup`` command shows status for the servers"
+" associated with a particular domain.  The ``dump_infra`` command dumps "
+"the entire contents of the infra-cache, a snapshot of the ping-times of "
+"the servers on the internet that unbound has contacted."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:239
+msgid "The output of a ``lookup`` command can look like this:"
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:289
+msgid ""
+"Some servers are listed as not in the infra-cache.  For the ones in the "
+"infra-cache, the rto (roundtrip timeout with exponential backoff applied)"
+" is printed, and the ttl of the infra-cache element.  Also the ping-time "
+"(the smoothed roundtrip time) is printed (in msec) and the variability "
+"(in msec), the roundtrip timeout without exponential backoff (rtt) is "
+"also printed (in msec).  The infra-cache also contains EDNS status and "
+"lameness information which is also shown.  In the above example, the ping"
+" time is very low as most servers are on the same subnet."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:302
+msgid ""
+"The ``dump_infra`` command produces similar output.  Here is an example "
+"(only a single line from the very long output) that shows a blocked "
+"entry.  The 120 second rto means it is blocked.  The rtt of 376 (still at"
+" the assumed default), leads us to assume it never replied. 192.0.2/24 is"
+" a netblock for documentation purposes and not deployed on the internet, "
+"hence no replies."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:310
+#: ../../source/reference/history/patch-announce102.rst:5
+msgid "Summary"
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:312
+msgid ""
+"Unbound implements timeout management with exponential backoff and keeps "
+"track of average and variance of the ping times.  If a server starts to "
+"become unresponsive, a probing scheme is applied in which a few queries "
+"are selected to probe the IP address.  If that fails, the server is "
+"blocked for 15 minutes (infra-ttl) and re-probed with one query after "
+"that."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:319
+msgid ""
+"Queries that failed to attain probe status, or if the server is blocked "
+"due to timeouts, get a reply with the SERVFAIL error.  Also, if the "
+"available IP addresses for a domain have been probed for 5 times by a "
+"query it is also replied with SERVFAIL.  New queries must come in to "
+"continue the probing."
+msgstr ""
+
+#: ../../source/reference/history/info-timeout-server-selection.rst:325
+msgid ""
+"The status of an IP address can be looked up and flushed.  The infra-"
+"cache is not flushed on a reload, so the list of blocked sites and ping "
+"times is not wiped.  If you wish to remove it the ``flush_infra`` control"
+" command can be used."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:2
+msgid "Unbound 1.0.2 Patch Announcement"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:7
+msgid ""
+"Unbound version 1.0 was released with port randomization features. The "
+"same features that have been made available in the various patches by "
+"other vendors the CERT alert last month."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:11
+msgid ""
+"Now Dan Kaminsky disclosed more details during the the august 2008 "
+"Blackhat Conference in Las Vegas we release additional counter measures. "
+"These counter measures were previously withheld in order to minimize the "
+"risk of disclosing details about several variations of the attack through"
+" reverse engineering."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:18
+msgid ""
+"With the current set of counter measures added, Unbound offers state of "
+"the art protection against the attacks described by Kaminsky. However, "
+"state of the art counter measures will not provide full protection, not "
+"in Unbound nor in other software. Although DNSSEC is hardly deployed, it "
+"is currently the only mechanism known to deal with spoofing and other "
+"kinds of attacks on the DNS."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:24
+msgid "More details in the ways that Unbound protects against spoofing are below."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:27
+msgid "What is Cache Poisoning"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:29
+msgid ""
+"Poisoning a DNS resolver refers to the act of inserting fake, often "
+"malicious data into the resolvers cache.  This can cause website visitors"
+" to be redirected from the site (e.g. their banking site) they thought to"
+" visit to a different web site, for example a phishing site."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:34
+msgid ""
+"The basic approach of poisoning DNS queries is to send fake replies that "
+"pretend to come from the authority servers to the caching resolver. Every"
+" DNS query carries a random query Identifier (16 bit number). Only "
+"replies that contain the same number are accepted. In order for the "
+"resolver to accept the fake replies, the Identifier in the incoming "
+"packet needs to match that of the outstanding question.  That is, the "
+"attacker has to guess a number of 16 bits in length."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:42
+#, python-format
+msgid ""
+"One can calculate the time how long it takes to guess the 16 bits "
+"Identifier. a detailed calculation can be found online (`draft-ietf-"
+"dnsext-forgery-resilience <http://tools.ietf.org/html/draft-ietf-dnsext-"
+"forgery-resilience-06>`_). The document contains formulas with all the "
+"variables involved. The example given in the draft has a 4 Mb/s attack "
+"rate to get a 50% chance to inject the fake data."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:49
+msgid ""
+"It comes down to this: it takes a certain time, on average, to guess the "
+"right random sequence.  The example in the reference argues that the "
+"Kaminsky exploit takes about 10 seconds to guess the 16 bit value in the "
+"identifier.  This is confirmed by implementations of the exploit as well "
+"as various calculations on public mailinglists."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:55
+msgid ""
+"In order to extend the time by which a packet can be succesfully replaced"
+" we need more than the 16 bits of random number that the query Identifier"
+" provides us. That can be done by putting random numbers in other parts "
+"of the query, and checking if the server puts the same number in a reply,"
+" without changing the protocol.  It is hard to add these extra random "
+"numbers without breaking interoperability, because the reply is only "
+"defined to contain a copy of the 16 bit ID value.  Once an extra random "
+"number is copied into the reply, a fake reply must guess that number.  "
+"Every extra bit that needs to be guessed, increases the time by a factor "
+"of 2.  The goal is to add enough extra bits that the chance of poisoning "
+"becomes very low (on average)."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:67
+msgid ""
+"Unbound implements a number of methods to add random bits.  The most "
+"important means to add randomness is to vary the port numbers from which "
+"the question is asked, another means is to use a hack that randomizes "
+"unused bits in the query name. Unbound implements even more methods. In "
+"addition, Unbound is careful in what to accept as information that can be"
+" cached. These techniques are explained in more detail below."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:74
+msgid ""
+"Note however that the increase in the amount of bits does improve your "
+"chances to safely cross the road but a bad packet may still hit you."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:77
+msgid ""
+"Real protection, where you are not subject to the whims of chance, is "
+"achieved by using DNSSEC.  DNSSEC uses digital signatures to protect the "
+"data.  With DNSSEC there is no chance of poisoning, independent of the "
+"number of random bits used."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:83
+msgid "Unbound Security"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:85
+msgid ""
+"Unbound implements the DNSSEC standard as specified in :rfc:`4034` and "
+":rfc:`4035`. This means that it can act as a validator and can thus check"
+" the digital signatures attached in replies.  Of course, the domain name "
+"owner must have inserted these digital signatures in the first place."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:90
+msgid ""
+"In the absence of DNSSEC, unbound attempts to provide very good security."
+" Without digital signatures, randomisation and filtering are currently "
+"the only options.  Below, a technical categorisation is made of the "
+"methods employed by unbound to protect unsigned data."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:96
+msgid "Filtering"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:98
+msgid ""
+"Unbound contains a component we call a 'scrubber'.  This component takes "
+"care of certain checks, disallowing (removing) possibly malicious "
+"content."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:101
+msgid "Only in-bailiwick data is accepted"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:102
+msgid ""
+"RFC 2181 trust is employed.  This means that data from the additional "
+"section receives an additional section trust.  And data from the answer "
+"section receives answer section trust.  Data with additional section "
+"trust is not used to answer queries from clients.  Thus putting a record "
+"in the additional section cannot make this record appear to clients."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:107
+msgid ""
+"The records in the authority and additional section are filtered for "
+"relevance to the query in question.  If the data is irrelevant, it is "
+"removed."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:110
+msgid ""
+"The answer section is filtered for relevance.  Only answers to the query "
+"that unbound wants to ask are allowed."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:112
+msgid ""
+"CNAME chains are cut off, only the first CNAME is kept as answer.  The "
+"remaining CNAMEs or answer records are not kept, but looked up instead."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:114
+msgid ""
+"For DNAME records, the CNAME is synthesized by unbound itself, it does "
+"not trust the server to do so."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:116
+msgid ""
+"DNAME records are not taken from the cache to perform the redirection, "
+"even if they seem to match.  Only for validated DNAME records (where the "
+"digital signature was correct) is redirection performed from cache, this "
+"requires the use of DNSSEC."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:122
+msgid "Randomisation"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:124
+msgid ""
+"By adding more random data, a spoofed reply has to guess more data to get"
+" through, lowering the chances of a successful poison attempt."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:127
+msgid ""
+"Strong random number generator.  Unbound uses a cryptographic strength "
+"random number generator.  The arc4random() generator from OpenBSD is "
+"used. This means that predicting the random numbers generated by unbound "
+"is equivalent to cracking an encryption cipher."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:131
+msgid ""
+"The random number generator is seeded with entropy.  Real entropy from "
+"the system /dev/random is used to seed the random number generator.  "
+"Thus, the starting values of the random number generator cannot easily be"
+" predicted."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:134
+msgid "Query ID bits.  Unbound uses all 16 bits in the ID."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:135
+msgid ""
+"Port randomisation.  Unbound uses 16 bits for the port randomisation. To "
+"be precise, about 60000 random ports, avoiding ports below 1024 and "
+"avoiding IANA allocated UDP ports to avoid system instability of the "
+"server. The port randomisation uses the same random number generator as "
+"the ID. Unbound takes care that a randomly drawn port is used for one "
+"query.  Thus every query gets a freshly random port number."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:141
+msgid ""
+"Destination address randomisation.  Unbound performs RTT banding, a "
+"method to select the destination server that provides additional "
+"randomness. This provides between 1 and 4 bits of randomness.  Perhaps 2 "
+"on average. Arguments that choosing the fastest destination reduces the "
+"attack time window are no longer relevant given the recent full "
+"disclosure at the Blackhat conference. Additional time windows are easily"
+" achieved."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:147
+msgid ""
+"Source address randomisation.  If configured with multiple public IP "
+"addresses, unbound can perform a random choice of interface.  This needs "
+"operator configuration, but by adding 4 outgoing-interface statements in "
+"the config file, an additional 2 bits of randomness are achieved."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:151
+msgid ""
+"Transport protocol randomisation.  If IPv6 is available (yes, yes, not "
+"very common), then unbound will obtain another random bit by choosing the"
+" IPv4 or IPv6 transport protocol randomly."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:154
+msgid ""
+"Query aggregation.  This prevents identical outstanding queries to the "
+"same server.  It prevents birthday-paradox attacks."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:156
+msgid ""
+"Query name strict matching.  This prevents an answer from matching a "
+"query for which it is not meant.  If an answer can match multiple "
+"queries, you get the birthday paradox attack again (from the previous "
+"item)."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:159
+#, python-format
+msgid ""
+"Capitalisation randomisation.  Also called dns-0x20.  This is an "
+"experimental resilience method that uses upper and lower case letters in "
+"the question name to obtain randomness.  On average about 7 or 8 bits.  "
+"This method currently has to be turned on by the operator manually, as it"
+" may result in maybe 0.4% of domains getting no answers due to no support"
+" on the authoritative server side."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:167
+msgid "Additional security measures"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:169
+msgid "These measures are mostly to prevent remote execution exploits."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:171
+msgid "Heap function pointer protection"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:172
+msgid "chroot() by default"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:173
+msgid "user privileges are dropped by default"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:174
+msgid "access control list for clients that are allowed recursion"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:175
+msgid ""
+"No detection of attacks underway. Unbound assumes it is always under "
+"attack"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:176
+msgid ""
+"can config the version.bind or hostname.bind answer to return, or block "
+"the queries"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:179
+msgid "Randomness Calculation"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:181
+msgid "So the default setup has a randomness of::"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:187
+msgid ""
+"For a total of 34 bits of randomness. Other implementations provide 16 "
+"bits (or less) unpatched, 26 bits for patches utilizing only 1024 ports "
+"and 32 bits for patches using the fully available port range (around "
+"60k). Unbound has been utilizing the full port range of about 60.000 "
+"ports since the release of version 1.0."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:193
+msgid ""
+"With a careful setup, enabling capitalisation and source address "
+"randomisation Unbound provides::"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:202
+msgid "in total 44 bits of randomness."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:204
+msgid "Sample config file items to enable this amount of randomness:"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:220
+msgid "Time to infection"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:222
+#, python-format
+msgid ""
+"We take 10 seconds to infect an unpatched server with 50% chance as a "
+"baseline. The table below shows the time until a poison attempt is "
+"successful.  The numbers are subject to being guesstimates.  Better "
+"numbers may become available, either from the Blackhat presentation, or "
+"other sources.  The bottom line is that adding randomness is a short term"
+" fix."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:230
+msgid "Bits"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:230
+msgid "50% chance"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:230
+msgid "5% chance"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:230
+msgid "Aka"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:232
+msgid "16"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:232
+msgid "10 seconds"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:232
+msgid "1 second"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:232
+msgid "unpatched server, random ID"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:233
+msgid "26"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:233
+msgid "2.8 hours"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:233
+msgid "17 minutes"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:233
+msgid "patched, using only 1024 ports"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:234
+msgid "34"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:234
+msgid "28 days"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:234
+msgid "2.8 days"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:234
+msgid "unbound using defaults"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:235
+msgid "44"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:235
+msgid "28444 days"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:235
+msgid "2844.4 days"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:235
+msgid "unbound with capitalisation and source addresses configured \\*"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:238
+msgid ""
+"*\\* : These are not enabled by default. The capitalisation has not been "
+"standardised, and could result in a small number of cases in slow or no "
+"answer. The source addresses need the operator to configure multiple "
+"addresses for the computer.*"
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:243
+#, python-format
+msgid ""
+"In the table above, the Bits column shows the number of random bits that "
+"are echoed in replies. The 50% chance column shows the length of time "
+"needed before an attack has a 50% chance of success (guessing the random "
+"numbers). The 5% chance column shows how long it takes before an attack "
+"has a 5% chance of inserting fake data."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:249
+msgid ""
+"Note: 60000 sockets not 65536 sockets used randomly for unbound is "
+"assumed in the table entries for unbound. Unbound avoids some port "
+"numbers for compatibility."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:253
+msgid ""
+"Also note that the table above assumes a fairly low bandwidth usage. If a"
+" large network capacity is available, say a botnet, and it can use 1000x "
+"more resources, then perhaps also the attack can be conducted 1000x "
+"faster."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:258
+msgid ""
+"In the meeting of the IETF dnsext working group successful poisoning "
+"attacks against an unpatched server in as little as 1/10 of a second were"
+" demonstrated easily (`demo results "
+"<http://www.ops.ietf.org/lists/namedroppers/namedroppers.2008/msg01193.html>`_),"
+" showing that much smarter things can be done than the dumb attack "
+"assumed for the numbers here.  Calculations by members of the working "
+"group showed a near perfect chance for 6-8 seconds.  This could move the "
+"figures to be less optimistic."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:267
+msgid ""
+"Keep in mind that the thousands of days shown for unbound with "
+"capitalisation and source addresses configured should not be taken as "
+"strong security.  It is likely that some measures can be outsmarted. Or "
+"that these numbers are overly optimistic (see text above).  And the 44 "
+"bits is an average.  If an attacker can work out how to attack domains or"
+" queries with less protection, the the benefits may be partially lost. "
+"Thus, the large time listed for 44 bits should be taken as an indication "
+"that it is pretty good, but not invulnerable."
+msgstr ""
+
+#: ../../source/reference/history/patch-announce102.rst:275
+msgid ""
+"As stated earlier, the real solution is to use DNSSEC.  DNSSEC makes this"
+" time table a non problem, because in all these cases DNSSEC can detect "
+"the forgery. Especially users in Brazil, Bulgaria, Puerto Rico and Sweden"
+" or people using these zones regularly, should consider turning on DNSSEC"
+" because the TLD zone is DNSSEC secured.  Do consider using the DNSSEC "
+"capabilities in Unbound."
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:2
+msgid "Unbound Resolver Prototype"
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:4
+msgid ""
+"*The following is information regarding the Java based prototype for "
+"Unbound. The Java prototype was superseded by a C version, available* "
+"`here <https://www.nlnetlabs.nl/projects/unbound/about/>`__. *Older "
+"prototype versions can be downloaded* `here "
+"<https://www.nlnetlabs.nl/downloads/unbound/proto-java>`__."
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:10
+msgid ""
+"Unbound is a project to develop independent open-source DNS software and "
+"documentation. It is jointly funded by `VeriSign, Inc. "
+"<https://www.verisign.com>`_, and the `University of Southern "
+"California/Information Sciences Institute <http://www.isi.edu>`_."
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:15
+msgid ""
+"This is our prototype full-service, iterative-mode, validating DNS "
+"resolver.  It is written entirely in Java and is licensed under the `BSD "
+"open-source license "
+"<http://svn.verisignlabs.com/unbound/proto/trunk/licenses/unbound-"
+"LICENSE.txt>`_."
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:19
+msgid "Even though it is a prototype, it is fairly full-featured:"
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:21
+msgid "Supports DNSSEC validation"
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:22
+msgid "Supports zone forwarding"
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:23
+msgid "Supports \"stub\" zones"
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:24
+msgid "Is resistant to cache poisoning"
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:25
+msgid "Plus, other even harder to explain features!"
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:28
+msgid "Download the Original Java Prototype"
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:30
+msgid "Fetch the latest package and released version here:"
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:32
+msgid "Binary:"
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:33
+msgid ""
+":download:`unbound-prototype-0.10.1.tar.gz "
+"<https://www.nlnetlabs.nl/downloads/unbound/proto-java/unbound-"
+"prototype-0.10.1.tar.gz>` | :download:`(sig) "
+"<https://www.nlnetlabs.nl/downloads/unbound/proto-java/unbound-"
+"prototype-0.10.1.tar.gz.asc>`"
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:35
+msgid "Source:"
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:35
+msgid ""
+":download:`unbound-prototype-0.10.1-src.tar.gz "
+"<https://www.nlnetlabs.nl/downloads/unbound/proto-java/unbound-"
+"prototype-0.10.1-src.tar.gz>` | :download:`(sig) "
+"<https://www.nlnetlabs.nl/downloads/unbound/proto-java/unbound-"
+"prototype-0.10.1-src.tar.gz.asc>`"
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:37
+msgid ""
+"As of unbound-prototype-0.10, support for `NSEC3 <http://www.nsec3.org>`_"
+" validation is part of the trunk. Even more cutting edge versions "
+"(including branches) of the Java Prototype may be fetched via the "
+"`subversion repository <http://svn.verisignlabs.com/unbound/proto>`_."
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:43
+msgid ""
+"The above is the link to the whole prototype area, which you probably "
+"don't want to check out directly.  Instead, either check out the trunk or"
+" a single branch:"
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:50
+msgid ""
+"Don't have subversion?  Don't even know what we are talking about? Head "
+"on over to the `subversion home <http://subversion.tigris.org>`_."
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:54
+msgid "Prototype?"
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:56
+msgid ""
+"Java, while a fine, fine language, isn't what we envision as the final "
+"implementation language of the non-prototype resolver.  That would be C."
+"  For the prototype, however, Java was chosen because of the excellent "
+"`DNSjava <http://www.dnsjava.org>`_ library and the familiarity with the "
+"same on the part of one of the main developers."
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:62
+msgid ""
+"The intent is to use a prototype to explore and validate a particular "
+"design for an iterative-resolver and separable DNSSEC validator."
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:66
+msgid "Design"
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:68
+msgid ""
+"The unbound-resolver was designed to be modular.  The idea was to create "
+"a \"chain\" of modules that could be brought together to form either a "
+"full-service resolver, or (for instance) a DNSSEC validating stub "
+"resolver.  It also is designed to be able to use different "
+"implementations of a few key components, like the cache."
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:74
+msgid "Here is a diagram that shows the basic components."
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:-1
+msgid "Unbound resolver architecture diagram"
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:79
+msgid ""
+"In the image, \"API\" is referring to an internal API which is not "
+"standardized *per-se*, but is internally consistent."
+msgstr ""
+
+#: ../../source/reference/history/prototype-resolver.rst:82
+msgid ""
+"This version of the prototype has been written as an event-driven, "
+"asynchronous server.  Each packet that is received is turned into an "
+"event (along with a few internally generated events, like timeouts and "
+"generated queries)."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:2
+msgid "Requirements for Recursive Caching Resolver"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:5
+msgid "1. Introduction"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:7
+msgid ""
+"This is the requirements document for a DNS name server and aims to "
+"document the goals and non-goals of the project.  The DNS (the Domain "
+"Name System) is a global, replicated database that uses a hierarchical "
+"structure for queries."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:12
+msgid ""
+"Data in the DNS is stored in Resource Record sets (RR sets), and has a "
+"time to live (TTL).  During this time the data can be cached.  It is thus"
+" useful to cache data to speed up future lookups.  A server that looks up"
+" data in the DNS for clients and caches previous answers to speed up "
+"processing is called a caching, recursive nameserver."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:18
+msgid ""
+"This project aims to develop such a nameserver in modular components, so "
+"that also DNSSEC (secure DNS) validation and stub-resolvers (that do not "
+"run as a server, but a linked into an application) are easily possible."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:22
+msgid ""
+"The main components are the Validator that validates the security "
+"fingerprints on data sets, the Iterator that sends queries to the "
+"hierarchical DNS servers that own the data and the Cache that stores data"
+" from previous queries.  The networking and query management code then "
+"interface with the modules to perform the necessary processing."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:28
+msgid ""
+"In Section 2 the origins of the Unbound project are documented. Section 3"
+" lists the goals, while Section 4 lists the explicit non-goals of the "
+"project. Section 5 discusses choices made during development."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:33
+msgid "2. History"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:35
+msgid ""
+"The unbound resolver project started by Bill Manning, David Blacka, and "
+"Matt Larson (from the University of California and from Verisign), that "
+"created a Java based prototype resolver called Unbound.  The basic design"
+" decisions of clean modules was executed."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:40
+msgid ""
+"The Java prototype worked very well, with contributions from Geoff Sisson"
+" and Roy Arends from Nominet.  Around 2006 the idea came to create a "
+"full-fledged C implementation ready for deployed use.  NLnet Labs "
+"volunteered to write this implementation."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:46
+msgid "3. Goals"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:48
+msgid "A validating recursive DNS resolver"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:49
+msgid "Code diversity in the DNS resolver monoculture"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:50
+msgid "Drop-in replacement for BIND apart from config"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:51
+msgid "DNSSEC support"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:52
+msgid "Fully RFC compliant"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:53
+msgid "High performance"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:55
+msgid "Even with validation"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:57
+msgid "Used as"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:59
+msgid "Stub resolver"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:60
+msgid "Full caching name server"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:61
+msgid "Resolver library"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:63
+msgid "Elegant design of validator, resolver, cache modules"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:65
+msgid "Provide the ability to pick and choose modules"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:67
+msgid "Robust"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:68
+msgid "In C, open source: The BSD license"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:69
+msgid ""
+"Highly portable, targets include modern Unix systems, such as \\*BSD, "
+"Solaris, linux, and maybe also the windows platform"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:70
+msgid "Smallest as possible component that does the job"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:71
+msgid "Stub-zones can be configured (local data or AS112 zones)"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:74
+msgid "4. Non-Goals"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:76
+msgid "An authoritative name server"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:77
+msgid "Too many Features"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:80
+msgid "5. Choices"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:82
+msgid ""
+"rfc2181 discourages duplicates RRs in RRsets. unbound does not create "
+"duplicates, but when presented with duplicates on the wire from the "
+"authoritative servers, does not perform duplicate removal. It does do "
+"some rrsig duplicate removal, in the msgparser, for dnssec qtype rrsig "
+"and any, because of special rrsig processing in the msgparser."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:89
+msgid ""
+"The harden-glue feature, when yes all out of zone glue is deleted, when "
+"no out of zone glue is used for further resolving, is more complicated "
+"than that, see below."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:93
+msgid "Main points:"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:95
+msgid "rfc2182 trust handling is used"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:96
+msgid "data is let through only in very specific cases"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:97
+msgid "spoofability remains possible"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:99
+msgid ""
+"Not all glue is let through (despite the name of the option). Only glue "
+"which is present in a delegation, of type A and AAAA, where the name is "
+"present in the NS record in the authority section is let through. The "
+"glue that is let through is stored in the cache (marked as 'from the "
+"additional section'). And will then be used for sending queries to. It "
+"will not be present in the reply to the client (if RD is off). A direct "
+"query for that name will attempt to get a msg into the message cache. "
+"Since A and AAAA queries are not synthesized by the unbound cache, this "
+"query will be (eventually) sent to the authoritative server and its "
+"answer will be put in the cache, marked as 'from the answer section' and "
+"thus remove the 'from the additional section' data, and this record is "
+"returned to the client."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:112
+msgid ""
+"The message has a TTL smaller or equal to the TTL of the answer RR. If "
+"the cache memory is low; the answer RR may be dropped, and a glue RR may "
+"be inserted, within the message TTL time, and thus return the spoofed "
+"glue to a client. When the message expires, it is refetched and the "
+"cached RR is updated with the correct content. The server can be spoofed "
+"by getting it to visit a especially prepared domain. This domain then "
+"inserts an address for another authoritative server into the cache, when "
+"visiting that other domain, this address may then be used to send queries"
+" to. And fake answers may be returned. If the other domain is signed by "
+"DNSSEC, the fakes will be detected."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:123
+msgid ""
+"In summary, the harden glue feature presents a security risk if disabled."
+" Disabling the feature leads to possible better performance as more glue "
+"is present for the recursive service to use. The feature is implemented "
+"so as to minimise the security risk, while trying to keep this "
+"performance gain."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:130
+msgid ""
+"The method by which dnssec-lameness is detected is not secure. DNSSEC "
+"lame is when a server has the zone in question, but lacks dnssec data, "
+"such as signatures. The method to detect dnssec lameness looks at "
+"nonvalidated data from the parent of a zone. This can be used, by "
+"spoofing the parent, to create a false sense of dnssec-lameness in the "
+"child, or a false sense or dnssec-non-lameness in the child. The first "
+"results in the server marked lame, and not used for 900 seconds, and the "
+"second will result in a validator failure (SERVFAIL again), when the "
+"query is validated later on."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:139
+msgid ""
+"Concluding, a spoof of the parent delegation can be used for many cases "
+"of denial of service. I.e. a completely different NS set could be "
+"returned, or the information withheld. All of these alterations can be "
+"caught by the validator if the parent is signed, and result in 900 "
+"seconds bogus. The dnssec-lameness detection is used to detect operator "
+"failures, before the validator will properly verify the messages."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:146
+msgid ""
+"Also for zones for which no chain of trust exists, but a DS is given by "
+"the parent, dnssec-lameness detection enables. This delivers dnssec to "
+"our clients when possible (for client validators)."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:150
+msgid "The following issue needs to be resolved:"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:152
+msgid ""
+"A server that serves both a parent and child zone, where parent is "
+"signed, but child is not. The server must not be marked lame for the "
+"parent zone, because the child answer is not signed."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:156
+msgid ""
+"Instead of a false positive, we want false negatives; failure to detect "
+"dnssec-lameness is less of a problem than marking honest servers lame. "
+"dnssec-lameness is a config error and deserves the trouble. So, only "
+"messages that identify the zone are used to mark the zone lame. The zone "
+"is identified by SOA or NS RRsets in the answer/auth. That includes "
+"almost all negative responses and also A, AAAA qtypes. That would be most"
+" responses from servers. For referrals, delegations that add a single "
+"label can be checked to be from their zone, this covers most delegation-"
+"centric zones."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:166
+msgid ""
+"So possibly, for complicated setups, with multiple (parent-child) zones "
+"on a server, dnssec-lameness detection does not work - no dnssec-lameness"
+" is detected. Instead the zone that is dnssec-lame becomes bogus."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:171
+msgid "authority features"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:173
+msgid ""
+"This is a recursive server, and authority features are out of scope. "
+"However, some authority features are expected in a recursor. Things like "
+"localhost, reverse lookup for 127.0.0.1, or blocking AS112 traffic. Also "
+"redirection of domain names with fixed data is needed by service "
+"providers. Limited support is added specifically to address this."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:179
+msgid ""
+"Adding full authority support, requires much more code, and more complex "
+"maintenance."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:182
+msgid ""
+"The limited support allows adding some static data (for localhost and "
+"so), and to respond with a fixed rcode (NXDOMAIN) for domains (such as "
+"AS112)."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:185
+msgid ""
+"You can put authority data on a separate server, and set the server in "
+"unbound.conf as stub for those zones, this allows clients to access data "
+"from the server without making unbound authoritative for the zones."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:190
+msgid "The access control denies queries before any other processing."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:192
+msgid ""
+"This denies queries that are not authoritative, or version.bind, or any. "
+"And thus prevents cache-snooping (denied hosts cannot make non-recursive "
+"queries and get answers from the cache)."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:197
+msgid ""
+"If a client makes a query without RD bit, in the case of a returned "
+"message from cache which is:"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:207
+msgid ""
+"A SOA record would indicate that this was a NODATA answer. A DS records "
+"would indicate a referral. Absence of NS record would indicate a NODATA "
+"answer as well."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:211
+msgid ""
+"Then the receiver does not know whether this was a referral with attempt "
+"at no-DS proof) or a nodata answer with attempt at no-data proof. It "
+"could be determined by attempting to prove either condition; and looking "
+"if only one is valid, but both proofs could be valid, or neither could be"
+" valid, which creates doubt. This case is validated by unbound as a "
+"'referral' which ascertains that RRSIGs are OK (and not omitted), but "
+"does not check NSEC/NSEC3."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:221
+msgid "Case preservation"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:223
+msgid ""
+"Unbound preserves the casing received from authority servers as best as "
+"possible. It compresses without case, so case can get lost there. The "
+"casing from the query name is used in preference to the casing of the "
+"authority server. This is the same as BIND. RFC4343 allows either "
+"behaviour."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:230
+msgid "Denial of service protection"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:232
+#, python-format
+msgid ""
+"If many queries are made, and they are made to names for which the "
+"authority servers do not respond, then the requestlist for unbound fills "
+"up fast.  This results in denial of service for new queries. To combat "
+"this the first 50% of the requestlist can run to completion. The last 50%"
+" of the requestlist get (200 msec) at least and are replaced by newer "
+"queries when older (LIFO). When a new query comes in, and a place in the "
+"first 50% is available, this is preferred.  Otherwise, it can replace "
+"older queries out of the last 50%. Thus, even long queries get a 50% "
+"chance to be resolved.  And many 'short' one or two round-trip resolves "
+"can be done in the last 50% of the list. The timeout can be configured."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:245
+msgid "EDNS fallback"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:247
+msgid ""
+"Is done according to the EDNS RFC (and update draft-00). Unbound assumes "
+"EDNS 0 support for the first query.  Then it can detect support (if the "
+"servers replies) or non-support (on a NOTIMPL or FORMERR). Some "
+"middleboxes drop EDNS 0 queries, mainly when forwarding, not when routing"
+" packets.  To detect this, when timeouts keep happening, as the timeout "
+"approached 5-10 seconds, and EDNS status has not been detected yet, a "
+"single probe query is sent.  This probe has a sub-second timeout, and if "
+"the server responds (quickly) without EDNS, this is cached for 15 min. "
+"This works very well when detecting an address that you use much - like a"
+" forwarder address - which is where the middleboxes need to be detected. "
+"Otherwise, it results in a 5 second wait time before EDNS timeout is "
+"detected, which is slow but it works at least. It minimizes the chances "
+"of a dropped query making a (DNSSEC) EDNS server falsely EDNS-"
+"nonsupporting, and thus DNSSEC-bogus, works well with middleboxes, and "
+"can detect the occasional authority that drops EDNS. For some boxes it is"
+" necessary to probe for every failing query, a reassurance that the DNS "
+"server does EDNS does not mean that path can take large DNS answers."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:267
+msgid "0x20 backoff"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:269
+msgid ""
+"The draft describes to back off to the next server, and go through all "
+"servers several times.  Unbound goes on get the full list of nameserver "
+"addresses, and then makes 3 * number of addresses queries. They are sent "
+"to a random server, but no one address more than 4 times. It succeeds if "
+"one has 0x20 intact, or else all are equal. Otherwise, servfail is "
+"returned to the client."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:277
+msgid "NXDOMAIN and SOA serial numbers"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:279
+msgid ""
+"Unbound keeps TTL values for message formats, and thus rcodes, such as "
+"NXDOMAIN.  Also it keeps the latest rrsets in the rrset cache. So it will"
+" faithfully negative cache for the exact TTL as originally specified for "
+"an NXDOMAIN message, but send a newer SOA record if this has been found "
+"in the mean time.  In point, this could lead to a negative cached "
+"NXDOMAIN reply with a SOA RR where the serial number indicates a zone "
+"version where this domain is not any longer NXDOMAIN. These situations "
+"become consistent once the original TTL expires. If the domain is DNSSEC "
+"signed, by the way, then NSEC records are updated more carefully.  If one"
+" of the NSEC records in an NXDOMAIN is updated from another query, the "
+"NXDOMAIN is dropped from the cache, and queried for again, so that its "
+"proof can be checked again."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:293
+msgid "SOA records in negative cached answers for DS queries"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:295
+msgid ""
+"The current unbound code uses a negative cache for queries for type DS. "
+"This speeds up building chains of trust, and uses NSEC and NSEC3 (optout)"
+" information to speed up lookups.  When used internally, the bare NSEC(3)"
+" information is sufficient, probably picked up from a referral.  When "
+"answering to clients, a SOA record is needed for the correct message "
+"format, a SOA record is picked from the cache (and may not actually match"
+" the serial number of the SOA for which the NSEC and NSEC3 records were "
+"obtained) if available otherwise network queries are performed to get the"
+" data."
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:306
+msgid "Parent and child with different nameserver information"
+msgstr ""
+
+#: ../../source/reference/history/requirements.rst:308
+msgid ""
+"A misconfiguration that sometimes happens is where the parent and child "
+"have different NS, glue information.  The child is authoritative, and "
+"unbound will not trust information from the parent nameservers as the "
+"final answer.  To help lookups, unbound will however use the parent-side "
+"version of the glue as a last resort lookup.  This resolves lookups for "
+"those misconfigured domains where the servers reported by the parent are "
+"the only ones working, and servers reported by the child do not."
+msgstr ""
+
+#: ../../source/reference/history/root-11sep-11oct.rst:2
+msgid "Trust anchor retrieval less then 30 days before the KSK rollover"
+msgstr ""
+
+#: ../../source/reference/history/root-11sep-11oct.rst:4
+msgid ""
+"There is an issue for new installations less then 30 days before the "
+"rollover with Unbound versions prior to 1.6.5 (1.6.4 or older). The "
+"KSK2017 will be added in the ADDPEND state for 30 days (RFC 5011) and "
+"will not be in the VALID state during the key rollover. All is fine for "
+"trust anchor files created more then 30 days before the KSK rollover or "
+"after the KSK rollover, in any Unbound version."
+msgstr ""
+
+#: ../../source/reference/history/root-11sep-11oct.rst:11
+msgid "Solution for installations less then 30 days prior to KSK rollover"
+msgstr ""
+
+#: ../../source/reference/history/root-11sep-11oct.rst:13
+msgid ""
+"You can either update to Unbound 1.6.5 (or later) or download the trust "
+"anchor file from this website."
+msgstr ""
+
+#: ../../source/reference/history/root-11sep-11oct.rst:17
+msgid "Update to Unbound 1.6.5 or later"
+msgstr ""
+
+#: ../../source/reference/history/root-11sep-11oct.rst:19
+msgid ""
+"Delete the root.key file with ``rm root.key``, then run ``unbound-"
+"anchor`` (1.6.5 or later) to create the root.key file again. You can "
+"verify that worked by checking that both keys have the string VALID in "
+"the newly created root.key file."
+msgstr ""
+
+#: ../../source/reference/history/root-11sep-11oct.rst:25
+msgid "Download the trust anchor file from the Unbound website"
+msgstr ""
+
+#: ../../source/reference/history/root-11sep-11oct.rst:27
+msgid ""
+"If updating to Unbound 1.6.5 or later is not possible, you can `download "
+"a trust anchor file <https://nlnetlabs.nl/downloads/unbound/root-11sep-"
+"11oct.key>`_ containing the two VALID keys."
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:2
+msgid "RFC Compliance"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:4
+msgid ""
+"Unbound strives to be a reference implementation for emerging standards "
+"in the Internet Engineering Task Force (IETF). The aim is to implement "
+"well-established Internet Drafts as a compile option and drafts in the "
+"final stage of open community review as an optional feature, that is "
+"disabled by default. Accepted RFCs are implemented in Unbound according "
+"to the described standard."
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:10
+msgid ""
+"The following table provides an extensive overview of all the RFC "
+"standards and Internet drafts that have been implemented in Unbound."
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:14
+msgid ":rfc:`1034`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:14
+msgid "Domain Names – Concepts and Facilities"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:15
+msgid ":rfc:`1035`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:15
+msgid "Domain Names – Implementation and Specification"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:16
+msgid ":rfc:`1101`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:16
+msgid "DNS Encoding of Network Names and Other Types"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:17
+msgid ":rfc:`1123`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:17
+msgid "Requirements for Internet Hosts -- Application and Support"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:18
+msgid ":rfc:`1183`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:18
+msgid "New DNS RR Definitions"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:19
+msgid ":rfc:`1337`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:19
+msgid "TIME-WAIT Assassination Hazards in TCP"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:20
+msgid ":rfc:`1521`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:20
+msgid ""
+"MIME (Multipurpose Internet Mail Extensions) Part One: Mechanisms for "
+"Specifying and Describing the Format of Internet Message Bodies"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:21
+msgid ":rfc:`1706`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:21
+msgid "DNS NSAP Resource Records"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:22
+msgid ":rfc:`1712`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:22
+msgid "DNS Encoding of Geographical Location"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:23
+msgid ":rfc:`1876`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:23
+msgid "A Means for Expressing Location Information in the Domain Name System"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:24
+msgid ":rfc:`1982`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:24
+msgid "Serial Number Arithmetic"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:25
+msgid ":rfc:`1995`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:25
+msgid "Incremental Zone Transfer in DNS"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:26
+msgid ":rfc:`1996`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:26
+msgid "A Mechanism for Prompt Notification of Zone Changes (DNS NOTIFY)"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:27
+msgid ":rfc:`2163`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:27
+msgid ""
+"Using the Internet DNS to Distribute MIXER Conformant Global Address "
+"Mapping (MCGAM)"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:28
+msgid ":rfc:`2181`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:28
+msgid "Clarifications to the DNS Specification"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:29
+msgid ":rfc:`2182`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:29
+msgid "Selection and Operation of Secondary DNS Servers"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:30
+msgid ":rfc:`2230`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:30
+msgid "Key Exchange Delegation Record for the DNS"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:31
+msgid ":rfc:`2253`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:31
+msgid ""
+"Lightweight Directory Access Protocol (v3): UTF-8 String Representation "
+"of Distinguished Names"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:32
+msgid ":rfc:`2308`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:32
+msgid "Negative Caching of DNS Queries (DNS NCACHE)"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:33
+msgid ":rfc:`2535`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:33
+msgid "Domain Name System Security Extensions"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:34
+msgid ":rfc:`2536`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:34
+msgid "DSA KEYs and SIGs in the Domain Name System (DNS)"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:35
+msgid ":rfc:`2537`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:35
+msgid "RSA/MD5 KEYs and SIGs in the Domain Name System (DNS)"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:36
+msgid ":rfc:`2538`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:36
+#: ../../source/reference/rfc-compliance.rst:59
+msgid "Storing Certificates in the Domain Name System (DNS)"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:37
+msgid ":rfc:`2539`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:37
+msgid "Storage of Diffie-Hellman Keys in the Domain Name System (DNS)"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:38
+msgid ":rfc:`2606`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:38
+msgid "Reserved Top Level DNS Names"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:39
+msgid ":rfc:`2671`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:39
+msgid "Extension Mechanisms for DNS (EDNS0)"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:40
+msgid ":rfc:`2672`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:40
+msgid "Non-Terminal DNS Name Redirection"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:41
+msgid ":rfc:`2673`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:41
+msgid "Binary Labels in the Domain Name System"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:42
+msgid ":rfc:`2782`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:42
+msgid "A DNS RR for specifying the location of services (DNS SRV)"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:43
+msgid ":rfc:`2874`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:43
+msgid "DNS Extensions to Support IPv6 Address Aggregation and Renumbering"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:44
+msgid ":rfc:`2915`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:44
+msgid "The Naming Authority Pointer (NAPTR) DNS Resource Record"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:45
+msgid ":rfc:`2930`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:45
+msgid "Secret Key Establishment for DNS (TKEY RR)"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:46
+msgid ":rfc:`3110`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:46
+msgid "RSA/SHA-1 SIGs and RSA KEYs in the Domain Name System (DNS)"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:47
+msgid ":rfc:`3123`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:47
+msgid "A DNS RR Type for Lists of Address Prefixes (APL RR)"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:48
+msgid ":rfc:`3225`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:48
+msgid "Indicating Resolver Support of DNSSEC"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:49
+msgid ":rfc:`3526`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:49
+msgid ""
+"More Modular Exponential (MODP) Diffie-Hellman groups for Internet Key "
+"Exchange (IKE)"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:50
+msgid ":rfc:`3597`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:50
+msgid "Handling of Unknown DNS Resource Record (RR) Types"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:51
+msgid ":rfc:`3779`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:51
+msgid "X.509 Extensions for IP Addresses and AS Identifiers"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:52
+msgid ":rfc:`4007`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:52
+msgid "IPv6 Scoped Address Architecture"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:53
+msgid ":rfc:`4025`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:53
+msgid "A Method for Storing IPsec Keying Material in DNS"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:54
+msgid ":rfc:`4033`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:54
+msgid "DNS Security Introduction and Requirements"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:55
+msgid ":rfc:`4034`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:55
+msgid "Resource Records for the DNS Security Extensions"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:56
+msgid ":rfc:`4035`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:56
+msgid "Protocol Modifications for the DNS Security Extensions"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:57
+msgid ":rfc:`4255`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:57
+msgid "Using DNS to Securely Publish Secure Shell (SSH) Key Fingerprints"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:58
+msgid ":rfc:`4343`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:58
+msgid "Domain Name System (DNS) Case Insensitivity Clarification"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:59
+msgid ":rfc:`4398`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:60
+msgid ":rfc:`4431`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:60
+msgid "The DNSSEC Lookaside Validation (DLV) DNS Resource Record"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:61
+msgid ":rfc:`4509`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:61
+msgid "Use of SHA-256 in DNSSEC Delegation Signer (DS) Resource Records (RRs)"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:62
+msgid ":rfc:`4592`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:62
+msgid "The Role of Wildcards in the Domain Name System"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:63
+msgid ":rfc:`4597`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:63
+msgid "Conferencing Scenarios"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:64
+msgid ":rfc:`4697`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:64
+msgid "Observed DNS Resolution Misbehavior"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:65
+msgid ":rfc:`4701`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:65
+msgid ""
+"A DNS Resource Record (RR) for Encoding Dynamic Host Configuration "
+"Protocol (DHCP) Information (DHCID RR)"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:66
+msgid ":rfc:`5001`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:66
+msgid "DNS Name Server Identifier (NSID) Option"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:67
+msgid ":rfc:`5011`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:67
+msgid "Automated Updates of DNS Security (DNSSEC) Trust Anchors"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:68
+msgid ":rfc:`5114`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:68
+msgid "Additional Diffie-Hellman Groups for Use with IETF Standards"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:69
+msgid ":rfc:`5155`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:69
+msgid "DNS Security (DNSSEC) Hashed Authenticated Denial of Existence"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:70
+msgid ":rfc:`5205`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:70
+msgid "Host Identity Protocol (HIP) Domain Name System (DNS) Extension"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:71
+msgid ":rfc:`5358`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:71
+msgid "Preventing Use of Recursive Nameservers in Reflector Attacks"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:72
+msgid ":rfc:`5452`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:72
+msgid "Measures for Making DNS More Resilient against Forged Answers"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:73
+msgid ":rfc:`5702`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:73
+msgid ""
+"Use of SHA-2 Algorithms with RSA in DNSKEY and RRSIG Resource Records for"
+" DNSSEC"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:74
+msgid ":rfc:`5933`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:74
+msgid ""
+"Use of GOST Signature Algorithms in DNSKEY and RRSIG Resource Records for"
+" DNSSEC"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:75
+msgid ":rfc:`6147`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:75
+msgid ""
+"DNS64: DNS Extensions for Network Address Translation from IPv6 Clients "
+"to IPv4 Servers"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:76
+msgid ":rfc:`6234`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:76
+msgid "US Secure Hash Algorithms (SHA and SHA-based HMAC and HKDF)"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:77
+msgid ":rfc:`6303`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:77
+msgid "Locally Served DNS Zones"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:78
+msgid ":rfc:`6598`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:78
+msgid "IANA-Reserved IPv4 Prefix for Shared Address Space"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:79
+msgid ":rfc:`6604`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:79
+msgid "xNAME RCODE and Status Bits Clarification"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:80
+msgid ":rfc:`6605`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:80
+msgid "Elliptic Curve Digital Signature Algorithm (DSA) for DNSSEC"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:81
+msgid ":rfc:`6672`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:81
+msgid "DNAME Redirection in the DNS"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:82
+msgid ":rfc:`6698`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:82
+msgid ""
+"The DNS-Based Authentication of Named Entities (DANE) Transport Layer "
+"Security (TLS) Protocol: TLSA"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:83
+msgid ":rfc:`6725`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:83
+msgid "DNS Security (DNSSEC) DNSKEY Algorithm IANA Registry Updates"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:84
+msgid ":rfc:`6742`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:84
+msgid "DNS Resource Records for the Identifier-Locator Network Protocol (ILNP)"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:85
+msgid ":rfc:`6761`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:85
+msgid "Special-Use Domain Names"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:86
+msgid ":rfc:`6840`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:86
+msgid "Clarifications and Implementation Notes for DNS Security (DNSSEC)"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:87
+msgid ":rfc:`6844`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:87
+msgid "DNS Certification Authority Authorization (CAA) Resource Record"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:88
+msgid ":rfc:`6891`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:88
+msgid "Extension Mechanisms for DNS (EDNS(0))"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:89
+msgid ":rfc:`6975`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:89
+msgid ""
+"Signaling Cryptographic Algorithm Understanding in DNS Security "
+"Extensions (DNSSEC)"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:90
+msgid ":rfc:`7043`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:90
+msgid "Resource Records for EUI-48 and EUI-64 Addresses in the DNS"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:91
+msgid ":rfc:`7344`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:91
+msgid "Automating DNSSEC Delegation Trust Maintenance"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:92
+msgid ":rfc:`7413`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:92
+msgid "TCP Fast Open"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:93
+msgid ":rfc:`7477`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:93
+msgid "Child-to-Parent Synchronization in DNS"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:94
+msgid ":rfc:`7553`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:94
+msgid "The Uniform Resource Identifier (URI) DNS Resource Record"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:95
+msgid ":rfc:`7646`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:95
+msgid "Definition and Use of DNSSEC Negative Trust Anchors"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:96
+msgid ":rfc:`7686`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:96
+msgid "The \".onion\" Special-Use Domain Name"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:97
+msgid ":rfc:`7706`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:97
+msgid "Decreasing Access Time to Root Servers by Running One on Loopback"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:98
+msgid ":rfc:`7830`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:98
+msgid "The EDNS(0) Padding Option"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:99
+msgid ":rfc:`7858`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:99
+msgid "Specification for DNS over Transport Layer Security (TLS)"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:100
+msgid ":rfc:`7871`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:100
+msgid "Client Subnet in DNS Queries"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:101
+msgid ":rfc:`7929`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:101
+msgid "DNS-Based Authentication of Named Entities (DANE) Bindings for OpenPGP"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:102
+msgid ":rfc:`7958`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:102
+msgid "DNSSEC Trust Anchor Publication for the Root Zone"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:103
+msgid ":rfc:`8020`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:103
+msgid "NXDOMAIN: There Really Is Nothing Underneath"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:104
+msgid ":rfc:`8080`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:104
+msgid "Edwards-Curve Digital Security Algorithm (EdDSA) for DNSSEC"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:105
+msgid ":rfc:`8145`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:105
+msgid "Signaling Trust Anchor Knowledge in DNS Security Extensions (DNSSEC)"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:106
+msgid ":rfc:`8162`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:106
+msgid "Using Secure DNS to Associate Certificates with Domain Names for S/MIME"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:107
+msgid ":rfc:`8198`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:107
+msgid "Aggressive Use of DNSSEC-Validated Cache"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:108
+msgid ":rfc:`8310`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:108
+msgid "Usage Profiles for DNS over TLS and DNS over DTLS"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:109
+msgid ":rfc:`8375`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:109
+msgid "Special-Use Domain 'home.arpa.'"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:110
+msgid ":rfc:`8467`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:110
+msgid "Padding Policies for Extension Mechanisms for DNS (EDNS(0))"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:111
+msgid ":rfc:`8482`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:111
+msgid "Providing Minimal-Sized Responses to DNS Queries That Have QTYPE=ANY"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:112
+msgid ":rfc:`8484`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:112
+msgid "DNS Queries over HTTPS (DoH)"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:113
+msgid ":rfc:`8509`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:113
+msgid "A Root Key Trust Anchor Sentinel for DNSSEC"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:114
+msgid ":rfc:`8624`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:114
+msgid "Algorithm Implementation Requirements and Usage Guidance for DNSSEC"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:115
+msgid ":rfc:`8767`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:115
+msgid "Serving Stale Data to Improve DNS Resiliency"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:116
+msgid ":rfc:`8806`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:116
+msgid "Running a Root Server Local to a Resolver"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:117
+msgid ":rfc:`8914`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:117
+msgid "Extended DNS Errors"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:118
+msgid ":rfc:`8976`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:118
+msgid "Message Digest for DNS Zones"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:119
+msgid ":rfc:`9156`"
+msgstr ""
+
+#: ../../source/reference/rfc-compliance.rst:119
+msgid "DNS Query Name Minimisation to Improve Privacy"
+msgstr ""
+
+#: ../../source/reference/todo.rst:2
+msgid "Docs To-Do List"
+msgstr ""
+
+#: ../../source/reference/todo.rst:4
+msgid ""
+"Since the first release in 2007, the documentation of Unbound has been "
+"maintained with a heavy focus on :doc:`manual pages</manpages/unbound>`. "
+"As the resolver has become more versatile and feature-rich over the "
+"years, the NLnet Labs team decided to add this documentation, providing "
+"installation guides for different platforms, practical use cases, and "
+"background information."
+msgstr ""
+
+#: ../../source/reference/todo.rst:10
+msgid ""
+"The to-do list below provides an overview if the the topics we still have"
+" to cover. If you feel something is missing, please `open an issue on "
+"GitHub <https://github.com/NLnetLabs/unbound-manual/issues>`_ to let us "
+"know."
+msgstr ""
+
+#: ../../source/reference/todo.rst:14
+msgid ""
+"If you would like to write one or more of these pages, we're happy to "
+"compensate you for your time. Contact us at docs@nlnetlabs.nl or find us "
+"on `Twitter <https://twitter.com/nlnetlabs>`_."
+msgstr ""
+
+#: ../../source/reference/todo.rst:19
+msgid "Use Cases"
+msgstr ""
+
+#: ../../source/reference/todo.rst:21
+msgid "Resolver setup for enterprise networks"
+msgstr ""
+
+#: ../../source/reference/todo.rst:22
+msgid "Resolver setup for ISPs"
+msgstr ""
+
+#: ../../source/reference/todo.rst:23
+msgid "Maximum privacy resolver"
+msgstr ""
+
+#: ../../source/reference/todo.rst:26
+msgid "Topics"
+msgstr ""
+
+#: ../../source/reference/todo.rst:28
+msgid "Resiliency (e.g. Rate Limiting, ACLs)"
+msgstr ""
+
+#: ../../source/reference/todo.rst:29
+msgid "EDNS Client Subnet"
+msgstr ""
+
+#: ../../source/reference/todo.rst:32
+msgid "Filtering and Manipulating Data"
+msgstr ""
+
+#: ../../source/reference/todo.rst:34
+msgid "Local Zones and Local Data"
+msgstr ""
+
+#: ../../source/reference/todo.rst:35
+msgid "Expansion to all RPZ triggers and actions"
+msgstr ""
+
+#: ../../source/reference/todo.rst:38
+msgid "Privacy"
+msgstr ""
+
+#: ../../source/reference/todo.rst:40
+msgid "Auth Zone"
+msgstr ""
+
+#: ../../source/reference/todo.rst:41
+msgid "Encryption"
+msgstr ""
+
+#: ../../source/reference/todo.rst:42
+msgid "QNAME Minimisation"
+msgstr ""
+
+#: ../../source/reference/todo.rst:45
+msgid "Internals"
+msgstr ""
+
+#: ../../source/reference/todo.rst:47
+msgid "Architecture"
+msgstr ""
+
+#: ../../source/reference/todo.rst:48
+msgid "Code structure"
+msgstr ""
+
+#: ../../source/reference/todo.rst:49
+msgid "Server selection"
+msgstr ""
+
+#: ../../source/reference/todo.rst:50
+msgid "DNSSEC Trust Anchor Management (unbound-anchor and :rfc:`5011`)"
+msgstr ""
+
+#: ../../source/reference/todo.rst:51
+msgid "Python modules"
+msgstr ""
+

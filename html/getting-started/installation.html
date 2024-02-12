@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation &mdash; Unbound 1.19.0 ドキュメント</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/dark.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/light.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="Configuration" href="configuration.html" />
+    <link rel="prev" title="Unbound by NLnet Labs" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/unbound-duotone-white.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.19.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installing-with-a-package-manager">Installing with a Package Manager</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ubuntu-22-04-lts">Ubuntu 22.04 LTS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#macos-big-sur">macOS Big Sur</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#building-from-source-compiling">Building from source/Compiling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Ubuntu 22.04 LTS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">macOS Big Sur</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Use Cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../use-cases/home-resolver.html">Resolver for Home Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use-cases/local-stub.html">Local DNS (Stub) Resolver for a Single Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/proxy.html">Downstream Proxy Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/serve-stale.html">Serving Stale Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/performance.html">Performance Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/monitoring.html">Monitoring and Reporting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/privacy/aggressive-nsec.html">Aggressive NSEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/privacy/dns-over-https.html">DNS-over-HTTPS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Filtering</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/filtering/tags-views.html">Tags and Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/filtering/rpz.html">Response Policy Zones</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developer/libunbound-tutorial/index.html">Unbound Library Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/python-modules.html">Unbound for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/doxygen-docs.html">Source Code Docs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual Pages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound.html">unbound(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound-checkconf.html">unbound-checkconf(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound.conf.html">unbound.conf(5)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound-host.html">unbound-host(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/libunbound.html">libunbound(3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound-control.html">unbound-control(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manpages/unbound-anchor.html">unbound-anchor(8)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/rfc-compliance.html">RFC Compliance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/history/index.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/todo.html">Docs To-Do List</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Unbound</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Installation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/getting-started/installation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="この見出しへのパーマリンク">¶</a></h1>
+<p>To install your own copy of Unbound you have two options: Use the version
+provided by your package manager, or download the source and building it
+yourself.</p>
+<p>Installing via the package manager is the easiest option, and on most systems
+even trivial. The downside is the distributed version can be outdated for some
+distributions or not have all the compile-time options included that you want.
+Building and compiling Unbound yourself ensures that you have the latest version
+and all the compile-time options you desire.</p>
+<p>If you're a first-time user we recommend installing via a package manager.</p>
+<section id="installing-with-a-package-manager">
+<h2>Installing with a Package Manager<a class="headerlink" href="#installing-with-a-package-manager" title="この見出しへのパーマリンク">¶</a></h2>
+<p>Most package managers maintain a version of Unbound, although this version can
+be outdated if this package has not been updated recently. If you like to
+upgrade to the latest version, we recommend <a class="reference internal" href="#building-from-source-compiling"><span class="std std-ref">compiling Unbound
+yourself</span></a>.</p>
+<section id="ubuntu-22-04-lts">
+<h3>Ubuntu 22.04 LTS<a class="headerlink" href="#ubuntu-22-04-lts" title="この見出しへのパーマリンク">¶</a></h3>
+<p>Installing Unbound with the built-in package manager should be as easy as:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>unbound
+</pre></div>
+</div>
+<p>This gives you a compiled and running version of Unbound ready to <a class="reference internal" href="configuration.html"><span class="doc">be
+configured</span></a>.</p>
+</section>
+<section id="macos-big-sur">
+<h3>macOS Big Sur<a class="headerlink" href="#macos-big-sur" title="この見出しへのパーマリンク">¶</a></h3>
+<p>In this tutorial we make use of the Brew package installer for MacOS. Install
+<code class="docutils literal notranslate"><span class="pre">brew</span></code> and, if you've never used <code class="docutils literal notranslate"><span class="pre">brew</span></code> before, give <a class="reference external" href="https://brew.sh/">their website</a> a read.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/bin/bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>Then use brew to install Unbound.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>unbound
+</pre></div>
+</div>
+<p>This gives you a compiled and running version of Unbound ready to <a class="reference internal" href="configuration.html"><span class="doc">be
+configured</span></a>.</p>
+</section>
+</section>
+<section id="building-from-source-compiling">
+<h2>Building from source/Compiling<a class="headerlink" href="#building-from-source-compiling" title="この見出しへのパーマリンク">¶</a></h2>
+<p>To compile Unbound on any system you need to have the <code class="docutils literal notranslate"><span class="pre">openssl</span></code> and <code class="docutils literal notranslate"><span class="pre">expat</span></code>
+libraries, and their header files. To include the header files we need to get
+the development version, usually called <code class="docutils literal notranslate"><span class="pre">libssl-dev</span></code> and <code class="docutils literal notranslate"><span class="pre">libexpat1-dev</span></code>
+respectively.</p>
+<section id="id1">
+<h3>Ubuntu 22.04 LTS<a class="headerlink" href="#id1" title="この見出しへのパーマリンク">¶</a></h3>
+<p>First of all, we need our copy of the Unbound code, so we download the tarball
+of the latest version and untar it.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://nlnetlabs.nl/downloads/unbound/unbound-latest.tar.gz
+tar<span class="w"> </span>xzf<span class="w"> </span>unbound-latest.tar.gz
+</pre></div>
+</div>
+<p>We'll need some tools, such as a compiler and the <strong class="command">make</strong> program.</p>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>During installations with the package manager, a screen will come up asking
+which services need to be restarted. Using the defaults for this is fine.</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>build-essential
+</pre></div>
+</div>
+<p>The library components Unbound needs are: <code class="docutils literal notranslate"><span class="pre">libssl</span></code> <code class="docutils literal notranslate"><span class="pre">libexpat</span></code>, of which we
+need the &quot;dev&quot; version. Unbound also uses <code class="docutils literal notranslate"><span class="pre">libldns</span></code>, but this is included in
+the tarball we've already downloaded.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>libssl-dev
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>libexpat1-dev
+</pre></div>
+</div>
+<p>We'll also need the tools to build the actual program. For this, Unbound uses
+<strong class="command">make</strong> and internally it uses <code class="docutils literal notranslate"><span class="pre">flex</span></code> and <code class="docutils literal notranslate"><span class="pre">yacc</span></code>, which we need to
+download as well.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>bison
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>flex
+</pre></div>
+</div>
+<p>With all the requirements met, we can now start the compilation process in the
+Unbound directory. The first step here is configuring. With <code class="docutils literal notranslate"><span class="pre">./configure</span>
+<span class="pre">-h</span></code> you can look at the extensive list of configuration options for Unbound.
+A nice feature is that <code class="docutils literal notranslate"><span class="pre">configure</span></code> will tell you what it's missing during
+configuration.
+A common error is for the paths to the two libraries we just installed, which
+can be manually specified with <code class="docutils literal notranslate"><span class="pre">--with-ssl=</span></code> and <code class="docutils literal notranslate"><span class="pre">--with-libexpat=</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./configure
+</pre></div>
+</div>
+<p>When <strong class="command">configure</strong> gives no errors, we can continue to actually compiling
+Unbound. For this Unbound uses <strong class="command">make</strong>. Be warned that compiling might
+take a while.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make
+</pre></div>
+</div>
+<p>When we have a successful compilation, we can install Unbound to make available
+for the machine.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>make<span class="w"> </span>install
+</pre></div>
+</div>
+<p>We now have fully compiled and installed version of Unbound, and <a class="reference internal" href="#testing"><span class="std std-ref">continue
+to testing it</span></a>.</p>
+<p>Please note that the default configuration file is located at
+<code class="file docutils literal notranslate"><span class="pre">/usr/local/etc/unbound/unbound.conf</span></code> and created during the
+<strong class="command">make</strong> step. This file contains all possible configuration options for
+Unbound.</p>
+</section>
+<section id="id2">
+<h3>macOS Big Sur<a class="headerlink" href="#id2" title="この見出しへのパーマリンク">¶</a></h3>
+<p>In this tutorial we make use of the <strong class="command">brew</strong> package installer for MacOS.
+Install <strong class="command">brew</strong> and give <a class="reference external" href="https://brew.sh/">their website</a> a read if
+you've never used brew before.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/bin/bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>Then we use <strong class="command">brew</strong> to install <strong class="command">wget</strong>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>wget
+</pre></div>
+</div>
+<p>We can the use <strong class="command">wget</strong> to download the latest version of Unbound from
+repository and unpack it.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://nlnetlabs.nl/downloads/unbound/unbound-latest.tar.gz
+tar<span class="w"> </span>xzf<span class="w"> </span>unbound-latest.tar.gz
+</pre></div>
+</div>
+<p>To compile Unbound on MacOS (or anything really), we need to install the Mac
+specific development tools called &quot;Xcode&quot;. This is available on the app store
+and requires ~12 GB space on the hard disk. Alternatively, if you don't want
+multiple Gigabytes of largely unused space on your hard disk a slimmed down
+version also exists called the &quot;Command Line Tools&quot;. This includes all the tools
+to compile on a Mac can also be installed via the terminal.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xcode-select<span class="w"> </span>--install
+</pre></div>
+</div>
+<p>This command will open a window where the selection can be made of what to
+install. If you just want the Command Line Tools select this option.</p>
+<p>To verify that Xcode is installed correctly we check that we have the
+<strong class="command">gcc</strong> compiler by asking for the version.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gcc<span class="w"> </span>--version
+</pre></div>
+</div>
+<p>Next we install the required libraries using <strong class="command">brew</strong>. Note that when
+installing these <strong class="command">brew</strong> will tell you the path to where it has
+installed the library. The default is the <code class="docutils literal notranslate"><span class="pre">/opt/homebrew/Cellar/</span></code> directory,
+which can become important in the <strong class="command">configure</strong> step.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>openssl@1.1
+brew<span class="w"> </span>install<span class="w"> </span>expat
+</pre></div>
+</div>
+<p>With all the requirements met, we can now start the compilation process in the
+Unbound directory. The first step here is configuring. With <code class="docutils literal notranslate"><span class="pre">./configure</span>
+<span class="pre">-h</span></code> you can look at the extensive list of configuration options for Unbound.
+A nice feature is that <strong class="command">configure</strong> will tell you what it's missing
+during configuration.
+A common error is for the paths to the two libraries we just installed, which
+can be manually specified with <code class="docutils literal notranslate"><span class="pre">--with-ssl=</span></code> and <code class="docutils literal notranslate"><span class="pre">--with-libexpat=</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./configure
+</pre></div>
+</div>
+<p>Or alternatively, when <strong class="command">configure</strong> cannot find <code class="docutils literal notranslate"><span class="pre">libssl</span></code> and
+<code class="docutils literal notranslate"><span class="pre">libexpat</span></code> and <strong class="command">brew</strong> installed them at the default directory (make
+sure you fill in the correct version, at the time of writing the latest version
+of openssl is <code class="docutils literal notranslate"><span class="pre">1.1.1k</span></code> and of libexapt is <code class="docutils literal notranslate"><span class="pre">2.3.0</span></code>).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./configure<span class="w"> </span>--with-ssl<span class="o">=</span>/opt/homebrew/Cellar/openssl@1.1/1.1.1k/<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>--with-libexpat<span class="o">=</span>/opt/homebrew/Cellar/expat/2.3.0
+</pre></div>
+</div>
+<p>When <strong class="command">configure</strong> gives no errors, we can continue to actually compiling
+Unbound. For this Unbound uses <strong class="command">make</strong>. Be warned that compiling might
+take a while.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make
+</pre></div>
+</div>
+<p>When we have a successful compilation, we can install Unbound to make available
+for the machine.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>make<span class="w"> </span>install
+</pre></div>
+</div>
+<p>We now have fully compiled and installed version of Unbound, and can
+<a class="reference internal" href="#testing"><span class="std std-ref">continue to testing it</span></a>.</p>
+</section>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="この見出しへのパーマリンク">¶</a></h2>
+<p>A simple test to determine if the installation was successful is to invoke the
+<strong class="command">unbound</strong> command with the <a class="reference internal" href="../manpages/unbound.html#cmdoption-unbound-V"><code class="xref std std-option docutils literal notranslate"><span class="pre">-V</span></code></a> option, which is
+the &quot;version&quot; option.
+This shows the version and build options used, as well as proving that the
+install was successful.
+You may have to use <code class="docutils literal notranslate"><span class="pre">sudo</span></code> to run this, depending on the installation.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>unbound<span class="w"> </span>-V
+</pre></div>
+</div>
+<p>If all the previous steps were successful we can continue to configuring our
+Unbound instance.</p>
+<p>Another handy trick you can use during testing is to run Unbound in the
+foreground using the <a class="reference internal" href="../manpages/unbound.html#cmdoption-unbound-d"><code class="xref std std-option docutils literal notranslate"><span class="pre">-d</span></code></a> option and increase the verbosity
+level using the <a class="reference internal" href="../manpages/unbound.html#cmdoption-unbound-v"><code class="xref std std-option docutils literal notranslate"><span class="pre">-v</span></code></a> option multiple times.
+This allows you to see steps Unbound takes and also where it fails.
+Another useful, more detailed trick in combination with the foreground is to
+make Unbound log on the foreground.
+To do this, the following line needs to be added to the configuration file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>server:
+<span class="w">    </span>use-syslog:<span class="w"> </span>no
+</pre></div>
+</div>
+<p>Now that Unbound is installed we can
+<a class="reference internal" href="configuration.html"><span class="doc">continue to configuring it</span></a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Unbound by NLnet Labs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="configuration.html" class="btn btn-neutral float-right" title="Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1999-2024, NLnet Labs.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

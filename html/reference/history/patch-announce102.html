@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unbound 1.0.2 Patch Announcement &mdash; Unbound 1.19.0 ドキュメント</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/dark.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/light.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/translations.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" />
+    <link rel="next" title="Unbound Operation Explained in Book" href="book-news.html" />
+    <link rel="prev" title="DNS Cache Poisoning Vulnerability (2008)" href="dns-cache-poisoning-vulnerability.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/unbound-duotone-white.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.19.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Use Cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../use-cases/home-resolver.html">Resolver for Home Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../use-cases/local-stub.html">Local DNS (Stub) Resolver for a Single Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/proxy.html">Downstream Proxy Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/serve-stale.html">Serving Stale Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/performance.html">Performance Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/monitoring.html">Monitoring and Reporting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/privacy/aggressive-nsec.html">Aggressive NSEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/privacy/dns-over-https.html">DNS-over-HTTPS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Filtering</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/filtering/tags-views.html">Tags and Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/filtering/rpz.html">Response Policy Zones</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/libunbound-tutorial/index.html">Unbound Library Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/python-modules.html">Unbound for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/doxygen-docs.html">Source Code Docs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual Pages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound.html">unbound(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-checkconf.html">unbound-checkconf(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound.conf.html">unbound.conf(5)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-host.html">unbound-host(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/libunbound.html">libunbound(3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-control.html">unbound-control(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-anchor.html">unbound-anchor(8)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../rfc-compliance.html">RFC Compliance</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">History</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="requirements.html">Requirements for Recursive Caching Resolver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prototype-resolver.html">Unbound Resolver Prototype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dns-cache-poisoning-vulnerability.html">DNS Cache Poisoning Vulnerability (2008)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Unbound 1.0.2 Patch Announcement</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-cache-poisoning">What is Cache Poisoning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unbound-security">Unbound Security</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#filtering">Filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#randomisation">Randomisation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-security-measures">Additional security measures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#randomness-calculation">Randomness Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#time-to-infection">Time to infection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="book-news.html">Unbound Operation Explained in Book</a></li>
+<li class="toctree-l2"><a class="reference internal" href="info-timeout-server-selection.html">Unbound Timeout and Server Selection Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="info-algo.html">DNSSEC Algorithms with Unbound</a></li>
+<li class="toctree-l2"><a class="reference internal" href="info-algo.html#trust-anchors">Trust Anchors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="root-11sep-11oct.html">Trust anchor retrieval less then 30 days before the KSK rollover</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../todo.html">Docs To-Do List</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Unbound</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">History</a></li>
+      <li class="breadcrumb-item active">Unbound 1.0.2 Patch Announcement</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/reference/history/patch-announce102.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="unbound-1-0-2-patch-announcement">
+<h1>Unbound 1.0.2 Patch Announcement<a class="headerlink" href="#unbound-1-0-2-patch-announcement" title="この見出しへのパーマリンク">¶</a></h1>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="この見出しへのパーマリンク">¶</a></h2>
+<p>Unbound version 1.0 was released with port randomization features. The
+same features that have been made available in the various patches by other
+vendors the CERT alert last month.</p>
+<p>Now Dan Kaminsky disclosed more details during the the august 2008
+Blackhat Conference in Las Vegas we release additional counter measures.
+These
+counter measures were previously withheld in order to minimize the risk of
+disclosing details about several variations of the attack through reverse
+engineering.</p>
+<p>With the current set of counter measures added, Unbound offers state of the art
+protection against the attacks described by Kaminsky. However, state of the
+art counter measures will not provide full protection, not in Unbound nor
+in other software. Although DNSSEC is hardly deployed, it is currently the only
+mechanism known to deal with spoofing and other kinds of attacks on the DNS.</p>
+<p>More details in the ways that Unbound protects against spoofing are below.</p>
+</section>
+<section id="what-is-cache-poisoning">
+<h2>What is Cache Poisoning<a class="headerlink" href="#what-is-cache-poisoning" title="この見出しへのパーマリンク">¶</a></h2>
+<p>Poisoning a DNS resolver refers to the act of inserting fake, often
+malicious data into the resolvers cache.  This can cause website visitors
+to be redirected from the site (e.g. their banking site) they thought
+to visit to a different web site, for example a phishing site.</p>
+<p>The basic approach of poisoning DNS queries is to send fake replies that
+pretend to come from the authority servers to the caching resolver.
+Every DNS query carries a random query Identifier (16 bit number).
+Only replies that contain the same number are accepted. In order for
+the resolver to accept the fake replies, the Identifier in the incoming
+packet needs to match that of the outstanding question.  That is, the
+attacker has to guess a number of 16 bits in length.</p>
+<p>One can calculate the time how long it takes to guess the 16 bits Identifier.
+a detailed calculation can be found online (<a class="reference external" href="http://tools.ietf.org/html/draft-ietf-dnsext-forgery-resilience-06">draft-ietf-dnsext-forgery-resilience</a>).
+The document contains formulas with all the variables involved.
+The example given in the draft has a 4 Mb/s attack rate to get a 50% chance
+to inject the fake data.</p>
+<p>It comes down to this: it takes a certain time, on average, to guess the
+right random sequence.  The example in the reference argues that the
+Kaminsky exploit takes about 10 seconds to guess the 16 bit value in the
+identifier.  This is confirmed by implementations of the exploit as well
+as various calculations on public mailinglists.</p>
+<p>In order to extend the time by which a packet can be succesfully replaced we
+need more than the 16 bits of random number that the query Identifier provides
+us. That can be done by putting random numbers in other parts of the query,
+and checking if the server puts the same number in a reply,
+without changing the protocol.  It is hard to add these extra random
+numbers without breaking interoperability, because the reply is only
+defined to contain a copy of the 16 bit
+ID value.  Once an extra random number is copied into the reply, a fake
+reply must guess that number.  Every extra bit that needs to be guessed,
+increases the time by a factor of 2.  The goal is to add enough extra
+bits that the chance of poisoning becomes very low (on average).</p>
+<p>Unbound implements a number of methods to add random bits.  The most
+important means to add randomness is to vary the port numbers from which
+the question is asked, another means is to use a hack that randomizes
+unused bits in the query name. Unbound implements even more methods.
+In addition, Unbound is careful in what to accept as information that
+can be cached. These techniques are explained in more detail below.</p>
+<p>Note however that the increase in the amount of bits does improve your
+chances to safely cross the road but a bad packet may still hit you.</p>
+<p>Real protection, where you are not subject to the whims of chance, is
+achieved by using DNSSEC.  DNSSEC uses digital signatures to protect
+the data.  With DNSSEC there is no chance of poisoning, independent of
+the number of random bits used.</p>
+</section>
+<section id="unbound-security">
+<h2>Unbound Security<a class="headerlink" href="#unbound-security" title="この見出しへのパーマリンク">¶</a></h2>
+<p>Unbound implements the DNSSEC standard as specified in <span class="target" id="index-0"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc4034.html"><strong>RFC 4034</strong></a> and
+<span class="target" id="index-1"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc4035.html"><strong>RFC 4035</strong></a>. This means that it can act as a validator and can thus check the
+digital signatures attached in replies.  Of course, the domain name owner must
+have inserted these digital signatures in the first place.</p>
+<p>In the absence of DNSSEC, unbound attempts to provide very good security.
+Without digital signatures, randomisation and filtering are currently the only
+options.  Below, a technical categorisation is made of the methods employed by
+unbound to protect unsigned data.</p>
+</section>
+<section id="filtering">
+<h2>Filtering<a class="headerlink" href="#filtering" title="この見出しへのパーマリンク">¶</a></h2>
+<p>Unbound contains a component we call a 'scrubber'.  This component
+takes care of certain checks, disallowing (removing) possibly malicious content.</p>
+<ul class="simple">
+<li><p>Only in-bailiwick data is accepted</p></li>
+<li><p>RFC 2181 trust is employed.  This means that data from the additional
+section receives an additional section trust.  And data from the answer
+section receives answer section trust.  Data with additional section trust
+is not used to answer queries from clients.  Thus putting a record in
+the additional section cannot make this record appear to clients.</p></li>
+<li><p>The records in the authority and additional section are filtered
+for relevance to the query in question.  If the data is irrelevant, it
+is removed.</p></li>
+<li><p>The answer section is filtered for relevance.  Only answers to the query
+that unbound wants to ask are allowed.</p></li>
+<li><p>CNAME chains are cut off, only the first CNAME is kept as answer.  The
+remaining CNAMEs or answer records are not kept, but looked up instead.</p></li>
+<li><p>For DNAME records, the CNAME is synthesized by unbound itself, it does
+not trust the server to do so.</p></li>
+<li><p>DNAME records are not taken from the cache to perform the redirection,
+even if they seem to match.  Only for validated DNAME records (where the
+digital signature was correct) is redirection performed from cache, this
+requires the use of DNSSEC.</p></li>
+</ul>
+</section>
+<section id="randomisation">
+<h2>Randomisation<a class="headerlink" href="#randomisation" title="この見出しへのパーマリンク">¶</a></h2>
+<p>By adding more random data, a spoofed reply has to guess more data to
+get through, lowering the chances of a successful poison attempt.</p>
+<ul class="simple">
+<li><p>Strong random number generator.  Unbound uses a cryptographic strength
+random number generator.  The arc4random() generator from OpenBSD is used.
+This means that predicting the random numbers generated by unbound is
+equivalent to cracking an encryption cipher.</p></li>
+<li><p>The random number generator is seeded with entropy.  Real entropy from the
+system /dev/random is used to seed the random number generator.  Thus, the
+starting values of the random number generator cannot easily be predicted.</p></li>
+<li><p>Query ID bits.  Unbound uses all 16 bits in the ID.</p></li>
+<li><p>Port randomisation.  Unbound uses 16 bits for the port randomisation.
+To be precise, about 60000 random ports, avoiding ports below 1024 and
+avoiding IANA allocated UDP ports to avoid system instability of the server.
+The port randomisation uses the same random number generator as the ID.
+Unbound takes care that a randomly drawn port is used for one query.  Thus
+every query gets a freshly random port number.</p></li>
+<li><p>Destination address randomisation.  Unbound performs RTT banding, a method
+to select the destination server that provides additional randomness.
+This provides between 1 and 4 bits of randomness.  Perhaps 2 on average.
+Arguments that choosing the fastest destination reduces the attack time
+window are no longer relevant given the recent full disclosure at the
+Blackhat conference. Additional time windows are easily achieved.</p></li>
+<li><p>Source address randomisation.  If configured with multiple public IP
+addresses, unbound can perform a random choice of interface.  This needs
+operator configuration, but by adding 4 outgoing-interface statements in
+the config file, an additional 2 bits of randomness are achieved.</p></li>
+<li><p>Transport protocol randomisation.  If IPv6 is available (yes, yes, not
+very common), then unbound will obtain another random bit by choosing the
+IPv4 or IPv6 transport protocol randomly.</p></li>
+<li><p>Query aggregation.  This prevents identical outstanding queries to the
+same server.  It prevents birthday-paradox attacks.</p></li>
+<li><p>Query name strict matching.  This prevents an answer from matching a query
+for which it is not meant.  If an answer can match multiple queries, you
+get the birthday paradox attack again (from the previous item).</p></li>
+<li><p>Capitalisation randomisation.  Also called dns-0x20.  This is an
+experimental resilience method that uses upper and lower case letters in the
+question name to obtain randomness.  On average about 7 or 8 bits.  This
+method currently has to be turned on by the operator manually, as it may
+result in maybe 0.4% of domains getting no answers due to no support on the
+authoritative server side.</p></li>
+</ul>
+</section>
+<section id="additional-security-measures">
+<h2>Additional security measures<a class="headerlink" href="#additional-security-measures" title="この見出しへのパーマリンク">¶</a></h2>
+<p>These measures are mostly to prevent remote execution exploits.</p>
+<ul class="simple">
+<li><p>Heap function pointer protection</p></li>
+<li><p>chroot() by default</p></li>
+<li><p>user privileges are dropped by default</p></li>
+<li><p>access control list for clients that are allowed recursion</p></li>
+<li><p>No detection of attacks underway. Unbound assumes it is always under attack</p></li>
+<li><p>can config the version.bind or hostname.bind answer to return, or block the queries</p></li>
+</ul>
+</section>
+<section id="randomness-calculation">
+<h2>Randomness Calculation<a class="headerlink" href="#randomness-calculation" title="この見出しへのパーマリンク">¶</a></h2>
+<p>So the default setup has a randomness of:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">16</span> <span class="n">bits</span> <span class="n">ID</span>
+<span class="mi">16</span> <span class="n">bits</span> <span class="n">port</span>
+<span class="mi">2</span> <span class="n">bits</span> <span class="n">destination</span> <span class="n">address</span> <span class="p">(</span><span class="n">estimated</span> <span class="n">average</span><span class="p">)</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>For a total of 34 bits of randomness.
+Other implementations provide 16 bits (or less) unpatched,
+26 bits for patches utilizing only 1024 ports and 32 bits for patches using
+the fully available port range (around 60k). Unbound has been utilizing the
+full port range of about 60.000 ports since the release of version 1.0.</p>
+<p>With a careful setup, enabling capitalisation and source address randomisation
+Unbound provides:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">16</span> <span class="n">bits</span> <span class="n">ID</span>
+<span class="mi">16</span> <span class="n">bits</span> <span class="n">port</span>
+<span class="mi">2</span> <span class="n">bits</span> <span class="n">destination</span> <span class="n">address</span> <span class="p">(</span><span class="n">estimated</span> <span class="n">average</span><span class="p">)</span>
+<span class="mi">2</span> <span class="n">bits</span> <span class="n">source</span> <span class="n">address</span> <span class="p">(</span><span class="n">estimated</span> <span class="n">average</span><span class="p">)</span>
+<span class="mi">8</span> <span class="n">bits</span> <span class="n">capitalisation</span> <span class="p">(</span><span class="n">estimated</span> <span class="n">average</span><span class="p">)</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>in total 44 bits of randomness.</p>
+<p>Sample config file items to enable this amount of randomness:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>server:
+<span class="w">    </span><span class="c1"># configures 4 static public IP addresses.</span>
+<span class="w">    </span><span class="c1"># you can also enter IPv6 if you have it.</span>
+<span class="w">    </span><span class="c1"># this is an example, you must enter your addresses.</span>
+<span class="w">    </span>outgoing-interface:<span class="w"> </span><span class="m">192</span>.0.2.1
+<span class="w">    </span>outgoing-interface:<span class="w"> </span><span class="m">192</span>.0.2.2
+<span class="w">    </span>outgoing-interface:<span class="w"> </span><span class="m">192</span>.0.2.3
+<span class="w">    </span>outgoing-interface:<span class="w"> </span><span class="m">192</span>.0.2.4
+<span class="w">    </span><span class="c1"># enable dns-0x20.</span>
+<span class="w">    </span>use-caps-for-id:<span class="w"> </span>yes
+</pre></div>
+</div>
+</section>
+<section id="time-to-infection">
+<h2>Time to infection<a class="headerlink" href="#time-to-infection" title="この見出しへのパーマリンク">¶</a></h2>
+<p>We take 10 seconds to infect an unpatched server with 50% chance
+as a baseline. The table below shows the time until a poison attempt
+is successful.  The numbers are subject to being guesstimates.  Better
+numbers may become available, either from the Blackhat presentation,
+or other sources.  The bottom line is that adding randomness is a short
+term fix.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Bits</p></th>
+<th class="head"><p>50% chance</p></th>
+<th class="head"><p>5% chance</p></th>
+<th class="head"><p>Aka</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>16</p></td>
+<td><p>10 seconds</p></td>
+<td><p>1 second</p></td>
+<td><p>unpatched server, random ID</p></td>
+</tr>
+<tr class="row-odd"><td><p>26</p></td>
+<td><p>2.8 hours</p></td>
+<td><p>17 minutes</p></td>
+<td><p>patched, using only 1024 ports</p></td>
+</tr>
+<tr class="row-even"><td><p>34</p></td>
+<td><p>28 days</p></td>
+<td><p>2.8 days</p></td>
+<td><p>unbound using defaults</p></td>
+</tr>
+<tr class="row-odd"><td><p>44</p></td>
+<td><p>28444 days</p></td>
+<td><p>2844.4 days</p></td>
+<td><p>unbound with capitalisation and source addresses configured *</p></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><p><em>* : These are not enabled by default. The capitalisation has not been
+standardised, and could result in a small number of cases in slow or no
+answer. The source addresses need the operator to configure multiple addresses
+for the computer.</em></p>
+</div></blockquote>
+<p>In the table above, the Bits column shows the number of random bits that
+are echoed in replies. The 50% chance column shows the length of time needed
+before an attack has a 50% chance of success (guessing the random numbers).
+The 5% chance column shows how long it takes before an attack has a 5% chance
+of inserting fake data.</p>
+<p>Note: 60000 sockets not 65536 sockets used randomly for unbound is assumed
+in the table entries for unbound. Unbound avoids some port numbers for
+compatibility.</p>
+<p>Also note that the table above assumes a fairly low bandwidth usage.
+If a large network capacity is available, say a botnet, and it can use
+1000x more resources, then perhaps also the attack can be conducted
+1000x faster.</p>
+<p>In the meeting of the IETF dnsext working group successful poisoning attacks
+against an unpatched server in as little as 1/10 of a second were demonstrated
+easily (<a class="reference external" href="http://www.ops.ietf.org/lists/namedroppers/namedroppers.2008/msg01193.html">demo results</a>),
+showing that much smarter things can be done than the dumb attack assumed for
+the numbers here.  Calculations by members of the working group showed a near
+perfect chance for 6-8 seconds.  This could move the figures to be less
+optimistic.</p>
+<p>Keep in mind that the thousands of days shown for unbound with capitalisation
+and source addresses configured should not be taken as strong security.  It is
+likely that some measures can be outsmarted. Or that these numbers are overly
+optimistic (see text above).  And the 44 bits is an average.  If an attacker can
+work out how to attack domains or queries with less protection, the the benefits
+may be partially lost. Thus, the large time listed for 44 bits should be taken
+as an indication that it is pretty good, but not invulnerable.</p>
+<p>As stated earlier, the real solution is to use DNSSEC.  DNSSEC makes this time
+table a non problem, because in all these cases DNSSEC can detect the forgery.
+Especially users in Brazil, Bulgaria, Puerto Rico and Sweden or people using
+these zones regularly, should consider turning on DNSSEC because the TLD zone is
+DNSSEC secured.  Do consider using the DNSSEC capabilities in Unbound.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dns-cache-poisoning-vulnerability.html" class="btn btn-neutral float-left" title="DNS Cache Poisoning Vulnerability (2008)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="book-news.html" class="btn btn-neutral float-right" title="Unbound Operation Explained in Book" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1999-2024, NLnet Labs.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

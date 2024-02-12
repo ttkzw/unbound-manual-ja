@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DNSSEC Algorithms with Unbound &mdash; Unbound 1.19.0 ドキュメント</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/dark.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/light.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/translations.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" />
+    <link rel="next" title="Trust anchor retrieval less then 30 days before the KSK rollover" href="root-11sep-11oct.html" />
+    <link rel="prev" title="Unbound Timeout and Server Selection Information" href="info-timeout-server-selection.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/unbound-duotone-white.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.19.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Use Cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../use-cases/home-resolver.html">Resolver for Home Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../use-cases/local-stub.html">Local DNS (Stub) Resolver for a Single Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/proxy.html">Downstream Proxy Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/serve-stale.html">Serving Stale Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/performance.html">Performance Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/monitoring.html">Monitoring and Reporting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/privacy/aggressive-nsec.html">Aggressive NSEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/privacy/dns-over-https.html">DNS-over-HTTPS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Filtering</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/filtering/tags-views.html">Tags and Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/filtering/rpz.html">Response Policy Zones</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/libunbound-tutorial/index.html">Unbound Library Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/python-modules.html">Unbound for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/doxygen-docs.html">Source Code Docs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual Pages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound.html">unbound(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-checkconf.html">unbound-checkconf(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound.conf.html">unbound.conf(5)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-host.html">unbound-host(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/libunbound.html">libunbound(3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-control.html">unbound-control(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-anchor.html">unbound-anchor(8)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../rfc-compliance.html">RFC Compliance</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">History</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="requirements.html">Requirements for Recursive Caching Resolver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prototype-resolver.html">Unbound Resolver Prototype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dns-cache-poisoning-vulnerability.html">DNS Cache Poisoning Vulnerability (2008)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="patch-announce102.html">Unbound 1.0.2 Patch Announcement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="book-news.html">Unbound Operation Explained in Book</a></li>
+<li class="toctree-l2"><a class="reference internal" href="info-timeout-server-selection.html">Unbound Timeout and Server Selection Information</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">DNSSEC Algorithms with Unbound</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#algorithms-in-the-chain-of-trust">Algorithms in the Chain of Trust</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#protection">Protection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#trust-anchors">Trust Anchors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="root-11sep-11oct.html">Trust anchor retrieval less then 30 days before the KSK rollover</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../todo.html">Docs To-Do List</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Unbound</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">History</a></li>
+      <li class="breadcrumb-item active">DNSSEC Algorithms with Unbound</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/reference/history/info-algo.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dnssec-algorithms-with-unbound">
+<h1>DNSSEC Algorithms with Unbound<a class="headerlink" href="#dnssec-algorithms-with-unbound" title="この見出しへのパーマリンク">¶</a></h1>
+<p>Unbound validates DNSSEC signatures and in the case that there are
+multiple signature algorithms in use, it checks that a valid chain of
+trust exists for each algorithm separately.  Thus the algorithms that are
+in use must all be subverted before validation can be misdirected.</p>
+<section id="algorithms-in-the-chain-of-trust">
+<h2>Algorithms in the Chain of Trust<a class="headerlink" href="#algorithms-in-the-chain-of-trust" title="この見出しへのパーマリンク">¶</a></h2>
+<p>The algorithms that are checked are signalled via the DS RRset.  This
+means that zones do not receive these checks until they publish multiple
+algorithms into their DS set.  Thus the set of algorithms present in
+the DS RRset must have DNSKEYs and signatures on every data element.</p>
+<p>The RFCs already mandate that for algorithms signalled to be in use for a
+domain you must have DNSKEYs and signatures on every data element, because
+a validator is allowed to continue the chain of trust if it supports one
+algorithm but not the others.  These validators that support one of the
+algorithms must find that the algorithm signalled to be present has keys
+and signatures, and if these are missing, will conclude that signatures
+have been 'stripped' away.  The extra checks that unbound performs thus
+must succeed if the domain is properly signed and all signatures are
+present.</p>
+<p>There is some leeway when signing a domain, and this leeway is useful when
+changes are phased in.  The DNSKEY may contain more algorithms, perhaps as
+part of a rollover.  The data may be signed with other algorithms as well.
+It is possible to have DS records for which no key exists, as long as
+another DS record for that algorithm has a key.  It is possible to have
+DNSKEY records that do not sign any or only part of the data (as long
+as signatures are available via other DNSKEYs).</p>
+<p>Change in algorithms is possible by introducing keys in the DNSKEY set,
+and signing with them, and once complete, introducing the DS record.
+The reverse, first with the takeown of the old algorithm DS records, for
+removal of a signing algorithm.  Older versions of unbound did not allow
+introduction of a new algorithm key in the DNSKEY set if the signatures
+on the data were not already present, but newer (since 1.4.8) versions
+allow this (and rely on the algorithms signalled in the DS RRset).</p>
+</section>
+<section id="protection">
+<h2>Protection<a class="headerlink" href="#protection" title="この見出しへのパーマリンク">¶</a></h2>
+<p>The check for multiple algorithms protects against not-known-today
+algorithmic weaknesses in one algorithm by using the other algorithm.
+This assumes the (mathematical) properties of the algorithms
+are dissimilar and that any deficiencies are not discovered
+simultaneously.</p>
+<p>So, for example, RSASHA1 and RSASHA1_NSEC3 is a poor choice in this
+regard, as the algorithms are identical (the algorithm identifier is used
+to signal NSEC3 support here, which was useful during the introduction
+of NSEC3).  Also the use of multiple keys only protects like the largest
+one.</p>
+</section>
+</section>
+<section id="trust-anchors">
+<h1>Trust Anchors<a class="headerlink" href="#trust-anchors" title="この見出しへのパーマリンク">¶</a></h1>
+<p>Trust anchors can provide multiple algorithms, if a trust anchor
+contains multiple algorithms, a valid chain of trust is checked for them.
+Similar, if a RFC5011 automated key state contains VALID (or MISSING)
+keys with multiple algorithms, these algorithms are checked. For RFC5011,
+key revocation is checked and performed before the other checks in the
+RFC5011 state table when processing a DNSKEY probe, to make algorithm
+rollover possible (specifically the removal of the last key for the old
+algorithm).</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="info-timeout-server-selection.html" class="btn btn-neutral float-left" title="Unbound Timeout and Server Selection Information" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="root-11sep-11oct.html" class="btn btn-neutral float-right" title="Trust anchor retrieval less then 30 days before the KSK rollover" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1999-2024, NLnet Labs.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

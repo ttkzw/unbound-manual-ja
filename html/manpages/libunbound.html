@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>libunbound(3) &mdash; Unbound 1.19.0 ドキュメント</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/dark.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/light.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="unbound-control(8)" href="unbound-control.html" />
+    <link rel="prev" title="unbound-host(1)" href="unbound-host.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/unbound-duotone-white.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.19.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Use Cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../use-cases/home-resolver.html">Resolver for Home Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use-cases/local-stub.html">Local DNS (Stub) Resolver for a Single Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/proxy.html">Downstream Proxy Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/serve-stale.html">Serving Stale Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/performance.html">Performance Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/monitoring.html">Monitoring and Reporting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/privacy/aggressive-nsec.html">Aggressive NSEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/privacy/dns-over-https.html">DNS-over-HTTPS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Filtering</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/filtering/tags-views.html">Tags and Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/filtering/rpz.html">Response Policy Zones</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developer/libunbound-tutorial/index.html">Unbound Library Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/python-modules.html">Unbound for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/doxygen-docs.html">Source Code Docs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual Pages</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="unbound.html">unbound(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unbound-checkconf.html">unbound-checkconf(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unbound.conf.html">unbound.conf(5)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unbound-host.html">unbound-host(1)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">libunbound(3)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#synopsis">概要</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">説明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#result-data-structure">Result Data structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#return-values">Return Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#see-also">See Also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="unbound-control.html">unbound-control(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unbound-anchor.html">unbound-anchor(8)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/rfc-compliance.html">RFC Compliance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/history/index.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/todo.html">Docs To-Do List</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Unbound</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">libunbound(3)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/manpages/libunbound.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="libunbound-3">
+<h1>libunbound(3)<a class="headerlink" href="#libunbound-3" title="この見出しへのパーマリンク">¶</a></h1>
+<section id="synopsis">
+<h2>概要<a class="headerlink" href="#synopsis" title="この見出しへのパーマリンク">¶</a></h2>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unbound.h&gt;</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ub_ctx_create</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">ub_ctx_delete</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_ctx_set_option</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">opt</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">val</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_ctx_get_option</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">opt</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">val</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_ctx_config</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">fname</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_ctx_set_fwd</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">addr</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_ctx_set_stub</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">zone</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span>
+<span class="w">                    </span><span class="kt">int</span><span class="w"> </span><span class="n">isprime</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_ctx_set_tls</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">tls</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_ctx_resolvconf</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">fname</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_ctx_hosts</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">fname</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_ctx_add_ta</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">ta</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_ctx_add_ta_autr</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">fname</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_ctx_add_ta_file</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">fname</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_ctx_trustedkeys</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">fname</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_ctx_debugout</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="kt">FILE</span><span class="o">*</span><span class="w"> </span><span class="n">out</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_ctx_debuglevel</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">d</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_ctx_async</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">dothread</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_poll</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_wait</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_fd</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_process</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_resolve</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">rrtype</span><span class="p">,</span>
+<span class="w">               </span><span class="kt">int</span><span class="w"> </span><span class="n">rrclass</span><span class="p">,</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_result</span><span class="o">**</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_resolve_async</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">rrtype</span><span class="p">,</span>
+<span class="w">                     </span><span class="kt">int</span><span class="w"> </span><span class="n">rrclass</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">mydata</span><span class="p">,</span><span class="w"> </span><span class="n">ub_callback_type</span><span class="w"> </span><span class="n">callback</span><span class="p">,</span>
+<span class="w">                     </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">async_id</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_cancel</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">async_id</span><span class="p">);</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">ub_resolve_free</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_result</span><span class="o">*</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">ub_strerror</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">err</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_ctx_print_local_zones</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_ctx_zone_add</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">zone_name</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">zone_type</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_ctx_zone_remove</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">zone_name</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_ctx_data_add</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">ub_ctx_data_remove</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="description">
+<h2>説明<a class="headerlink" href="#description" title="この見出しへのパーマリンク">¶</a></h2>
+<p>Unbound is an implementation of a DNS resolver, that does caching and DNSSEC
+validation.
+This is the library API, for using the <code class="docutils literal notranslate"><span class="pre">-lunbound</span></code> library.
+The server daemon is described in <a class="reference internal" href="unbound.html"><span class="doc">unbound(8)</span></a>.
+The library works independent from a running unbound server, and can be used to
+convert hostnames to ip addresses, and back, and obtain other information from
+the DNS.
+The library performs public-key validation of results with DNSSEC.</p>
+<p>The library uses a variable of type <em>struct ub_ctx</em> to keep context between
+calls.
+The user must maintain it, creating it with <strong>ub_ctx_create</strong> and deleting it
+with <strong>ub_ctx_delete</strong>.
+It can be created and deleted at any time.
+Creating it anew removes any previous configuration (such as trusted keys) and
+clears any cached results.</p>
+<p>The functions are thread-safe, and a context can be used in a threaded (as well
+as in a non-threaded) environment.
+Also resolution (and validation) can be performed blocking and non-blocking
+(also called asynchronous).
+The async method returns from the call immediately, so that processing can go
+on, while the results become available later.</p>
+<p>The functions are discussed in turn below.</p>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="この見出しへのパーマリンク">¶</a></h2>
+<dl class="glossary">
+<dt id="term-ub_ctx_create">ub_ctx_create<a class="headerlink" href="#term-ub_ctx_create" title="この用語の解説へ">¶</a></dt><dd><p>Create a new context, initialised with defaults.
+The information from <code class="file docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code> and <code class="file docutils literal notranslate"><span class="pre">/etc/hosts</span></code> is
+not utilised by default.
+Use <strong>ub_ctx_resolvconf</strong> and <strong>ub_ctx_hosts</strong> to read them.
+Before you call this, use the openssl functions
+<strong>CRYPTO_set_id_callback</strong> and <strong>CRYPTO_set_locking_callback</strong> to set
+up asynchronous operation if you use lib openssl (the application calls
+these functions once for initialisation).
+Openssl 1.0.0 or later uses the <strong>CRYPTO_THREADID_set_callback</strong>
+function.</p>
+</dd>
+<dt id="term-ub_ctx_delete">ub_ctx_delete<a class="headerlink" href="#term-ub_ctx_delete" title="この用語の解説へ">¶</a></dt><dd><p>Delete validation context and free associated resources.
+Outstanding async queries are killed and callbacks are not called for
+them.</p>
+</dd>
+<dt id="term-ub_ctx_set_option">ub_ctx_set_option<a class="headerlink" href="#term-ub_ctx_set_option" title="この用語の解説へ">¶</a></dt><dd><p>A power-user interface that lets you specify one of the options from
+the config file format, see <a class="reference internal" href="unbound.conf.html"><span class="doc">unbound.conf(5)</span></a>.
+Not all options are relevant.
+For some specific options, such as adding trust anchors, special
+routines exist.
+Pass the option name with the trailing <code class="docutils literal notranslate"><span class="pre">':'</span></code>.</p>
+</dd>
+<dt id="term-ub_ctx_get_option">ub_ctx_get_option<a class="headerlink" href="#term-ub_ctx_get_option" title="この用語の解説へ">¶</a></dt><dd><p>A power-user interface that gets an option value.
+Some options cannot be gotten, and others return a newline separated
+list.
+Pass the option name without trailing <code class="docutils literal notranslate"><span class="pre">':'</span></code>.
+The returned value must be free(2)d by the caller.</p>
+</dd>
+<dt id="term-ub_ctx_config">ub_ctx_config<a class="headerlink" href="#term-ub_ctx_config" title="この用語の解説へ">¶</a></dt><dd><p>A power-user interface that lets you specify an unbound config file,
+see <a class="reference internal" href="unbound.conf.html"><span class="doc">unbound.conf(5)</span></a>, which is read for
+configuration.
+Not all options are relevant.
+For some specific options, such as adding trust anchors, special
+routines exist.
+This function is thread-safe only if a single instance of <strong>ub_ctx</strong>*
+exists in the application.
+If several instances exist the application has to ensure that
+<strong>ub_ctx_config</strong> is not called in parallel by the different instances.</p>
+</dd>
+<dt id="term-ub_ctx_set_fwd">ub_ctx_set_fwd<a class="headerlink" href="#term-ub_ctx_set_fwd" title="この用語の解説へ">¶</a></dt><dd><p>Set machine to forward DNS queries to, the caching resolver to use.
+IP4 or IP6 address.
+Forwards all DNS requests to that machine, which is expected to run a
+recursive resolver.
+If the proxy is not DNSSEC capable, validation may fail.
+Can be called several times, in that case the addresses are used as
+backup servers.
+At this time it is only possible to set configuration before the first
+resolve is done.</p>
+</dd>
+<dt id="term-ub_ctx_set_stub">ub_ctx_set_stub<a class="headerlink" href="#term-ub_ctx_set_stub" title="この用語の解説へ">¶</a></dt><dd><p>Set a stub zone, authoritative dns servers to use for a particular
+zone.
+IP4 or IP6 address.
+If the address is NULL the stub entry is removed.
+Set isprime true if you configure root hints with it.
+Otherwise similar to the stub zone item from unbound's config file.
+Can be called several times, for different zones, or to add multiple
+addresses for a particular zone.
+At this time it is only possible to set configuration before the first
+resolve is done.</p>
+</dd>
+<dt id="term-ub_ctx_set_tls">ub_ctx_set_tls<a class="headerlink" href="#term-ub_ctx_set_tls" title="この用語の解説へ">¶</a></dt><dd><p>Enable DNS over TLS (DoT) for machines set with <strong>ub_ctx_set_fwd</strong>.
+At this time it is only possible to set configuration before the first
+resolve is done.</p>
+</dd>
+<dt id="term-ub_ctx_resolvconf">ub_ctx_resolvconf<a class="headerlink" href="#term-ub_ctx_resolvconf" title="この用語の解説へ">¶</a></dt><dd><p>By default the root servers are queried and full resolver mode is used,
+but you can use this call to read the list of nameservers to use from
+the filename given.
+Usually <code class="file docutils literal notranslate"><span class="pre">&quot;/etc/resolv.conf&quot;</span></code>.
+Uses those nameservers as caching proxies.
+If they do not support DNSSEC, validation may fail.
+Only nameservers are picked up, the searchdomain, ndots and other
+settings from <em>resolv.conf(5)</em> are ignored.
+If fname NULL is passed, <code class="file docutils literal notranslate"><span class="pre">&quot;/etc/resolv.conf&quot;</span></code> is used (if on
+Windows, the system-wide configured nameserver is picked instead).
+At this time it is only possible to set configuration before the first
+resolve is done.</p>
+</dd>
+<dt id="term-ub_ctx_hosts">ub_ctx_hosts<a class="headerlink" href="#term-ub_ctx_hosts" title="この用語の解説へ">¶</a></dt><dd><p>Read list of hosts from the filename given.
+Usually <code class="file docutils literal notranslate"><span class="pre">&quot;/etc/hosts&quot;</span></code>.
+When queried for, these addresses are not marked DNSSEC secure.
+If fname NULL is passed, <code class="file docutils literal notranslate"><span class="pre">&quot;/etc/hosts&quot;</span></code> is used (if on Windows,
+<code class="file docutils literal notranslate"><span class="pre">etc/hosts</span></code> from WINDIR is picked instead).
+At this time it is only possible to set configuration before the first
+resolve is done.</p>
+</dd>
+<dt id="term-ub_ctx_add_ta">ub_ctx_add_ta<a class="headerlink" href="#term-ub_ctx_add_ta" title="この用語の解説へ">¶</a></dt><dd><p>Add a trust anchor to the given context.
+At this time it is only possible to add trusted keys before the first
+resolve is done.
+The format is a string, similar to the zone-file format,
+<strong>[domainname]</strong> <strong>[type]</strong> <strong>[rdata contents]</strong>.
+Both DS and DNSKEY records are accepted.</p>
+</dd>
+<dt id="term-ub_ctx_add_ta_autr">ub_ctx_add_ta_autr<a class="headerlink" href="#term-ub_ctx_add_ta_autr" title="この用語の解説へ">¶</a></dt><dd><p>Add filename with automatically tracked trust anchor to the given
+context.
+Pass name of a file with the managed trust anchor.
+You can create this file with
+<a class="reference internal" href="unbound-anchor.html"><span class="doc">unbound-anchor(8)</span></a> for the root anchor.
+You can also create it with an initial file with one line with a DNSKEY
+or DS record.
+If the file is writable, it is updated when the trust anchor changes.
+At this time it is only possible to add trusted keys before the first
+resolve is done.</p>
+</dd>
+<dt id="term-ub_ctx_add_ta_file">ub_ctx_add_ta_file<a class="headerlink" href="#term-ub_ctx_add_ta_file" title="この用語の解説へ">¶</a></dt><dd><p>Add trust anchors to the given context.
+Pass name of a file with DS and DNSKEY records in zone file format.
+At this time it is only possible to add trusted keys before the first
+resolve is done.</p>
+</dd>
+<dt id="term-ub_ctx_trustedkeys">ub_ctx_trustedkeys<a class="headerlink" href="#term-ub_ctx_trustedkeys" title="この用語の解説へ">¶</a></dt><dd><p>Add trust anchors to the given context.
+Pass the name of a bind-style config file with <code class="docutils literal notranslate"><span class="pre">trusted-keys{}</span></code>.
+At this time it is only possible to add trusted keys before the first
+resolve is done.</p>
+</dd>
+<dt id="term-ub_ctx_debugout">ub_ctx_debugout<a class="headerlink" href="#term-ub_ctx_debugout" title="この用語の解説へ">¶</a></dt><dd><p>Set debug and error log output to the given stream.
+Pass NULL to disable output.
+Default is stderr.
+File-names or using syslog can be enabled using config options, this
+routine is for using your own stream.</p>
+</dd>
+<dt id="term-ub_ctx_debuglevel">ub_ctx_debuglevel<a class="headerlink" href="#term-ub_ctx_debuglevel" title="この用語の解説へ">¶</a></dt><dd><p>Set debug verbosity for the context.
+Output is directed to stderr.
+Higher debug level gives more output.</p>
+</dd>
+<dt id="term-ub_ctx_async">ub_ctx_async<a class="headerlink" href="#term-ub_ctx_async" title="この用語の解説へ">¶</a></dt><dd><p>Set a context behaviour for asynchronous action.
+if set to true, enables threading and a call to <strong>ub_resolve_async</strong>
+creates a thread to handle work in the background.
+If false, a process is forked to handle work in the background.
+Changes to this setting after <strong>ub_resolve_async</strong> calls have been made
+have no effect (delete and re-create the context to change).</p>
+</dd>
+<dt id="term-ub_poll">ub_poll<a class="headerlink" href="#term-ub_poll" title="この用語の解説へ">¶</a></dt><dd><p>Poll a context to see if it has any new results.
+Do not poll in a loop, instead extract the <strong>fd</strong> below to poll for
+readiness, and then check, or wait using the wait routine.
+Returns 0 if nothing to read, or nonzero if a result is available.
+If nonzero, call <strong>ub_process</strong> to do callbacks.</p>
+</dd>
+<dt id="term-ub_wait">ub_wait<a class="headerlink" href="#term-ub_wait" title="この用語の解説へ">¶</a></dt><dd><p>Wait for a context to finish with results.
+Calls <strong>ub_process</strong> after the wait for you.
+After the wait, there are no more outstanding asynchronous queries.</p>
+</dd>
+<dt id="term-ub_fd">ub_fd<a class="headerlink" href="#term-ub_fd" title="この用語の解説へ">¶</a></dt><dd><p>Get file descriptor.
+Wait for it to become readable, at this point answers are returned from
+the asynchronous validating resolver.
+Then call the <strong>ub_process</strong> to continue processing.</p>
+</dd>
+<dt id="term-ub_process">ub_process<a class="headerlink" href="#term-ub_process" title="この用語の解説へ">¶</a></dt><dd><p>Call this routine to continue processing results from the validating
+resolver (when the <strong>fd</strong> becomes readable).
+Will perform necessary callbacks.</p>
+</dd>
+<dt id="term-ub_resolve">ub_resolve<a class="headerlink" href="#term-ub_resolve" title="この用語の解説へ">¶</a></dt><dd><p>Perform resolution and validation of the target name.
+The name is a domain name in a zero terminated text string.
+The rrtype and rrclass are DNS type and class codes.
+The result structure is newly allocated with the resulting data.</p>
+</dd>
+<dt id="term-ub_resolve_async">ub_resolve_async<a class="headerlink" href="#term-ub_resolve_async" title="この用語の解説へ">¶</a></dt><dd><p>Perform asynchronous resolution and validation of the target name.
+Arguments mean the same as for <strong>ub_resolve</strong> except no data is
+returned immediately, instead a callback is called later.
+The callback receives a copy of the mydata pointer, that you can use to
+pass information to the callback.
+The callback type is a function pointer to a function declared as:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">my_callback_function</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">my_arg</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">err</span><span class="p">,</span>
+<span class="w">                </span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_result</span><span class="o">*</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <strong>async_id</strong> is returned so you can (at your option) decide to
+track it and cancel the request if needed.
+If you pass a NULL pointer the <strong>async_id</strong> is not returned.</p>
+</dd>
+<dt id="term-ub_cancel">ub_cancel<a class="headerlink" href="#term-ub_cancel" title="この用語の解説へ">¶</a></dt><dd><p>Cancel an async query in progress.
+This may return an error if the query does not exist, or the query is
+already being delivered, in that case you may still get a callback for
+the query.</p>
+</dd>
+<dt id="term-ub_resolve_free">ub_resolve_free<a class="headerlink" href="#term-ub_resolve_free" title="この用語の解説へ">¶</a></dt><dd><p>Free struct <strong>ub_result</strong> contents after use.</p>
+</dd>
+<dt id="term-ub_strerror">ub_strerror<a class="headerlink" href="#term-ub_strerror" title="この用語の解説へ">¶</a></dt><dd><p>Convert error value from one of the unbound library functions to a
+human readable string.</p>
+</dd>
+<dt id="term-ub_ctx_print_local_zones">ub_ctx_print_local_zones<a class="headerlink" href="#term-ub_ctx_print_local_zones" title="この用語の解説へ">¶</a></dt><dd><p>Debug printout the local authority information to debug output.</p>
+</dd>
+<dt id="term-ub_ctx_zone_add">ub_ctx_zone_add<a class="headerlink" href="#term-ub_ctx_zone_add" title="この用語の解説へ">¶</a></dt><dd><p>Add new zone to local authority info, like local-zone
+<a class="reference internal" href="unbound.conf.html"><span class="doc">unbound.conf(5)</span></a> statement.</p>
+</dd>
+<dt id="term-ub_ctx_zone_remove">ub_ctx_zone_remove<a class="headerlink" href="#term-ub_ctx_zone_remove" title="この用語の解説へ">¶</a></dt><dd><p>Delete zone from local authority info.</p>
+</dd>
+<dt id="term-ub_ctx_data_add">ub_ctx_data_add<a class="headerlink" href="#term-ub_ctx_data_add" title="この用語の解説へ">¶</a></dt><dd><p>Add resource record data to local authority info, like local-data
+<a class="reference internal" href="unbound.conf.html"><span class="doc">unbound.conf(5)</span></a> statement.</p>
+</dd>
+<dt id="term-ub_ctx_data_remove">ub_ctx_data_remove<a class="headerlink" href="#term-ub_ctx_data_remove" title="この用語の解説へ">¶</a></dt><dd><p>Delete local authority data from the name given.</p>
+</dd>
+</dl>
+</section>
+<section id="result-data-structure">
+<h2>Result Data structure<a class="headerlink" href="#result-data-structure" title="この見出しへのパーマリンク">¶</a></h2>
+<p>The result of the DNS resolution and validation is returned as <em>struct
+ub_result</em>.
+The result structure contains the following entries:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_result</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">qname</span><span class="p">;</span><span class="w">         </span><span class="cm">/* text string, original question */</span>
+<span class="w">     </span><span class="kt">int</span><span class="w"> </span><span class="n">qtype</span><span class="p">;</span><span class="w">           </span><span class="cm">/* type code asked for */</span>
+<span class="w">     </span><span class="kt">int</span><span class="w"> </span><span class="n">qclass</span><span class="p">;</span><span class="w">          </span><span class="cm">/* class code asked for */</span>
+<span class="w">     </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">data</span><span class="p">;</span><span class="w">         </span><span class="cm">/* array of rdata items, NULL terminated*/</span>
+<span class="w">     </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">len</span><span class="p">;</span><span class="w">            </span><span class="cm">/* array with lengths of rdata items */</span>
+<span class="w">     </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">canonname</span><span class="p">;</span><span class="w">     </span><span class="cm">/* canonical name of result */</span>
+<span class="w">     </span><span class="kt">int</span><span class="w"> </span><span class="n">rcode</span><span class="p">;</span><span class="w">           </span><span class="cm">/* additional error code in case of no data */</span>
+<span class="w">     </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">answer_packet</span><span class="p">;</span><span class="w"> </span><span class="cm">/* full network format answer packet */</span>
+<span class="w">     </span><span class="kt">int</span><span class="w"> </span><span class="n">answer_len</span><span class="p">;</span><span class="w">      </span><span class="cm">/* length of packet in octets */</span>
+<span class="w">     </span><span class="kt">int</span><span class="w"> </span><span class="n">havedata</span><span class="p">;</span><span class="w">        </span><span class="cm">/* true if there is data */</span>
+<span class="w">     </span><span class="kt">int</span><span class="w"> </span><span class="n">nxdomain</span><span class="p">;</span><span class="w">        </span><span class="cm">/* true if nodata because name does not exist */</span>
+<span class="w">     </span><span class="kt">int</span><span class="w"> </span><span class="n">secure</span><span class="p">;</span><span class="w">          </span><span class="cm">/* true if result is secure */</span>
+<span class="w">     </span><span class="kt">int</span><span class="w"> </span><span class="n">bogus</span><span class="p">;</span><span class="w">           </span><span class="cm">/* true if a security failure happened */</span>
+<span class="w">     </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">why_bogus</span><span class="p">;</span><span class="w">     </span><span class="cm">/* string with error if bogus */</span>
+<span class="w">     </span><span class="kt">int</span><span class="w"> </span><span class="n">was_ratelimited</span><span class="p">;</span><span class="w"> </span><span class="cm">/* true if the query was ratelimited (SERVFAIL) by unbound */</span>
+<span class="w">     </span><span class="kt">int</span><span class="w"> </span><span class="n">ttl</span><span class="p">;</span><span class="w">             </span><span class="cm">/* number of seconds the result is valid */</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>If both secure and bogus are false, security was not enabled for the domain of
+the query.
+Else, they are not both true, one of them is true.</p>
+</section>
+<section id="return-values">
+<h2>Return Values<a class="headerlink" href="#return-values" title="この見出しへのパーマリンク">¶</a></h2>
+<p>Many routines return an error code.
+The value 0 (zero) denotes no error happened.
+Other values can be passed to <strong>ub_strerror</strong> to obtain a readable error
+string.
+<strong>ub_strerror</strong> returns a zero terminated string.
+<strong>ub_ctx_create</strong> returns NULL on an error (a malloc failure).
+<strong>ub_poll</strong> returns true if some information may be available, false otherwise.
+<strong>ub_fd</strong> returns a file descriptor or -1 on error.
+<strong>ub_ctx_config</strong> and <strong>ub_ctx_resolvconf</strong> attempt to leave errno informative
+on a function return with file read failure.</p>
+</section>
+<section id="see-also">
+<h2>See Also<a class="headerlink" href="#see-also" title="この見出しへのパーマリンク">¶</a></h2>
+<p><a class="reference internal" href="unbound.conf.html"><span class="doc">unbound.conf(5)</span></a>, <a class="reference internal" href="unbound.html"><span class="doc">unbound(8)</span></a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="unbound-host.html" class="btn btn-neutral float-left" title="unbound-host(1)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="unbound-control.html" class="btn btn-neutral float-right" title="unbound-control(8)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1999-2024, NLnet Labs.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

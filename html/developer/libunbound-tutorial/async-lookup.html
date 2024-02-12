@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asynchronous Lookup &mdash; Unbound 1.19.0 ドキュメント</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/dark.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/light.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/translations.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" />
+    <link rel="next" title="Lookup from Threads" href="lookup-threads.html" />
+    <link rel="prev" title="Examine the Results" href="examine-results.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/unbound-duotone-white.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.19.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Use Cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../use-cases/home-resolver.html">Resolver for Home Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../use-cases/local-stub.html">Local DNS (Stub) Resolver for a Single Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/proxy.html">Downstream Proxy Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/serve-stale.html">Serving Stale Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/performance.html">Performance Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/core/monitoring.html">Monitoring and Reporting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/privacy/aggressive-nsec.html">Aggressive NSEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/privacy/dns-over-https.html">DNS-over-HTTPS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Filtering</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/filtering/tags-views.html">Tags and Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../topics/filtering/rpz.html">Response Policy Zones</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Unbound Library Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="resolve-a-name.html">Resolve a Name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup-context.html">Setup the Context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examine-results.html">Examine the Results</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Asynchronous Lookup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lookup-threads.html">Lookup from Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dnssec-validate.html">DNSSEC Validate</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python-modules.html">Unbound for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doxygen-docs.html">Source Code Docs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual Pages</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound.html">unbound(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-checkconf.html">unbound-checkconf(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound.conf.html">unbound.conf(5)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-host.html">unbound-host(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/libunbound.html">libunbound(3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-control.html">unbound-control(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../manpages/unbound-anchor.html">unbound-anchor(8)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/rfc-compliance.html">RFC Compliance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/history/index.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/todo.html">Docs To-Do List</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Unbound</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Unbound Library Tutorial</a></li>
+      <li class="breadcrumb-item active">Asynchronous Lookup</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/developer/libunbound-tutorial/async-lookup.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="asynchronous-lookup">
+<h1>Asynchronous Lookup<a class="headerlink" href="#asynchronous-lookup" title="この見出しへのパーマリンク">¶</a></h1>
+<p>This example performs the name lookup in the background. The original program
+keeps running, while the name is resolved. It is a modification of the example
+program from the <a class="reference internal" href="resolve-a-name.html"><span class="doc">Resolve a Name</span></a> section.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;arpa/inet.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unbound.h&gt;</span>
+
+<span class="cm">/* This is called when resolution is completed */</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">mycallback</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">mydata</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">err</span><span class="p">,</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_result</span><span class="o">*</span><span class="w"> </span><span class="n">result</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">done</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">mydata</span><span class="p">;</span>
+<span class="w">        </span><span class="o">*</span><span class="n">done</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;resolve error: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ub_strerror</span><span class="p">(</span><span class="n">err</span><span class="p">));</span>
+<span class="w">                </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="cm">/* show first result */</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">result</span><span class="o">-&gt;</span><span class="n">havedata</span><span class="p">)</span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;The address of %s is %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="o">-&gt;</span><span class="n">qname</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">inet_ntoa</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">in_addr</span><span class="o">*</span><span class="p">)</span><span class="n">result</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]));</span>
+
+<span class="w">        </span><span class="n">ub_resolve_free</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">ub_ctx</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">;</span>
+<span class="w">        </span><span class="k">volatile</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">done</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">retval</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">        </span><span class="cm">/* create context */</span>
+<span class="w">        </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ub_ctx_create</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">ctx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;error: could not create unbound context</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="cm">/* asynchronous query for webserver */</span>
+<span class="w">        </span><span class="n">retval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ub_resolve_async</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;www.nlnetlabs.nl&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="mi">1</span><span class="w"> </span><span class="cm">/* TYPE A (IPv4 address) */</span><span class="p">,</span>
+<span class="w">                </span><span class="mi">1</span><span class="w"> </span><span class="cm">/* CLASS IN (internet) */</span><span class="p">,</span>
+<span class="w">                </span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">done</span><span class="p">,</span><span class="w"> </span><span class="n">mycallback</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">retval</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;resolve error: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ub_strerror</span><span class="p">(</span><span class="n">retval</span><span class="p">));</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="cm">/* we keep running, lets do something while waiting */</span>
+<span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">done</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">usleep</span><span class="p">(</span><span class="mi">100000</span><span class="p">);</span><span class="w"> </span><span class="cm">/* wait 1/10 of a second */</span>
+<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;time passed (%d) ..</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">);</span>
+<span class="w">                </span><span class="n">retval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ub_process</span><span class="p">(</span><span class="n">ctx</span><span class="p">);</span>
+<span class="w">                </span><span class="k">if</span><span class="p">(</span><span class="n">retval</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;resolve error: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ub_strerror</span><span class="p">(</span><span class="n">retval</span><span class="p">));</span>
+<span class="w">                        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;done</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">ub_ctx_delete</span><span class="p">(</span><span class="n">ctx</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Invocation of this program yields the following:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ example_4
+time passed (0) ..
+time passed (1) ..
+time passed (2) ..
+The address of www.nlnetlabs.nl is 213.154.224.1
+done
+</pre></div>
+</div>
+<p>If resolution takes longer or shorter, the output can vary.</p>
+<p>The context is created. Then an asynchronous resolve is performed. This performs
+the name resolution work in the background, allowing your application to
+continue to perform tasks (like showing a GUI to the user).</p>
+<p>The function to start a background, asynchronous, resolve is
+<code class="docutils literal notranslate"><span class="pre">ub_resolve_async</span></code>. It takes the usual context, name, type and class as
+arguments. Additionally it takes a user argument, callback function and an id as
+arguments. In the example, the user argument is a reference to the variable
+done. It can be any pointer you like, or NULL if you don't care. The callback
+function is a pointer to a function, like <code class="docutils literal notranslate"><span class="pre">mycallback</span></code> in the example, that is
+invoked when the lookup is done.</p>
+<p>The optional id argument is omitted in the example by passing NULL. If you pass
+an int*, an identifier is returned to you, that allows subsequent cancellation
+of the outstanding resolve request. The function <code class="docutils literal notranslate"><span class="pre">ub_cancel</span></code> can be used while
+the asynchronous lookup has not completed yet to cancel it (not shown in the
+example).</p>
+<p>After requesting the lookup the main function continues with a while loop, that
+prints time increments. Every time increment <code class="docutils literal notranslate"><span class="pre">ub_process</span></code> is called. This
+function processes pending lookup results and an application has to call
+<code class="docutils literal notranslate"><span class="pre">ub_process</span></code> somewhere to be able to receive results from asynchronous
+queries. The function <code class="docutils literal notranslate"><span class="pre">ub_process</span></code> does not block. The callback function is
+called from within <code class="docutils literal notranslate"><span class="pre">ub_process</span></code>.</p>
+<p>The callback is called after some time, in the example it is called
+<code class="docutils literal notranslate"><span class="pre">mycallback</span></code>. This function receives as its first argument the same value you
+passed as user argument to <code class="docutils literal notranslate"><span class="pre">ub_resolve_async</span></code>. It also receives the error code
+and a result structure. If the error code is not 0 (an error happened), the
+result is NULL. The result structure contains the lookup information.</p>
+<p>The example callback uses its first argument to set done to true, to signal the
+main function that lookup has completed. It then checks if an error happened,
+and prints it if so. If there was no error it prints the first data element of
+the result. (It doesn't check the result very closely, this is only an example).</p>
+<p>When the main function sees that after a call to <code class="docutils literal notranslate"><span class="pre">ub_process</span></code> the variable
+done is true, it exits the waiting loop, and deletes the context. The delete of
+the context also stops the background resolution process and removes the cached
+data from memory.</p>
+<p>You do not have to call <code class="docutils literal notranslate"><span class="pre">ub_process</span></code> all the time. The function <code class="docutils literal notranslate"><span class="pre">ub_poll</span></code>
+(not shown in example) returns true when new data is available (without calling
+any callbacks). The function <code class="docutils literal notranslate"><span class="pre">ub_fd</span></code> (not shown in example) returns a file
+descriptor that becomes readable when new data is available (for use with
+<code class="docutils literal notranslate"><span class="pre">select()</span></code> or similar system calls).</p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">ub_wait</span></code> (not shown in example) can be used to wait for the
+asynchronous lookups to complete. For example, when the main program continues
+to set up a user GUI after starting the lookup, then if it runs out of work
+before the result arrives, it can use <code class="docutils literal notranslate"><span class="pre">ub_wait</span></code> to block until data arrives.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="examine-results.html" class="btn btn-neutral float-left" title="Examine the Results" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="lookup-threads.html" class="btn btn-neutral float-right" title="Lookup from Threads" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1999-2024, NLnet Labs.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

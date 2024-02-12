@@ -1,0 +1,798 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 1999-2024, NLnet Labs
+# This file is distributed under the same license as the Unbound package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Unbound 1.19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-12 13:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.14.0\n"
+
+#: ../../source/use-cases/home-resolver.rst:2
+msgid "Resolver for Home Networks"
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:4
+msgid ""
+"To start off, let's ask the all-important question \"Why would you want "
+"Unbound as a resolver for your home network?\""
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:7
+msgid ""
+"Firstly, Unbound supports DNSSEC which, through an authentication chain, "
+"verifies that the DNS query responses you receive are unaltered, as "
+"opposed to query responses which are not DNSSEC-signed and could be "
+"changed by anyone who has access to the query. Secondly, by using your "
+"own resolver you stop sharing your DNS traffic with third parties and "
+"increase your DNS privacy. While you still send out (parts of) your "
+"queries unencrypted, you could configure Unbound to take it a step "
+"further, which we'll talk about in an upcoming guide. Lastly, when you "
+"run your own resolver your DNS cache will be local to your network. Even "
+"though the first time you resolve a domain name may be slightly slower "
+"than using your ISP’s resolver, all subsequent queries for the name will "
+"likely be much faster."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:19
+msgid ""
+"In this tutorial we'll look at setting up Unbound as a DNS resolver; "
+"First for your own machine, and then for your entire network."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:24
+msgid "Setting up Unbound"
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:26
+msgid ""
+"Unbound is a powerful validating, recursive, caching DNS resolver. It’s "
+"used by some of the biggest tech companies in the world as well as small-"
+"office / home-office users, who use it together with ad blockers and "
+"firewalls, or self-hosted resolvers. Setting it up for your home network "
+"can be quite simple as we’ll showcase below."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:32
+msgid ""
+"Setting up a caching DNS server for your entire home network requires a "
+"recursive DNS resolver, and a dedicated machine on which the resolver "
+"runs; this (small) system is always on and accessible to the entire "
+"network. It can be as small as a Raspberry Pi or any other available "
+"Linux/Unix machine that is always online and has Internet connectivity "
+"via your router."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:38
+msgid ""
+"Because of the variety of machines that Unbound can run on we cannot "
+"create a comprehensive tutorial for all possible options. For this "
+"tutorial we will use **Ubuntu 22.04 LTS** as a stepping stone you can "
+"adapt and apply to other systems."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:43
+msgid ""
+"While you could download the code from GitHub and build it yourself, "
+"getting a copy can be as simple as running:"
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:51
+msgid ""
+"This gives you a complete and running version of Unbound which behaves as"
+" a caching recursive DNS resolver out of the box for the system on which "
+"you install it. You can check which version of Unbound you have installed"
+" with ``unbound -V``. The version installed will vary depending on the "
+"operating system. If the version is installed is quite old (at the time "
+"of writing it isn't) or you'd simply like to run the latest and greatest "
+"version you can download the latest release tarball from our `website "
+"<https://nlnetlabs.nl/projects/unbound/about/>`_ and build it yourself."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:60
+msgid ""
+"Do note that by default Unbound will be queriable only from the local "
+"host, i.e. the system on which you installed Unbound. We will change that"
+" later."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:65
+msgid "Testing the resolver locally"
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:67
+msgid ""
+"To verify that the server works correctly, it’s a good idea to test it "
+"before committing the entire network to it. Luckily we can test this on "
+"the machine that you installed Unbound on (locally) and from any other "
+"machine (remotely) that will be using the resolver after we expose "
+"Unbound to the network."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:72
+msgid "The command for testing locally on the Unbound machine is:"
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:78
+msgid ""
+"Here we tell the :command:`dig` tool to look up the IP address for "
+"example.com, and to ask for this information from the resolver running at"
+" the IP address ``127.0.0.1``, which is where our Unbound machine is "
+"running by default. We can verify that Unbound has indeed answered our "
+"query instead of the default resolver that is present on Ubuntu by "
+"default. In the output of every :command:`dig` command there is an "
+"``ANSWER SECTION`` which gives the response to the query. In the footer "
+"section of the output, the server which has answered the query under the "
+"``SERVER`` entry. The entry will look like:"
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:91
+msgid ""
+"In the next section we will be disabling the default Ubuntu resolver. To "
+"verify that we do it correctly it is useful to know the address of the "
+"default resolver as a baseline. For this baseline we also use a "
+":command:`dig` query, but this time without specifying an IP address "
+"(which causes dig to use the machine's default DNS resolver)."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:101
+msgid ""
+"While the response should be the same, the ``SERVER`` entry in the "
+"response should look like:"
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:108
+msgid ""
+"Note that the final IPv4 digit is 53 and not 1, as with our Unbound "
+"instance."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:111
+msgid "Setting up for a single machine"
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:113
+msgid ""
+"Now that we have tested our Unbound resolver, we can tell our machine to "
+"use it by default. The resolver your machine uses by default is defined "
+"in :file:`/etc/systemd/resolved.conf` in the ``DNS`` entry (It uses "
+"``127.0.0.53`` ). While just changing this file will work as long as the "
+"machine doesn't reboot, we need to make sure that this change is "
+"persistent. To do that, we need to change the ``DNS`` entry to be equal "
+"to ``127.0.0.1`` so the machine uses Unbound as default. To make the "
+"change persistent, we also need to set the ``DNSStubListener`` to ``no`` "
+"so that is not changed by our router (such as with a \"recommended "
+"resolver\" mentioned below). We also want to enable the ``DNSSEC`` option"
+" so that we can verify the integrity the responses we get to our DNS "
+"queries. With your favourite text editor (e.g. :command:`nano`) we can "
+"modify the file:"
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:130
+msgid ""
+"Here, under the ``[Resolve]`` section we add (or rather, enable by "
+"removing the \"#\") the options:"
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:147
+msgid ""
+"To actually have the system start using Unbound, we then need to create a"
+" symlink to overwrite :file:`/etc/resolv.conf` to the one we modified."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:153
+msgid "With this file modified, we can restart using this configuration with:"
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:159
+#: ../../source/use-cases/local-stub.rst:141
+msgid ""
+"If successful, the operating system should use our Unbound instance as "
+"default. A quick test a :command:`dig` without specifying the address of "
+"the Unbound server should give the same result as specifying it did above"
+" (with ``@127.0.0.1``)."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:168
+msgid ""
+"Note that the \"SERVER\" section in the output from :command:`dig` should"
+" also contain the local IP address of our server."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:177
+msgid "Setting up for the rest of the network"
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:179
+msgid ""
+"While we currently have a working instance of Unbound, we need it to be "
+"reachable from within our entire network. With that comes the headache of"
+" dealing with (local) IP addresses. It’s likely that your home router "
+"distributed local IP addresses to your devices. If this is the case (i.e."
+" you didn't change it by hand), they should be :rfc:`1918` ranges:"
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:191
+msgid "To find the IP address of the machine that is running Unbound, we use:"
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:197
+msgid ""
+"If you just have one IP address as output from the :command:`hostname` "
+"command that will be the correct one. If you have multiple IP addresses, "
+"the easiest way to determine which IP address to use, is to find out "
+"which connection goes to your home router. Keep in mind that using the "
+"wrong IP address here can be a source of connectivity errors further on. "
+"For the purpose of this tutorial we assume that our home router has the "
+"IP address ``192.168.0.1``, as this is typical for home routers, and our "
+"resolver machine (the machine that is running our Unbound instance) has "
+"IP address ``192.168.0.2``, which we will get into in the next section."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:207
+msgid ""
+"As a prerequisite for the next step, we need to configure our Unbound "
+"instance to be reachable from devices other than only the machine on "
+"which the Unbound is running. Unbound is a highly capable resolver, and "
+"as such has many options which can be set; the full example configuration"
+" file is almost 1200 lines long, but we'll need but a fraction of these "
+"settings. (If you are interested, all configuration options are "
+"documented in the extensive manual page of "
+":doc:`/manpages/unbound.conf`)."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:216
+msgid "The default configuration file is found at:"
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:222
+msgid ""
+"If you open this for the first time it looks very empty. It is still "
+"usable as a resolver for one machine, as this is how the Unbound defaults"
+" are configured. It's not, however, enough for our purposes, so we will "
+"add the minimal configuration options needed."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:227
+msgid ""
+"The options that we add to the current configuration file to make it a "
+"\"minimal usable configuration\" are as follows. Note that the IPv6 "
+"options are commented out, but we recommend to uncomment them if your "
+"router and network supports it."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:250
+msgid ""
+"The interface is currently configured to listen to any address on the "
+"machine, and the access-control only allows queries from the "
+"``192.168.0.0/16`` `IP subnet <https://www.ripe.net/about-us/press-centre"
+"/understanding-ip-addressing>`_ range. Note that the IP address we chose "
+"above (``192.168.0.1`` and ``192.168.0.2``) fall within the "
+"``192.168.0.0/16`` range."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:257
+msgid ""
+"To prepare our configuration we are going to modify the existing "
+"configuration in :file:`/etc/unbound/unbound.conf`. If you open the file "
+"for the first time, you see that there is already an “include” in there. "
+"The \"include\" enables us to do `DNSSEC <https://www.sidn.nl/en/modern-"
+"internet-standards/dnssec>`_, which allows Unbound to verify the source "
+"of the answers that it receives, as well as QNAME minimisation. For "
+"convenience these configuration options have already been added in the "
+"minimal configuration. The configuration also includes the :ref:`remote-"
+"control:<unbound.conf.remote>` section in the configuration to enable "
+"controlling Unbound using the :doc:`/manpages/unbound-control` command, "
+"which is useful if you want to modify the configuration on the fly later "
+"on."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:269
+msgid ""
+"Using the text editor again, we can then add the minimal configuration "
+"shown above, making any changes to the access control where needed. When "
+"we've modified the configuration we check it for mistakes with the "
+":doc:`/manpages/unbound-checkconf` command:"
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:278
+msgid ""
+"If this command reports no errors, we need to stop the currently running "
+"Unbound instance and restart it with our new configuration. You can stop "
+"Unbound with:"
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:285
+msgid "And you can restart Unbound with:"
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:291
+msgid ""
+"From this point on, we can :ref:`stop<unbound-control.commands.stop>`, "
+":ref:`start<unbound-control.commands.start>`, and :ref:`reload<unbound-"
+"control.commands.reload>` Unbound with :command:`unbound-control` if you "
+"want to make changes to the configuration."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:297
+msgid "Testing the resolver from a remote machine"
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:299
+msgid ""
+"So now we have a DNS resolver which should be reachable from within the "
+"network. To be able to verify that our resolver is working correctly, we "
+"want to test it from another machine in the network. As mentioned above, "
+"this tutorial uses the address ``192.168.0.2`` (not ``127.0.0.1`` as we "
+"saw earlier) as an example for the machine running Unbound. Armed with "
+"the IP address we can send a query to our DNS resolver from another "
+"machine which is within our home network. To do this we use the same dig "
+"command, only we change the IP address where the query is asked."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:312
+msgid ""
+"This should give the same result as above. The ``SERVER`` entry in the "
+"footer reflects from which server the response was received."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:316
+msgid "Where it all comes together"
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:318
+msgid ""
+"We should now have a functioning DNS resolver that is accessible to all "
+"machines in our network (**make sure you do before you continue**)."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:321
+msgid ""
+"The next step then is a little tricky as there are many options and "
+"variations possible. We have a choice of which machines in our network "
+"will be using our configured DNS resolver. This can range from a single "
+"machine to all the machines that are connected. Since this tutorial "
+"cannot (and does not try to) be comprehensive for the range of choices, "
+"we will look at some of the basic examples which you can implement and "
+"expand on."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:328
+msgid ""
+"Most machines when they first connect to a network get a “recommended "
+"resolver” from your router using :abbr:`DHCP (Dynamic Host Configuration "
+"Protocol)`. To change this, we need to log into the router. Earlier in "
+"this tutorial we assume the home router was using ``192.168.0.1``, though"
+" in reality this can differ. If this does differ, the unbound "
+"configuration needs to be changed as well."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:334
+msgid ""
+"To find the IP address of our home router, which is likely be under the "
+"``default gateway`` entry from:"
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:341
+msgid ""
+"When you've found the IP address of your home router, you can copy the "
+"address to a web browser, which should give you access to the router "
+"configuration portal. If you can't find the portal using this method, "
+"consult the manual or the manufacturer's website. When you have access, "
+"you should change the DHCP configuration to advertise the IP address of "
+"the machine running Unbound as the default gateway. In the case of our "
+"example, that would be ``192.168.0.2``."
+msgstr ""
+
+#: ../../source/use-cases/home-resolver.rst:348
+msgid ""
+"Another possibility is a machine that does not use a resolver that is "
+"“recommended” by your router. This machine can be running its own "
+"resolver or be connected to a different one altogether. If you want these"
+" machines to use the Unbound resolver you set up, you need to change the "
+"configuration of the machine."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:2
+msgid "Local DNS (Stub) Resolver for a Single Machine"
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:8
+msgid ""
+"Unbound is a powerful validating, recursive, caching DNS resolver. It’s "
+"used by some of the biggest tech companies in the world as well as home "
+"users, who use it together with ad blockers and firewalls, or self-run "
+"resolvers. Setting it up as a caching resolver for your own machine can "
+"be quite simple as we’ll showcase below."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:14
+msgid ""
+"We strongly recommend setting up `DNSSEC <https://www.sidn.nl/en/modern-"
+"internet-standards/dnssec>`_ during the Unbound configuration step, as it"
+" allows the verification of the integrity of the responses to the queries"
+" you send."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:19
+msgid ""
+"If you need to install Unbound first visit the :doc:`/getting-"
+"started/installation` page."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:23
+msgid "Configuring the Local Stub resolver"
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:25
+msgid ""
+"For configuring Unbound we need to make sure we have Unbound installed. "
+"An easy test is by asking the version number."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:32
+msgid ""
+"Once we have a working version of Unbound installed we need to configure "
+"it to be a recursive caching resolver (information about recursive "
+"resolvers can be found `here <https://www.cloudflare.com/en-"
+"gb/learning/dns/dns-server-types/>`_, but is not necessary for our "
+"purposes here). Luckily for us Unbound already behaves as such by "
+"default, so for basic purposes we can use the configuration from the :doc"
+":`/getting-started/configuration` page. We always recommend "
+":doc:`enabling DNSSEC </getting-started/configuration#set-up-trust-"
+"anchor-enable-dnssec>`."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:40
+msgid ""
+"Once we have a configuration we are happy with, we need to tell our "
+"machine to use Unbound by default instead of what it is currently using. "
+"This works differently on different operating systems. Below we will go "
+"through this for a selection of OSes."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:46
+msgid ""
+"Make sure your Unbound can run with the configuration we create. Steps "
+"for this can be found :doc:`on the configuration page</getting-"
+"started/configuration>`."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:50
+msgid "Ubuntu 22.04 LTS"
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:52
+msgid ""
+"The resolver your machine uses by default is defined in "
+":file:`/etc/systemd/resolved.conf` in the ``DNS`` entry and uses the IP "
+"address ``127.0.0.53``."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:55
+msgid ""
+"We can test this by using :command:`dig` to \"example.com\" and looking "
+"at the output."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:62
+msgid "Near the bottom of the output we can see ``127.0.0.53`` IP address."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:68
+msgid ""
+"To change this, we are going to change the :file:`resolved.conf`. While "
+"just changing this file will work as long as the machine doesn't reboot, "
+"we need to make sure that this change is *persistent*. To do that, we "
+"need to change the ``DNS`` entry to be equal to ``127.0.0.1`` (or "
+"whatever IP address Unbound is bound to in your configuration) so the "
+"machine uses Unbound as default. So the interface would look like this in"
+" the Unbound config:"
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:80
+msgid ""
+"To test that Unbound is running, we can tell :command:`dig` to use a "
+"specific server with the ``@``."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:87
+msgid ""
+"If Unbound is running, the output should contain the address that we "
+"specified in the config:"
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:94
+msgid ""
+"If we changed :file:`resolved.conf` now, the default resolver would be "
+"persistent until the router wants to update it. To make sure it doesn't "
+"do that we also need to set the ``DNSStubListener`` to ``no`` so that is "
+"not changed by our router (such as with a \"recommended resolver\" "
+"mentioned below). We also want to enable the ``DNSSEC`` option so that we"
+" can verify the integrity the responses we get to our DNS queries. With "
+"your favourite text editor (e.g. :command:`nano` ) we can modify the "
+"file:"
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:105
+msgid ""
+"Here, under there ``[Resolve]`` header we add/substitute our changes to "
+"the options:"
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:122
+msgid ""
+"To actually have the system start using our changed config, we then need "
+"to create a symlink to overwrite :file:`/etc/resolv.conf` to the one we "
+"modified."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:130
+msgid ""
+"Make sure your Unbound is running at at the IP address from the modified "
+"resolv.conf before the next step, otherwise you might break your internet"
+" connection."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:134
+msgid ""
+"With the resolv.conf file modified, we can restart systemd using the new "
+"resolver configuration with:"
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:150
+msgid ""
+"Here we tell the :command:`dig` tool to look up the IP address for "
+"``example.com``. We did not specify where :command:`dig` should ask this,"
+" so it goes to the default resolver of the machine."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:158
+msgid ""
+"It should look the same as with the ``127.0.0.1`` IP specified as we did "
+"earlier."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:167
+msgid ""
+"Unbound is not persistent at this point, and will not start up when your "
+"system does (and possibly \"breaking\" your internet). This is fixed by "
+"restarting your Unbound upon reboot."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:172
+msgid "Package manager"
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:174
+msgid ""
+"To make Unbound persistent between restarts, we need to add it to the "
+"systemd service manager, for which we'll need a service file. If you "
+"installed Unbound via the package manager, this service file is already "
+"created for you and the only thing that is missing, is it executing our "
+"own configuration file."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:179
+msgid ""
+"To make sure we execute Unbound with our own configuration, we copy our "
+"config file to the default location of the config file: "
+":file:`/etc/unbound/unbound.conf`. Make sure Unbound starts using the "
+"copied configuration (this can be done with the :option:`-c<unbound -c>` "
+"flag to specify the config location)."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:185
+msgid ""
+"Before you proceed to the next step, make sure to stop the Unbound that "
+"may still be running. Now we can start our Unbound with systemd, which "
+"will restart automatically when the system is rebooted."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:193
+msgid ""
+"To check that everything is correct, you can see the status (which should"
+" be \"active\"):"
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:200
+msgid "We can now :command:`dig` a final time, to verify that this works."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:204
+#: ../../source/use-cases/local-stub.rst:347
+msgid "Compilation"
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:206
+msgid ""
+"The steps for making Unbound persistent are almost exactly the same as if"
+" you installed it via the package manager, except that the service file "
+"that is needed by systemd does not exist yet. So instead of changing it, "
+"we create it and call it ``unbound.service``, and copy the minimally "
+"modified service file supplied by the package manager. It should be "
+"located at: ``/lib/systemd/system/unbound.service``."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:213
+msgid "So using your favorite text editor open the file:"
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:219
+msgid "and copy the file contents below:"
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:240
+msgid ""
+"Note that in this file ``systemctl`` uses the default config location. "
+"This location is different depending on the installation method used. In "
+"this case the default config file is located at "
+":file:`/usr/local/etc/unbound`. We need to copy the config that we are "
+"going to use here."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:245
+msgid ""
+"Once you have your config copied in the right location, we need to make "
+"sure the system can find it."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:248
+msgid ""
+"Because we change the service file on disk (we created it), systemctl "
+"needs to be reloaded:"
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:255
+msgid "We then need to enable Unbound as a systemctl service:"
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:261
+msgid ""
+"If all steps went correctly, we can start Unbound now using systemctl. "
+"Note that any previous Unbound instances with the same config "
+"(specifically the same ip-address) needs to be stopped."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:269
+msgid "We can then look at the status, which should be \"active\"."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:276
+msgid ""
+"If you succeeded Unbound should now be the default resolver on your "
+"machine and it will start when your machine boots."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:280
+msgid "macOS Big Sur"
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:282
+msgid ""
+"To find out which resolver your machine uses, we have two options: Look "
+"at the DNS tab under the Network tab in the System Preferences app, or we"
+" can use the :command:`scutil` command in the terminal. The "
+":command:`scutil` command can be used to manage and give information "
+"about the system configuration parameters. When used for DNS, it will "
+"show you all the configured resolvers though we are only interested in "
+"the first."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:293
+msgid ""
+"The output will show all the resolvers configured, but we are interested "
+"in the first entry. Before configuring Unbound to be our resolver, the "
+"first entry is (likely) the resolver recommended by your router."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:297
+msgid ""
+"The simplest method of changing the resolver of your Mac is by using the "
+"System Preferences Window (the option of doing this step via the command "
+"line terminal also exists if you want to script this step). The steps go "
+"as follows:"
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:301
+msgid "Open the Network tab in System Preferences."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:303
+msgid "Click on the Advanced button."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:305
+msgid "Go to the DNS Tab."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:307
+msgid "Click \"+\" icon"
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:309
+msgid "Add IP address of Unbound instance (here we use ``127.0.0.1``)"
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:315
+msgid ""
+"Once the IP address is added we can test our Unbound instance (assuming "
+"it's running)  with :command:`dig`. Note that the Unbound instance cannot"
+" be reached before it has been added in the DNS tab in System "
+"Preferences."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:322
+msgid ""
+"If you restart your Mac at this stage in the process, you will not have "
+"access to the internet anymore. This is because Unbound does not "
+"automatically restart if your machine restarts. To make remedy this, we "
+"need to add Unbound to the startup routine on your Mac."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:327
+msgid ""
+"Depending on your installation method, either via ``Homebrew`` or "
+"compiling Unbound yourself, the method of making Unbound persistent "
+"differs slightly. For both methods we use :command:`launchctl` to start "
+"Unbound on the startup of your machine."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:333
+msgid "Homebrew"
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:335
+msgid ""
+"If you installed Unbound using Homebrew, the XML file required by "
+":command:`launchctl` is already supplied during installation. The file "
+"can be found at ``/Library/LaunchDaemons/homebrew.mxcl.unbound.plist``. "
+"To load this file we invoke the following command."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:344
+#: ../../source/use-cases/local-stub.rst:406
+msgid "Now every time you restart your machine, Unbound should restart too."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:349
+msgid ""
+"If you installed Unbound by compiling it yourself, we need to create an "
+"XML file for :command:`launchctl`. Conveniently we've created one for "
+"you:"
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:382
+msgid ""
+"The main components that interest us, are the items in the ``<array>`` "
+"which execute the command. Firstly, we invoke Unbound from the location "
+"that it has been installed (for example using ``make install``). "
+"Secondly, we add the :option:`-c<unbound -c>` option to supply a "
+"configuration file. Lastly, we add the location of the default "
+"configuration file. The location in the XML can be changed to another "
+"location if this is convenient."
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:391
+msgid ""
+"Using the text editor of choice, we then create the file "
+"``/Library/LaunchDaemons/nl.nlnetlabs.unbound.plist`` and insert the "
+"above supplied XML code. To be able to use the file, we need to change "
+"the permissions of the file using :command:`chmod`"
+msgstr ""
+
+#: ../../source/use-cases/local-stub.rst:400
+msgid "We can then load the file with the following command."
+msgstr ""
+

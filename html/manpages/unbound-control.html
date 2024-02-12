@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>unbound-control(8) &mdash; Unbound 1.19.0 ドキュメント</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/dark.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/light.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="unbound-anchor(8)" href="unbound-anchor.html" />
+    <link rel="prev" title="libunbound(3)" href="libunbound.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/unbound-duotone-white.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.19.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Use Cases</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../use-cases/home-resolver.html">Resolver for Home Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use-cases/local-stub.html">Local DNS (Stub) Resolver for a Single Machine</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/proxy.html">Downstream Proxy Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/serve-stale.html">Serving Stale Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/performance.html">Performance Tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/core/monitoring.html">Monitoring and Reporting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/privacy/aggressive-nsec.html">Aggressive NSEC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/privacy/dns-over-https.html">DNS-over-HTTPS</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Filtering</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../topics/filtering/tags-views.html">Tags and Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../topics/filtering/rpz.html">Response Policy Zones</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developer/libunbound-tutorial/index.html">Unbound Library Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/python-modules.html">Unbound for Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/doxygen-docs.html">Source Code Docs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Manual Pages</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="unbound.html">unbound(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unbound-checkconf.html">unbound-checkconf(8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unbound.conf.html">unbound.conf(5)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unbound-host.html">unbound-host(1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libunbound.html">libunbound(3)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">unbound-control(8)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#synopsis">概要</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">説明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#commands">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exit-code">Exit Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-up">Set Up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#statistic-counters">Statistic Counters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#extended-statistics">Extended Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#files">Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#see-also">See Also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="unbound-anchor.html">unbound-anchor(8)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/rfc-compliance.html">RFC Compliance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/history/index.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/todo.html">Docs To-Do List</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Unbound</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">unbound-control(8)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/manpages/unbound-control.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="unbound-control-8">
+<h1>unbound-control(8)<a class="headerlink" href="#unbound-control-8" title="この見出しへのパーマリンク">¶</a></h1>
+<section id="synopsis">
+<h2>概要<a class="headerlink" href="#synopsis" title="この見出しへのパーマリンク">¶</a></h2>
+<p><strong>unbound-control</strong> [<code class="docutils literal notranslate"><span class="pre">-hq</span></code>] [<code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">cfgfile</span></code>] [<code class="docutils literal notranslate"><span class="pre">-s</span> <span class="pre">server</span></code>] command</p>
+</section>
+<section id="description">
+<h2>説明<a class="headerlink" href="#description" title="この見出しへのパーマリンク">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">unbound-control</span></code> performs remote administration on the
+<a class="reference internal" href="unbound.html"><span class="doc">unbound(8)</span></a> DNS server.
+It reads the configuration file, contacts the Unbound server over TLS sends the
+command and displays the result.</p>
+<p>The available options are:</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-control-h">
+<span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-unbound-control-h" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Show the version and commandline option help.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-control-c">
+<span class="sig-name descname"><span class="pre">-c</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;cfgfile&gt;</span></span><a class="headerlink" href="#cmdoption-unbound-control-c" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>The config file to read with settings.
+If not given the default config file
+<code class="file docutils literal notranslate"><span class="pre">/usr/local/etc/unbound/unbound.conf</span></code> is used.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-control-s">
+<span class="sig-name descname"><span class="pre">-s</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;server[&#64;port]&gt;</span></span><a class="headerlink" href="#cmdoption-unbound-control-s" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>IPv4 or IPv6 address of the server to contact.
+If not given, the address is read from the config file.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-unbound-control-q">
+<span class="sig-name descname"><span class="pre">-q</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-unbound-control-q" title="この定義へのパーマリンク">¶</a></dt>
+<dd><p>Quiet, if the option is given it does not print anything if it works ok.</p>
+</dd></dl>
+
+</section>
+<section id="commands">
+<h2>Commands<a class="headerlink" href="#commands" title="この見出しへのパーマリンク">¶</a></h2>
+<p>There are several commands that the server understands.</p>
+<dl class="simple" id="unbound-control-commands-start">
+<dt>start</dt><dd><p>Start the server.
+Simply execs <a class="reference internal" href="unbound.html"><span class="doc">unbound(8)</span></a>.
+The <code class="docutils literal notranslate"><span class="pre">unbound</span></code> executable is searched for in the <strong>PATH</strong> set in the
+environment.
+It is started with the config file specified using <a class="reference internal" href="#cmdoption-unbound-control-c"><code class="xref std std-option docutils literal notranslate"><span class="pre">-c</span></code></a> or the
+default config file.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-stop">
+<dt>stop</dt><dd><p>Stop the server.
+The server daemon exits.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-reload">
+<dt>reload</dt><dd><p>Reload the server.
+This flushes the cache and reads the config file fresh.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-reload-keep-cache">
+<dt>reload_keep_cache</dt><dd><p>Reload the server but try to keep the RRset and message cache if
+(re)configuration allows for it.
+That means the caches sizes and the number of threads must not change
+between reloads.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-verbosity">
+<dt>verbosity <em>number</em></dt><dd><p>Change verbosity value for logging.
+Same values as the <strong>verbosity:</strong> keyword in
+<a class="reference internal" href="unbound.conf.html"><span class="doc">unbound.conf(5)</span></a>.
+This new setting lasts until the server is issued a reload (taken from
+config file again), or the next verbosity control command.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-log-reopen">
+<dt>log_reopen</dt><dd><p>Reopen the logfile, close and open it.
+Useful for logrotation to make the daemon release the file it is logging
+to.
+If you are using syslog it will attempt to close and open the syslog (which
+may not work if chrooted).</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-stats">
+<dt>stats</dt><dd><p>Print statistics.
+Resets the internal counters to zero, this can be controlled using the
+<strong>statistics-cumulative:</strong> config statement.
+Statistics are printed with one <code class="docutils literal notranslate"><span class="pre">[name]:</span> <span class="pre">[value]</span></code> per line.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-stats-noreset">
+<dt>stats_noreset</dt><dd><p>Peek at statistics.
+Prints them like the stats command does, but does not reset the internal
+counters to zero.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-status">
+<dt>status</dt><dd><p>Display server status.
+Exit code 3 if not running (the connection to the port is refused), 1 on
+error, 0 if running.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-local-zone">
+<dt>local_zone <em>name type</em></dt><dd><p>Add new local zone with name and type.
+Like local-zone config statement.
+If the zone already exists, the type is changed to the given argument.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-local-zone-remove">
+<dt>local_zone_remove <em>name</em></dt><dd><p>Remove the local zone with the given name.
+Removes all local data inside it.
+If the zone does not exist, the command succeeds.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-local-data">
+<dt>local_data <em>RR data...</em></dt><dd><p>Add new local data, the given resource record.
+Like <strong>local-data:</strong> keyword, except for when no covering zone exists.
+In that case this remote control command creates a transparent zone with
+the same name as this record.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-local-data-remove">
+<dt>local_data_remove <em>name</em></dt><dd><p>Remove all RR data from local name.
+If the name already has no items, nothing happens.
+Often results in NXDOMAIN for the name (in a static zone), but if the name
+has become an empty nonterminal (there is still data in domain names below
+the removed name), NOERROR nodata answers are the result for that name.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-local-zones">
+<dt>local_zones</dt><dd><p>Add local zones read from stdin of unbound-control.
+Input is read per line, with name space type on a line.
+For bulk additions.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-local-zones-remove">
+<dt>local_zones_remove</dt><dd><p>Remove local zones read from stdin of unbound-control.
+Input is one name per line.
+For bulk removals.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-local-datas">
+<dt>local_datas</dt><dd><p>Add local data RRs read from stdin of unbound-control.
+Input is one RR per line.
+For bulk additions.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-local-datas-remove">
+<dt>local_datas_remove</dt><dd><p>Remove local data RRs read from stdin of unbound-control.
+Input is one name per line.
+For bulk removals.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-dump-cache">
+<dt>dump_cache</dt><dd><p>The contents of the cache is printed in a text format to stdout.
+You can redirect it to a file to store the cache in a file.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-load-cache">
+<dt>load_cache</dt><dd><p>The contents of the cache is loaded from stdin.
+Uses the same format as dump_cache uses.
+Loading the cache with old, or wrong data can result in old or wrong data
+returned to clients.
+Loading data into the cache in this way is supported in order to aid with
+debugging.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-lookup">
+<dt>lookup <em>name</em></dt><dd><p>Print to stdout the name servers that would be used to look up the name
+specified.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-flush">
+<dt>flush <em>name</em></dt><dd><p>Remove the name from the cache.
+Removes the types A, AAAA, NS, SOA, CNAME, DNAME, MX, PTR, SRV, NAPTR,
+SVCB and HTTPS.
+Because that is fast to do.
+Other record types can be removed using <strong>flush_type</strong> or <strong>flush_zone</strong>.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-flush-type">
+<dt>flush_type <em>name type</em></dt><dd><p>Remove the name, type information from the cache.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-flush-zone">
+<dt>flush_zone name</dt><dd><p>Remove all information at or below the name from the cache.
+The rrsets and key entries are removed so that new lookups will be
+performed.
+This needs to walk and inspect the entire cache, and is a slow operation.
+The entries are set to expired in the implementation of this command (so,
+with serve-expired enabled, it'll serve that information but schedule a
+prefetch for new information).</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-flush-bogus">
+<dt>flush_bogus</dt><dd><p>Remove all bogus data from the cache.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-flush-negative">
+<dt>flush_negative</dt><dd><p>Remove all negative data from the cache.
+This is nxdomain answers, nodata answers and servfail answers.
+Also removes bad key entries (which could be due to failed lookups) from
+the dnssec key cache, and iterator last-resort lookup failures from the
+rrset cache.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-flush-stats">
+<dt>flush_stats</dt><dd><p>Reset statistics to zero.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-flush-requestlist">
+<dt>flush_requestlist</dt><dd><p>Drop the queries that are worked on.
+Stops working on the queries that the server is working on now.
+The cache is unaffected.
+No reply is sent for those queries, probably making those users request
+again later.
+Useful to make the server restart working on queries with new settings,
+such as a higher verbosity level.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-dump-requestlist">
+<dt>dump_requestlist</dt><dd><p>Show what is worked on.
+Prints all queries that the server is currently working on.
+Prints the time that users have been waiting.
+For internal requests, no time is printed.
+And then prints out the module status.
+This prints the queries from the first thread, and not queries that are
+being serviced from other threads.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-flush-infra">
+<dt>flush_infra <em>all|IP</em></dt><dd><p>If all then entire infra cache is emptied.
+If a specific IP address, the entry for that address is removed from the
+cache.
+It contains EDNS, ping and lameness data.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-dump-infra">
+<dt>dump_infra</dt><dd><p>Show the contents of the infra cache.</p>
+</dd>
+</dl>
+<dl id="unbound-control-commands-set-option">
+<dt>set_option <em>opt: val</em></dt><dd><p>Set the option to the given value without a reload.
+The cache is therefore not flushed.
+The option must end with a <code class="docutils literal notranslate"><span class="pre">':'</span></code> and whitespace must be between the
+option and the value.
+Some values may not have an effect if set this way, the new values are not
+written to the config file, not all options are supported.
+This is different from the set_option call in libunbound, where all values
+work because Unbound has not been initialized.</p>
+<p>The values that work are: statistics-interval, statistics-cumulative,
+do-not-query-localhost,  harden-short-bufsize, harden-large-queries,
+harden-glue, harden-dnssec-stripped, harden-below-nxdomain,
+harden-referral-path,  prefetch, prefetch-key, log-queries, hide-identity,
+hide-version, identity, version, val-log-level, val-log-squelch,
+ignore-cd-flag, add-holddown, del-holddown, keep-missing, tcp-upstream,
+ssl-upstream, max-udp-size, ratelimit, ip-ratelimit, cache-max-ttl,
+cache-min-ttl, cache-max-negative-ttl.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-get-option">
+<dt>get_option <em>opt</em></dt><dd><p>Get the value of the option.
+Give the option name without a trailing <code class="docutils literal notranslate"><span class="pre">':'</span></code>.
+The value is printed.
+If the value is <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>, nothing is printed and the connection closes.
+On error <code class="docutils literal notranslate"><span class="pre">'error</span> <span class="pre">...'</span></code> is printed (it gives a syntax error on unknown
+option).
+For some options a list of values, one on each line, is printed.
+The options are shown from the config file as modified with set_option.
+For some options an override may have been taken that does not show up with
+this command, not results from e.g. the verbosity and forward control
+commands.
+Not all options work, see list_stubs, list_forwards, list_local_zones and
+list_local_data for those.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-list-stubs">
+<dt>list_stubs</dt><dd><p>List the stub zones in use.
+These are printed one by one to the output.
+This includes the root hints in use.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-list-forwards">
+<dt>list_forwards</dt><dd><p>List the forward zones in use.
+These are printed zone by zone to the output.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-list-insecure">
+<dt>list_insecure</dt><dd><p>List the zones with domain-insecure.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-list-local-zones">
+<dt>list_local_zones</dt><dd><p>List the local zones in use.
+These are printed one per line with zone type.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-list-local-data">
+<dt>list_local_data</dt><dd><p>List the local data RRs in use.
+The resource records are printed.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-insecure-add">
+<dt>insecure_add <em>zone</em></dt><dd><p>Add a domain-insecure for the given zone, like the statement in
+unbound.conf.
+Adds to the running Unbound without affecting the cache
+contents (which may still be bogus, use flush_zone to remove it), does not
+affect the config file.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-insecure-remove">
+<dt>insecure_remove <em>zone</em></dt><dd><p>Removes domain-insecure for the given zone.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-forward-add">
+<dt>forward_add [<code class="docutils literal notranslate"><span class="pre">+i</span></code>] <em>zone addr ...</em></dt><dd><p>Add a new forward zone to running Unbound.
+With <code class="docutils literal notranslate"><span class="pre">+i</span></code> option also adds a domain-insecure for the zone (so it can
+resolve insecurely if you have a DNSSEC root trust anchor configured for
+other names).
+The addr can be IP4, IP6 or nameserver names, like forward-zone config in
+unbound.conf.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-forward-remove">
+<dt>forward_remove [<code class="docutils literal notranslate"><span class="pre">+i</span></code>] <em>zone</em></dt><dd><p>Remove a forward zone from running Unbound.
+The <code class="docutils literal notranslate"><span class="pre">+i</span></code> also removes a domain-insecure for the zone.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-stub-add">
+<dt>stub_add [<code class="docutils literal notranslate"><span class="pre">+ip</span></code>] <em>zone addr ...</em></dt><dd><p>Add a new stub zone to running Unbound.
+With <code class="docutils literal notranslate"><span class="pre">+i</span></code> option also adds a domain-insecure for the zone.
+With <code class="docutils literal notranslate"><span class="pre">+p</span></code> the stub zone is set to prime, without it it is set to
+notprime.
+The addr can be IP4, IP6 or nameserver names, like the <strong>stub-zone:</strong>
+config in unbound.conf.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-stub-remove">
+<dt>stub_remove [<code class="docutils literal notranslate"><span class="pre">+i</span></code>] <em>zone</em></dt><dd><p>Remove a stub zone from running Unbound.
+The <code class="docutils literal notranslate"><span class="pre">+i</span></code> also removes a domain-insecure for the zone.</p>
+</dd>
+</dl>
+<dl id="unbound-control-commands-forward">
+<dt>forward [<em>off</em> | <em>addr ...</em> ]</dt><dd><p>Setup forwarding mode.
+Configures if the server should ask other upstream nameservers, should go
+to the internet root nameservers itself, or show the current config.
+You could pass the nameservers after a DHCP update.</p>
+<p>Without arguments the current list of addresses used to forward all queries
+to is printed.
+On startup this is from the forward-zone <code class="docutils literal notranslate"><span class="pre">&quot;.&quot;</span></code> configuration.
+Afterwards it shows the status.
+It prints off when no forwarding is used.</p>
+<p>If off is passed, forwarding is disabled and the root nameservers are
+used.
+This can be used to avoid to avoid buggy or non-DNSSEC supporting
+nameservers returned from DHCP.
+But may not work in hotels or hotspots.</p>
+<p>If one or more IPv4 or IPv6 addresses are given, those are then used to
+forward queries to.
+The addresses must be separated with spaces.
+With <code class="docutils literal notranslate"><span class="pre">'&#64;port'</span></code> the port number can be set explicitly (default port is 53
+(DNS)).</p>
+<p>By default the forwarder information from the config file for the root
+<code class="docutils literal notranslate"><span class="pre">&quot;.&quot;</span></code> is used.
+The config file is not changed, so after a reload these changes are gone.
+Other forward zones from the config file are not affected by this command.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-ratelimit-list">
+<dt>ratelimit_list [<code class="docutils literal notranslate"><span class="pre">+a</span></code>]</dt><dd><p>List the domains that are ratelimited.
+Printed one per line with current estimated qps and qps limit from config.
+With <code class="docutils literal notranslate"><span class="pre">+a</span></code> it prints all domains, not just the ratelimited domains, with
+their estimated qps.
+The ratelimited domains return an error for uncached (new) queries, but
+cached queries work as normal.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-ip-ratelimit-list">
+<dt>ip_ratelimit_list [<code class="docutils literal notranslate"><span class="pre">+a</span></code>]</dt><dd><p>List the ip addresses that are ratelimited.
+Printed one per line with current estimated qps and qps limit from config.
+With <code class="docutils literal notranslate"><span class="pre">+a</span></code> it prints all ips, not just the ratelimited ips, with their
+estimated qps.
+The ratelimited ips are dropped before checking the cache.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-list-auth-zones">
+<dt>list_auth_zones</dt><dd><p>List the auth zones that are configured.
+Printed one per line with a status, indicating if the zone is expired and
+current serial number.
+Configured RPZ zones are included.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-auth-zone-reload">
+<dt>auth_zone_reload <em>zone</em></dt><dd><p>Reload the auth zone (or RPZ zone) from zonefile.
+The zonefile is read in overwriting the current contents of the zone in
+memory.
+This changes the auth zone contents itself, not the cache contents.
+Such cache contents exists if you set Unbound to validate with
+<strong>for-upstream: yes</strong> and that can be cleared with <strong>flush_zone</strong> <em>zone</em>.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-auth-zone-transfer">
+<dt>auth_zone_transfer <em>zone</em></dt><dd><p>Transfer the auth zone (or RPZ zone) from master.
+The auth zone probe sequence is started, where the masters are probed to
+see if they have an updated zone (with the SOA serial check).
+And then the zone is transferred for a newer zone version.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-rpz-enable">
+<dt>rpz_enable <em>zone</em></dt><dd><p>Enable the RPZ zone if it had previously been disabled.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-rpz-disable">
+<dt>rpz_disable <em>zone</em></dt><dd><p>Disable the RPZ zone.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-view-list-local-zones">
+<dt>view_list_local_zones <em>view</em></dt><dd><p><em>list_local_zones</em> for given view.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-view-local-zone">
+<dt>view_local_zone <em>view name type</em></dt><dd><p><em>local_zone</em> for given view.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-view-local-zone-remove">
+<dt>view_local_zone_remove <em>view name</em></dt><dd><p><em>local_zone_remove</em> for given view.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-view-list-local-data">
+<dt>view_list_local_data <em>view</em></dt><dd><p><em>list_local_data</em> for given view.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-view-local-data">
+<dt>view_local_data <em>view RR data...</em></dt><dd><p><em>local_data</em> for given view.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-view-local-data-remove">
+<dt>view_local_data_remove <em>view name</em></dt><dd><p><em>local_data_remove</em> for given view.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-view-local-datas-remove">
+<dt>view_local_datas_remove <em>view</em></dt><dd><p>Remove a list of <em>local_data</em> for given view from stdin.
+Like <em>local_datas_remove</em>.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-commands-view-local-datas">
+<dt>view_local_datas <em>view</em></dt><dd><p>Add a list of <em>local_data</em> for given view from stdin.
+Like <em>local_datas</em>.</p>
+</dd>
+</dl>
+</section>
+<section id="exit-code">
+<h2>Exit Code<a class="headerlink" href="#exit-code" title="この見出しへのパーマリンク">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">unbound-control</span></code> program exits with status code 1 on error, 0 on
+success.</p>
+</section>
+<section id="set-up">
+<h2>Set Up<a class="headerlink" href="#set-up" title="この見出しへのパーマリンク">¶</a></h2>
+<p>The setup requires a self-signed certificate and private keys for both the
+server and client.
+The script <code class="docutils literal notranslate"><span class="pre">unbound-control-setup</span></code> generates these in the default run
+directory, or with <code class="docutils literal notranslate"><span class="pre">-d</span></code> in another directory.
+If you change the access control permissions on the key files you can decide
+who can use <code class="docutils literal notranslate"><span class="pre">unbound-control</span></code>, by default owner and group but not all users.
+Run the script under the same username as you have configured in
+<code class="file docutils literal notranslate"><span class="pre">unbound.conf</span></code> or as root, so that the daemon is permitted to read the
+files, for example with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>-u<span class="w"> </span>unbound<span class="w"> </span>unbound-control-setup
+</pre></div>
+</div>
+<p>If you have not configured a username in <code class="file docutils literal notranslate"><span class="pre">unbound.conf</span></code>, the keys need
+read permission for the user credentials under which the daemon is started.
+The script preserves private keys present in the directory.
+After running the script as root, turn on
+<a class="reference internal" href="unbound.conf.html#unbound-conf-remote-control-enable"><span class="std std-ref">control-enable:</span></a> in
+<code class="file docutils literal notranslate"><span class="pre">unbound.conf</span></code>.</p>
+</section>
+<section id="statistic-counters">
+<h2>Statistic Counters<a class="headerlink" href="#statistic-counters" title="この見出しへのパーマリンク">¶</a></h2>
+<p>The <a class="reference internal" href="#unbound-control-commands-stats"><span class="std std-ref">stats</span></a> and
+<a class="reference internal" href="#unbound-control-commands-stats-noreset"><span class="std std-ref">stats_noreset</span></a> commands show a
+number of statistic counters:</p>
+<dl class="simple" id="unbound-control-stats-threadx-num-queries">
+<dt>threadX.num.queries</dt><dd><p>number of queries received by thread</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-num-queries-ip-ratelimited">
+<dt>threadX.num.queries_ip_ratelimited</dt><dd><p>number of queries rate limited by thread</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-num-queries-cookie-valid">
+<dt>threadX.num.queries_cookie_valid</dt><dd><p>number of queries with a valid DNS Cookie by thread</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-num-queries-cookie-client">
+<dt>threadX.num.queries_cookie_client</dt><dd><p>number of queries with a client part only DNS Cookie by thread</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-num-queries-cookie-invalid">
+<dt>threadX.num.queries_cookie_invalid</dt><dd><p>number of queries with an invalid DNS Cookie by thread</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-num-cachehits">
+<dt>threadX.num.cachehits</dt><dd><p>number of queries that were successfully answered using a cache lookup</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-num-cachemiss">
+<dt>threadX.num.cachemiss</dt><dd><p>number of queries that needed recursive processing</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-num-dnscrypt-crypted">
+<dt>threadX.num.dnscrypt.crypted</dt><dd><p>number of queries that were encrypted and successfully decapsulated by
+dnscrypt.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-num-dnscrypt-cert">
+<dt>threadX.num.dnscrypt.cert</dt><dd><p>number of queries that were requesting dnscrypt certificates.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-num-dnscrypt-cleartext">
+<dt>threadX.num.dnscrypt.cleartext</dt><dd><p>number of queries received on dnscrypt port that were cleartext and not a
+request for certificates.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-num-dnscrypt-malformed">
+<dt>threadX.num.dnscrypt.malformed</dt><dd><p>number of request that were neither cleartext, not valid dnscrypt messages.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-num-prefetch">
+<dt>threadX.num.prefetch</dt><dd><p>number of cache prefetches performed.
+This number is included in cachehits, as the original query had the
+unprefetched answer from cache, and resulted in recursive processing,
+taking a slot in the requestlist.
+Not part of the recursivereplies (or the histogram thereof) or cachemiss,
+as a cache response was sent.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-num-expired">
+<dt>threadX.num.expired</dt><dd><p>number of replies that served an expired cache entry.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-num-queries-timed-out">
+<dt>threadX.num.queries_timed_out</dt><dd><p>number of queries that are dropped because they waited in the UDP socket
+buffer for too long.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-query-queue-time-us-max">
+<dt>threadX.query.queue_time_us.max</dt><dd><p>The maximum wait time for packets in the socket buffer, in microseconds.
+This is only reported when
+<a class="reference internal" href="unbound.conf.html#unbound-conf-sock-queue-timeout"><span class="std std-ref">sock-queue-timeout:</span></a> is enabled.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-num-recursivereplies">
+<dt>threadX.num.recursivereplies</dt><dd><p>The number of replies sent to queries that needed recursive processing.
+Could be smaller than threadX.num.cachemiss if due to timeouts no replies
+were sent for some queries.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-requestlist-avg">
+<dt>threadX.requestlist.avg</dt><dd><p>The average number of requests in the internal recursive processing request
+list on insert of a new incoming recursive processing query.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-requestlist-max">
+<dt>threadX.requestlist.max</dt><dd><p>Maximum size attained by the internal recursive processing request list.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-requestlist-overwritten">
+<dt>threadX.requestlist.overwritten</dt><dd><p>Number of requests in the request list that were overwritten by newer
+entries.
+This happens if there is a flood of queries that recursive processing and
+the server has a hard time.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-requestlist-exceeded">
+<dt>threadX.requestlist.exceeded</dt><dd><p>Queries that were dropped because the request list was full.
+This happens if a flood of queries need recursive processing, and the
+server can not keep up.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-requestlist-current-all">
+<dt>threadX.requestlist.current.all</dt><dd><p>Current size of the request list, includes internally generated queries
+(such as priming queries and glue lookups).</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-requestlist-current-user">
+<dt>threadX.requestlist.current.user</dt><dd><p>Current size of the request list, only the requests from client queries.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-recursion-time-avg">
+<dt>threadX.recursion.time.avg</dt><dd><p>Average time it took to answer queries that needed recursive processing.
+Note that queries that were answered from the cache are not in this average.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-recursion-time-median">
+<dt>threadX.recursion.time.median</dt><dd><p>The median of the time it took to answer queries that needed recursive
+processing.
+The median means that 50% of the user queries were answered in less than
+this time.
+Because of big outliers (usually queries to non responsive servers), the
+average can be bigger than the median.
+This median has been calculated by interpolation from a histogram.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-threadx-tcpusage">
+<dt>threadX.tcpusage</dt><dd><p>The currently held tcp buffers for incoming connections.
+A spot value on the time of the request.
+This helps you spot if the incoming-num-tcp buffers are full.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-total-num-queries">
+<dt>total.num.queries</dt><dd><p>summed over threads.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-total-num-queries-ip-ratelimited">
+<dt>total.num.queries_ip_ratelimited</dt><dd><p>summed over threads.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-total-num-queries-cookie-valid">
+<dt>total.num.queries_cookie_valid</dt><dd><p>summed over threads.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-total-num-queries-cookie-client">
+<dt>total.num.queries_cookie_client</dt><dd><p>summed over threads.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-total-num-queries-cookie-invalid">
+<dt>total.num.queries_cookie_invalid</dt><dd><p>summed over threads.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-total-num-cachehits">
+<dt>total.num.cachehits</dt><dd><p>summed over threads.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-total-num-cachemiss">
+<dt>total.num.cachemiss</dt><dd><p>summed over threads.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-total-num-dnscrypt-crypted">
+<dt>total.num.dnscrypt.crypted</dt><dd><p>summed over threads.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-total-num-dnscrypt-cert">
+<dt>total.num.dnscrypt.cert</dt><dd><p>summed over threads.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-total-num-dnscrypt-cleartext">
+<dt>total.num.dnscrypt.cleartext</dt><dd><p>summed over threads.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-total-num-dnscrypt-malformed">
+<dt>total.num.dnscrypt.malformed</dt><dd><p>summed over threads.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-total-num-prefetch">
+<dt>total.num.prefetch</dt><dd><p>summed over threads.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-total-num-expired">
+<dt>total.num.expired</dt><dd><p>summed over threads.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-total-num-queries-timed-out">
+<dt>total.num.queries_timed_out</dt><dd><p>summed over threads.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-total-query-queue-time-us-max">
+<dt>total.query.queue_time_us.max</dt><dd><p>the maximum of the thread values.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-total-num-recursivereplies">
+<dt>total.num.recursivereplies</dt><dd><p>summed over threads.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-total-requestlist-avg">
+<dt>total.requestlist.avg</dt><dd><p>averaged over threads.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-total-requestlist-max">
+<dt>total.requestlist.max</dt><dd><p>the maximum of the thread requestlist.max values.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-total-requestlist-overwritten">
+<dt>total.requestlist.overwritten</dt><dd><p>summed over threads.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-total-requestlist-exceeded">
+<dt>total.requestlist.exceeded</dt><dd><p>summed over threads.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-total-requestlist-current-all">
+<dt>total.requestlist.current.all</dt><dd><p>summed over threads.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-total-recursion-time-median">
+<dt>total.recursion.time.median</dt><dd><p>averaged over threads.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-total-tcpusage">
+<dt>total.tcpusage</dt><dd><p>summed over threads.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-time-now">
+<dt>time.now</dt><dd><p>current time in seconds since 1970.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-time-up">
+<dt>time.up</dt><dd><p>uptime since server boot in seconds.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-time-elapsed">
+<dt>time.elapsed</dt><dd><p>time since last statistics printout, in seconds.</p>
+</dd>
+</dl>
+</section>
+<section id="extended-statistics">
+<h2>Extended Statistics<a class="headerlink" href="#extended-statistics" title="この見出しへのパーマリンク">¶</a></h2>
+<dl class="simple" id="unbound-control-stats-mem-cache-rrset">
+<dt>mem.cache.rrset</dt><dd><p>Memory in bytes in use by the RRset cache.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-mem-cache-message">
+<dt>mem.cache.message</dt><dd><p>Memory in bytes in use by the message cache.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-mem-cache-dnscrypt-shared-secret">
+<dt>mem.cache.dnscrypt_shared_secret</dt><dd><p>Memory in bytes in use by the dnscrypt shared secrets cache.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-mem-cache-dnscrypt-nonce">
+<dt>mem.cache.dnscrypt_nonce</dt><dd><p>Memory in bytes in use by the dnscrypt nonce cache.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-mem-mod-iterator">
+<dt>mem.mod.iterator</dt><dd><p>Memory in bytes in use by the iterator module.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-mem-mod-validator">
+<dt>mem.mod.validator</dt><dd><p>Memory in bytes in use by the validator module.
+Includes the key cache and negative cache.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-mem-streamwait">
+<dt>mem.streamwait</dt><dd><p>Memory in bytes in used by the TCP and TLS stream wait buffers.
+These are answers waiting to be written back to the clients.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-mem-http-query-buffer">
+<dt>mem.http.query_buffer</dt><dd><p>Memory in bytes used by the HTTP/2 query buffers.
+Containing (partial) DNS queries waiting for request stream completion.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-mem-http-response-buffer">
+<dt>mem.http.response_buffer</dt><dd><p>Memory in bytes used by the HTTP/2 response buffers.
+Containing DNS responses waiting to be written back to the clients.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-histogram-sec-usec-to-sec-usec">
+<dt>histogram.&lt;sec&gt;.&lt;usec&gt;.to.&lt;sec&gt;.&lt;usec&gt;</dt><dd><p>Shows a histogram, summed over all threads.
+Every element counts the recursive queries whose reply time fit between the
+lower and upper bound.
+Times larger or equal to the lowerbound, and smaller than the upper bound.
+There are 40 buckets, with bucket sizes doubling.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-type-a">
+<dt>num.query.type.A</dt><dd><p>The total number of queries over all threads with query type A.
+Printed for the other query types as well, but only for the types for which
+queries were received, thus =0 entries are omitted for brevity.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-type-other">
+<dt>num.query.type.other</dt><dd><p>Number of queries with query types 256-65535.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-class-in">
+<dt>num.query.class.IN</dt><dd><p>The total number of queries over all threads with query class IN
+(internet).
+Also printed for other classes (such as CH (CHAOS) sometimes used for
+debugging), or NONE, ANY, used by dynamic update.
+num.query.class.other is printed for classes 256-65535.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-opcode-query">
+<dt>num.query.opcode.QUERY</dt><dd><p>The total number of queries over all threads with query opcode QUERY.
+Also printed for other opcodes, UPDATE, ...</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-tcp">
+<dt>num.query.tcp</dt><dd><p>Number of queries that were made using TCP towards the Unbound server.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-tcpout">
+<dt>num.query.tcpout</dt><dd><p>Number of queries that the Unbound server made using TCP outgoing towards
+other servers.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-udpout">
+<dt>num.query.udpout</dt><dd><p>Number of queries that the Unbound server made using UDP outgoing towards
+other servers.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-tls">
+<dt>num.query.tls</dt><dd><p>Number of queries that were made using TLS towards the Unbound server.
+These are also counted in num.query.tcp, because TLS uses TCP.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-tls-resume">
+<dt>num.query.tls.resume</dt><dd><p>Number of TLS session resumptions, these are queries over TLS towards the
+Unbound server where the client negotiated a TLS session resumption key.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-https">
+<dt>num.query.https</dt><dd><p>Number of queries that were made using HTTPS towards the Unbound server.
+These are also counted in num.query.tcp and num.query.tls, because HTTPS
+uses TLS and TCP.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-ipv6">
+<dt>num.query.ipv6</dt><dd><p>Number of queries that were made using IPv6 towards the Unbound server.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-flags-rd">
+<dt>num.query.flags.RD</dt><dd><p>The number of queries that had the RD flag set in the header.
+Also printed for flags QR, AA, TC, RA, Z, AD, CD.
+Note that queries with flags QR, AA or TC may have been rejected because of
+that.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-edns-present">
+<dt>num.query.edns.present</dt><dd><p>number of queries that had an EDNS OPT record present.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-edns-do">
+<dt>num.query.edns.DO</dt><dd><p>number of queries that had an EDNS OPT record with the DO (DNSSEC OK) bit
+set.
+These queries are also included in the num.query.edns.present number.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-ratelimited">
+<dt>num.query.ratelimited</dt><dd><p>The number of queries that are turned away from being send to nameserver
+due to ratelimiting.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-dnscrypt-shared-secret-cachemiss">
+<dt>num.query.dnscrypt.shared_secret.cachemiss</dt><dd><p>The number of dnscrypt queries that did not find a shared secret in the
+cache.
+This can be use to compute the shared secret hitrate.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-dnscrypt-replay">
+<dt>num.query.dnscrypt.replay</dt><dd><p>The number of dnscrypt queries that found a nonce hit in the nonce cache
+and hence are considered a query replay.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-answer-rcode-nxdomain">
+<dt>num.answer.rcode.NXDOMAIN</dt><dd><p>The number of answers to queries, from cache or from recursion, that had
+the return code NXDOMAIN.
+Also printed for the other return codes.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-answer-rcode-nodata">
+<dt>num.answer.rcode.nodata</dt><dd><p>The number of answers to queries that had the pseudo return code nodata.
+This means the actual return code was NOERROR, but additionally, no data
+was carried in the answer (making what is called a NOERROR/NODATA answer).
+These queries are also included in the num.answer.rcode.NOERROR number.
+Common for AAAA lookups when an A record exists, and no AAAA.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-answer-secure">
+<dt>num.answer.secure</dt><dd><p>Number of answers that were secure.
+The answer validated correctly.
+The AD bit might have been set in some of these answers, where the client
+signalled (with DO or AD bit in the query) that they were ready to accept
+the AD bit in the answer.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-answer-bogus">
+<dt>num.answer.bogus</dt><dd><p>Number of answers that were bogus.
+These answers resulted in SERVFAIL to the client because the answer failed
+validation.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-rrset-bogus">
+<dt>num.rrset.bogus</dt><dd><p>The number of rrsets marked bogus by the validator.
+Increased for every RRset inspection that fails.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-unwanted-queries">
+<dt>unwanted.queries</dt><dd><p>Number of queries that were refused or dropped because they failed the
+access control settings.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-unwanted-replies">
+<dt>unwanted.replies</dt><dd><p>Replies that were unwanted or unsolicited.
+Could have been random traffic, delayed duplicates, very late answers, or
+could be spoofing attempts.
+Some low level of late answers and delayed duplicates are to be expected
+with the UDP protocol.
+Very high values could indicate a threat (spoofing).</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-msg-cache-count">
+<dt>msg.cache.count</dt><dd><p>The number of items (DNS replies) in the message cache.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-rrset-cache-count">
+<dt>rrset.cache.count</dt><dd><p>The number of RRsets in the rrset cache.
+This includes rrsets used by the messages in the message cache, but also
+delegation information.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-infra-cache-count">
+<dt>infra.cache.count</dt><dd><p>The number of items in the infra cache.
+These are IP addresses with their timing and protocol support information.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-key-cache-count">
+<dt>key.cache.count</dt><dd><p>The number of items in the key cache.
+These are DNSSEC keys, one item per delegation point, and their validation
+status.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-msg-cache-max-collisions">
+<dt>msg.cache.max_collisions</dt><dd><p>The maximum number of hash table collisions in the msg cache.
+This is the number of hashes that are identical when a new element is
+inserted in the hash table.
+If the value is very large, like hundreds, something is wrong with the
+performance of the hash table, hash values are incorrect or malicious.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-rrset-cache-max-collisions">
+<dt>rrset.cache.max_collisions</dt><dd><p>The maximum number of hash table collisions in the rrset cache.
+This is the number of hashes that are identical when a new element is
+inserted in the hash table.
+If the value is very large, like hundreds, something is wrong with the
+performance of the hash table, hash values are incorrect or malicious.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-dnscrypt-shared-secret-cache-count">
+<dt>dnscrypt_shared_secret.cache.count</dt><dd><p>The number of items in the shared secret cache.
+These are precomputed shared secrets for a given client public key/server
+secret key pair.
+Shared secrets are CPU intensive and this cache allows Unbound to avoid
+recomputing the shared secret when multiple dnscrypt queries are sent from
+the same client.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-dnscrypt-nonce-cache-count">
+<dt>dnscrypt_nonce.cache.count</dt><dd><p>The number of items in the client nonce cache.
+This cache is used to prevent dnscrypt queries replay.
+The client nonce must be unique for each client public key/server secret
+key pair.
+This cache should be able to host QPS * <cite>replay window</cite> interval keys to
+prevent replay of a query during <cite>replay window</cite> seconds.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-authzone-up">
+<dt>num.query.authzone.up</dt><dd><p>The number of queries answered from auth-zone data, upstream queries.
+These queries would otherwise have been sent (with fallback enabled) to the
+internet, but are now answered from the auth zone.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-authzone-down">
+<dt>num.query.authzone.down</dt><dd><p>The number of queries for downstream answered from auth-zone data.
+These queries are from downstream clients, and have had an answer from the
+data in the auth zone.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-aggressive-noerror">
+<dt>num.query.aggressive.NOERROR</dt><dd><p>The number of queries answered using cached NSEC records with NODATA RCODE.
+These queries would otherwise have been sent to the internet, but are now
+answered using cached data.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-aggressive-nxdomain">
+<dt>num.query.aggressive.NXDOMAIN</dt><dd><p>The number of queries answered using cached NSEC records with NXDOMAIN
+RCODE.
+These queries would otherwise have been sent to the internet, but are now
+answered using cached data.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-subnet">
+<dt>num.query.subnet</dt><dd><p>Number of queries that got an answer that contained EDNS client subnet
+data.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-subnet-cache">
+<dt>num.query.subnet_cache</dt><dd><p>Number of queries answered from the edns client subnet cache.
+These are counted as cachemiss by the main counters, but hit the client
+subnet specific cache after getting processed by the edns client subnet
+module.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-query-cachedb">
+<dt>num.query.cachedb</dt><dd><p>Number of queries answered from the external cache of cachedb.
+These are counted as cachemiss by the main counters, but hit the cachedb
+external cache after getting processed by the cachedb module.</p>
+</dd>
+</dl>
+<dl class="simple" id="unbound-control-stats-num-rpz-action-rpz-action">
+<dt>num.rpz.action.&lt;rpz_action&gt;</dt><dd><p>Number of queries answered using configured RPZ policy, per RPZ action
+type.
+Possible actions are: nxdomain, nodata, passthru, drop, tcp-only,
+local-data, disabled, and cname-override.</p>
+</dd>
+</dl>
+</section>
+<section id="files">
+<h2>Files<a class="headerlink" href="#files" title="この見出しへのパーマリンク">¶</a></h2>
+<dl class="simple">
+<dt>/usr/local/etc/unbound/unbound.conf</dt><dd><p>Unbound configuration file.</p>
+</dd>
+<dt>/usr/local/etc/unbound</dt><dd><p>directory with private keys (<code class="file docutils literal notranslate"><span class="pre">unbound_server.key</span></code> and
+<code class="file docutils literal notranslate"><span class="pre">unbound_control.key</span></code>) and self-signed certificates
+(<code class="file docutils literal notranslate"><span class="pre">unbound_server.pem</span></code> and <code class="file docutils literal notranslate"><span class="pre">unbound_control.pem</span></code>).</p>
+</dd>
+</dl>
+</section>
+<section id="see-also">
+<h2>See Also<a class="headerlink" href="#see-also" title="この見出しへのパーマリンク">¶</a></h2>
+<p><a class="reference internal" href="unbound.conf.html"><span class="doc">unbound.conf(5)</span></a>,
+<a class="reference internal" href="unbound.html"><span class="doc">unbound(8)</span></a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="libunbound.html" class="btn btn-neutral float-left" title="libunbound(3)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="unbound-anchor.html" class="btn btn-neutral float-right" title="unbound-anchor(8)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1999-2024, NLnet Labs.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
