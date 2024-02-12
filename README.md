@@ -1,4 +1,4 @@
-# nsd-manual ja
+# unbound-manual ja
 
 本プロジェクトは[unbound-manual](https://github.com/NLnetLabs/unbound-manual)の文書を日本語に翻訳するものです。
 
