@@ -1,6 +1,6 @@
 # nsd-manual ja
 
-本プロジェクトは[nsd-manual](https://github.com/NLnetLabs/nsd-manual)の文書を日本語に翻訳するものです。
+本プロジェクトは[unbound-manual](https://github.com/NLnetLabs/unbound-manual)の文書を日本語に翻訳するものです。
 
 ## 必要とするもの
 
@@ -29,5 +29,5 @@
 
 ## 参考ページ
 
-- [nsd-manual](https://github.com/NLnetLabs/nsd-manual)
+- [unbound-manual](https://github.com/NLnetLabs/unbound-manual)
 - [国際化 - Sphinx Documentation](https://www.sphinx-doc.org/ja/master/usage/advanced/intl.html)
